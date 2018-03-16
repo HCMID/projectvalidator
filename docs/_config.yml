@@ -1,0 +1,23 @@
+
+
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Virgapes library
+tagline:          'Work with neumes in the virgapes alphabet'
+description:      'A library for working with chant notated in neumes and encoded in the virgapes alphabet'
+
+
+baseurl: '/virgapes/'
+
+
+author:
+  name:           'Neel Smith'
+
+
+links:
+  - title:  Github repository
+    url:  https://github.com/neelsmith/virgapes
+    external: true
