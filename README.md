@@ -1,2 +1,5 @@
-# projectvalidator
-Library to validate HCMID project
+# `projectvalidator`
+
+A code library to validate HCMID projects.
+
+Documentation:  <>

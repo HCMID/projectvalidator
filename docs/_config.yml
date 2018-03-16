@@ -5,12 +5,12 @@
 permalink:        pretty
 
 # Setup
-title:            Virgapes library
-tagline:          'Work with neumes in the virgapes alphabet'
-description:      'A library for working with chant notated in neumes and encoded in the virgapes alphabet'
+title:            MID project validator
+tagline:          'Valid contents of projects following MID conventions'
+description:      'A cross-platform library for validating structure and contents of digital editing projects'
 
 
-baseurl: '/virgapes/'
+baseurl: '/projectvalidator/'
 
 
 author:
@@ -19,5 +19,5 @@ author:
 
 links:
   - title:  Github repository
-    url:  https://github.com/neelsmith/virgapes
+    url:  https://github.com/HCMID/projectvalidator
     external: true
