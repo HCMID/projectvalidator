@@ -6,10 +6,10 @@ import java.io.{File => JFile}
 import better.files.Dsl._
 
 
-/** Root directory of an HMT editorial repository
+/** Local file system of an HCMID editorial repository
 * laid out according to 2018 standards.
 *
-* @param baseDir Name of root directory.
+* @param baseDir Root directory of repository.
 */
 case class EditorsRepo(baseDir: String)  {
   val dseDir = File(baseDir + "/dse")
