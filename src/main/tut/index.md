@@ -8,7 +8,7 @@ title: MID project validator
 
 
 -   Quick start
--   Current API docs
+-   [API docs](api):  version **0.0.1**
 -   [Github repository](https://github.com/HCMID/projectvalidator)
 
 
