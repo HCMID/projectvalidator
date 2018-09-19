@@ -14,7 +14,7 @@ resolvers += Resolver.jcenterRepo
 resolvers += Resolver.bintrayRepo("neelsmith", "maven")
 
 libraryDependencies ++= Seq(
- "org.scalatest" %% "scalatest" % "3.0.1" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
   "com.github.pathikrit" %% "better-files" % "3.5.0",
 
   "edu.holycross.shot.cite" %% "xcite" % "3.5.0",
