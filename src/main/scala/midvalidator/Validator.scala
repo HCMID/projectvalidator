@@ -52,6 +52,9 @@ case class Validator(repo: EditorsRepo) {
     }
   }
 
+
+
+
 }
 
 object Validator {
@@ -65,4 +68,17 @@ object Validator {
     Validator(EditorsRepo(repoPath))
   }
 
+  /** Recursively merge  a list of corpora into a single corpus.
+  *
+  * @param v List of corpora to merge.
+  * @param composite Composite corpus compiled so far.
+  */
+  def mergeCorpusVector(v: Vector[Corpus], composite: Corpus):  Corpus = {
+    if (v.isEmpty) {
+      composite
+    } else {
+      val nextCorpus = composite ++ v.head
+      mergeCorpusVector(v.tail, nextCorpus)
+    }
+  }
 }

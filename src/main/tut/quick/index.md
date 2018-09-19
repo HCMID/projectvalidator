@@ -12,7 +12,7 @@ Import the library, create an editorial repository object, and use that to creat
 ```tut
 import edu.holycross.shot.mid.validator._
 
-val repo = EditorsRepo("src/test/resources/il10")
+val repo = EditorsRepo("src/test/resources/iliad10")
 val midValidator = Validator(repo)
 ```
 
