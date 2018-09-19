@@ -1,1 +1,1 @@
-Paleographic observations go in cex files in this directory.
+Paleographic observations go in `.cex` files in this directory.

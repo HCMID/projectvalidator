@@ -1,1 +1,1 @@
-Output reports from validation are written in this directory.
+Results of validation with HMT MOM go in this folder.

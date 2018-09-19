@@ -5,7 +5,7 @@ enablePlugins(TutPlugin)
 
 name := "midvalidator"
 organization := "edu.holycross.shot"
-version := "0.0.1"
+version := "1.0.0"
 licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html"))
 
 

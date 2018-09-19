@@ -103,7 +103,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
   /**  Compose markdown content juxtaposing indexed image with
   * transcribed text content for a specific page.
   */
-  /*
+/*
   def passageView : String = {
     val viewMd = StringBuilder.newBuilder
     val rows = for (psg <- txts.nodes) yield {
@@ -116,19 +116,21 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
       dipl + " (*" + psg.urn + "*)" + "  " + md
     }
     rows.mkString("\n\n\n")
-  }
-*/
+  }*/
+
   /** Compose markdown report to verify correctness of DSE records.
   *
   * @param pg Page to analyze.
   */
   def dseCorrectness:  String = {
+    /*
     val bldr = StringBuilder.newBuilder
     bldr.append("\n\n### Correctness\n\n")
     bldr.append("To check for **correctness** of indexing, please verify that text transcriptions and images agree:\n\n")
 
-    //bldr.append(passageView)
-    bldr.toString
+    bldr.append(passageView)
+    bldr.toString*/
+    ""
   }
 
 

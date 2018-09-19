@@ -88,7 +88,7 @@ object PaleographyResults {
 
     bldr.append("| Image     | Reading     |\n| :------------- | :------------- |\n")
     val rows = for (obs <- observations) yield {
-      "| " + imgmgr.markdown(obs.img) + " | " + obs.reading + " | \n"
+      "| " + imgmgr.markdown(obs.img) + " | " + obs.reading + " |"
     }
     bldr.append(rows.mkString("\n") + "\n")
     bldr.toString
