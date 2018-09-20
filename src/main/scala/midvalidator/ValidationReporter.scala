@@ -18,14 +18,11 @@ import better.files.Dsl._
 case class ValidationReporter(midValidator: Validator) {
 
   val outputDir = midValidator.repo.validationDir
-  //println("PREPARIONG midValidator REPORTER")
+
   // compute these once:
   val dse = midValidator.dse
-  //println("DSE: " + dse)
   val corpus = midValidator.raw
   val paleoResults = PaleographyResults(midValidator.paleoCex)
-  //println("PALEO " + paleoResults)
-  // put these in package object?
 
 
   /** Select a corpus by page reference.
@@ -35,21 +32,13 @@ case class ValidationReporter(midValidator: Validator) {
   * texts on page.
   */
   def corpusForPage(pg: Cite2Urn) = {
-    //val txtSet = dse.textsForTbs(Cite2Urn("urn:cite2:hmt:msB.v1:128v"))
-    //Corpus(txtSet.toVector)
-
     val textUrns = dse.textsForTbs(pg).toVector
     val miniCorpora = for (u <- textUrns) yield {
       val merged = corpus ~~ u
-      //println("CORPUS: " + corpus.nodes.map(_.urn).mkString("\n"))
-      //println("MERGED on " +  u  + " and now " + merged.size)
       merged
     }
     Validator.mergeCorpusVector(miniCorpora, Corpus(Vector.empty[CitableNode]))
-
-
   }
-
 
   /** Write suite of markdown reports to validate and
   * verify editorial work on a single page.
@@ -75,16 +64,13 @@ case class ValidationReporter(midValidator: Validator) {
       home.append(s"# Review of ${u.collection}, page ${u.objectComponent}\n\n")
       home.append("## Summary of automated validation\n\n")
 
-      //println("PALEO RESULTS:\n")
-      //println("good: " + paleoResults.good.size)
-      //println("bad: " + paleoResults.bad.size)
       // 1.  Paleography validation
       if (paleoResults.bad.isEmpty ) {
         home.append(s"-  ![errors](${okImg}) Paleography validation: there were no errors. \n")
       } else {
+        println("There were errors finding paleographic observations for " + pageUrn)
         home.append("-  ![errors](${sadImg}) Paleography validation: there were errors. ")
       }
-
 
       val paleoValidate = pageDir/"paleo-validation.md"
       val paleoImages = dse.imagesForTbs(u).toSeq
@@ -106,11 +92,8 @@ case class ValidationReporter(midValidator: Validator) {
       val dseReport = pageDir/"dse-validation.md"
       dseReport.overwrite(dseValidMd)
 
-
-      //println("DSE VALID MD:\n" + dseValidMd)
-      //println("DOES IT CONTAIN ERROR HEADER? " + dseValidMd.contains("## Errors") + ", so " + dseHasErrors)
-
       if (dseHasErrors) {
+        println("There were errors in DSE records.")
         home.append("-  ![errors](${sadImg}) DSE validation: there were errors.  ")
 
       } else {
@@ -160,15 +143,16 @@ case class ValidationReporter(midValidator: Validator) {
       val dseVerify = pageDir/"dse-verification.md"
       val dsePassageMd =
       dseVerify.overwrite(dseCompleteMd + dseCorrectMd)
-      // 2. Paloegraphic observations
+
+      // 2. Paleographic observations
       val paleoVerify = pageDir/"paleo-verification.md"
+      println("Checking paleographic observations for " + u + "...")
       if (paleoImages.nonEmpty) {
         val paleoImg = paleoImages(0)
         //println(paleoResults.good.map(_._1).mkString("\n"))
         val observations = paleoResults.good.filter(_.img ~~ paleoImg)
         paleoVerify.overwrite(PaleographyResults.pageVerification(u, observations, ictBase))
       } else {
-        println("NO PALEOGRAPHIC OBSERVATIONS")
         home.append("No paleographic observations included in repository.\n")
       }
 
