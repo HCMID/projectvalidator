@@ -48,7 +48,7 @@ class ValidatorObjectSpec extends FlatSpec {
     assert(stringOccurences.isInstanceOf[Vector[Occurrence[String]]])
   }*/
 
-  it should "compute a list of HMT-output codepoints for a list of tokens" in pending /*{
+  it should "compute a list of output codepoints for a list of tokens" in pending /*{
     val repo = EditorsRepo("src/test/resources/il10")
     val tkns = Validator(repo).tokens
     val cps = Validator.hmtCpsFromTokens(tkns)
