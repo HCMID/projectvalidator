@@ -51,6 +51,6 @@ trait MidOrthography {
   *
   * @param s String to tokenize.
   */
-  def tokenizeString(s: String): Vector[Option[MidToken]]
+  def tokenizeString(s: String): Vector[MidToken]
 
 }

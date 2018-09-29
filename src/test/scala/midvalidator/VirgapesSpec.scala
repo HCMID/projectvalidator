@@ -33,21 +33,21 @@ class VirgapesSpec extends FlatSpec {
 
   it should "tokenize plain-text string for a single neume" in {
     val oneNeume = "1.0.1.0"
-    val expectedOne = Vector( Some(MidToken(oneNeume, NeumeToken)))
+    val expectedOne = Vector( MidToken(oneNeume, Some(NeumeToken)))
     assert (ortho.tokenizeString(oneNeume) == expectedOne)
   }
 
   it should "tokenize plain-text string for a hyphen" in {
     val hyphen = "-"
-    val expected = Vector( Some(MidToken(hyphen, PunctuationToken)))
+    val expected = Vector( (MidToken(hyphen, Some(PunctuationToken))))
     assert (ortho.tokenizeString(hyphen) == expected)
   }
 
   it should "tokenize multiple neumes" in {
     val twoNeumes = "1.0.1.0 1.0.0.0"
     val expected = Vector(
-      Some(MidToken("1.0.1.0", NeumeToken)),
-      Some(MidToken("1.0.0.0", NeumeToken))
+      MidToken("1.0.1.0", Some(NeumeToken)),
+      MidToken("1.0.0.0", Some(NeumeToken))
     )
     assert (ortho.tokenizeString(twoNeumes) == expected)
   }
@@ -55,10 +55,10 @@ class VirgapesSpec extends FlatSpec {
   it should "tokenize multiple neumes including multiple neumes on one syllable" in {
     val twoNeumes = "1.0.1.0-2.0.0.0 1.0.0.0"
     val expected = Vector(
-      Some(MidToken("1.0.1.0", NeumeToken)),
-      Some(MidToken("-", PunctuationToken)),
-      Some(MidToken("2.0.0.0", NeumeToken)),
-      Some(MidToken("1.0.0.0", NeumeToken))
+      MidToken("1.0.1.0", Some(NeumeToken)),
+      MidToken("-", Some(PunctuationToken)),
+      MidToken("2.0.0.0", Some(NeumeToken)),
+      MidToken("1.0.0.0", Some(NeumeToken))
     )
     assert (ortho.tokenizeString(twoNeumes) == expected)
   }

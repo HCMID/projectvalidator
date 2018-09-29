@@ -44,23 +44,22 @@ case class Virgapes(domain: CtsUrn) extends MidOrthography {
   *
   * @param s String to tokenize.
   */
-  def tokenizeString(s: String) = {
+  def tokenizeString(s: String): Vector[MidToken] = {
     val expandHyphens = s.replaceAll("-", " - ")
     val tokens = expandHyphens.split("\\s+").filter(_.nonEmpty)
     val pairs = for (t <- tokens) yield {
       if (t == "-") {
-        Some(MidToken(t,PunctuationToken))
+        MidToken(t,Some(PunctuationToken))
       } else if (validString(t)) {
-
         val parts = t.split("\\.")
         if (parts.size == 4) {
-          Some(MidToken(t,NeumeToken))
+          MidToken(t,Some(NeumeToken))
         } else {
-          None
+          MidToken(t,None)
         }
 
       } else {
-        None
+        MidToken(t,None)
       }
     }
     pairs.toVector

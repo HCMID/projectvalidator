@@ -151,7 +151,7 @@
       <p class="shortcomment cmt">Provides classes for validating editorial work on the Homer Multitext
 project.</p><div class="fullcomment"><div class="comment cmt"><p>Provides classes for validating editorial work on the Homer Multitext
 project.
-See https://homermultext.github.io/ for documentation.</p><h4>Overview</h4><p>The class  <a href="Validator.html" class="extype" name="edu.holycross.shot.mid.validator.Validator">Validator</a> manages contents of an <a href="" class="extype" name="edu.holycross.shot.mid.validator.EditorsRepo">EditorsRepo</a>.  It
+See https://homermultext.github.io/ for documentation.</p><h4>Overview</h4><p>The class  <a href="Validator.html" class="extype" name="edu.holycross.shot.mid.validator.Validator">Validator</a> manages contents of an <a href="EditorsRepo.html" class="extype" name="edu.holycross.shot.mid.validator.EditorsRepo">EditorsRepo</a>.  It
 can be constructucted from a string path for the root of the
 repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<span class="lit">"REPOROOT"</span>)</pre></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="edu.holycross.shot.mid">mid</a></dd></dl></div>
     </li><li class="current-entities indented5">
@@ -160,12 +160,12 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
                         <a href="DseReporter.html" title="An object for analyzing and writing reports about the DSE relations for material on a single surface (page).">DseReporter</a>
                       </li><li class="current-entities indented5">
                         <span class="separator"></span>
-                        <a class="class" href="" title="Local file system of an HCMID editorial repository laid out according to 2018 standards."></a>
-                        <a href="" title="Local file system of an HCMID editorial repository laid out according to 2018 standards.">EditorsRepo</a>
+                        <a class="class" href="EditorsRepo.html" title="Local file system of an HCMID editorial repository laid out according to 2018 standards."></a>
+                        <a href="EditorsRepo.html" title="Local file system of an HCMID editorial repository laid out according to 2018 standards.">EditorsRepo</a>
                       </li><li class="current-entities indented5">
                         <span class="separator"></span>
-                        <a class="class" href="ImageManager.html" title="A class for working with image services recognizing URNs."></a>
-                        <a href="ImageManager.html" title="A class for working with image services recognizing URNs.">ImageManager</a>
+                        <a class="class" href="" title="A class for working with image services recognizing URNs."></a>
+                        <a href="" title="A class for working with image services recognizing URNs.">ImageManager</a>
                       </li><li class="current-entities indented5">
                         <span class="separator"></span>
                         <a class="trait" href="MidEditions.html" title="An orthographic system"></a>
@@ -223,8 +223,8 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
       <div id="definition">
         <div class="big-circle class">c</div>
         <p id="owner"><a href="../../../../index.html" class="extype" name="edu">edu</a>.<a href="../../../index.html" class="extype" name="edu.holycross">holycross</a>.<a href="../../index.html" class="extype" name="edu.holycross.shot">shot</a>.<a href="../index.html" class="extype" name="edu.holycross.shot.mid">mid</a>.<a href="index.html" class="extype" name="edu.holycross.shot.mid.validator">validator</a></p>
-        <h1>EditorsRepo<span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html" title="Permalink">
+        <h1>ImageManager<span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span></h1>
@@ -237,14 +237,13 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">EditorsRepo</span><span class="params">(<span name="baseDir">baseDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">ImageManager</span><span class="params">(<span name="ictBase">ictBase: <span class="extype" name="scala.Predef.String">String</span> = <span class="defval" name="&quot;http://www.homermultitext.org/ict2/&quot;">...</span></span>, <span name="iipBase">iipBase: <span class="extype" name="scala.Predef.String">String</span> = <span class="defval" name="&quot;http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&amp;FIF=/project/homer/pyramidal/deepzoom/&quot;">...</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Local file system of an HCMID editorial repository
-laid out according to 2018 standards.
-</p></div><dl class="paramcmts block"><dt class="param">baseDir</dt><dd class="cmt"><p>Root directory of repository.</p></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A class for working with image services recognizing URNs.
+</p></div><dl class="paramcmts block"><dt class="param">ictBase</dt><dd class="cmt"><p>Base URL for HMT Image Citation Service, version 2.</p></dd><dt class="param">iipBase</dt><dd class="cmt"><p>Base URL for IIP image service.</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
@@ -274,7 +273,7 @@ laid out according to 2018 standards.
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="edu.holycross.shot.mid.validator.EditorsRepo"><span>EditorsRepo</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="edu.holycross.shot.mid.validator.ImageManager"><span>ImageManager</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -294,10 +293,10 @@ laid out according to 2018 standards.
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="edu.holycross.shot.mid.validator.EditorsRepo#&lt;init&gt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(baseDir:String):edu.holycross.shot.mid.validator.EditorsRepo"></a><a id="&lt;init&gt;:EditorsRepo"></a>
+              <ol><li name="edu.holycross.shot.mid.validator.ImageManager#&lt;init&gt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(ictBase:String,iipBase:String):edu.holycross.shot.mid.validator.ImageManager"></a><a id="&lt;init&gt;:ImageManager"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#&lt;init&gt;(baseDir:String):edu.holycross.shot.mid.validator.EditorsRepo" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#&lt;init&gt;(ictBase:String,iipBase:String):edu.holycross.shot.mid.validator.ImageManager" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -306,10 +305,10 @@ laid out according to 2018 standards.
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">EditorsRepo</span><span class="params">(<span name="baseDir">baseDir: <span class="extype" name="scala.Predef.String">String</span></span>)</span>
+        <span class="name">ImageManager</span><span class="params">(<span name="ictBase">ictBase: <span class="extype" name="scala.Predef.String">String</span> = <span class="defval" name="&quot;http://www.homermultitext.org/ict2/&quot;">...</span></span>, <span name="iipBase">iipBase: <span class="extype" name="scala.Predef.String">String</span> = <span class="defval" name="&quot;http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&amp;FIF=/project/homer/pyramidal/deepzoom/&quot;">...</span></span>)</span>
       </span>
       
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">baseDir</dt><dd class="cmt"><p>Root directory of repository.</p></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">ictBase</dt><dd class="cmt"><p>Base URL for HMT Image Citation Service, version 2.</p></dd><dt class="param">iipBase</dt><dd class="cmt"><p>Base URL for IIP image service.</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -323,7 +322,7 @@ laid out according to 2018 standards.
                 <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#!=(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#!=(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -339,7 +338,7 @@ laid out according to 2018 standards.
     </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html###():Int" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html###():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -355,7 +354,7 @@ laid out according to 2018 standards.
     </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#==(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#==(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -371,7 +370,7 @@ laid out according to 2018 standards.
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#asInstanceOf[T0]:T0" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#asInstanceOf[T0]:T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -384,26 +383,27 @@ laid out according to 2018 standards.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#baseDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="baseDir:String"></a>
+    </li><li name="edu.holycross.shot.mid.validator.ImageManager#binary" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="binary(img:edu.holycross.shot.cite.Cite2Urn,imgSize:Int):String"></a><a id="binary(Cite2Urn,Int):String"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#baseDir:String" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#binary(img:edu.holycross.shot.cite.Cite2Urn,imgSize:Int):String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">baseDir</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">binary</span><span class="params">(<span name="img">img: <span class="extype" name="edu.holycross.shot.cite.Cite2Urn">Cite2Urn</span></span>, <span name="imgSize">imgSize: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">100</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
-      
+      <p class="shortcomment cmt"> Form URL for image binary data.</p><div class="fullcomment"><div class="comment cmt"><p> Form URL for image binary data.
+</p></div><dl class="paramcmts block"><dt class="param">img</dt><dd class="cmt"><p>Image to retrieve.</p></dd><dt class="param">imgSize</dt><dd class="cmt"><p>Size of binary image, in pixels.</p></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a><a id="clone():AnyRef"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#clone():Object" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#clone():Object" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -424,90 +424,10 @@ laid out according to 2018 standards.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#ctsCatalog" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ctsCatalog:better.files.File"></a><a id="ctsCatalog:File"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#ctsCatalog:better.files.File" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">ctsCatalog</span><span class="result">: <span class="extype" name="better.files.File">File</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Catalog of edited texts.</p>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#ctsCitation" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ctsCitation:better.files.File"></a><a id="ctsCitation:File"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#ctsCitation:better.files.File" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">ctsCitation</span><span class="result">: <span class="extype" name="better.files.File">File</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Configuration of citation for local files (in any supported format).</p>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#dirs" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dirs:scala.collection.immutable.Vector[better.files.File]"></a><a id="dirs:Vector[File]"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#dirs:scala.collection.immutable.Vector[better.files.File]" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">dirs</span><span class="result">: <span class="extype" name="scala.collection.immutable.Vector">Vector</span>[<span class="extype" name="better.files.File">File</span>]</span>
-      </span>
-      
-      <p class="shortcomment cmt">Vector of all required directories for an HCMID editorial project.</p>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#dseDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="dseDir:better.files.File"></a><a id="dseDir:File"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#dseDir:better.files.File" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">dseDir</span><span class="result">: <span class="extype" name="better.files.File">File</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Directory for DSE records (in CEX format).</p>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#editionsDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="editionsDir:better.files.File"></a><a id="editionsDir:File"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#editionsDir:better.files.File" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">editionsDir</span><span class="result">: <span class="extype" name="better.files.File">File</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Directory with cataloged editions of texts.</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#eq(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -523,7 +443,7 @@ laid out according to 2018 standards.
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#finalize():Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#finalize():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -545,7 +465,7 @@ laid out according to 2018 standards.
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#getClass():Class[_]" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#getClass():Class[_]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -561,10 +481,59 @@ laid out according to 2018 standards.
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
+    </li><li name="edu.holycross.shot.mid.validator.ImageManager#ict" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ict(img:edu.holycross.shot.cite.Cite2Urn):String"></a><a id="ict(Cite2Urn):String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#ict(img:edu.holycross.shot.cite.Cite2Urn):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ict</span><span class="params">(<span name="img">img: <span class="extype" name="edu.holycross.shot.cite.Cite2Urn">Cite2Urn</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt"> Form URL for using an image in HMT Image Citation Tool.</p><div class="fullcomment"><div class="comment cmt"><p> Form URL for using an image in HMT Image Citation Tool.
+</p></div><dl class="paramcmts block"><dt class="param">img</dt><dd class="cmt"><p>Image to open in ICT.</p></dd></dl></div>
+    </li><li name="edu.holycross.shot.mid.validator.ImageManager#ictBase" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ictBase:String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#ictBase:String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ictBase</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      
+    </li><li name="edu.holycross.shot.mid.validator.ImageManager#iipBase" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="iipBase:String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#iipBase:String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">iipBase</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#isInstanceOf[T0]:Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#isInstanceOf[T0]:Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -577,26 +546,27 @@ laid out according to 2018 standards.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#libHeadersDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="libHeadersDir:better.files.File"></a><a id="libHeadersDir:File"></a>
+    </li><li name="edu.holycross.shot.mid.validator.ImageManager#markdown" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="markdown(img:edu.holycross.shot.cite.Cite2Urn,imgSize:Int):String"></a><a id="markdown(Cite2Urn,Int):String"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#libHeadersDir:better.files.File" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#markdown(img:edu.holycross.shot.cite.Cite2Urn,imgSize:Int):String" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">libHeadersDir</span><span class="result">: <span class="extype" name="better.files.File">File</span></span>
+        <span class="name">markdown</span><span class="params">(<span name="img">img: <span class="extype" name="edu.holycross.shot.cite.Cite2Urn">Cite2Urn</span></span>, <span name="imgSize">imgSize: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">100</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
-      <p class="shortcomment cmt">Directory with library headers for building composite CEX file.</p>
+      <p class="shortcomment cmt"> Compose markdown for binary image linked to ICT.</p><div class="fullcomment"><div class="comment cmt"><p> Compose markdown for binary image linked to ICT.
+</p></div><dl class="paramcmts block"><dt class="param">img</dt><dd class="cmt"><p>Image to display in markdown.</p></dd><dt class="param">imgSize</dt><dd class="cmt"><p>Size of binary image, in pixels.</p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#ne(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -612,7 +582,7 @@ laid out according to 2018 standards.
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#notify():Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#notify():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -631,7 +601,7 @@ laid out according to 2018 standards.
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#notifyAll():Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#notifyAll():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -647,26 +617,10 @@ laid out according to 2018 standards.
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#paleographyDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="paleographyDir:better.files.File"></a><a id="paleographyDir:File"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#paleographyDir:better.files.File" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">paleographyDir</span><span class="result">: <span class="extype" name="better.files.File">File</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Directory with paleographic observations (in CEX format).</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -679,26 +633,10 @@ laid out according to 2018 standards.
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="edu.holycross.shot.mid.validator.EditorsRepo#validationDir" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="validationDir:better.files.File"></a><a id="validationDir:File"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#validationDir:better.files.File" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">validationDir</span><span class="result">: <span class="extype" name="better.files.File">File</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Writable directory for validation reports.</p>
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#wait():Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#wait():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -720,7 +658,7 @@ laid out according to 2018 standards.
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -742,7 +680,7 @@ laid out according to 2018 standards.
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/EditorsRepo.html#wait(x$1:Long):Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/ImageManager.html#wait(x$1:Long):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
