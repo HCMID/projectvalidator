@@ -11,7 +11,9 @@ trait MidMarkupReader {
   /** Specific edition type to apply. */
   def editionType: MidEditionType
 
-  /**
+  /**  For a citable node in archival format, compose
+  * the a CEX String for the corresponding node in
+  * the edition type specified by [[editionType]].
   */
-  def edition(archival: String, srcUrn: CtsUrn): String
+  def editedNode(archival: String, srcUrn: CtsUrn): String
 }

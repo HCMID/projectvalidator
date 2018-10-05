@@ -10,6 +10,5 @@ class XmlTextCollectSpec extends FlatSpec {
     val actual = collectText(xml).trim
     val expected = "Level 1 contained 2 , more two third tier and back to two"
     assert(actual == expected)
-
   }
 }

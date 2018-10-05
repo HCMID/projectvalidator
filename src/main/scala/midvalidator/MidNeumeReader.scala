@@ -3,12 +3,11 @@ import edu.holycross.shot.cite._
 
 import scala.xml._
 
-/** Reads MID prose texts in TEI markup using `ab`
-* element as terminal citation unit.
+/** Reads MID texts editing neumes in TEI markup.
 *
 * @param editionType Type of edition to read.
 */
-case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupReader {
+class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReader {
   require(editionTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
   /** Vector of all recognized editionTypes. */
@@ -19,7 +18,7 @@ case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupRea
   /** Specific edition type to apply. */
   def editionType: MidEditionType = applicableType
 
-  /** Create a plain-text citable node of type editionType
+  /** Create a plain-text citable edition of type editionType
   * in CEX format from source string `archival`.
   *
   * @param archival Archival source text.
@@ -29,11 +28,9 @@ case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupRea
     val cex = StringBuilder.newBuilder
     val editedUrn = srcUrn.dropVersion.addVersion(editionType.versionId)
     println("EDITED URN:  " + editedUrn)
-    cex.append(editedUrn + "#")
     editionType match {
-      case MidDiplomaticEdition => cex.append(MidProseABReader.diplomatic(archival))
+      case MidDiplomaticEdition => cex.append(MidNeumeReader.diplomatic(archival, srcUrn))
     }
-
     cex.toString
   }
 }
@@ -41,14 +38,14 @@ case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupRea
 /**  Implementation of MID model for prose texts encoded
 * with terminal citation units in TEI `ab` elements.
 */
-object MidProseABReader {
+object MidNeumeReader {
 
   /** Generate pure diplomatic edition in CEX format.
   *
   * @param xml Archival source in MID-compliant TEI.
   * @param src CtsUrn of archival source edition.
   */
-  def diplomatic(xml: String) : String = {
+  def diplomatic(xml: String, src: CtsUrn) : String = {
     val root  = XML.loadString(xml)
     collectDiplomatic(root,"")
   }
@@ -116,9 +113,7 @@ object MidProseABReader {
       case "unclear" => Some(el.text)
       case "sic" => Some(el.text)
       case "orig" => Some(el.text)
-      // Read text content and append numeric sign marker,
-      // Unicode 0x374 :
-      case "num" =>  Some(el.text  + "ʹ")
+
       // Recursively read all text content wrapped in `w`
       case "w" => Some(collectText(el))
 
@@ -128,8 +123,6 @@ object MidProseABReader {
       case "ab" => None
       case "div" => None
       case "choice" => None
-      case "persName" => None
-      case "placeName" => None
       case "q" => None
 
 
