@@ -176,8 +176,8 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
                         <a href="MidEditionType.html" title="A named category of token for a given orthography.">MidEditionType</a>
                       </li><li class="current-entities indented5">
                         <span class="separator"></span>
-                        <a class="trait" href="MidMarkupReader.html" title="An orthographic system"></a>
-                        <a href="MidMarkupReader.html" title="An orthographic system">MidMarkupReader</a>
+                        <a class="trait" href="" title="An orthographic system"></a>
+                        <a href="" title="An orthographic system">MidMarkupReader</a>
                       </li><li class="current-entities indented5">
                         <a class="object" href="MidNeumeReader$.html" title="Implementation of MID model for prose texts encoded with terminal citation units in TEI ab elements."></a>
                         <a class="class" href="MidNeumeReader.html" title="Reads MID texts editing neumes in TEI markup."></a>
@@ -204,8 +204,8 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
                         <a href="MidTokenCategory.html" title="A named category of token for a given orthography.">MidTokenCategory</a>
                       </li><li class="current-entities indented5">
                         <span class="separator"></span>
-                        <a class="class" href="" title="A paleographic observation of a single glyph."></a>
-                        <a href="" title="A paleographic observation of a single glyph.">PaleographicObservation</a>
+                        <a class="class" href="PaleographicObservation.html" title="A paleographic observation of a single glyph."></a>
+                        <a href="PaleographicObservation.html" title="A paleographic observation of a single glyph.">PaleographicObservation</a>
                       </li><li class="current-entities indented5">
                         <span class="separator"></span>
                         <a class="object" href="PaleographyResults$.html" title=""></a>
@@ -227,12 +227,12 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
             </div>
           </div>
           <div id="content">
-            <body class="class type">
+            <body class="trait type">
       <div id="definition">
-        <div class="big-circle class">c</div>
+        <div class="big-circle trait">t</div>
         <p id="owner"><a href="../../../../index.html" class="extype" name="edu">edu</a>.<a href="../../../index.html" class="extype" name="edu.holycross">holycross</a>.<a href="../../index.html" class="extype" name="edu.holycross.shot">shot</a>.<a href="../index.html" class="extype" name="edu.holycross.shot.mid">mid</a>.<a href="index.html" class="extype" name="edu.holycross.shot.mid.validator">validator</a></p>
-        <h1>PaleographicObservation<span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html" title="Permalink">
+        <h1>MidMarkupReader<span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span></h1>
@@ -242,21 +242,25 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">case class</span>
+        <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <span class="name">PaleographicObservation</span><span class="params">(<span name="reading">reading: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="img">img: <span class="extype" name="edu.holycross.shot.cite.Cite2Urn">Cite2Urn</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">MidMarkupReader</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
 
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A paleographic observation of a single glyph.
-</p></div><dl class="paramcmts block"><dt class="param">reading</dt><dd class="cmt"><p>Reading of text of a single glyph.</p></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An orthographic system</p></div><div class="toggleContainer block">
           <span class="toggle">
             Linear Supertypes
           </span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
-        </div></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div><div class="toggleContainer block">
+            <span class="toggle">
+              Known Subclasses
+            </span>
+            <div class="subClasses hiddenContent"><a href="MidNeumeReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidNeumeReader">MidNeumeReader</a>, <a href="MidProseABReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidProseABReader">MidProseABReader</a></div>
+          </div></div>
         
 
       <div id="mbrsel">
@@ -281,7 +285,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
                   <span class="filtertype">Inherited<br />
                   </span>
                   <ol id="linearization">
-                    <li class="in" name="edu.holycross.shot.mid.validator.PaleographicObservation"><span>PaleographicObservation</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                    <li class="in" name="edu.holycross.shot.mid.validator.MidMarkupReader"><span>MidMarkupReader</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                   </ol>
                 </div><div class="ancestors">
               <span class="filtertype"></span>
@@ -299,38 +303,72 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
 
       <div id="template">
         <div id="allMembers">
-        <div id="constructors" class="members">
-              <h3>Instance Constructors</h3>
-              <ol><li name="edu.holycross.shot.mid.validator.PaleographicObservation#&lt;init&gt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(reading:String,img:edu.holycross.shot.cite.Cite2Urn):edu.holycross.shot.mid.validator.PaleographicObservation"></a><a id="&lt;init&gt;:PaleographicObservation"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#&lt;init&gt;(reading:String,img:edu.holycross.shot.cite.Cite2Urn):edu.holycross.shot.mid.validator.PaleographicObservation" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">new</span>
-      </span>
-      <span class="symbol">
-        <span class="name">PaleographicObservation</span><span class="params">(<span name="reading">reading: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="img">img: <span class="extype" name="edu.holycross.shot.cite.Cite2Urn">Cite2Urn</span></span>)</span>
-      </span>
-      
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">reading</dt><dd class="cmt"><p>Reading of text of a single glyph.</p></dd></dl></div>
-    </li></ol>
-            </div>
-
         
 
         
 
         <div class="values members">
-              <h3>Value Members</h3>
+              <h3>Abstract Value Members</h3>
+              <ol><li name="edu.holycross.shot.mid.validator.MidMarkupReader#editedNode" visbl="pub" class="indented0 " data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="editedNode(archival:String,srcUrn:edu.holycross.shot.cite.CtsUrn):String"></a><a id="editedNode(String,CtsUrn):String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#editedNode(archival:String,srcUrn:edu.holycross.shot.cite.CtsUrn):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">editedNode</span><span class="params">(<span name="archival">archival: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="srcUrn">srcUrn: <span class="extype" name="edu.holycross.shot.cite.CtsUrn">CtsUrn</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt"> For a citable node in archival format, compose
+the a CEX String for the corresponding node in
+the edition type specified by <a href="#editionType:edu.holycross.shot.mid.validator.MidEditionType" class="extmbr" name="edu.holycross.shot.mid.validator.MidMarkupReader#editionType">editionType</a>.</p>
+    </li><li name="edu.holycross.shot.mid.validator.MidMarkupReader#editionType" visbl="pub" class="indented0 " data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="editionType:edu.holycross.shot.mid.validator.MidEditionType"></a><a id="editionType:MidEditionType"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#editionType:edu.holycross.shot.mid.validator.MidEditionType" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">editionType</span><span class="result">: <a href="MidEditionType.html" class="extype" name="edu.holycross.shot.mid.validator.MidEditionType">MidEditionType</a></span>
+      </span>
+      
+      <p class="shortcomment cmt">Specific edition type to apply.</p>
+    </li><li name="edu.holycross.shot.mid.validator.MidMarkupReader#editionTypes" visbl="pub" class="indented0 " data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="editionTypes:Vector[edu.holycross.shot.mid.validator.MidEditionType]"></a><a id="editionTypes:Vector[MidEditionType]"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#editionTypes:Vector[edu.holycross.shot.mid.validator.MidEditionType]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">editionTypes</span><span class="result">: <span class="extype" name="scala.Vector">Vector</span>[<a href="MidEditionType.html" class="extype" name="edu.holycross.shot.mid.validator.MidEditionType">MidEditionType</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Vector of all recognized editionTypes.</p>
+    </li></ol>
+            </div>
+
+        <div class="values members">
+              <h3>Concrete Value Members</h3>
               <ol>
                 <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#!=(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#!=(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -346,7 +384,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html###():Int" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html###():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -362,7 +400,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#==(x$1:Any):Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#==(x$1:Any):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -378,7 +416,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#asInstanceOf[T0]:T0" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#asInstanceOf[T0]:T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -391,26 +429,10 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="edu.holycross.shot.mid.validator.PaleographicObservation#cex" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="cex:String"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#cex:String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">cex</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      
-      <p class="shortcomment cmt">Format pair for CEX.</p>
     </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a><a id="clone():AnyRef"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#clone():Object" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#clone():Object" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -431,10 +453,58 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="edu.holycross.shot.mid.validator.MidMarkupReader#editedNode" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="editedNode(cexNode:String):String"></a><a id="editedNode(String):String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#editedNode(cexNode:String):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">editedNode</span><span class="params">(<span name="cexNode">cexNode: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      
+    </li><li name="edu.holycross.shot.mid.validator.MidMarkupReader#edition" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="edition(nodes:Vector[edu.holycross.shot.ohco2.CitableNode]):String"></a><a id="edition(Vector[CitableNode]):String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#edition(nodes:Vector[edu.holycross.shot.ohco2.CitableNode]):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">edition</span><span class="params">(<span name="nodes">nodes: <span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="edu.holycross.shot.ohco2.CitableNode">CitableNode</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      
+    </li><li name="edu.holycross.shot.mid.validator.MidMarkupReader#edition" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="edition(cex:String):String"></a><a id="edition(String):String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#edition(cex:String):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">edition</span><span class="params">(<span name="cex">cex: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#eq(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -447,10 +517,26 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#equals(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#finalize():Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#finalize():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -472,7 +558,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#getClass():Class[_]" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#getClass():Class[_]" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -488,26 +574,29 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="edu.holycross.shot.mid.validator.PaleographicObservation#img" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="img:edu.holycross.shot.cite.Cite2Urn"></a><a id="img:Cite2Urn"></a>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#img:edu.holycross.shot.cite.Cite2Urn" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#hashCode():Int" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">img</span><span class="result">: <span class="extype" name="edu.holycross.shot.cite.Cite2Urn">Cite2Urn</span></span>
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#isInstanceOf[T0]:Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#isInstanceOf[T0]:Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -523,7 +612,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#ne(x$1:AnyRef):Boolean" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -539,7 +628,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#notify():Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#notify():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -558,7 +647,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#notifyAll():Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#notifyAll():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -574,26 +663,10 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
                 <span class="name">@native</span><span class="args">()</span>
               
         </dd></dl></div>
-    </li><li name="edu.holycross.shot.mid.validator.PaleographicObservation#reading" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="reading:String"></a>
-      <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#reading:String" title="Permalink">
-        <i class="material-icons"></i>
-      </a>
-    </span>
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">reading</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      
-      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -606,10 +679,26 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
       </span>
       
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#wait():Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#wait():Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -631,7 +720,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -653,7 +742,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
     </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
       <span class="permalink">
-      <a href="../../../../../edu/holycross/shot/mid/validator/PaleographicObservation.html#wait(x$1:Long):Unit" title="Permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidMarkupReader.html#wait(x$1:Long):Unit" title="Permalink">
         <i class="material-icons"></i>
       </a>
     </span>
@@ -684,15 +773,7 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.Serializable">
-              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
-            </div><div class="parent" name="java.io.Serializable">
-              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
-            </div><div class="parent" name="scala.Product">
-              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
-            </div><div class="parent" name="scala.Equals">
-              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
-            </div><div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

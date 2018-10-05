@@ -8,7 +8,7 @@ title: MID project validator
 
 
 -   [Quick start](quick)
--   [API docs](api/edu/holycross/shot/mid/validator/index.html):  version **1.1.0**
+-   [API docs](api/edu/holycross/shot/mid/validator/index.html):  version **1.3.0**
 -   [Github repository](https://github.com/HCMID/projectvalidator)
 
 
