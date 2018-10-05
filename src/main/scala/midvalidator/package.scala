@@ -29,4 +29,31 @@ package object validator {
   val sadImg = "http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/hmt/vbimg/2017a/VB216VN_0316.tif&RGN=0.4788,0.7559,0.01419,0.007746&WID=50&CVT=JPEG"
 
 
+  /** Recursively collect all text contained in
+  * a branches of a given XML node.
+  *
+  * @param n Root of subtree to collect text from.
+  * @param s Previously seen string data to add new
+  * contents to.
+  */
+  def collectText(n: xml.Node, s: String = ""): String = {
+    val txt = StringBuilder.newBuilder
+    n match {
+      case t: xml.Text =>  {
+        val cleaner = t.toString().trim
+        if (cleaner.nonEmpty){
+          txt.append(cleaner + " ")
+        }
+
+      }
+      case e: xml.Elem =>  {
+
+        for (ch <- e.child) {
+         txt.append(collectText(ch, s))
+       }
+     }
+    }
+    txt.toString
+  }
+
 }

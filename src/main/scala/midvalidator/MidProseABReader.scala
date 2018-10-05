@@ -36,6 +36,7 @@ class MidProseABReader(applicableType: MidEditionType) extends MidMarkupReader {
 * with terminal citation units in TEI `ab` elements.
 */
 object MidProseABReader {
+
   /** Generate pure diplomatic edition in CEX format.
   *
   * @param xml Archival source in MID-compliant TEI.
@@ -46,11 +47,17 @@ object MidProseABReader {
     collectDiplomatic(root,"")
   }
 
+  /** Recursively collect diplomatic text readings from
+  * a given XML node.
+  *
+  * @param n Node to read.
+  * @param s Any previously accumulated readings that subsequent
+  * readings should be added to.
+  */
   def collectDiplomatic(n: xml.Node, s: String): String = {
-    //println("Collect diplomatic on " + n.label + " with  s " + s)
     val txt =  StringBuilder.newBuilder
-    //txt.append(s)
     n match {
+
       case t: xml.Text =>  {
         val cleaner = t.toString().trim
         if (cleaner.nonEmpty){
@@ -59,36 +66,65 @@ object MidProseABReader {
       }
 
       case e: xml.Elem =>  {
-        val appnd = addTextFromElement(e)
+        val appnd = addDiplomaticTextFromElement(e)
         appnd match {
           case None => {
             for (chld <- e.child) {
-            //println("\tNow look at " +  chld.label)
              txt.append(collectDiplomatic(chld, txt.toString))
-             //txt.append(addTextFromElement(chld))
             }
           }
           case _ => txt.append(appnd.get)
         }
-
-
-        //println("TEXT IS NOW " + txt.toString)
      }
     }
 
-
-    //println("Returning " + txt + " from " + n.label)
     txt.toString
   }
 
-  def addTextFromElement(el: xml.Elem): Option[String] = {
+  /** Determine what text to extract from a single XML element.
+  *  Depending on the semantics of this element in MID
+  * dipomatic markup, we return either the text content of the
+  * element, or, if no text content should be extracted,
+  * a single space to isolate this markup from any preceding
+  * or following content, or if the element is a container
+  * that should continue to be recursively analyzed, None.
+  *
+  * @param el Parsed XML element.
+  */
+  def addDiplomaticTextFromElement(el: xml.Elem): Option[String] = {
     //println("Add text from " + el.label)
     el.label match {
-      case "add" => Some(" ")
-      case "del" =>  Some(el.text)
+      case "teiHeader" => Some(" ")
 
-      case _ => None
+      case "add" => Some(" ")
+      case "expan" => Some(" ")
+      case "corr" => Some(" ")
+      case "ref" => Some(" ")
+      case "reg" => Some(" ")
+
+      case "abbr" => Some(el.text)
+      case "cit" => Some(el.text)
+      case "del" =>  Some(el.text)
+      case "num" =>  Some(el.text  + "'")
+      case "unclear" => Some(el.text)
+      case "sic" => Some(el.text)
+      case "orig" => Some(el.text)
+
+      case "ab" => None
+      case "div" => None
+      case "choice" => None
+      case "cit" => None
+      case "persName" => None
+      case "placeName" => None
+      case "q" => None
+      // Other elements to consider:
+      /*
+        w
+      */
+
+      case elementName: String => throw new Exception("Unrecognized XML element: " + elementName)
     }
   }
 
+  
 }
