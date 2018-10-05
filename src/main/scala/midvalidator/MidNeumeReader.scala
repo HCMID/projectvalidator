@@ -27,7 +27,7 @@ class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReader {
   def editedNode(archival: String, srcUrn: CtsUrn): String = {
     val cex = StringBuilder.newBuilder
     val editedUrn = srcUrn.dropVersion.addVersion(editionType.versionId)
-    println("EDITED URN:  " + editedUrn)
+    cex.append(editedUrn + "#")
     editionType match {
       case MidDiplomaticEdition => cex.append(MidNeumeReader.diplomatic(archival, srcUrn))
     }
