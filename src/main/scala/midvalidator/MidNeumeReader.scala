@@ -10,7 +10,10 @@ import scala.xml._
 class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReader {
   require(editionTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
-  /** Vector of all recognized editionTypes. */
+  /** Vector of all recognized editionTypes.
+  * In this release, the only type recognized
+  * is the [MidDiplomaticEdition].
+  */
   def editionTypes: Vector[MidEditionType]= {
     Vector(MidDiplomaticEdition)
   }

@@ -4,24 +4,7 @@ title: "MID validator library: quick start"
 ---
 
 
-## Instantiate a validator
 
-
-Import the library, create an editorial repository object, and use that to create a validator for the repository:
-
-```tut
-import edu.holycross.shot.mid.validator._
-
-val repo = EditorsRepo("src/test/resources/iliad10")
-val midValidator = Validator(repo)
-```
-
-## Validating paleography
-
-## Validating DSE relations
-
-Get a DSE Vector from a `Validator` instance:
-
-```tut
-val dseV = midValidator.dse
-```
+1.  The MID project library expects an editorial repository to be organized following [these conventions](repo).
+2.  How to [generate markdown reports](reports) for a repository.
+3.  How to work directly with [objects constructed by the validator](validator-objects)

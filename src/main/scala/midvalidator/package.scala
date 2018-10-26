@@ -17,8 +17,6 @@ project.
 */
 package object validator {
 
-  /** Object selectors for MSS illustrated in bifolio spreads.*/
-  val bifolios = Seq("e3", "venB")
 
   /** Base URL for Image Citation Tools.*/
   val ictBase= "http://www.homermultitext.org/ict2/"

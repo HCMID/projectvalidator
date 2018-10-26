@@ -11,12 +11,16 @@ import scala.xml._
 case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupReader {
   require(editionTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
-  /** Vector of all recognized editionTypes. */
+  /** Vector of all recognized editionTypes.
+  * In this release, we implement only the [MidDiplomaticEdition]
+  * type.
+  */
   def editionTypes: Vector[MidEditionType]= {
     Vector(MidDiplomaticEdition)
   }
 
-  /** Specific edition type to apply. */
+  /** Implementation of function required by MidMarkupReader
+  * trait specifying type of edition to create. */
   def editionType: MidEditionType = applicableType
 
   /** Create a plain-text citable node of type editionType

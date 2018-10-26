@@ -1,5 +1,6 @@
 package edu.holycross.shot.mid.validator
 
+// Implementations of the [[MidEditionType]] trait.
 /**  */
 case object MidDiplomaticEdition extends MidEditionType {
   def label =  "diplomatic"
