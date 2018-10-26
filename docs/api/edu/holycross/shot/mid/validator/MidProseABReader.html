@@ -176,8 +176,8 @@ repository.  For example:</p><pre><span class="kw">val</span> mom = Validator(<s
                         <a href="MidEditionType.html" title="A named category of edition.">MidEditionType</a>
                       </li><li class="current-entities indented5">
                         <span class="separator"></span>
-                        <a class="trait" href="MidMarkupReader.html" title="An orthographic system"></a>
-                        <a href="MidMarkupReader.html" title="An orthographic system">MidMarkupReader</a>
+                        <a class="trait" href="MidMarkupReader.html" title="A class capable of reading marked up archival editions, and creating editions of specified types."></a>
+                        <a href="MidMarkupReader.html" title="A class capable of reading marked up archival editions, and creating editions of specified types.">MidMarkupReader</a>
                       </li><li class="current-entities indented5">
                         <a class="object" href="MidNeumeReader$.html" title="Implementation of MID model for prose texts encoded with terminal citation units in TEI ab elements."></a>
                         <a class="class" href="MidNeumeReader.html" title="Reads MID texts editing neumes in TEI markup."></a>
@@ -468,7 +468,13 @@ in CEX format from source string <code>archival</code>.
         <span class="name">editedNode</span><span class="params">(<span name="cexNode">cexNode: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
+      <p class="shortcomment cmt"> Given a CEX String for a citable node in archival
+format, compose the CEX String for the corresponding
+node in the edition type specified by <a href="MidMarkupReader.html#editionType:edu.holycross.shot.mid.validator.MidEditionType" class="extmbr" name="edu.holycross.shot.mid.validator.MidMarkupReader#editionType">editionType</a>.</p><div class="fullcomment"><div class="comment cmt"><p> Given a CEX String for a citable node in archival
+format, compose the CEX String for the corresponding
+node in the edition type specified by <a href="MidMarkupReader.html#editionType:edu.holycross.shot.mid.validator.MidEditionType" class="extmbr" name="edu.holycross.shot.mid.validator.MidMarkupReader#editionType">editionType</a>.
+</p></div><dl class="paramcmts block"><dt class="param">cexNode</dt><dd class="cmt"><p>CEX String for a single node in
+archival format.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
     </li><li name="edu.holycross.shot.mid.validator.MidMarkupReader#edition" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="edition(nodes:Vector[edu.holycross.shot.ohco2.CitableNode]):String"></a><a id="edition(Vector[CitableNode]):String"></a>
       <span class="permalink">
@@ -484,7 +490,31 @@ in CEX format from source string <code>archival</code>.
         <span class="name">edition</span><span class="params">(<span name="nodes">nodes: <span class="extype" name="scala.Vector">Vector</span>[<span class="extype" name="edu.holycross.shot.ohco2.CitableNode">CitableNode</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
+      <p class="shortcomment cmt">Given a Vector of <code>CitableNode</code>s, create a
+CEX edition of type [editionType].</p><div class="fullcomment"><div class="comment cmt"><p>Given a Vector of <code>CitableNode</code>s, create a
+CEX edition of type [editionType].
+</p></div><dl class="paramcmts block"><dt class="param">nodes</dt><dd class="cmt"><p><code>CitableNode</code>s with text content
+in archival format.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
+    </li><li name="edu.holycross.shot.mid.validator.MidMarkupReader#edition" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="edition(corpus:edu.holycross.shot.ohco2.Corpus):String"></a><a id="edition(Corpus):String"></a>
+      <span class="permalink">
+      <a href="../../../../../edu/holycross/shot/mid/validator/MidProseABReader.html#edition(corpus:edu.holycross.shot.ohco2.Corpus):String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">edition</span><span class="params">(<span name="corpus">corpus: <span class="extype" name="edu.holycross.shot.ohco2.Corpus">Corpus</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Given a <code>Corpus</code>, create a
+CEX edition of type [editionType].</p><div class="fullcomment"><div class="comment cmt"><p>Given a <code>Corpus</code>, create a
+CEX edition of type [editionType].
+</p></div><dl class="paramcmts block"><dt class="param">corpus</dt><dd class="cmt"><p>Corpus of text(s) in archival
+format.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
     </li><li name="edu.holycross.shot.mid.validator.MidMarkupReader#edition" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="edition(cex:String):String"></a><a id="edition(String):String"></a>
       <span class="permalink">
@@ -500,7 +530,13 @@ in CEX format from source string <code>archival</code>.
         <span class="name">edition</span><span class="params">(<span name="cex">cex: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
+      <p class="shortcomment cmt">Given a CEX String with text contents in
+archival format, create a CEX String with
+edition of type [editionType].</p><div class="fullcomment"><div class="comment cmt"><p>Given a CEX String with text contents in
+archival format, create a CEX String with
+edition of type [editionType].
+</p></div><dl class="paramcmts block"><dt class="param">cex</dt><dd class="cmt"><p>CEX String of text(s) in archival
+format.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
     </li><li name="edu.holycross.shot.mid.validator.MidProseABReader#editionType" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="editionType:edu.holycross.shot.mid.validator.MidEditionType"></a><a id="editionType:MidEditionType"></a>
       <span class="permalink">
@@ -516,7 +552,9 @@ in CEX format from source string <code>archival</code>.
         <span class="name">editionType</span><span class="result">: <a href="MidEditionType.html" class="extype" name="edu.holycross.shot.mid.validator.MidEditionType">MidEditionType</a></span>
       </span>
       
-      <p class="shortcomment cmt">Specific edition type to apply.</p><div class="fullcomment"><div class="comment cmt"><p>Specific edition type to apply.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="edu.holycross.shot.mid.validator.MidProseABReader">MidProseABReader</a> → <a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
+      <p class="shortcomment cmt">Implementation of function required by MidMarkupReader
+trait specifying type of edition to create.</p><div class="fullcomment"><div class="comment cmt"><p>Implementation of function required by MidMarkupReader
+trait specifying type of edition to create.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="edu.holycross.shot.mid.validator.MidProseABReader">MidProseABReader</a> → <a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
     </li><li name="edu.holycross.shot.mid.validator.MidProseABReader#editionTypes" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="editionTypes:Vector[edu.holycross.shot.mid.validator.MidEditionType]"></a><a id="editionTypes:Vector[MidEditionType]"></a>
       <span class="permalink">
@@ -532,7 +570,10 @@ in CEX format from source string <code>archival</code>.
         <span class="name">editionTypes</span><span class="result">: <span class="extype" name="scala.Vector">Vector</span>[<a href="MidEditionType.html" class="extype" name="edu.holycross.shot.mid.validator.MidEditionType">MidEditionType</a>]</span>
       </span>
       
-      <p class="shortcomment cmt">Vector of all recognized editionTypes.</p><div class="fullcomment"><div class="comment cmt"><p>Vector of all recognized editionTypes.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="edu.holycross.shot.mid.validator.MidProseABReader">MidProseABReader</a> → <a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
+      <p class="shortcomment cmt">Vector of all recognized editionTypes.</p><div class="fullcomment"><div class="comment cmt"><p>Vector of all recognized editionTypes.
+In this release, we implement only the [MidDiplomaticEdition]
+type.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="edu.holycross.shot.mid.validator.MidProseABReader">MidProseABReader</a> → <a href="MidMarkupReader.html" class="extype" name="edu.holycross.shot.mid.validator.MidMarkupReader">MidMarkupReader</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
       <span class="permalink">
