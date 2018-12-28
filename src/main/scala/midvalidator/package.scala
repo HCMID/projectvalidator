@@ -18,6 +18,12 @@ project.
 package object validator {
 
 
+  /** Awesome regex to select text while keeping
+  * delimiting string in the resulting match group.
+  */
+  val  includeDelimiterRE = "((?<=%1$s)|(?=%1$s))"
+
+
   /** Base URL for Image Citation Tools.*/
   val ictBase= "http://www.homermultitext.org/ict2/"
 

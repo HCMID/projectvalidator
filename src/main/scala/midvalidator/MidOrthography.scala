@@ -8,7 +8,6 @@ trait MidOrthography {
   /** Set of one or more texts this orthography applies to.*/
   def domain:  CtsUrn
 
-
   /** True if u is URN-similar to domain.
   *
   * @param domain Text to check.
