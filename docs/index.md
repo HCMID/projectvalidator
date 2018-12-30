@@ -35,6 +35,5 @@ Implemented by not fully integrated:
 
 Orthography:
 
-An orthography can tokenize strings.
-
+- An orthography can tokenize strings into a sequence of `MidToken`s.
 - `MidToken` objects classify strings as belonging to `MidTokenTypes`.
