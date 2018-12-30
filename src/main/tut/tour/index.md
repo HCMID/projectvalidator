@@ -52,7 +52,7 @@ reporter.validate("urn:cite2:hmt:msA.v1:126r")
 
 
 -  A `Validator` object can construct a `DseVector` and validate **DSE relations**.  [Example](dse).
--  A `Validator` object can dreictly validate **paleographic observations**.
+-  A `Validator` object can directly validate **paleographic observations**.
 -  A `Validator` object uses an implementation of the `MidMarkupReader` trait to validate a **physical document's format** by creating an edition of the kind  specified by an `MidEditionType`.  This is achieved by giving the validator a map of URN values to a non-empty Vector of `MidMarkupReaders`.
 -  A `Validator` object uses an implementation of the `MidOrthography` trait to validate the **orthography** of an edition.  This is achieved by giving the validator a map of URN values to a non-empty Vector of `MidMarkupReaders`.
 -  Editions with valid orthography are **analyzed as a sequence of classified tokens**.

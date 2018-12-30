@@ -11,13 +11,8 @@ import scala.xml._
 case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupReader {
   require(editionTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
-  /** Vector of all recognized editionTypes.
-  * In this release, we implement only the [MidDiplomaticEdition]
-  * type.
-  */
-  def editionTypes: Vector[MidEditionType]= {
-    Vector(MidDiplomaticEdition)
-  }
+
+  def  editionTypes: Vector[MidEditionType] =MidProseABReader.editionTypes
 
   /** Implementation of function required by MidMarkupReader
   * trait specifying type of edition to create. */
@@ -45,6 +40,21 @@ case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupRea
 * with terminal citation units in TEI `ab` elements.
 */
 object MidProseABReader {
+
+
+  def readers : Vector[MidProseABReader] = {
+    val readerList = for (ed <- editionTypes) yield {
+      MidProseABReader(ed)
+    }
+    readerList.toVector
+  }
+  /** Vector of all recognized editionTypes.
+  * In this release, we implement only the [MidDiplomaticEdition]
+  * type.
+  */
+  def editionTypes: Vector[MidEditionType]= {
+    Vector(MidDiplomaticEdition)
+  }
 
   /** Generate pure diplomatic edition in CEX format.
   *
