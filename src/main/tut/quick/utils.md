@@ -8,7 +8,7 @@ title: "Nifty utilities"
 The package object includes a function for recursively collecting text from a parsed XML node.  To test it, we'll use Scala's built-in XML parser.
 
 
-```tut
+```tut:silent
 import edu.holycross.shot.mid.validator._
 import scala.xml._
 
