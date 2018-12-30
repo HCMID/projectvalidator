@@ -5,7 +5,7 @@ title: A hands-on tour of the library
 
 Obviously, import the library.
 
-```tut:silent
+```scala
 import edu.holycross.shot.mid.validator._
 ```
 
@@ -16,7 +16,7 @@ import edu.holycross.shot.mid.validator._
 
 Everything starts with an `EditorsRepo`.  You can create one from a relative or absolute path (as a String) to the root of the repository.
 
-```tut:silent
+```scala
 val repo = EditorsRepo("src/test/resources/iliad10")
 ```
 
@@ -27,7 +27,7 @@ This class enforces MID conventions for organizing data in an editorial project,
 
 A `Validator` object is created from an `EditorsRepo`.
 
-```tut:silent
+```scala
 val midValidator = Validator(repo)
 ```
 
@@ -39,7 +39,7 @@ The `Validator` analyzes and can validate the contents of the editorial reposito
 A `ValidationReporter` can compose a variety of reports in markdown format.  You create a `ValidationReporter` with a `Validator` object. Pass a URN value (as a String) for a text-bearing surface to its `validate` function, and the `ValidationReporter` will write the resulting reports to the required `validation` directory of the editorial repository.
 
 
-```tut:silent
+```scala
 val reporter = ValidationReporter(midValidator)
 reporter.validate("urn:cite2:hmt:msA.v1:126r")
 ```

@@ -35,7 +35,8 @@ package object validator {
 
 
   /** Recursively collect all text contained in
-  * a branches of a given XML node.
+  * a branches of a given XML node, normalizing runs of
+  * whitespace characters to a single space.
   *
   * @param n Root of subtree to collect text from.
   * @param s Previously seen string data to add new
@@ -58,7 +59,7 @@ package object validator {
        }
      }
     }
-    txt.toString
+    txt.toString.replaceAll("[\\s]+", " ")
   }
 
 }

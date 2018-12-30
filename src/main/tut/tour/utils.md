@@ -5,15 +5,13 @@ title: "Nifty utilities"
 
 
 
-The package object includes a function for recursively collecting text from a parsed XML node.  To test it, we'll use Scala's built-in XML parser.
+The package object includes a function called `collectText` for recursively collecting text from a parsed XML node.  To illustrate it, we'll use Scala's built-in XML parser to parse a String, and compare the .
 
 
-```tut:silent
+```tut
 import edu.holycross.shot.mid.validator._
 import scala.xml._
 
-val xml = XML.loadString("<root>Level 1 <div>contained 2</div><div>, more two <sub>third tier</sub> and back to two</div></root>")
-val actual = collectText(xml).trim
-val expected = "Level 1 contained 2 , more two third tier and back to two"
-assert(actual == expected)
+val xml = XML.loadString("<root>Level 1 <div>contained level 2 div,</div><div> another level two div, <sub>which contained a third tier,</sub> and back to second level.</div></root>")
+val extracted = collectText(xml).trim
 ```
