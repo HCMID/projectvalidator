@@ -1,6 +1,6 @@
 ---
 layout:  page
-title: "Scriptingwith editorial repository"
+title: "Scripting an editorial repository"
 ---
 
 

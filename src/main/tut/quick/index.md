@@ -9,3 +9,6 @@ title: "MID validator library: quick start"
 2.  [Scripting with an editorial repository](repo-script).
 2.  How to [generate markdown reports](reports) for a repository.
 3.  How to work directly with [objects constructed by the validator](validator-objects)
+
+
+[Nifty utilities](utils)
