@@ -51,7 +51,7 @@ class MidProseABReaderSpec extends FlatSpec {
     val urn =CtsUrn("urn:cts:mid:unittests.1.xml:1")
     val reader = MidProseABReader(MidDiplomaticEdition)
     val actual = reader.editedNode(xml, urn)
-    val expected = "urn:cts:mid:unittests.1.dipl:1#Text 1 .1 version"
+    val expected = "urn:cts:mid:unittests.1.xml_dipl:1#Text 1 .1 version"
     assert (actual.trim == expected)
   }
 

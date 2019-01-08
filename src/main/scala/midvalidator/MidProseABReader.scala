@@ -26,7 +26,7 @@ case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupRea
   */
   def editedNode(archival: String, srcUrn: CtsUrn): String = {
     val cex = StringBuilder.newBuilder
-    val editedUrn = srcUrn.dropVersion.addVersion(editionType.versionId)
+    val editedUrn = srcUrn.dropVersion.addVersion( srcUrn.version + "_" + editionType.versionId)
     cex.append(editedUrn + "#")
     editionType match {
       case MidDiplomaticEdition => cex.append(MidProseABReader.diplomatic(archival))
