@@ -41,7 +41,7 @@ trait MidMarkupReader {
 
   /** Given a CEX String with text contents in
   * archival format, create a CEX String with
-  * edition of type [editionType].
+  * edition of type [[editionType]].
   *
   * @param cex CEX String of text(s) in archival
   * format.

@@ -7,16 +7,14 @@ import scala.xml._
 *
 * @param editionType Type of edition to read.
 */
-class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReader {
+case class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReader {
   require(editionTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
   /** Vector of all recognized editionTypes.
   * In this release, the only type recognized
   * is the [MidDiplomaticEdition].
   */
-  def editionTypes: Vector[MidEditionType]= {
-    Vector(MidDiplomaticEdition)
-  }
+  def editionTypes: Vector[MidEditionType] =  MidNeumeReader.editionTypes
 
   /** Specific edition type to apply. */
   def editionType: MidEditionType = applicableType
@@ -42,6 +40,21 @@ class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReader {
 * with terminal citation units in TEI `ab` elements.
 */
 object MidNeumeReader {
+
+  def readers : Vector[MidNeumeReader] = {
+    val readerList = for (ed <- editionTypes) yield {
+      MidNeumeReader(ed)
+    }
+    readerList
+  }
+
+  /** Vector of all recognized editionTypes.
+  * In this release, we implement only the [MidDiplomaticEdition]
+  * type.
+  */
+  def editionTypes: Vector[MidEditionType]= {
+    Vector(MidDiplomaticEdition)
+  }
 
   /** Generate pure diplomatic edition in CEX format.
   *

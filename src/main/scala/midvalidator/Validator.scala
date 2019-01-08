@@ -8,6 +8,11 @@ import edu.holycross.shot.dse._
 import org.homermultitext.edmodel._
 import org.homermultitext.hmtcexbuilder._
 
+import better.files._
+import File._
+import java.io.{File => JFile}
+import better.files.Dsl._
+
 
 /** Validator helps you manage and maintain the contents of a Homer Multitext
 *  project repository.
@@ -15,7 +20,7 @@ import org.homermultitext.hmtcexbuilder._
 * @param repo Root directory of a repository laid out according to conventions
 * of HMT project in 2018.
 */
-case class Validator(repo: EditorsRepo) {
+case class Validator(repo: EditorsRepo, readers: Vector[ReadersPairing], orthos: Vector[OrthoPairing]) {
 
   /** Create a corpus of XML archival editions.
   */
@@ -52,8 +57,27 @@ case class Validator(repo: EditorsRepo) {
     }
   }
 
+  def publishTexts = {
+    val editionsDir = repo.validationDir/"editions"
+    if (editionsDir.exists) {
+      editionsDir.delete()
+    }
+    mkdirs(editionsDir)
 
 
+    for (txtRdrs <- readers) {
+      for (rdr <- txtRdrs.readers) {
+        println("Using reader " + rdr )
+
+        val texts = raw ~~ txtRdrs.urn
+        val edition = rdr.edition(texts.cex("#"))
+
+        val fName = txtRdrs.urn.workComponent + "-" + rdr.editionType.versionId + ".cex"
+        val editionFile = editionsDir/fName
+        editionFile.overwrite(edition)
+      }
+    }
+  }
 
 }
 
@@ -64,8 +88,13 @@ object Validator {
   *
   * @param repoPath Path to repository.
   */
-  def apply(repoPath: String) : Validator = {
-    Validator(EditorsRepo(repoPath))
+  def apply(repoPath: String, readers: Vector[ReadersPairing]) : Validator = {
+    Validator(EditorsRepo(repoPath), readers)
+  }
+
+
+  def apply(repo: EditorsRepo, readers: Vector[ReadersPairing]) : Validator = {
+    Validator(repo, readers)
   }
 
   /** Recursively merge  a list of corpora into a single corpus.

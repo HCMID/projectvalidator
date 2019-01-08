@@ -12,7 +12,7 @@ case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupRea
   require(editionTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
 
-  def  editionTypes: Vector[MidEditionType] =MidProseABReader.editionTypes
+  def  editionTypes: Vector[MidEditionType] = MidProseABReader.editionTypes
 
   /** Implementation of function required by MidMarkupReader
   * trait specifying type of edition to create. */
