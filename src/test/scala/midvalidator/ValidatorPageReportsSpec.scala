@@ -10,10 +10,12 @@ import File._
 import java.io.{File => JFile}
 
 class ValidationPageReportsSpec extends FlatSpec {
+  val readers = Vector.empty[ReadersPairing]
+  val ortho = Vector.empty[OrthoPairing]
 
   "A ValidationReporter" should "write a DSE report" in {
     val repo = EditorsRepo("src/test/resources/iliad10")
-    val mom = Validator(repo)
+    val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
     val pg = "urn:cite2:hmt:msA.v1:126r"
     reporter.validate(pg)
@@ -21,7 +23,7 @@ class ValidationPageReportsSpec extends FlatSpec {
 
   it should "parse natarch" in {
       val repo = EditorsRepo("natarch")
-      val mom = Validator(repo)
+      val mom = Validator(repo, readers, ortho)
       val reporter = ValidationReporter(mom)
       val pg = "urn:cite2:mid:declparchment.v1:front"
       reporter.validate(pg)

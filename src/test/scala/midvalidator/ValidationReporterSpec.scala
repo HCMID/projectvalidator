@@ -10,10 +10,12 @@ import File._
 import java.io.{File => JFile}
 
 class ValidationReporterSpec extends FlatSpec {
+  val readers = Vector.empty[ReadersPairing]
+  val ortho = Vector.empty[OrthoPairing]
 
   "A ValidationReporter" should "throw an exception if asked to validate a page with a bad urn" in {
     val repo = EditorsRepo("src/test/resources/iliad10")
-    val midValidator = Validator(repo)
+    val midValidator = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(midValidator)
     try {
       reporter.validate("BogusUrn")
@@ -25,7 +27,7 @@ class ValidationReporterSpec extends FlatSpec {
 
   it should "make a directory for reports based on the collection and object ID" in {
     val repo = EditorsRepo("src/test/resources/iliad10")
-    val mom = Validator(repo)
+    val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
     val testUrnStr = "urn:cite2:testns:mom.v1:demopage"
     reporter.validate(testUrnStr)
@@ -36,7 +38,7 @@ class ValidationReporterSpec extends FlatSpec {
 
   it should "write a DSE report" in {
     val repo = EditorsRepo("src/test/resources/iliad10")
-    val mom = Validator(repo)
+    val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
     val pg = "urn:cite2:hmt:msA.v1:126r"
     reporter.validate(pg)

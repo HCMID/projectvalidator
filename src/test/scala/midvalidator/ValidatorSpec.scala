@@ -7,18 +7,17 @@ import org.homermultitext.edmodel._
 
 class ValidatorSpec extends FlatSpec {
 
+
+  val readers = Vector.empty[ReadersPairing]
+  val ortho = Vector.empty[OrthoPairing]
+
   "A Validator" should "create a CTS corpus of raw XML source" in {
     val repo = EditorsRepo("src/test/resources/iliad10")
-    val mom = Validator(repo)
+    val mom = Validator(repo, readers, ortho)
     assert(mom.raw.isInstanceOf[Corpus])
   }
 
 
-  it should "create a comprehensive corpus with XML source for diplomatic edition" in {
-    val repo = EditorsRepo("src/test/resources/iliad10")
-    val validator = Validator(repo)
-    assert(validator.raw.isInstanceOf[Corpus])
-  }
 
 
 }
