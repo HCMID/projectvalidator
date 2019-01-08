@@ -14,7 +14,7 @@ class ValidationReporterSpec extends FlatSpec {
   val ortho = Vector.empty[OrthoPairing]
 
   "A ValidationReporter" should "throw an exception if asked to validate a page with a bad urn" in {
-    val repo = EditorsRepo("jvm/src/test/resources/iliad10")
+    val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val midValidator = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(midValidator)
     try {
@@ -26,7 +26,7 @@ class ValidationReporterSpec extends FlatSpec {
   }
 
   it should "make a directory for reports based on the collection and object ID" in {
-    val repo = EditorsRepo("jvm/src/test/resources/iliad10")
+    val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
     val testUrnStr = "urn:cite2:testns:mom.v1:demopage"
@@ -37,7 +37,7 @@ class ValidationReporterSpec extends FlatSpec {
   }
 
   it should "write a DSE report" in {
-    val repo = EditorsRepo("jvm/src/test/resources/iliad10")
+    val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
     val pg = "urn:cite2:hmt:msA.v1:126r"
