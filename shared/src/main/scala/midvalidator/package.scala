@@ -1,5 +1,6 @@
 package edu.holycross.shot.mid
 
+
 /** Provides classes for validating editorial work on the Homer Multitext
 project.
 * See https://homermultext.github.io/ for documentation.

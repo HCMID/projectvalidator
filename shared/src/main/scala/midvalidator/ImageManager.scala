@@ -2,12 +2,14 @@ package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
 
 
+import scala.scalajs.js.annotation._
+
 /** A class for working with image services recognizing URNs.
 *
 * @param ictBase Base URL for HMT Image Citation Service, version 2.
 * @param iipBase Base URL for IIP image service.
 */
-case class ImageManager(
+@JSExportTopLevel("ImageManager") case class ImageManager(
   ictBase: String = "http://www.homermultitext.org/ict2/",
   iipBase: String = "http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/"
   ) {
