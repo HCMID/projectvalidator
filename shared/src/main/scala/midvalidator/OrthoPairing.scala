@@ -1,4 +1,11 @@
 package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
+import scala.scalajs.js.annotation._
 
-case class OrthoPairing(urn: CtsUrn, orthogaphy: MidOrthography)
+
+/** Pairing of a text or set of texts identified by URN with an orthographic system.
+*
+* @param urn Identifier for a text or set of texts.
+* @param orthography Orthographic system used in the texts identified by [[urn]].
+*/
+@JSExportTopLevel("OrthoPairing")  case class OrthoPairing(urn: CtsUrn, orthography: MidOrthography)
