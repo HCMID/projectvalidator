@@ -73,7 +73,7 @@ case class ValidationReporter(midValidator: Validator) {
       }
 
       val paleoValidate = pageDir/"paleo-validation.md"
-      val paleoImages = dse.imagesForTbs(u).toSeq
+      val paleoImg = dse.imageForTbs(u)/*.toSeq
 
       if (paleoImages.nonEmpty) {
         val paleoImg = paleoImages(0)
@@ -81,7 +81,7 @@ case class ValidationReporter(midValidator: Validator) {
         home.append("See [details in paleo-validation.md](./paleo-validation.md)\n")
       } else {
         home.append("No paleographic observations included in repository.\n")
-      }
+      }*/
 
 
       // 2.  DSE valdiation reporting:
@@ -147,14 +147,17 @@ case class ValidationReporter(midValidator: Validator) {
       // 2. Paleographic observations
       val paleoVerify = pageDir/"paleo-verification.md"
       println("Checking paleographic observations for " + u + "...")
-      if (paleoImages.nonEmpty) {
+
+      /*if (paleoImages.nonEmpty) {
         val paleoImg = paleoImages(0)
         //println(paleoResults.good.map(_._1).mkString("\n"))
+        */
         val observations = paleoResults.good.filter(_.img ~~ paleoImg)
         paleoVerify.overwrite(PaleographyResults.pageVerification(u, observations, ictBase))
+        /*
       } else {
         home.append("No paleographic observations included in repository.\n")
-      }
+      }*/
 
 
 /*

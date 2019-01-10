@@ -4,7 +4,7 @@ import edu.holycross.shot.ohco2._
 import scala.scalajs.js.annotation._
 
 
-@JSExportTopLevel("Latin23") class Latin23 extends MidOrthography {
+@JSExportTopLevel("Latin23") object Latin23 extends MidOrthography {
 
   /** Label for this orthographic system.*/
   def orthography: String = "Latin-23"
@@ -62,6 +62,7 @@ import scala.scalajs.js.annotation._
   /** Tokenize a CitableNode in this othography.
   *
   * @param n CitableNode to tokenize.
+  * @param exemplarId Value to use for exemplar identifier in exemplar-level URN.
   */
   def tokenizeNode(n: CitableNode, exemplarId: String = "tkn"): Vector[MidToken] = {
     val rawList =  n.text.split("\\s+").filter(_.nonEmpty)
@@ -72,7 +73,10 @@ import scala.scalajs.js.annotation._
     raw.toVector
   }
 
-
+  /** Tokenize a CitableNode in this othography.
+  *
+  * @param n CitableNode to tokenize.
+  */
   def tokenizeNode(n: CitableNode):  Vector[MidToken] = {
     tokenizeNode(n, "tkn")
   }

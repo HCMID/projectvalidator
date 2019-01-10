@@ -51,20 +51,20 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
     if (dse.size == 0) {
       md.append("### Errors\n\nNo DSE records found!\n\n")
     } else {
-      val imgs = dse.imagesForTbs(pg).toVector
+      val img = dse.imageForTbs(pg)/*.toVector
       if (imgs.size != 1) {
         errors.append(s"### Errors\n\nCould not validate DSE records:  page ${pg} indexed to more than one image:\n\n" + imgs.map(i => "-  " + i.toString).mkString("\n") + "\n")
 
-      } else {
+      } else {*/
         md.append("## Internal consistency of records\n\n")
-        val img = imgs(0)
+        //val img = imgs(0)
         val imgTxts = dse.textsForImage(img).toVector
         val  tbsTxts = dse.textsForTbs(pg).toVector
         if (imgTxts.size == tbsTxts.size) {
-            md.append(s"- **${imgTxts.size}** text passages are indexed to ${imgs.head.objectComponent}\n")
+            md.append(s"- **${imgTxts.size}** text passages are indexed to ${img.objectComponent}\n")
             md.append(s"-  **${tbsTxts.size}** text passages are indexed to ${pg.objectComponent}\n")
         } else {
-          md.append(s"- Error in indexing: ${imgTxts.size} text passages indexed to image ${imgs.head.objectComponent}, but ${tbsTxts.size} passages indexed to page ${pg.objectComponent}\n")
+          md.append(s"- Error in indexing: ${imgTxts.size} text passages indexed to image ${img.objectComponent}, but ${tbsTxts.size} passages indexed to page ${pg.objectComponent}\n")
           if (errors.isEmpty) {
             errors.append("## Errors\n\n")
           }
@@ -72,7 +72,8 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
         }
 
         // check image size...
-        val dseImgMessage = dse.imagesForTbs(pg).size match {
+        val dseImgMessage = dse.imageForTbs(pg)
+        /*.size match {
           case 1 => "Surface **correctly** indexed to only one image."
           case i: Int => {
             if (errors.isEmpty) {
@@ -82,7 +83,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
             s"There were errors in indexing:  page ${pg} indexed to ${i} images.\n\n")
             s"**Error**:  page ${pg} indexed to ${i} images."
           }
-        }
+        }*/
         md.append("\n\n## Selection of image for imaging\n\n" +  dseImgMessage  + "\n\n")
 
         val missingPsgs = missingPassages(tbsTxts)
@@ -94,7 +95,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
 
         }
         md.append("\n\n## Relation of DSE records to text corpus\n\n" +  dseTextMessage  + "\n\n" + errors.toString + "\n\n")
-      }
+      //}
     }
 
     md.toString
