@@ -17,7 +17,7 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "2.0.0",
+      version := "3.0.0",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -25,7 +25,7 @@ lazy val crossed = crossProject.in(file(".")).
       libraryDependencies ++= Seq(
         "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
         "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
-        "edu.holycross.shot.cite" %%% "xcite" % "3.5.0",
+        "edu.holycross.shot.cite" %%% "xcite" % "3.7.0",
         "edu.holycross.shot" %%% "ohco2" % "10.9.0",
         "edu.holycross.shot" %%% "citeobj" % "7.1.1",
         "edu.holycross.shot" %%% "citerelations" % "2.3.0",

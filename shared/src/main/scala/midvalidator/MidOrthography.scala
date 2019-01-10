@@ -1,21 +1,11 @@
 package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
+import edu.holycross.shot.ohco2._
 
 /** An orthographic system
 */
 trait MidOrthography {
 
-  /** Set of one or more texts this orthography applies to.*/
-  //def domain:  CtsUrn
-
-  /** True if u is URN-similar to domain.
-  *
-  * @param domain Text to check.
-
-  def inDomain(u: CtsUrn): Boolean = {
-    domain ~~ u
-  }
-  */
 
   /** Label for this orthographic system.*/
   def orthography: String
@@ -49,8 +39,8 @@ trait MidOrthography {
 
   /** Tokenize a String in this othography.
   *
-  * @param s String to tokenize.
+  * @param n CitableNode to tokenize.
   */
-  def tokenizeString(s: String): Vector[MidToken]
+  def tokenizeNode(n: CitableNode): Vector[MidToken]
 
 }

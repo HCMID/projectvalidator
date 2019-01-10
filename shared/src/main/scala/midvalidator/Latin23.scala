@@ -1,4 +1,6 @@
 package edu.holycross.shot.mid.validator
+
+import edu.holycross.shot.ohco2._
 import scala.scalajs.js.annotation._
 
 
@@ -57,17 +59,23 @@ import scala.scalajs.js.annotation._
     Vector(PraenomenToken, PunctuationToken, LexicalToken, NumericToken)
   }
 
-  /** Tokenize a String in this othography.
+  /** Tokenize a CitableNode in this othography.
   *
-  * @param s String to tokenize.
+  * @param n CitableNode to tokenize.
   */
-  def tokenizeString(s: String): Vector[MidToken] = {
-    val raw = for (t <- s.split("\\s+").filter(_.nonEmpty)) yield {
-      MidToken(t, None)
+  def tokenizeNode(n: CitableNode, exemplarId: String = "tkn"): Vector[MidToken] = {
+    val rawList =  n.text.split("\\s+").filter(_.nonEmpty)
+    val raw = for ((t,count) <- rawList.zipWithIndex) yield {
+      val psg = n.urn.passageComponent + "." + count
+      MidToken(n.urn.addExemplar(exemplarId).addPassage(psg),t, None)
     }
     raw.toVector
   }
 
+
+  def tokenizeNode(n: CitableNode):  Vector[MidToken] = {
+    tokenizeNode(n, "tkn")
+  }
 
   /** Write a description of this orthography in the notatoin of
   * the Stuttgart FST toolkit.
