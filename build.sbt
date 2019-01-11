@@ -17,7 +17,7 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "3.0.0",
+      version := "3.0.1",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -25,11 +25,12 @@ lazy val crossed = crossProject.in(file(".")).
       libraryDependencies ++= Seq(
         "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
         "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
+
         "edu.holycross.shot.cite" %%% "xcite" % "3.7.0",
-        "edu.holycross.shot" %%% "ohco2" % "10.9.0",
-        "edu.holycross.shot" %%% "citeobj" % "7.1.1",
-        "edu.holycross.shot" %%% "citerelations" % "2.3.0",
-        "edu.holycross.shot" %%% "dse" % "3.2.0"
+        "edu.holycross.shot" %%% "ohco2" % "10.11.1",
+        "edu.holycross.shot" %%% "citeobj" % "7.2.0",
+        "edu.holycross.shot" %%% "citerelations" % "2.4.0",
+        "edu.holycross.shot" %%% "dse" % "4.2.1"
 
       )
     ).
@@ -37,8 +38,8 @@ lazy val crossed = crossProject.in(file(".")).
       libraryDependencies ++= Seq(
         "com.github.pathikrit" %% "better-files" % "3.5.0",
 
-        "edu.holycross.shot" %% "scm" % "6.1.1",
-        "org.homermultitext" %% "hmtcexbuilder" % "3.2.1"
+        "edu.holycross.shot" %% "scm" % "6.2.0",
+        "org.homermultitext" %% "hmtcexbuilder" % "3.3.1"
       ),
       tutTargetDirectory := file("docs"),
       tutSourceDirectory := file("shared/src/main/tut")
