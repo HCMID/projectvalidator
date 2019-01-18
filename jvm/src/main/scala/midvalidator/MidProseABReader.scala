@@ -100,6 +100,8 @@ object MidProseABReader {
     txt.toString
   }
 
+
+
   /** Determine what text to extract from a single XML element.
   *  Depending on the semantics of this element in MID
   * dipomatic markup, we return either the text content of the
@@ -129,6 +131,8 @@ object MidProseABReader {
       case "unclear" => Some(el.text)
       case "sic" => Some(el.text)
       case "orig" => Some(el.text)
+
+
       // Read text content and append numeric sign marker,
       // Unicode 0x374 :
       case "num" =>  Some(el.text  + "ʹ")
@@ -140,10 +144,14 @@ object MidProseABReader {
       // of these elements:
       case "ab" => None
       case "div" => None
+
       case "choice" => None
       case "persName" => None
       case "placeName" => None
       case "q" => None
+      case "foreign" => None
+      case "seg" =>  None
+
 
 
       case elementName: String => throw new Exception("Unrecognized XML element: " + elementName)
