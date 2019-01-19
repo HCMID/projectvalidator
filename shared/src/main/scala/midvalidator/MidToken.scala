@@ -11,4 +11,4 @@ import edu.holycross.shot.cite._
 * `MidTokenCategory` recognized by an [MidOrthography]'s
 * `tokenCategories` function.
 */
-case class MidToken(urn: CtsUrn, s: String, tokenCategory: Option[MidTokenCategory])
+case class MidToken(urn: CtsUrn, string: String, tokenCategory: Option[MidTokenCategory])

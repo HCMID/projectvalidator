@@ -46,9 +46,20 @@ trait MidOrthography {
 }
 
 object MidOrthography {
-  def vocabulary(tokens: Vector[MidToken]): Vector[String] = Vector.empty[String]
-
+  def vocabulary(tokens: Vector[MidToken]): Vector[String] ={
+    tokens.map(_.string).distinct.sortWith(_ < _)
+  }
+// Vector.empty[String] 
   def concordance(tokens: Vector[MidToken]): Map[String, Vector[CtsUrn]] = Map.empty[String, Vector[CtsUrn]]
 
   def tokenHistogram(tokens: Vector[MidToken]): Map[String, Int] = Map.empty[String, Int]
+
+  def indexedTokens (tokens: Vector[MidToken]): Vector[IndexedToken] = {
+    val indexed = for ( (tkn,idx) <- tokens.zipWithIndex) yield {
+      IndexedToken(tkn, idx)
+    }
+    indexed.toVector
+  }
+
+  case class IndexedToken(token: MidToken, index: Int)
 }
