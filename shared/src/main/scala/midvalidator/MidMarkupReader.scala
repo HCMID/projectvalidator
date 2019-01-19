@@ -23,6 +23,7 @@ trait MidMarkupReader {
   */
   def editedNode(archival: String, srcUrn: CtsUrn): String
 
+  //def editedNode(n: CitableNode):  S
 
 
   /**  Given a CEX String for a citable node in archival
@@ -36,6 +37,12 @@ trait MidMarkupReader {
     val cols = cexNode.split("#")
     val urn = CtsUrn(cols(0))
     editedNode(cols(1), urn)
+  }
+
+
+
+  def editedNode(cn: CitableNode):  String = {
+    editedNode(cn.text, cn.urn)
   }
 
 

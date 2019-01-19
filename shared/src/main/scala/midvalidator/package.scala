@@ -6,7 +6,7 @@ project.
 * See https://homermultext.github.io/ for documentation.
 *
 * ==Overview==
-* The class  [[Validator]] manages contents of an [[EditorsRepo]], which
+* The class  Validator manages contents of an [[EditorsRepo]], which
 * can be constructucted from a string path for the root of the
 * repository.  For example:
 *
