@@ -1,4 +1,5 @@
 package edu.holycross.shot.mid.validator
+import scala.collection.immutable.ListMap
 import edu.holycross.shot.cite._
 import org.scalatest.FlatSpec
 
@@ -22,7 +23,7 @@ class MidOrthographyObjectSpec extends FlatSpec {
     assert(actual == expected)
   }
 
-  it should "create a parallel vector of indexed tokens from a vector of tokens" in {
+  it should "generate a vector of indexed tokens from a vector of tokens" in {
     val actual = MidOrthography.indexedTokens(tokens)
     val expected = Vector (
         MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.1"), "μῆνιν", Some(LexicalToken)), 0),
@@ -37,9 +38,23 @@ class MidOrthographyObjectSpec extends FlatSpec {
     assert(actual == expected)
   }
 
-  it should "generate a concordance of surface forms from lists of tokens" in pending
+  it should "generate a concordance of surface forms from lists of tokens" in {
 
-  it should "generate a histogram of otkens from lists of tokens" in pending
+    val expected = ListMap(
+      "," -> Vector(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.3"), CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.5")),
+      "Πηληϊάδεω" -> Vector(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.6")),
+      "θεά" -> Vector(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.4")),
+      "μῆνιν" -> Vector(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.1")),
+      "οὐλομένην" -> Vector(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:2.1.1")),
+      "ἄειδε" -> Vector(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.2")),
+      "Ἀχιλῆος" -> Vector(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.7"))
+    )
+    val actual = MidOrthography.concordance(tokens)
+    assert(actual == expected)
+  }
 
-  it should "generate a vector of indexed tokens from a vector of tokens" in pending
+  it should "generate a histogram of tokens from lists of tokens" in {
+    val expected = ListMap("," -> 2, "Πηληϊάδεω" -> 1, "θεά" -> 1, "μῆνιν" -> 1, "οὐλομένην" -> 1, "ἄειδε" -> 1, "Ἀχιλῆος" -> 1)
+    assert(MidOrthography.tokenHistogram(tokens) == expected)
+  }
 }

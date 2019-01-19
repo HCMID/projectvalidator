@@ -1,6 +1,7 @@
 package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
+import scala.collection.immutable.ListMap
 
 /** An orthographic system
 */
@@ -57,10 +58,26 @@ object MidOrthography {
     tokens.map(_.string).distinct.sortWith(_ < _)
   }
 
+  /** Generate a concordance of tokens to CtsUrns.
+  *
+  * @param tokens Vector of [[MidToken]]s to create concordance for.
+  */
+  def concordance(tokens: Vector[MidToken]): ListMap[String, Vector[CtsUrn]] = {
+    val grouped = indexedTokens(tokens).groupBy(_.token.string)
+    val mapped = grouped.map{ case (k,v) => (k, v.sortWith(_.index < _.index).map(_.token.urn) )  }
+     ListMap(mapped.toSeq.sortBy(_._1):_*)
+   }
 
-  def concordance(tokens: Vector[MidToken]): Map[String, Vector[CtsUrn]] = Map.empty[String, Vector[CtsUrn]]
 
-  def tokenHistogram(tokens: Vector[MidToken]): Map[String, Int] = Map.empty[String, Int]
+  /** Generate a histogram of token occurrences
+  *
+  * @param tokens Vector of [[MidToken]]s to create histogram for.
+  */
+  def tokenHistogram(tokens: Vector[MidToken]): ListMap[String, Int] = {
+    val counts = concordance(tokens).map{ case (k,v) => (k, v.size)}
+    ListMap(counts.toSeq.sortWith(_._1 > _._1):_*)
+  }
+
 
   /** Generated vector of [[IndexedToken]]s from a vector of [[MidToken]]s.
   *
