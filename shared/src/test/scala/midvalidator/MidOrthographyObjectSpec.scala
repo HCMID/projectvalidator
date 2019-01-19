@@ -22,6 +22,21 @@ class MidOrthographyObjectSpec extends FlatSpec {
     assert(actual == expected)
   }
 
+  it should "create a parallel vector of indexed tokens from a vector of tokens" in {
+    val actual = MidOrthography.indexedTokens(tokens)
+    val expected = Vector (
+        MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.1"), "μῆνιν", Some(LexicalToken)), 0),
+        MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.2"), "ἄειδε", Some(LexicalToken)), 1),
+        MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.3"), ",", Some(PunctuationToken)), 2),
+        MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.4"), "θεά", Some(LexicalToken)), 3),
+        MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.5"), ",", Some(PunctuationToken)), 4),
+        MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.6"), "Πηληϊάδεω", Some(LexicalToken)), 5),
+        MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1.7"), "Ἀχιλῆος", Some(LexicalToken)), 6),
+        MidOrthography.IndexedToken(MidToken(CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:2.1.1"), "οὐλομένην", Some(LexicalToken)), 7)
+      )
+    assert(actual == expected)
+  }
+
   it should "generate a concordance of surface forms from lists of tokens" in pending
 
   it should "generate a histogram of otkens from lists of tokens" in pending

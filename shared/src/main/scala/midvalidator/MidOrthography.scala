@@ -45,15 +45,27 @@ trait MidOrthography {
 
 }
 
+/** Singleton object for operating on vectors of [MidToken]s. */
 object MidOrthography {
+
+
+  /** Generate sorted, unique list of  vocabulary items.
+  *
+  * @param tokens Vector of [[MidToken]]s to extract vocabulary list from.
+  */
   def vocabulary(tokens: Vector[MidToken]): Vector[String] ={
     tokens.map(_.string).distinct.sortWith(_ < _)
   }
-// Vector.empty[String] 
+
+
   def concordance(tokens: Vector[MidToken]): Map[String, Vector[CtsUrn]] = Map.empty[String, Vector[CtsUrn]]
 
   def tokenHistogram(tokens: Vector[MidToken]): Map[String, Int] = Map.empty[String, Int]
 
+  /** Generated vector of [[IndexedToken]]s from a vector of [[MidToken]]s.
+  *
+  * @param tokens Vector of [[MidToken]]s to index.
+  */
   def indexedTokens (tokens: Vector[MidToken]): Vector[IndexedToken] = {
     val indexed = for ( (tkn,idx) <- tokens.zipWithIndex) yield {
       IndexedToken(tkn, idx)
@@ -61,5 +73,11 @@ object MidOrthography {
     indexed.toVector
   }
 
+  /** Association of an [[MidToken]] with an index of its sequential position
+  * in a vector of tokens.
+  *
+  * @param token MidToken to index.
+  * @param index Sequential index of this token in a vector.
+  */
   case class IndexedToken(token: MidToken, index: Int)
 }
