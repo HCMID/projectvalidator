@@ -1,6 +1,6 @@
 package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
-
+import edu.holycross.shot.ohco2._
 import scala.xml._
 
 /** Reads MID texts editing neumes in TEI markup.
@@ -8,13 +8,13 @@ import scala.xml._
 * @param editionType Type of edition to read.
 */
 case class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReader {
-  require(editionTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
+  require(recognizedTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
   /** Vector of all recognized editionTypes.
   * In this release, the only type recognized
   * is the [MidDiplomaticEdition].
   */
-  def editionTypes: Vector[MidEditionType] =  MidNeumeReader.editionTypes
+  def recognizedTypes: Vector[MidEditionType] =  MidNeumeReader.recognizedTypes
 
   /** Specific edition type to apply. */
   def editionType: MidEditionType = applicableType
@@ -25,7 +25,9 @@ case class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReade
   * @param archival Archival source text.
   * @param srcUrn URN for archival source text.
   */
-  def editedNode(archival: String, srcUrn: CtsUrn): String = {
+  def editedNodeCex(cn: CitableNode): String = {
+    val archival = cn.text
+    val srcUrn = cn.urn
     val cex = StringBuilder.newBuilder
     //val editedUrn = srcUrn.dropVersion.addVersion(editionType.versionId)
     val editedUrn = srcUrn.dropVersion.addVersion( srcUrn.version + "_" + editionType.versionId)
@@ -43,7 +45,7 @@ case class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReade
 object MidNeumeReader {
 
   def readers : Vector[MidNeumeReader] = {
-    val readerList = for (ed <- editionTypes) yield {
+    val readerList = for (ed <- recognizedTypes) yield {
       MidNeumeReader(ed)
     }
     readerList
@@ -53,7 +55,7 @@ object MidNeumeReader {
   * In this release, we implement only the [MidDiplomaticEdition]
   * type.
   */
-  def editionTypes: Vector[MidEditionType]= {
+  def recognizedTypes: Vector[MidEditionType]= {
     Vector(MidDiplomaticEdition)
   }
 

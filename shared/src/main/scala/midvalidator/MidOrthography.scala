@@ -44,3 +44,11 @@ trait MidOrthography {
   def tokenizeNode(n: CitableNode): Vector[MidToken]
 
 }
+
+object MidOrthography {
+  def vocabulary(tokens: Vector[MidToken]): Vector[String] = Vector.empty[String]
+
+  def concordance(tokens: Vector[MidToken]): Map[String, Vector[CtsUrn]] = Map.empty[String, Vector[CtsUrn]]
+
+  def tokenHistogram(tokens: Vector[MidToken]): Map[String, Int] = Map.empty[String, Int]
+}

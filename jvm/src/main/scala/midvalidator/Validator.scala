@@ -70,7 +70,7 @@ case class Validator(repo: EditorsRepo, readers: Vector[ReadersPairing], orthos:
         println("Using reader " + rdr )
 
         val texts = raw ~~ txtRdrs.urn
-        val edition = rdr.edition(texts.cex("#"))
+        val edition = rdr.editionCex(texts.cex("#"))
 
         val fName = txtRdrs.urn.workComponent + "-" + rdr.editionType.versionId + ".cex"
         val editionFile = editionsDir/fName

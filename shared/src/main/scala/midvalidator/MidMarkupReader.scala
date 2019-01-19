@@ -8,10 +8,23 @@ import edu.holycross.shot.ohco2._
 trait MidMarkupReader {
 
   /** Vector of all recognized editionTypes. */
-  def editionTypes: Vector[MidEditionType]
+  def recognizedTypes: Vector[MidEditionType]
 
   /** Specific edition type to apply. */
   def editionType: MidEditionType
+
+
+  /**  Given a  citable node in archival
+  * format, compose the CEX String for the corresponding
+  * node in the edition type specified by [[editionType]].
+  *
+  * @param cexNode CEX String for a single node in
+  * archival format.
+  */
+  def editedNodeCex(cn: CitableNode):  String /* = {
+    editedNodeCex(cn.text, cn.urn)
+  }*/
+
 
   /**  For a citable node in archival format, compose
   * the CEX String for the corresponding node in
@@ -21,10 +34,9 @@ trait MidMarkupReader {
   * in archival representation.
   * @param srcUrn `CtsUrn` for the citable node.
   */
-  def editedNode(archival: String, srcUrn: CtsUrn): String
-
-  //def editedNode(n: CitableNode):  S
-
+  def editedNodeCex(archival: String, srcUrn: CtsUrn): String = {
+    editedNodeCex(CitableNode(srcUrn, archival))
+  }
 
   /**  Given a CEX String for a citable node in archival
   * format, compose the CEX String for the corresponding
@@ -33,17 +45,14 @@ trait MidMarkupReader {
   * @param cexNode CEX String for a single node in
   * archival format.
   */
-  def editedNode(cexNode: String):  String = {
+  def editedNodeCex(cexNode: String):  String = {
     val cols = cexNode.split("#")
     val urn = CtsUrn(cols(0))
-    editedNode(cols(1), urn)
+    editedNodeCex(cols(1), urn)
   }
 
 
 
-  def editedNode(cn: CitableNode):  String = {
-    editedNode(cn.text, cn.urn)
-  }
 
 
   /** Given a CEX String with text contents in
@@ -53,33 +62,41 @@ trait MidMarkupReader {
   * @param cex CEX String of text(s) in archival
   * format.
   */
-  def edition(cex: String): String = {
+  def editionCex(cex: String): String = {
     val cexNodes = for (ln <- cex.split("\n")) yield {
-      editedNode(ln)
+      editedNodeCex(ln)
     }
     cexNodes.mkString("\n")
   }
+
+
+  //def editedNode(n: CitableNode):  S
+
+/*
+  def edition(corpus: Corpus) : Corpus = {
+    val
+  }*/
 
   /** Given a `Corpus`, create a
   * CEX edition of type [editionType].
   *
   * @param corpus Corpus of text(s) in archival
   * format.
-  */
+
   def edition(corpus: Corpus): String = {
     edition(corpus.nodes)
-  }
+  }*/
 
   /** Given a Vector of `CitableNode`s, create a
   * CEX edition of type [editionType].
   *
   * @param nodes `CitableNode`s with text content
   * in archival format.
-  */
+
   def edition(nodes: Vector[CitableNode]): String = {
     val cexNodes = for (n <- nodes) yield {
       editedNode(n.text, n.urn)
     }
     cexNodes.mkString("\n")
-  }
+  }  */
 }

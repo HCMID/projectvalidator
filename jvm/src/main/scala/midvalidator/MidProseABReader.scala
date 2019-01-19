@@ -1,6 +1,6 @@
 package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
-
+import edu.holycross.shot.ohco2._
 import scala.xml._
 
 /** Reads MID prose texts in TEI markup using `ab`
@@ -9,10 +9,10 @@ import scala.xml._
 * @param editionType Type of edition to read.
 */
 case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupReader {
-  require(editionTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
+  require(recognizedTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
 
-  def  editionTypes: Vector[MidEditionType] = MidProseABReader.editionTypes
+  def  recognizedTypes: Vector[MidEditionType] = MidProseABReader.recognizedTypes
 
   /** Implementation of function required by MidMarkupReader
   * trait specifying type of edition to create. */
@@ -24,7 +24,9 @@ case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupRea
   * @param archival Archival source text.
   * @param srcUrn URN for archival source text.
   */
-  def editedNode(archival: String, srcUrn: CtsUrn): String = {
+  def editedNodeCex(cn: CitableNode): String = {
+    val archival = cn.text
+    val srcUrn = cn.urn
     val cex = StringBuilder.newBuilder
     val editedUrn = srcUrn.dropVersion.addVersion( srcUrn.version + "_" + editionType.versionId)
     cex.append(editedUrn + "#")
@@ -43,7 +45,7 @@ object MidProseABReader {
 
 
   def readers : Vector[MidProseABReader] = {
-    val readerList = for (ed <- editionTypes) yield {
+    val readerList = for (ed <- recognizedTypes) yield {
       MidProseABReader(ed)
     }
     readerList.toVector
@@ -52,7 +54,7 @@ object MidProseABReader {
   * In this release, we implement only the [MidDiplomaticEdition]
   * type.
   */
-  def editionTypes: Vector[MidEditionType]= {
+  def recognizedTypes: Vector[MidEditionType]= {
     Vector(MidDiplomaticEdition)
   }
 
