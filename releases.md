@@ -1,5 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**4.0.0**:  API-breaking changes introduced by more coherent naming of functions in `MidReader`.
+
+**3.1.0**:  Support `seg` and `foreign` in `MidProseABReader`.
 
 **3.0.1**:   Bug fix in binary publication process.
 

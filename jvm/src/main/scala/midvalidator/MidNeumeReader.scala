@@ -33,9 +33,23 @@ case class MidNeumeReader(applicableType: MidEditionType) extends MidMarkupReade
     val editedUrn = srcUrn.dropVersion.addVersion( srcUrn.version + "_" + editionType.versionId)
     cex.append(editedUrn + "#")
     editionType match {
-      case MidDiplomaticEdition => cex.append(MidNeumeReader.diplomatic(archival, srcUrn))
+      case MidDiplomaticEdition => cex.append(MidNeumeReader.diplomatic(srcUrn, archival))
     }
     cex.toString
+  }
+
+
+  def editedNode(cn: CitableNode): CitableNode = {
+    val archival = cn.text
+    val srcUrn = cn.urn
+    val cex = StringBuilder.newBuilder
+    //val editedUrn = srcUrn.dropVersion.addVersion(editionType.versionId)
+    val editedUrn = srcUrn.dropVersion.addVersion( srcUrn.version + "_" + editionType.versionId)
+    cex.append(editedUrn + "#")
+    editionType match {
+      case MidDiplomaticEdition => cex.append(MidNeumeReader.diplomatic(srcUrn, archival))
+    }
+    CitableNode(editedUrn, cex.toString)
   }
 }
 
@@ -64,7 +78,7 @@ object MidNeumeReader {
   * @param xml Archival source in MID-compliant TEI.
   * @param src CtsUrn of archival source edition.
   */
-  def diplomatic(xml: String, src: CtsUrn) : String = {
+  def diplomatic(src: CtsUrn, xml: String) : String = {
     val root  = XML.loadString(xml)
     collectDiplomatic(root,"")
   }

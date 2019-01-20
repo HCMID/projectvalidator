@@ -33,8 +33,18 @@ case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupRea
     editionType match {
       case MidDiplomaticEdition => cex.append(MidProseABReader.diplomatic(archival))
     }
-
     cex.toString
+  }
+
+  def editedNode(cn: CitableNode): CitableNode = {
+    val archival = cn.text
+    val srcUrn = cn.urn
+    val editedUrn = srcUrn.dropVersion.addVersion( srcUrn.version + "_" + editionType.versionId)
+
+    val content = editionType match {
+      case MidDiplomaticEdition => MidProseABReader.diplomatic(archival)
+    }
+    CitableNode(editedUrn, content)
   }
 }
 
