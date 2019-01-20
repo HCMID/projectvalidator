@@ -1,6 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
 
+*5.2.1**:  Fixes a bug in sorting of token histograms.
+
 *5.2.0**: Add concrete `categoryHistogram` function to `MidOrthography` trait.
 
 *5.1.0**: Add concrete `tokenizeCorpus` function to `MidOrthography` trait.

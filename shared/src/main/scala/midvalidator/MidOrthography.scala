@@ -82,7 +82,7 @@ object MidOrthography {
   */
   def tokenHistogram(tokens: Vector[MidToken]): ListMap[String, Int] = {
     val counts = concordance(tokens).map{ case (k,v) => (k, v.size)}
-    ListMap(counts.toSeq.sortWith(_._1 > _._1):_*)
+    ListMap(counts.toSeq.sortWith(_._2 > _._2):_*)
   }
 
   /** Generate a histogram of occurrences of each token category.
