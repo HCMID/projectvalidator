@@ -1,5 +1,10 @@
 ## Release notes: MID   `projectvalidator` code library
 
+
+*5.1.0**: Add concrete `tokenizeCorpus` function to `MidOrthography` trait.
+
+**5.0.0**: Further API-breaking changes in refactoring code.
+
 **4.0.0**:  API-breaking changes introduced by more coherent naming of functions in `MidReader`.
 
 **3.1.0**:  Support `seg` and `foreign` in `MidProseABReader`.

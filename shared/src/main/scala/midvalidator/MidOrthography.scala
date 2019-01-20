@@ -44,6 +44,13 @@ trait MidOrthography {
   */
   def tokenizeNode(n: CitableNode): Vector[MidToken]
 
+  def tokenizeCorpus(c: Corpus): Vector[MidToken] = {
+    val tokens = for (n <- c.nodes) yield {
+      tokenizeNode(n)
+    }
+    tokens.flatten
+  }
+
 }
 
 /** Singleton object for operating on vectors of [MidToken]s. */
