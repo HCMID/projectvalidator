@@ -85,6 +85,15 @@ object MidOrthography {
     ListMap(counts.toSeq.sortWith(_._1 > _._1):_*)
   }
 
+  /** Generate a histogram of occurrences of each token category.
+  *
+  * @param tokens Vector of [[MidToken]]s to create histogram for.
+  */
+  def categoryHistogram(tokens: Vector[MidToken]): ListMap[Option[MidTokenCategory], Int] = {
+    val grouped = tokens.groupBy(_.tokenCategory).map{ case (k,v) => (k, v.size)}
+    ListMap(grouped.toSeq.sortWith(_._2 > _._2):_*)
+  }
+
 
   /** Generated vector of [[IndexedToken]]s from a vector of [[MidToken]]s.
   *
