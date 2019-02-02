@@ -1,6 +1,9 @@
 ## Release notes: MID   `projectvalidator` code library
 
 
+*5.3.0**:  Add `MidVerseLReader`.
+
+
 *5.2.1**:  Fixes a bug in sorting of token histograms.
 
 *5.2.0**: Add concrete `categoryHistogram` function to `MidOrthography` trait.
