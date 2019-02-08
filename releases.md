@@ -1,5 +1,10 @@
 ## Release notes: MID   `projectvalidator` code library
 
+*5.5.0**: Publish binaries correctly for scala 2.11 and 2.12.
+
+
+*5.4.0**:  Add `TokenHistogram` class with histogram functions and charts with `evilplot`.
+
 
 *5.3.0**:  Add `MidVerseLReader`.
 

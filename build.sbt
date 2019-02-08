@@ -17,10 +17,11 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "5.3.0",
+      version := "5.5.0",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
+      resolvers +=  Resolver.bintrayRepo("cibotech", "public"),
 
       libraryDependencies ++= Seq(
         "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
@@ -30,7 +31,10 @@ lazy val crossed = crossProject.in(file(".")).
         "edu.holycross.shot" %%% "ohco2" % "10.11.1",
         "edu.holycross.shot" %%% "citeobj" % "7.2.0",
         "edu.holycross.shot" %%% "citerelations" % "2.4.0",
-        "edu.holycross.shot" %%% "dse" % "4.2.1"
+        "edu.holycross.shot" %%% "dse" % "4.2.1",
+
+        "com.cibo" %%% "evilplot" % "0.6.3"
+
 
       )
     ).
@@ -39,12 +43,16 @@ lazy val crossed = crossProject.in(file(".")).
         "com.github.pathikrit" %% "better-files" % "3.5.0",
 
         "edu.holycross.shot" %% "scm" % "6.2.0",
-        "org.homermultitext" %% "hmtcexbuilder" % "3.3.1"
+        "org.homermultitext" %% "hmtcexbuilder" % "3.3.1",
+        "com.cibo" %% "evilplot-repl" % "0.6.3"
       ),
       tutTargetDirectory := file("docs"),
       tutSourceDirectory := file("tut")
     ).
     jsSettings(
+      libraryDependencies ++= Seq(
+
+      ),
       skip in packageJSDependencies := false,
       scalaJSUseMainModuleInitializer in Compile := true
     )
