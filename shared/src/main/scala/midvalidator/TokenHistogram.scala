@@ -2,6 +2,7 @@ package edu.holycross.shot.mid.validator
 
 import edu.holycross.shot.cite._
 
+
 import com.cibo.evilplot.plot._
 import com.cibo.evilplot.plot.aesthetics.DefaultTheme._
 import com.cibo.evilplot.numeric.Point
@@ -11,13 +12,10 @@ import com.cibo.evilplot.colors._
 import java.awt.Image.SCALE_SMOOTH
 
 
-/** Mapping of a text or group of texts identified by CtsUrn to
-* a list of [[MidMarkupReader]]s.
-*
-* @param urn Text or texts these markup readers can be applied to.
-* @param readers Readersa applicable to texts identified by [[urn]].
+import scala.scalajs.js.annotation._
+/**
 */
-case class TokenHistogram(tokens: Vector[MidToken]) {
+@JSExportAll case class TokenHistogram(tokens: Vector[MidToken]) {
 
 
   /** Counts of individual tokens sorted by count. */

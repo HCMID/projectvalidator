@@ -25,4 +25,26 @@ class JsAccessSpec extends FlatSpec {
     assert(pairing.orthography.tokenCategories == expectedTypes)
   }
 
+  it should "expose common token types" in {
+    assert(PunctuationToken.name == "punctuation")
+  }
+
+  it should "expose concrete methods of orthography trait" in {
+    val cps = Latin23.strToCps("abc")
+    val expected = Vector(97, 98, 99)
+    assert(cps == expected)
+  }
+
+  it should "expose MidToken" in {
+    val tkn = MidToken(CtsUrn("urn:cts:test:none.demoval:1"),"bogus", None)
+    assert(tkn.string == "bogus")
+  }
+
+  it should "expose TokenHistogram" in {
+    val tkn = MidToken(CtsUrn("urn:cts:test:none.demoval:1"),"bogus", None)
+    val tokenVector = Vector(tkn)
+    val hist = TokenHistogram(tokenVector)
+    assert(hist.tokens.size == 1)
+  }
+
 }

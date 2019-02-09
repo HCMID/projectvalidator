@@ -1,5 +1,5 @@
 package edu.holycross.shot.mid.validator
-
+import scala.scalajs.js.annotation._
 import edu.holycross.shot.cite._
 
 /** A classified token.
@@ -11,4 +11,4 @@ import edu.holycross.shot.cite._
 * `MidTokenCategory` recognized by an [MidOrthography]'s
 * `tokenCategories` function.
 */
-case class MidToken(urn: CtsUrn, string: String, tokenCategory: Option[MidTokenCategory])
+@JSExportAll case class MidToken(urn: CtsUrn, string: String, tokenCategory: Option[MidTokenCategory])

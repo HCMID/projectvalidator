@@ -8,4 +8,4 @@ import scala.scalajs.js.annotation._
 * @param urn Identifier for a text or set of texts.
 * @param orthography Orthographic system used in the texts identified by [[urn]].
 */
-@JSExportTopLevel("OrthoPairing")  case class OrthoPairing(urn: CtsUrn, orthography: MidOrthography)
+@JSExportAll  case class OrthoPairing(urn: CtsUrn, orthography: MidOrthography)

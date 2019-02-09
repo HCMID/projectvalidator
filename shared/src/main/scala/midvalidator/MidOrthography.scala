@@ -2,10 +2,11 @@ package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
 import scala.collection.immutable.ListMap
+import scala.scalajs.js.annotation._
 
 /** An orthographic system
 */
-trait MidOrthography {
+@JSExportAll trait MidOrthography {
 
 
   /** Label for this orthographic system.*/

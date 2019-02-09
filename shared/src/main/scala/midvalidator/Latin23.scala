@@ -3,8 +3,9 @@ package edu.holycross.shot.mid.validator
 import edu.holycross.shot.ohco2._
 import scala.scalajs.js.annotation._
 
-
-@JSExportTopLevel("Latin23") object Latin23 extends MidOrthography {
+//@JSExportAll
+@JSExportTopLevel("Latin23")
+object Latin23 extends MidOrthography {
 
   /** Label for this orthographic system.*/
   def orthography: String = "Latin-23"

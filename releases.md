@@ -1,5 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+*5.5.1**:  Correct bug in ScalaJS export.
+
+
 *5.5.0**: Publish binaries correctly for scala 2.11 and 2.12.
 
 

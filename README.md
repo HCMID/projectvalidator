@@ -3,7 +3,7 @@
 A code library to validate HC-MID editorial projects.
 
 
-## Current version: 5.5.0
+## Current version: 5.5.1
 
 Status:  **active development**. [Release notes](releases.md)
 
