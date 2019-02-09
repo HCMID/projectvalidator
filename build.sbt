@@ -50,9 +50,6 @@ lazy val crossed = crossProject.in(file(".")).
       tutSourceDirectory := file("tut")
     ).
     jsSettings(
-      libraryDependencies ++= Seq(
-
-      ),
       skip in packageJSDependencies := false,
       scalaJSUseMainModuleInitializer in Compile := true
     )
