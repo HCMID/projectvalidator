@@ -45,11 +45,25 @@ import scala.scalajs.js.annotation._
   */
   def tokenizeNode(n: CitableNode): Vector[MidToken]
 
+
+  /** Tokenize a `Corpus` into a Vector of [MidToken]s.
+  *
+  * @param c Corpus to tokenize.
+  */
   def tokenizeCorpus(c: Corpus): Vector[MidToken] = {
     val tokens = for (n <- c.nodes) yield {
       tokenizeNode(n)
     }
     tokens.flatten
+  }
+
+  /** Create a new corpus citable at the level of the token.
+  *
+  * @param c Source corpus to analyze.
+  */
+  def tokenizedCorpus(c: Corpus): Corpus = {
+    def tokens = tokenizeCorpus(c)
+    Corpus(tokens.map(_.citableNode))
   }
 
 }

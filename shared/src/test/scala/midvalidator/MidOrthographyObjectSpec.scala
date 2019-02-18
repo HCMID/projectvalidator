@@ -57,4 +57,8 @@ class MidOrthographyObjectSpec extends FlatSpec {
     val expected = ListMap("," -> 2, "Πηληϊάδεω" -> 1, "θεά" -> 1, "μῆνιν" -> 1, "οὐλομένην" -> 1, "ἄειδε" -> 1, "Ἀχιλῆος" -> 1)
     assert(MidOrthography.tokenHistogram(tokens) == expected)
   }
+
+  
+
+
 }

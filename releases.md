@@ -1,6 +1,6 @@
 ## Release notes: MID   `projectvalidator` code library
 
-*5.6.0**: Add `citableNode` function to `MidToken`.
+*5.6.0**: Add `citableNode` function to `MidToken`, and `tokenizedCorpus` function to `MidOrthography`.
 
 
 *5.5.1**:  Correct bug in ScalaJS export.

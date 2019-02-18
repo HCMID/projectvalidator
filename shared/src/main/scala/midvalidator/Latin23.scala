@@ -8,7 +8,7 @@ import scala.scalajs.js.annotation._
 object Latin23 extends MidOrthography {
 
   /** Label for this orthographic system.*/
-  def orthography: String = "Latin-23"
+  def orthography: String = "Simple white-space tokenization for testing"
 
 
   // named code points
