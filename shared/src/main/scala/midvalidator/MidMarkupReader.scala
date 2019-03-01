@@ -21,7 +21,10 @@ trait MidMarkupReader {
   * @param cexNode CEX String for a single node in
   * archival format.
   */
-  def editedNodeCex(cn: CitableNode):  String
+  def editedNodeCex(cn: CitableNode, separator: String = "#"):  String = {
+    val editionNode = editedNode(cn)
+    editionNode.urn.toString + separator + editionNode.text
+  }
 
   /**  Given a  citable node in archival
   * format, create the corresponding

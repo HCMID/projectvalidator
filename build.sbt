@@ -8,21 +8,16 @@ lazy val supportedScalaVersions = List("2.11.8", "2.12.4")
 lazy val root = project.in(file(".")).
     aggregate(crossedJVM, crossedJS).
     settings(
-
-        crossScalaVersions := Nil,
-        publish / skip := true
-        /*
-      publish := {},
-      publishLocal := {}*/
+      crossScalaVersions := Nil,
+      publish / skip := true
     )
-
 
 
 lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "5.7.0",
+      version := "6.0.0",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
