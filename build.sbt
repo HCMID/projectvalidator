@@ -1,14 +1,19 @@
-name := "MID project validator"
+//name := "MID project validator"
 
-crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.4")
-scalaVersion := (crossScalaVersions in ThisBuild).value.last
+//crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.4")
+//scalaVersion := (crossScalaVersions in ThisBuild).value.last
 
+lazy val supportedScalaVersions = List("2.11.8", "2.12.4")
 
 lazy val root = project.in(file(".")).
     aggregate(crossedJVM, crossedJS).
     settings(
+
+        crossScalaVersions := Nil,
+        publish / skip := true
+        /*
       publish := {},
-      publishLocal := {}
+      publishLocal := {}*/
     )
 
 
@@ -17,7 +22,7 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "5.6.0",
+      version := "5.7.0",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -43,15 +48,20 @@ lazy val crossed = crossProject.in(file(".")).
         "com.github.pathikrit" %% "better-files" % "3.5.0",
 
         "edu.holycross.shot" %% "scm" % "6.2.0",
-        "org.homermultitext" %% "hmtcexbuilder" % "3.3.1",
+        //"org.homermultitext" %% "hmtcexbuilder" % "3.3.1",
+        "edu.holycross.shot" %% "cex" % "6.3.3",
         "com.cibo" %% "evilplot-repl" % "0.6.3"
       ),
       tutTargetDirectory := file("docs"),
-      tutSourceDirectory := file("tut")
+      tutSourceDirectory := file("tut"),
+      crossScalaVersions := supportedScalaVersions
+
     ).
     jsSettings(
       skip in packageJSDependencies := false,
-      scalaJSUseMainModuleInitializer in Compile := true
+      scalaJSUseMainModuleInitializer in Compile := true,
+      crossScalaVersions := supportedScalaVersions
+
     )
 
 lazy val crossedJVM = crossed.jvm.enablePlugins(TutPlugin)

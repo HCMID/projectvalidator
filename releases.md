@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+*5.7.0**: Changes dependency on library for CEX parsing, eliminating circular dependency with HMT text model library.
+
 *5.6.0**: Add `citableNode` function to `MidToken`, and `tokenizedCorpus` function to `MidOrthography`.
 
 

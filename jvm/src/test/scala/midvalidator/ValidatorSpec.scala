@@ -3,7 +3,7 @@ import org.scalatest.FlatSpec
 
 import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
-import org.homermultitext.edmodel._
+import edu.holycross.shot.cex._
 
 import better.files._
 import File._

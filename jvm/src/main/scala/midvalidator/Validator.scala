@@ -5,8 +5,8 @@ import edu.holycross.shot.ohco2._
 import edu.holycross.shot.citerelation._
 import edu.holycross.shot.citeobj._
 import edu.holycross.shot.dse._
-import org.homermultitext.edmodel._
-import org.homermultitext.hmtcexbuilder._
+//import org.homermultitext.edmodel._
+import edu.holycross.shot.cex._
 
 import better.files._
 import File._
