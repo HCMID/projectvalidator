@@ -17,6 +17,7 @@ class ValidationReporterSpec extends FlatSpec {
     val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val midValidator = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(midValidator)
+
     try {
       reporter.validate("BogusUrn")
       fail("Should not have validated bad urn.")
@@ -36,7 +37,7 @@ class ValidationReporterSpec extends FlatSpec {
     expectedDir.delete()
   }
 
-  it should "write a DSE report" in {
+  it should "write a DSE report" in  {
     val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
