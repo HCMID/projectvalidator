@@ -1,5 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+
+*6.0.1**:  Remove evilplot dependency.
+
 *6.0.0**:  Make function for CEX writing from CEX source concrete.
 
 *5.7.0**: Changes dependency on library for CEX parsing, eliminating circular dependency with HMT text model library.

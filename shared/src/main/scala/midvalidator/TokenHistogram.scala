@@ -2,7 +2,7 @@ package edu.holycross.shot.mid.validator
 
 import edu.holycross.shot.cite._
 
-
+/*
 import com.cibo.evilplot.plot._
 import com.cibo.evilplot.plot.aesthetics.DefaultTheme._
 import com.cibo.evilplot.numeric.Point
@@ -10,7 +10,7 @@ import com.cibo.evilplot.numeric.Point
 
 import com.cibo.evilplot.colors._
 import java.awt.Image.SCALE_SMOOTH
-
+*/
 
 import scala.scalajs.js.annotation._
 /**
@@ -45,7 +45,7 @@ import scala.scalajs.js.annotation._
 
 
   /**  Create evilplot graph of histogram.
-  */
+
   def histoPlot = {
     val data = for ((rec,i) <- histogram.zipWithIndex) yield {
       Point(i, rec._2)
@@ -54,6 +54,6 @@ import scala.scalajs.js.annotation._
     yAxis().frame().
     yLabel("Occurrences").render()
   }
-
+  */
 
 }
