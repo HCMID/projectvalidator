@@ -1,5 +1,13 @@
 ## Release notes: MID   `projectvalidator` code library
 
+*6.1.1**:  support TEI `gap` element.
+
+
+*6.1.0**:  add generalized `MidTeiReader` class.  This allows containing/terminal elements including TEI `p`, `ab`, `div`, `l`.  It therefore cannot, by itself, be used to ensure compliance with a citation scheme using any of these nodes for citation values.
+
+
+*6.0.2**:  Harmonize versions of library dependencies.
+
 
 *6.0.1**:  Remove evilplot dependency.
 

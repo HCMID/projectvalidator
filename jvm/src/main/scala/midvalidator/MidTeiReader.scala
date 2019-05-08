@@ -134,7 +134,7 @@ object MidTeiReader {
       case "corr" => Some(" ")
       case "ref" => Some(" ")
       case "reg" => Some(" ")
-
+      case "gap" => Some(" ")
 
       // Read text content from these elements:
       case "abbr" => Some(el.text)
