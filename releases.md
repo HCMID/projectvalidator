@@ -1,40 +1,42 @@
 ## Release notes: MID   `projectvalidator` code library
 
-*6.1.1**:  support TEI `gap` element.
+**6.1.2**:  update library dependencies.
+
+**6.1.1**:  support TEI `gap` element.
 
 
-*6.1.0**:  add generalized `MidTeiReader` class.  This allows containing/terminal elements including TEI `p`, `ab`, `div`, `l`.  It therefore cannot, by itself, be used to ensure compliance with a citation scheme using any of these nodes for citation values.
+**6.1.0**:  add generalized `MidTeiReader` class.  This allows containing/terminal elements including TEI `p`, `ab`, `div`, `l`.  It therefore cannot, by itself, be used to ensure compliance with a citation scheme using any of these nodes for citation values.
 
 
-*6.0.2**:  Harmonize versions of library dependencies.
+**6.0.2**:  Harmonize versions of library dependencies.
 
 
-*6.0.1**:  Remove evilplot dependency.
+**6.0.1**:  Remove evilplot dependency.
 
 *6.0.0**:  Make function for CEX writing from CEX source concrete.
 
 *5.7.0**: Changes dependency on library for CEX parsing, eliminating circular dependency with HMT text model library.
 
-*5.6.0**: Add `citableNode` function to `MidToken`, and `tokenizedCorpus` function to `MidOrthography`.
+**5.6.0**: Add `citableNode` function to `MidToken`, and `tokenizedCorpus` function to `MidOrthography`.
 
 
-*5.5.1**:  Correct bug in ScalaJS export.
+**5.5.1**:  Correct bug in ScalaJS export.
 
 
-*5.5.0**: Publish binaries correctly for scala 2.11 and 2.12.
+**5.5.0**: Publish binaries correctly for scala 2.11 and 2.12.
 
 
-*5.4.0**:  Add `TokenHistogram` class with histogram functions and charts with `evilplot`.
+**5.4.0**:  Add `TokenHistogram` class with histogram functions and charts with `evilplot`.
 
 
-*5.3.0**:  Add `MidVerseLReader`.
+**5.3.0**:  Add `MidVerseLReader`.
 
 
-*5.2.1**:  Fixes a bug in sorting of token histograms.
+**5.2.1**:  Fixes a bug in sorting of token histograms.
 
-*5.2.0**: Add concrete `categoryHistogram` function to `MidOrthography` trait.
+**5.2.0**: Add concrete `categoryHistogram` function to `MidOrthography` trait.
 
-*5.1.0**: Add concrete `tokenizeCorpus` function to `MidOrthography` trait.
+**5.1.0**: Add concrete `tokenizeCorpus` function to `MidOrthography` trait.
 
 **5.0.0**: Further API-breaking changes in refactoring code.
 
