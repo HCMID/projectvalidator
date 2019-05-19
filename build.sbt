@@ -17,7 +17,7 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "6.1.2",
+      version := "6.1.3",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -42,7 +42,7 @@ lazy val crossed = crossProject.in(file(".")).
       libraryDependencies ++= Seq(
         "com.github.pathikrit" %% "better-files" % "3.5.0",
 
-        "edu.holycross.shot" %% "scm" % "6.2.1",
+        "edu.holycross.shot" %% "scm" % "6.2.3",
         //"org.homermultitext" %% "hmtcexbuilder" % "3.3.1",
         "edu.holycross.shot" %% "cex" % "6.3.3",
         //"com.cibo" %% "evilplot-repl" % "0.6.3"

@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**6.1.3**:  update `scm` library.
+
 **6.1.2**:  update library dependencies.
 
 **6.1.1**:  support TEI `gap` element.
