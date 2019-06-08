@@ -5,7 +5,6 @@ import edu.holycross.shot.ohco2._
 import edu.holycross.shot.citerelation._
 import edu.holycross.shot.citeobj._
 import edu.holycross.shot.dse._
-//import org.homermultitext.edmodel._
 import edu.holycross.shot.cex._
 
 import better.files._
@@ -17,8 +16,11 @@ import better.files.Dsl._
 /** Validator helps you manage and maintain the contents of a Homer Multitext
 *  project repository.
 *
-* @param repo Root directory of a repository laid out according to conventions
-* of HMT project in 2018.
+* @param repo Root directory of a repository laid out according to
+* conventions of HMT project in 2018.
+* @param readers Mapping of URN strings to class implementing MidMarkupReader trait.
+* @param orthos Mapping of URN strings to class implementing MidOrthography trait.
+*
 */
 case class Validator(repo: EditorsRepo, readers: Vector[ReadersPairing], orthos: Vector[OrthoPairing]) {
 

@@ -84,7 +84,7 @@ case class ValidationReporter(midValidator: Validator) {
       }*/
 
 
-      // 2.  DSE valdiation reporting:
+      // 2.  DSE validation reporting:
       println("Validating  DSE records...")
       val dseReporter =  DseReporter(u, dse, pageCorpus)
       val dseValidMd = dseReporter.dseValidation
