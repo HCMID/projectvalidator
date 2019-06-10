@@ -58,38 +58,19 @@ case class ValidationReporter(midValidator: Validator) {
       mkdirs(pageDir)
 
       val pageCorpus = corpusForPage(u)
-      //val pageTokens = TeiReader.fromCorpus(pageCorpus)
 
       val home = StringBuilder.newBuilder
       home.append(s"# Review of ${u.collection}, page ${u.objectComponent}\n\n")
       home.append("## Summary of automated validation\n\n")
 
-      // 1.  Paleography validation
-      if (paleoResults.bad.isEmpty ) {
-        home.append(s"-  ![errors](${okImg}) Paleography validation: there were no errors. \n")
-      } else {
-        println("There were errors finding paleographic observations for " + pageUrn)
-        home.append("-  ![errors](${sadImg}) Paleography validation: there were errors. ")
-      }
-
-      val paleoValidate = pageDir/"paleo-validation.md"
-      val paleoImg = dse.imageForTbs(u)/*.toSeq
-
-      if (paleoImages.nonEmpty) {
-        val paleoImg = paleoImages(0)
-        paleoValidate.overwrite(PaleographyResults.pageReport(paleoImg,u,paleoResults))
-        home.append("See [details in paleo-validation.md](./paleo-validation.md)\n")
-      } else {
-        home.append("No paleographic observations included in repository.\n")
-      }*/
 
 
-      // 2.  DSE validation reporting:
+      //  DSE validation reporting:
       println("Validating  DSE records...")
       val dseReporter =  DseReporter(u, dse, pageCorpus)
       val dseValidMd = dseReporter.dseValidation
       val dseHasErrors: Boolean = dseValidMd.contains("## Errors")
-      val dseReport = pageDir/"dse-validation.md"
+      val dseReport = nameBetterFile(pageDir,"dse-validation.md")
       dseReport.overwrite(dseValidMd)
 
       if (dseHasErrors) {
@@ -106,92 +87,26 @@ case class ValidationReporter(midValidator: Validator) {
       val errHeader = "Token#Reading#Error\n"
 
       // 3.  Character valdiatoin
-      /*
-      val badChars = Validator.badCharTokens(pageTokens)
-      if (badChars.isEmpty) {
-          home.append(s"-  ![errors](${okImg}) Character set validation: there were no errors.\n")
-      } else {
-        home.append("-  ![errors](${sadImg}) Character set validation: there were errors.  ")
-
-        val badCharFile = pageDir/"badCharacters.cex"
-        badCharFile.overwrite(Validator.badCharTable(badChars))
-        home.append("See [details in badCharacters.cex](./badCharacters.cex)\n")
-      }
-*/
-
       // 4.  XML markup validation
-      /*
-      val badXml = Validator.badMarkup(pageTokens).map(_.analysis.errorReport("#"))
-      if (badXml.isEmpty) {
-          home.append(s"-  ![errors](${okImg}) XML markup validation: there were no errors.\n")
-      } else {
-          home.append("-  ![errors](${sadImg}) XML markup validation: there were errors.  ")
-          val badXmlFile = pageDir/"badXML.cex"
 
-          badXmlFile.overwrite(errHeader + badXml.mkString("\n"))
-          home.append("See [details in badXML.cex](./badXML.cex)\n")
-      }
-
-
-      home.append("-  Index of scholia markers validation.  **TBA**\n")
-*/
       home.append("\n\n## Visualizations to review for verification\n\n")
 
       //  1.  DSE indexing
       val dseCompleteMd = dseReporter.dseCompleteness
       val dseCorrectMd = dseReporter.dseCorrectness
-      val dseVerify = pageDir/"dse-verification.md"
+      val dseVerify = nameBetterFile(pageDir, "dse-verification.md")
       val dsePassageMd =
       dseVerify.overwrite(dseCompleteMd + dseCorrectMd)
 
       // 2. Paleographic observations
-      val paleoVerify = pageDir/"paleo-verification.md"
-      println("Checking paleographic observations for " + u + "...")
-
-      /*if (paleoImages.nonEmpty) {
-        val paleoImg = paleoImages(0)
-        //println(paleoResults.good.map(_._1).mkString("\n"))
-        */
-        val observations = paleoResults.good.filter(_.img ~~ paleoImg)
-        paleoVerify.overwrite(PaleographyResults.pageVerification(u, observations, ictBase))
-        /*
-      } else {
-        home.append("No paleographic observations included in repository.\n")
-      }*/
 
 
-/*
       // 3. Named entity tagging
-      val neReporter = NamedEntityReporter(u, pageTokens)
-      val neReport = pageDir/"ne-verification.md"
-      neReport.overwrite(neReporter.verification)
-
-      home.append("- Completeness and correctness of DSE indexing:  see [dse-verification.md](./dse-verification.md)\n")
-      home.append("-  Completeness and correctness of paleography observations:  see [paleo-verification.md](./paleo-verification.md)\n")
-      home.append("-  Correctness of named entity identification:  see [ne-verification.md](ne-verification.md)")
-
 
 
       // OV of text contents
       home.append("\n## Overview of page's text contents\n\n")
-      val wordList = pageDir/"wordlist.txt"
-      wordList.overwrite(Validator.wordList(pageTokens).mkString("\n"))
-      val wordHisto = pageDir/"wordFrequencies.cex"
-      wordHisto.overwrite("Word#Frequency\n" + Validator.wordHisto(pageTokens).map(_.cex).mkString("\n"))
-      val wordIndex = pageDir/"wordIndex.cex"
-      val wordHeader = "Character#Codepoint\n"
 
-
-      wordIndex.overwrite(wordHeader + Validator.tokenIndex(pageTokens).mkString("\n"))
-      val charHisto = pageDir/"characterFrequencies.cex"
-      charHisto.overwrite(Validator.cpTable(pageTokens))
-
-      val tProf = Validator.profileTokens(pageTokens)
-      val tokensProfile = for (prof <- tProf) yield {
-        "- " + prof._1 + ": " + prof._2 + " tokens. " + prof._3 + " distinct tokens."
-      }
-      home.append(s"**${pageTokens.size}** analyzed tokens in **${pageCorpus.size}** citable units of text.\n\nDistribution of token types:\n\n")
-      home.append(tokensProfile.mkString("\n") + "\n")
 
       home.append("\nWord data:\n\n")
 
@@ -202,11 +117,8 @@ case class ValidationReporter(midValidator: Validator) {
 
       home.append("\nCharacter data:\n\n")
       home.append("-  frequencies:  see [characterFrequencies.cex](./characterFrequencies.cex)\n")
-*/
 
-
-
-      val index = pageDir/"summary.md"
+      val index = nameBetterFile(pageDir,"summary.md")
       index.overwrite(home.toString)
 
 
@@ -218,4 +130,5 @@ case class ValidationReporter(midValidator: Validator) {
       }
     }
   }
+
 }

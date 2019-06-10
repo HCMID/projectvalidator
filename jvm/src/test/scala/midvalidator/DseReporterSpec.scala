@@ -18,16 +18,17 @@ class DseReporterSpec extends FlatSpec {
 
   val corpus = TextRepositorySource.fromFiles(txtCatalog, txtConfig, txtDir).corpus
 
-
-
   "A DseReporter" should "do things" in {
     val pg = Cite2Urn("urn:cite2:hmt:e3.v1:109v")
     val reporter = DseReporter(pg, dsev, corpus)
 
+    val corpusUrns = (corpus.nodes.map(_.urn))
+    assert(reporter.missingPassages.isEmpty)
   }
 
   it should "handle a range of pages" in {
       val pgs = Cite2Urn("urn:cite2:hmt:e3.v1:109v-110r")
       val reporter = DseReporter(pgs, dsev, corpus)
+      assert(reporter.missingPassages.isEmpty)
   }
 }

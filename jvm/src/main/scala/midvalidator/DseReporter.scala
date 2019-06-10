@@ -28,8 +28,9 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
   *
   * @param txts Passages to check.
    */
-  def missingPassages(psgs: Vector[CtsUrn]):  Vector[CtsUrn] = {
-    val accountedFor = for (psg <- psgs) yield {
+  def missingPassages:  Vector[CtsUrn] = {
+    val psgs = dse.textsForTbs(pg)
+    val accountedFor = for (psg <- psgs ) yield {
       val matches = txts ~~ psg
       if (matches.isEmpty) {
         Some(psg)
@@ -41,6 +42,21 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
   }
 
 
+
+/*
+  def imageOnlyPassages: Set[CtsUrn] = {
+    val img = dse.imageForTbs(pg)
+    val imgTxts = dse.textsForImage(img).toVector
+    val  tbsTxts = dse.textsForTbs(pg).toVector
+
+    Set.empty[CtsUrn]
+  }
+
+  def surfaceOnlyPassages: Set[CtsUrn] = {
+    Set.empty[CtsUrn]
+  }
+*/
+
   /** Compose markdown report on automated validation of DSE records.
   */
   def dseValidation: String = {
@@ -51,51 +67,20 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
     if (dse.size == 0) {
       md.append("### Errors\n\nNo DSE records found!\n\n")
     } else {
-      val img = dse.imageForTbs(pg)/*.toVector
-      if (imgs.size != 1) {
-        errors.append(s"### Errors\n\nCould not validate DSE records:  page ${pg} indexed to more than one image:\n\n" + imgs.map(i => "-  " + i.toString).mkString("\n") + "\n")
 
-      } else {*/
-        md.append("## Internal consistency of records\n\n")
-        //val img = imgs(0)
-        val imgTxts = dse.textsForImage(img).toVector
-        val  tbsTxts = dse.textsForTbs(pg).toVector
-        if (imgTxts.size == tbsTxts.size) {
-            md.append(s"- **${imgTxts.size}** text passages are indexed to ${img.objectComponent}\n")
-            md.append(s"-  **${tbsTxts.size}** text passages are indexed to ${pg.objectComponent}\n")
-        } else {
-          md.append(s"- Error in indexing: ${imgTxts.size} text passages indexed to image ${img.objectComponent}, but ${tbsTxts.size} passages indexed to page ${pg.objectComponent}\n")
-          if (errors.isEmpty) {
-            errors.append("## Errors\n\n")
-          }
-          errors.append("There were inconsistencies in indexing. (See details above.)\n\n")
-        }
+      md.append("## Internal consistency of records\n\n")
+      val dseImgMessage = dse.imageForTbs(pg)
+      md.append("\n\n## Selection of image for imaging\n\n" +  dseImgMessage  + "\n\n")
 
-        // check image size...
-        val dseImgMessage = dse.imageForTbs(pg)
-        /*.size match {
-          case 1 => "Surface **correctly** indexed to only one image."
-          case i: Int => {
-            if (errors.isEmpty) {
-              errors.append("## Errors\n\n")
-            }
-            errors.append(
-            s"There were errors in indexing:  page ${pg} indexed to ${i} images.\n\n")
-            s"**Error**:  page ${pg} indexed to ${i} images."
-          }
-        }*/
-        md.append("\n\n## Selection of image for imaging\n\n" +  dseImgMessage  + "\n\n")
+      val dseTextMessage =  if (missingPassages.isEmpty) {
+        "**All** passages indexed in DSE records appear in text corpus."
+      } else {
+        "There were errors indexing texts. \n\n" +
+        "The following passages in DSE records do not appear in the text corpus:\n\n" + missingPassages.map("-  " + _ ).mkString("\n") + "\n\n"
 
-        val missingPsgs = missingPassages(tbsTxts)
-        val dseTextMessage =  if (missingPsgs.isEmpty) {
-          "**All** passages indexed in DSE records appear in text corpus."
-        } else {
-          errors.append("There were errors citing texts. \n\n")
-          errors.append("The following passages in DSE records do not appear in the text corpus:\n\n" + missingPsgs.map("-  " + _ ).mkString("\n") + "\n\n")
+      }
+      md.append("\n\n## Relation of DSE records to text corpus\n\n" +  dseTextMessage  + "\n\n" + errors.toString + "\n\n")
 
-        }
-        md.append("\n\n## Relation of DSE records to text corpus\n\n" +  dseTextMessage  + "\n\n" + errors.toString + "\n\n")
-      //}
     }
 
     md.toString
@@ -103,34 +88,32 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
 
   /**  Compose markdown content juxtaposing indexed image with
   * transcribed text content for a specific page.
-  */
-/*
+
   def passageView : String = {
+    val imgmgr = ImageManager()
     val viewMd = StringBuilder.newBuilder
     val rows = for (psg <- txts.nodes) yield {
       val img = dse.imagesWRoiForText(psg.urn).head
-      val imgmgr = ImageManager()
       val md = imgmgr.markdown(img, 1000)
-
       val dipl = TeiReader(psg.cex("#")).tokens.map(_.analysis.readWithDiplomatic).mkString(" ")
 
       dipl + " (*" + psg.urn + "*)" + "  " + md
     }
     rows.mkString("\n\n\n")
-  }*/
+  }  */
 
   /** Compose markdown report to verify correctness of DSE records.
   *
   * @param pg Page to analyze.
   */
   def dseCorrectness:  String = {
-    /*
+
     val bldr = StringBuilder.newBuilder
     bldr.append("\n\n### Correctness\n\n")
     bldr.append("To check for **correctness** of indexing, please verify that text transcriptions and images agree:\n\n")
 
-    bldr.append(passageView)
-    bldr.toString*/
+    //bldr.append(passageView)
+    bldr.toString
     ""
   }
 

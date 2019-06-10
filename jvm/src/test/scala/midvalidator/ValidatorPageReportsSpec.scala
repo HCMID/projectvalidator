@@ -13,13 +13,13 @@ class ValidationPageReportsSpec extends FlatSpec {
   val readers = Vector.empty[ReadersPairing]
   val ortho = Vector.empty[OrthoPairing]
 
-  "A ValidationReporter" should "write a DSE report" in {
+  "A ValidationReporter" should "write a DSE report" in pending /*{
     val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
     val pg = "urn:cite2:ecod:eins121pages.v1:21"
     reporter.validate(pg)
-  }
+  }*/
 /*
   it should "parse natarch" in {
       val repo = EditorsRepo("natarch")

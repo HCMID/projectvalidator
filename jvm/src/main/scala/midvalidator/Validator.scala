@@ -60,7 +60,7 @@ case class Validator(repo: EditorsRepo, readers: Vector[ReadersPairing], orthos:
   }
 
   def publishTexts = {
-    val editionsDir = repo.validationDir/"editions"
+    val editionsDir = nameBetterFile(repo.validationDir,"editions")
     if (editionsDir.exists) {
       editionsDir.delete()
     }
@@ -83,6 +83,7 @@ case class Validator(repo: EditorsRepo, readers: Vector[ReadersPairing], orthos:
 
 }
 
+
 object Validator {
 
   /** Construct an Validator object from the path to an
@@ -90,14 +91,24 @@ object Validator {
   *
   * @param repoPath Path to repository.
   */
-  def apply(repoPath: String, readers: Vector[ReadersPairing]) : Validator = {
-    Validator(EditorsRepo(repoPath), readers)
+  def apply(repoPath: String, readers: Vector[ReadersPairing], orthos: Vector[OrthoPairing])  : Validator = {
+    Validator(EditorsRepo(repoPath), readers, orthos)
   }
 
+  def apply(repoPath: String) : Validator = {
+    val rdrs = Vector.empty[ReadersPairing]
+    val orths = Vector.empty[OrthoPairing]
+    val root = File(repoPath)
+    println("REPO ROOT " + root)
 
-  def apply(repo: EditorsRepo, readers: Vector[ReadersPairing]) : Validator = {
-    Validator(repo, readers)
+
+    val readerConf = nameBetterFile(root, "editions/readers.csv")
+
+    println("READERS:\n" + readerConf.lines)
+    Validator(repoPath, rdrs, orths)
+
   }
+
 
   /** Recursively merge  a list of corpora into a single corpus.
   *

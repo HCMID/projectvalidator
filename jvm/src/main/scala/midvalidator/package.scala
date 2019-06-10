@@ -1,5 +1,11 @@
 package edu.holycross.shot.mid
 
+import better.files._
+import File._
+import java.io.{File => JFile}
+import better.files.Dsl._
+
+
 
 /** Provides classes for validating editorial work following HC MID conventions.
 */
@@ -47,6 +53,12 @@ package object validator {
      }
     }
     txt.toString.replaceAll("[\\s]+", " ")
+  }
+
+
+
+  def nameBetterFile(dir: File, fName: String): File = {
+    dir/fName
   }
 
 }

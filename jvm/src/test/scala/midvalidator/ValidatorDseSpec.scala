@@ -7,14 +7,14 @@ import edu.holycross.shot.ohco2._
 
 class ValidatorDseSpec extends FlatSpec {
 
-  "A validator" should "build a DseVector for the repository" in {
+  "A validator" should "build a DseVector for the repository when a single text reference spns multiple pages" in pending/* {
     val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val readers = Vector.empty[ReadersPairing]
     val ortho = Vector.empty[OrthoPairing]
     val midValidator = Validator(repo, readers, ortho)
     val dseV = midValidator.dse
     assert(dseV.passages.size > 0)
-  }
+  }*/
 
   it should "build a DseVector when multiple surfaces are indexed to one image" in {
     val repo = EditorsRepo("jvm/src/test/resources/bifoliosample")
@@ -23,7 +23,7 @@ class ValidatorDseSpec extends FlatSpec {
     val midValidator = Validator(repo, readers, ortho)
     val dseV = midValidator.dse
 
-    println(dseV.passages.size + " passages in bifolio sample.")
+    assert(dseV.passages.size > 100)
   }
 
 }

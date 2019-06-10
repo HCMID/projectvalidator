@@ -31,13 +31,13 @@ lazy val crossed = crossProject.in(file(".")).
         "edu.holycross.shot" %%% "ohco2" % "10.13.0",
         "edu.holycross.shot" %%% "citeobj" % "7.3.3",
         "edu.holycross.shot" %%% "citerelations" % "2.4.1",
-        "edu.holycross.shot" %%% "dse" % "4.3.0"
+        "edu.holycross.shot" %%% "dse" % "4.4.0"
       )
     ).
     jvmSettings(
       libraryDependencies ++= Seq(
         "com.github.pathikrit" %% "better-files" % "3.5.0",
-        
+
         "edu.holycross.shot" %% "scm" % "6.2.3",
         "edu.holycross.shot" %% "cex" % "6.3.3"
       ),
