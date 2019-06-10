@@ -67,7 +67,7 @@ case class ValidationReporter(midValidator: Validator) {
 
       //  DSE validation reporting:
       println("Validating  DSE records...")
-      val dseReporter =  DseReporter(u, dse, pageCorpus)
+      val dseReporter =  DseReporter(u, dse, pageCorpus, midValidator.readers)
       val dseValidMd = dseReporter.dseValidation
       val dseHasErrors: Boolean = dseValidMd.contains("## Errors")
       val dseReport = nameBetterFile(pageDir,"dse-validation.md")

@@ -95,6 +95,19 @@ object Validator {
     Validator(EditorsRepo(repoPath), readers, orthos)
   }
 
+
+/*
+  def readers(repoPath: String) : Vector[ReadersPairing] = {
+    val readerConf = nameBetterFile(root, "editions/readers.csv")
+    Vector.empty[ReadersPairing]
+  }
+
+  def orthos(repoPath: String) = {
+      val orthoConf = nameBetterFile(root, "editions/orthographies.csv")
+
+    }
+  }
+
   def apply(repoPath: String) : Validator = {
     val rdrs = Vector.empty[ReadersPairing]
     val orths = Vector.empty[OrthoPairing]
@@ -104,11 +117,16 @@ object Validator {
 
     val readerConf = nameBetterFile(root, "editions/readers.csv")
 
-    println("READERS:\n" + readerConf.lines)
+    println("READERS:\n" + readerConf.lines.toVector.tail.mkString("\n"))
+
+    val orthoConf = nameBetterFile(root, "editions/orthographies.csv")
+
+    println("ORTHOS:\n" + orthoConf.lines.toVector.tail.mkString("\n"))
+
     Validator(repoPath, rdrs, orths)
 
   }
-
+*/
 
   /** Recursively merge  a list of corpora into a single corpus.
   *

@@ -23,7 +23,8 @@ class ValidatorDseSpec extends FlatSpec {
     val midValidator = Validator(repo, readers, ortho)
     val dseV = midValidator.dse
 
-    assert(dseV.passages.size > 100)
+    val expectedSize = 7
+    assert(dseV.passages.size == expectedSize)
   }
 
 }

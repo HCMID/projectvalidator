@@ -29,8 +29,8 @@ class ValidatorSpec extends FlatSpec {
   }
 
   it should "publish editions from archival source" in {
-    // ensure we start from empty outoput directory:
-    val editionsDir = repo.validationDir/"editions"
+    // ensure we start from empty output directory:
+    val editionsDir = nameBetterFile(repo.validationDir,"editions")
     if (editionsDir.exists) {
       editionsDir.delete()
     }

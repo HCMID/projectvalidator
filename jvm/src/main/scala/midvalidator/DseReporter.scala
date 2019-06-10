@@ -21,7 +21,7 @@ import better.files.Dsl._
 * @param dse DSE records for the whole repository.
 * @param txts Corpus composed only of texts on this page.
 */
-case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
+case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vector[ReadersPairing]) {
 
   /** Check if passages in a list are actually in corpus
   * or not, and create a Vector of missing passages.
@@ -88,19 +88,24 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus) {
 
   /**  Compose markdown content juxtaposing indexed image with
   * transcribed text content for a specific page.
-
+  */
   def passageView : String = {
     val imgmgr = ImageManager()
     val viewMd = StringBuilder.newBuilder
     val rows = for (psg <- txts.nodes) yield {
-      val img = dse.imagesWRoiForText(psg.urn).head
+      //println("PASG:  " + psg.urn)
+      //println(dse.passages.map(_.passage).mkString("#"))
+      val img = dse.imageWRoiForText(psg.urn)
       val md = imgmgr.markdown(img, 1000)
-      val dipl = TeiReader(psg.cex("#")).tokens.map(_.analysis.readWithDiplomatic).mkString(" ")
-
-      dipl + " (*" + psg.urn + "*)" + "  " + md
+      //val dipl = TeiReader(psg.cex("#")).tokens.map(_.analysis.readWithDiplomatic).mkString(" ")
+      //println("FIND READER IN " + readers)
+      val applicable = (readers.filter(_.urn ~~ psg.urn)).head.readers.head
+      //println(applicable)
+      //dipl + " (*" + psg.urn + "*)" + "  " + md
+      applicable.editedNode(psg).text +  " (*" + psg.urn + "*)" + "  " + md
     }
     rows.mkString("\n\n\n")
-  }  */
+  }
 
   /** Compose markdown report to verify correctness of DSE records.
   *

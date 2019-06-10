@@ -15,10 +15,10 @@ class ReaderOrthoSpec extends FlatSpec {
 
   val repoPath = "jvm/src/test/resources/bifoliosample"
 
-  "The Validator object" should "be able to configure readers by convention" in {
+  "The Validator object" should "be able to configure readers by convention" in pending /*(){
     Validator(repoPath)
 
-  }
+  }*/
 
   it should "be able to configure orthographies by convention" in pending
 }
