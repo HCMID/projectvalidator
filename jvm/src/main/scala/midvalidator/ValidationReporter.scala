@@ -84,10 +84,8 @@ case class ValidationReporter(midValidator: Validator) {
 
 
       // Text validation reporting
-      val errHeader = "Token#Reading#Error\n"
+      //val errHeader = "Token#Reading#Error\n"
 
-      // 3.  Character valdiatoin
-      // 4.  XML markup validation
 
       home.append("\n\n## Visualizations to review for verification\n\n")
 

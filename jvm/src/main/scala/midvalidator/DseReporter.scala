@@ -42,21 +42,6 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
   }
 
 
-
-/*
-  def imageOnlyPassages: Set[CtsUrn] = {
-    val img = dse.imageForTbs(pg)
-    val imgTxts = dse.textsForImage(img).toVector
-    val  tbsTxts = dse.textsForTbs(pg).toVector
-
-    Set.empty[CtsUrn]
-  }
-
-  def surfaceOnlyPassages: Set[CtsUrn] = {
-    Set.empty[CtsUrn]
-  }
-*/
-
   /** Compose markdown report on automated validation of DSE records.
   */
   def dseValidation: String = {
@@ -92,17 +77,20 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
   def passageView : String = {
     val imgmgr = ImageManager()
     val viewMd = StringBuilder.newBuilder
-    val rows = for (psg <- txts.nodes) yield {
+    val psgs = dse.textsForTbs(pg)
+    //println("PASSAGES FOR " + pg + "\n: " + psgs.mkString)
+    val rows = for (psg <- psgs) yield {
+      val psgNodes = txts.nodes.filter(_.urn == psg)
       //println("PASG:  " + psg.urn)
       //println(dse.passages.map(_.passage).mkString("#"))
-      val img = dse.imageWRoiForText(psg.urn)
+      val img = dse.imageWRoiForText(psg)
       val md = imgmgr.markdown(img, 1000)
       //val dipl = TeiReader(psg.cex("#")).tokens.map(_.analysis.readWithDiplomatic).mkString(" ")
       //println("FIND READER IN " + readers)
-      val applicable = (readers.filter(_.urn ~~ psg.urn)).head.readers.head
+      val applicable = (readers.filter(_.urn ~~ psg)).head.readers.head
       //println(applicable)
       //dipl + " (*" + psg.urn + "*)" + "  " + md
-      applicable.editedNode(psg).text +  " (*" + psg.urn + "*)" + "  " + md
+      applicable.editedNode(psgNodes(0)).text +  " (*" + psg + "*)" + "  " + md
     }
     rows.mkString("\n\n\n")
   }
@@ -117,7 +105,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
     bldr.append("\n\n### Correctness\n\n")
     bldr.append("To check for **correctness** of indexing, please verify that text transcriptions and images agree:\n\n")
 
-    //bldr.append(passageView)
+    bldr.append(passageView)
     bldr.toString
     ""
   }

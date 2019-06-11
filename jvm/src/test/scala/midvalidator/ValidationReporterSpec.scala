@@ -13,8 +13,8 @@ class ValidationReporterSpec extends FlatSpec {
   val readers = Vector.empty[ReadersPairing]
   val ortho = Vector.empty[OrthoPairing]
 
-  "A ValidationReporter" should "throw an exception if asked to validate a page with a bad urn" in pending /*{
-    val repo = EditorsRepo("jvm/src/test/resources/chantsample")
+  "A ValidationReporter" should "throw an exception if asked to validate a page with a bad urn" in {
+    val repo = EditorsRepo("jvm/src/test/resources/bifoliosample")
     val midValidator = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(midValidator)
 
@@ -24,10 +24,10 @@ class ValidationReporterSpec extends FlatSpec {
     } catch {
       case t: Throwable => assert(true)
     }
-  }*/
+  }
 
-  it should "make a directory for reports based on the collection and object ID" in pending /* {
-    val repo = EditorsRepo("jvm/src/test/resources/chantsample")
+  it should "make a directory for reports based on the collection and object ID" in  {
+    val repo = EditorsRepo("jvm/src/test/resources/bifoliosample")
     val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
     val testUrnStr = "urn:cite2:testns:mom.v1:demopage"
@@ -35,15 +35,22 @@ class ValidationReporterSpec extends FlatSpec {
     val expectedDir = nameBetterFile(repo.validationDir, "mom-demopage")
     assert(expectedDir.exists)
     expectedDir.delete()
-  }*/
+  }
 
-  it should "write a DSE report" in  pending /*{
-    val repo = EditorsRepo("jvm/src/test/resources/chantsample")
+  it should "write a DSE report" in  {
+    val repo = EditorsRepo("jvm/src/test/resources/bifoliosample")
+    val reportsDir = nameBetterFile(repo.validationDir, "e3-109v")
+    if (reportsDir.exists) { reportsDir.delete() }
+
     val mom = Validator(repo, readers, ortho)
+
+
     val reporter = ValidationReporter(mom)
-    val pg = "urn:cite2:hmt:msA.v1:126r"
+    val pg = "urn:cite2:hmt:e3.v1:109v"
     reporter.validate(pg)
-  }*/
+    assert(reportsDir.exists)
+
+  }
 
 
 }

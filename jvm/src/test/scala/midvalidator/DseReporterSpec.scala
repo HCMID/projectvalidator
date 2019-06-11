@@ -50,18 +50,19 @@ class DseReporterSpec extends FlatSpec {
       val dse = DseSource.fromTriplesFile(dseCex,dummyCollection)
 
 
-
-      val pgs = Cite2Urn("urn:cite2:hmt:e3.v1:109v-110r")
+      val pg = Cite2Urn("urn:cite2:hmt:e3.v1:109v")
       //println("IL IDS:")
       //println(dse.passages.map(_.passage).mkString("\n"))
 
 
       val readers = Vector(ReadersPairing(CtsUrn("urn:cts:greekLit:tlg0012:"), MidVerseLReader.readers))
 
-      val reporter = DseReporter(pgs, dse, iliadCorpus,readers )
+      val reporter = DseReporter(pg, dse, iliadCorpus,readers )
       //println("Indexed in DSE:")
       //println(dse.passages.map(_.passage).mkString("\n"))
-      println("Markdown for passage view:\n" + reporter.passageView)
+      val lines = reporter.passageView.split("\n").filter(_.nonEmpty)
+      val expectedEntries = 4
+      assert(lines.size == expectedEntries)
 
   }
 }
