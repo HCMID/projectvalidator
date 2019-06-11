@@ -63,6 +63,28 @@ class DseReporterSpec extends FlatSpec {
       val lines = reporter.passageView.split("\n").filter(_.nonEmpty)
       val expectedEntries = 4
       assert(lines.size == expectedEntries)
+  }
 
+  it should "report on completeness of coverage in DSE" in {
+    val txtDir = "jvm/src/test/resources/iliadsample/editions"
+    val txtCatalog = s"${txtDir}/catalog.cex"
+    val txtConfig = s"${txtDir}/citation.cex"
+
+    val iliadCorpus = TextRepositorySource.fromFiles(txtCatalog, txtConfig, txtDir).corpus
+
+
+    val dseCex = "jvm/src/test/resources/iliadsample/dse/e3_dse.cex"
+    val dse = DseSource.fromTriplesFile(dseCex,dummyCollection)
+
+
+    val pg = Cite2Urn("urn:cite2:hmt:e3.v1:109v")
+    //println("IL IDS:")
+    //println(dse.passages.map(_.passage).mkString("\n"))
+
+
+    val readers = Vector(ReadersPairing(CtsUrn("urn:cts:greekLit:tlg0012:"), MidVerseLReader.readers))
+
+    val reporter = DseReporter(pg, dse, iliadCorpus,readers )
+    println("COMPLETENESS:  \n" + reporter.dseCompleteness)
   }
 }

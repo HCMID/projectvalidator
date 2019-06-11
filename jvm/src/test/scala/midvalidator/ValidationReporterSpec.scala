@@ -10,7 +10,7 @@ import File._
 import java.io.{File => JFile}
 
 class ValidationReporterSpec extends FlatSpec {
-  val readers = Vector.empty[ReadersPairing]
+  val readers = Vector(ReadersPairing(CtsUrn("urn:cts:greekLit:tlg0012:"), MidVerseLReader.readers), ReadersPairing(CtsUrn("urn:cts:greekLit:tlg5026:"), MidVerseLReader.readers))
   val ortho = Vector.empty[OrthoPairing]
 
   "A ValidationReporter" should "throw an exception if asked to validate a page with a bad urn" in {
@@ -38,7 +38,7 @@ class ValidationReporterSpec extends FlatSpec {
   }
 
   it should "write a DSE report" in  {
-    val repo = EditorsRepo("jvm/src/test/resources/bifoliosample")
+    val repo = EditorsRepo("jvm/src/test/resources/iliadsample")
     val reportsDir = nameBetterFile(repo.validationDir, "e3-109v")
     if (reportsDir.exists) { reportsDir.delete() }
 

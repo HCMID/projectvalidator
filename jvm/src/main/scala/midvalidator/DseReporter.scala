@@ -48,17 +48,17 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
     val md = StringBuilder.newBuilder
     val errors = StringBuilder.newBuilder
 
-    md.append(s"# Validation of DSE records for ${pg.collection}, page " + pg.objectComponent + "\n\n")
+    md.append(s"# Automated validation of DSE records for ${pg.collection}, page " + pg.objectComponent + "\n\n")
     if (dse.size == 0) {
       md.append("### Errors\n\nNo DSE records found!\n\n")
     } else {
 
-      md.append("## Internal consistency of records\n\n")
       val dseImgMessage = dse.imageForTbs(pg)
-      md.append("\n\n## Selection of image for imaging\n\n" +  dseImgMessage  + "\n\n")
+      md.append("\n\n## Reference image\n\n" +  dseImgMessage  + "\n\n")
 
       val dseTextMessage =  if (missingPassages.isEmpty) {
         "**All** passages indexed in DSE records appear in text corpus."
+
       } else {
         "There were errors indexing texts. \n\n" +
         "The following passages in DSE records do not appear in the text corpus:\n\n" + missingPassages.map("-  " + _ ).mkString("\n") + "\n\n"
@@ -118,19 +118,19 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
   */
   def dseCompleteness: String = {
     val bldr = StringBuilder.newBuilder
-    bldr.append(s"\n\n## Human verification of DSE records for ${pg.collection}, page ${pg.objectComponent}\n\n###  Completeness\n\n")
+    bldr.append(s"\n\n## Verification of DSE records for ${pg.collection}, page ${pg.objectComponent}\n\n###  Completeness\n\n")
     bldr.append(s"To check for **completeness** of coverage, please review these visualizations of DSE relations in ICT2:\n\n")
     bldr.append(s"- [**all** DSE relations of page ${pg.objectComponent} ](${dse.ictForSurface(pg)}).\n\n")
 
     bldr
     .append("Visualizations for individual documents:\n\n")
     val texts =  dse.textsForTbs(pg).map(_.dropPassage).toVector
-    val listItems = for (txt <- texts) yield {
-      println("Create view for " + txt + " ...")
-      val oneDocDse = DseVector(dse.passages.filter(_.passage ~~ txt))
-      "-  all [passages in " + txt + "](" + oneDocDse.ictForSurface(pg) + ")."
-    }
-    bldr.append(listItems.mkString("\n") + "\n")
+    val txt = texts(0)
+    println("Create view for " + txt + " ...")
+    val oneDocDse = DseVector(dse.passages.filter(_.passage ~~ txt))
+    val viz = "-  all [passages in " + txt + "](" + oneDocDse.ictForSurface(pg) + ")."
+
+    bldr.append(viz + "\n")
     bldr.toString
   }
 }

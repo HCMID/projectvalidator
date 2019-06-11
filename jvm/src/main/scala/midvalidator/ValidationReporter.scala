@@ -71,6 +71,7 @@ case class ValidationReporter(midValidator: Validator) {
       val dseValidMd = dseReporter.dseValidation
       val dseHasErrors: Boolean = dseValidMd.contains("## Errors")
       val dseReport = nameBetterFile(pageDir,"dse-validation.md")
+      println("Writing DSE validation report in "  + dseReport)
       dseReport.overwrite(dseValidMd)
 
       if (dseHasErrors) {
@@ -89,10 +90,21 @@ case class ValidationReporter(midValidator: Validator) {
 
       home.append("\n\n## Visualizations to review for verification\n\n")
 
+
+      home.append("- verify DSE completeness: [dse-verification.md](./dse-verification.md)\n")
+
+      home.append("- verify correctness of [diplomatic transcription](./transcription.md)\n")
+
+      val psgView = nameBetterFile(pageDir, "transcription.md")
+      val psgViewHdr = s"# Diplomatic transcription of ${u.collection}, page ${u.objectComponent}\n\n"
+      psgView.overwrite(psgViewHdr + dseReporter.passageView)
+
+
       //  1.  DSE indexing
       val dseCompleteMd = dseReporter.dseCompleteness
       val dseCorrectMd = dseReporter.dseCorrectness
       val dseVerify = nameBetterFile(pageDir, "dse-verification.md")
+      println("Writing DSE verification report in "  + dseVerify)
       val dsePassageMd =
       dseVerify.overwrite(dseCompleteMd + dseCorrectMd)
 
@@ -105,7 +117,8 @@ case class ValidationReporter(midValidator: Validator) {
       // OV of text contents
       home.append("\n## Overview of page's text contents\n\n")
 
-
+      home.append("TBA\n\n")
+      /*
       home.append("\nWord data:\n\n")
 
       home.append("-  frequencies:  see [wordFrequencies.cex](./wordFrequencies.cex)\n")
@@ -115,8 +128,9 @@ case class ValidationReporter(midValidator: Validator) {
 
       home.append("\nCharacter data:\n\n")
       home.append("-  frequencies:  see [characterFrequencies.cex](./characterFrequencies.cex)\n")
-
+      */
       val index = nameBetterFile(pageDir,"summary.md")
+      println("Writing summary in " + index)
       index.overwrite(home.toString)
 
 
