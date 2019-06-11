@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**6.2.2**:  better handling of cases where no texts in the corpus match for a surface with indexed texts.
+
 **6.2.1**: correct passage view display to work by requested surface only.  Better reporting in markdown output.
 
 **6.2.0**: update `dse` library, add markdown output to view report with image and transcribed text interleaved.
