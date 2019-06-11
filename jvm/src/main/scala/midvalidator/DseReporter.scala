@@ -23,6 +23,8 @@ import better.files.Dsl._
 */
 case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vector[ReadersPairing]) {
 
+  //require(txts.size > 0, "Can not create DseReporter:  no texts found for " + pg)
+
   /** Check if passages in a list are actually in corpus
   * or not, and create a Vector of missing passages.
   *
@@ -30,15 +32,20 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
    */
   def missingPassages:  Vector[CtsUrn] = {
     val psgs = dse.textsForTbs(pg)
-    val accountedFor = for (psg <- psgs ) yield {
-      val matches = txts ~~ psg
-      if (matches.isEmpty) {
-        Some(psg)
-      } else {
-        None
+    if (txts.nodes.isEmpty) {
+      psgs
+    } else {
+
+      val accountedFor = for (psg <- psgs ) yield {
+        val matches = txts ~~ psg
+        if (matches.isEmpty) {
+          Some(psg)
+        } else {
+          None
+        }
       }
+      accountedFor.flatten
     }
-    accountedFor.flatten
   }
 
 
@@ -50,7 +57,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
 
     md.append(s"# Automated validation of DSE records for ${pg.collection}, page " + pg.objectComponent + "\n\n")
     if (dse.size == 0) {
-      md.append("### Errors\n\nNo DSE records found!\n\n")
+      md.append("## Errors\n\nNo DSE records found!\n\n")
     } else {
 
       val dseImgMessage = dse.imageForTbs(pg)
@@ -60,7 +67,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
         "**All** passages indexed in DSE records appear in text corpus."
 
       } else {
-        "There were errors indexing texts. \n\n" +
+        "### Errors\n\nThere were errors indexing texts. \n\n" +
         "The following passages in DSE records do not appear in the text corpus:\n\n" + missingPassages.map("-  " + _ ).mkString("\n") + "\n\n"
 
       }
@@ -78,19 +85,31 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
     val imgmgr = ImageManager()
     val viewMd = StringBuilder.newBuilder
     val psgs = dse.textsForTbs(pg)
-    //println("PASSAGES FOR " + pg + "\n: " + psgs.mkString)
     val rows = for (psg <- psgs) yield {
       val psgNodes = txts.nodes.filter(_.urn == psg)
-      //println("PASG:  " + psg.urn)
       //println(dse.passages.map(_.passage).mkString("#"))
       val img = dse.imageWRoiForText(psg)
       val md = imgmgr.markdown(img, 1000)
-      //val dipl = TeiReader(psg.cex("#")).tokens.map(_.analysis.readWithDiplomatic).mkString(" ")
-      //println("FIND READER IN " + readers)
-      val applicable = (readers.filter(_.urn ~~ psg)).head.readers.head
+
+
+
+      val allApplicable = (readers.filter(_.urn ~~ psg))
+      if (allApplicable.isEmpty) {
+        "**No reader configured for " +  psg + "**" + "  " + md
+
+      } else if (psgNodes.isEmpty) {
+        "**No transcription for " +  psg + "**" + "  " + md
+
+      } else {
+        val applicable = allApplicable.head.readers.head
+        applicable.editedNode(psgNodes(0)).text +  " (*" + psg + "*)" + "  " + md
+      }
+
+
       //println(applicable)
       //dipl + " (*" + psg.urn + "*)" + "  " + md
-      applicable.editedNode(psgNodes(0)).text +  " (*" + psg + "*)" + "  " + md
+
+
     }
     rows.mkString("\n\n\n")
   }

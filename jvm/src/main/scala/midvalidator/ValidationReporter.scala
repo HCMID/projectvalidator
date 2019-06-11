@@ -35,9 +35,15 @@ case class ValidationReporter(midValidator: Validator) {
     val textUrns = dse.textsForTbs(pg).toVector
     val miniCorpora = for (u <- textUrns) yield {
       val merged = corpus ~~ u
+      //println("checked " + u + " against " + corpus.nodes.map(_.urn))
       merged
     }
-    Validator.mergeCorpusVector(miniCorpora, Corpus(Vector.empty[CitableNode]))
+    //println("Finding nodes for " + pg + ", got " + miniCorpora.filter(_.nonEmpty).size + " nodes.")
+    //println("CORPORA: " + miniCorpora.size)
+    //println(miniCorpora(0))
+    val singleCorpus = Validator.mergeCorpusVector(miniCorpora, Corpus(Vector.empty[CitableNode]))
+    //println("SINGLE CORPUS: " + singleCorpus)
+    singleCorpus
   }
 
   /** Write suite of markdown reports to validate and
@@ -58,7 +64,7 @@ case class ValidationReporter(midValidator: Validator) {
       mkdirs(pageDir)
 
       val pageCorpus = corpusForPage(u)
-
+      println("Corpus for " + u + " = " + pageCorpus)
       val home = StringBuilder.newBuilder
       home.append(s"# Review of ${u.collection}, page ${u.objectComponent}\n\n")
       home.append("## Summary of automated validation\n\n")
@@ -68,21 +74,24 @@ case class ValidationReporter(midValidator: Validator) {
       //  DSE validation reporting:
       println("Validating  DSE records...")
       val dseReporter =  DseReporter(u, dse, pageCorpus, midValidator.readers)
+
       val dseValidMd = dseReporter.dseValidation
       val dseHasErrors: Boolean = dseValidMd.contains("## Errors")
       val dseReport = nameBetterFile(pageDir,"dse-validation.md")
-      println("Writing DSE validation report in "  + dseReport)
-      dseReport.overwrite(dseValidMd)
+
+
 
       if (dseHasErrors) {
-        println("There were errors in DSE records.")
-        home.append("-  ![errors](${sadImg}) DSE validation: there were errors.  ")
+        println("\nThere were errors in DSE records.\n")
+        home.append(s"-  ![errors](${sadImg}) DSE validation: there were errors.  ")
 
       } else {
         home.append(s"-  ![errors](${okImg}) DSE validation: there were no errors. \n")
       }
       home.append("See [details in dse-validation.md](./dse-validation.md)\n")
 
+      println("Writing DSE validation report in "  + dseReport)
+      dseReport.overwrite(dseValidMd)
 
       // Text validation reporting
       //val errHeader = "Token#Reading#Error\n"
@@ -108,6 +117,11 @@ case class ValidationReporter(midValidator: Validator) {
       val dsePassageMd =
       dseVerify.overwrite(dseCompleteMd + dseCorrectMd)
 
+
+
+
+
+
       // 2. Paleographic observations
 
 
@@ -130,7 +144,7 @@ case class ValidationReporter(midValidator: Validator) {
       home.append("-  frequencies:  see [characterFrequencies.cex](./characterFrequencies.cex)\n")
       */
       val index = nameBetterFile(pageDir,"summary.md")
-      println("Writing summary in " + index)
+      println("Writing summary in " + index + "\n\n")
       index.overwrite(home.toString)
 
 
