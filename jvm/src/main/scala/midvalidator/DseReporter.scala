@@ -78,38 +78,73 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
     md.toString
   }
 
+  case class IndexedNode(citableNode: CitableNode, index: Int)
+  def indexedNodes : Vector[IndexedNode] = {
+    val allIndexed = txts.nodes.zipWithIndex
+    for (n <- allIndexed) yield {
+      IndexedNode(n._1, n._2)
+    }
+  }
+
+  def sortTextNodes(unsorted: Vector[CtsUrn]) :  Vector[(CtsUrn, Option[IndexedNode])] = {
+    val allIndexed = indexedNodes
+    val selectionIndexed = for (ref <- unsorted) yield {
+      val matches = allIndexed.filter(_.  citableNode.urn == ref)
+      matches.size match {
+        case 1  => (ref, Some(matches(0)))
+        case _ => (ref, None)
+      }
+
+    }
+
+    val sorted = selectionIndexed.sortBy(_._2.get.index)
+    sorted
+
+  }
+
   /**  Compose markdown content juxtaposing indexed image with
   * transcribed text content for a specific page.
   */
   def passageView : String = {
+
+    val urns = dse.textsForTbs(pg)
+    val psgs = sortTextNodes(urns)
+    println("\n\n\nPassageView:")
+
+
     val imgmgr = ImageManager()
-    val viewMd = StringBuilder.newBuilder
-    val psgs = dse.textsForTbs(pg)
     val rows = for (psg <- psgs) yield {
-      val psgNodes = txts.nodes.filter(_.urn == psg)
-      //println(dse.passages.map(_.passage).mkString("#"))
-      val img = dse.imageWRoiForText(psg)
-      val md = imgmgr.markdown(img, 1000)
+    //val rows = for (psg <- urns) yield {
 
+      val psgUrn = psg._1
+      val psgOpt = psg._2
+      //println("pasageView:  psg urn " + psgUrn)
+      //println("\topt: " + psgOpt)
 
+      val psgMd = psgOpt match {
 
-      val allApplicable = (readers.filter(_.urn ~~ psg))
-      if (allApplicable.isEmpty) {
-        "**No reader configured for " +  psg + "**" + "  " + md
+        case None => {
+          val msg = "**No transcription for " +  psgUrn + "**"
+          println(msg)
+          msg
+        }
 
-      } else if (psgNodes.isEmpty) {
-        "**No transcription for " +  psg + "**" + "  " + md
-
-      } else {
-        val applicable = allApplicable.head.readers.head
-        applicable.editedNode(psgNodes(0)).text +  " (*" + psg + "*)" + "  " + md
+        case _ => {
+          val cn = psgOpt.get.citableNode
+          // md = "MAKE MD FOR " + cn
+          val img = dse.imageWRoiForText(cn.urn)
+          val md = imgmgr.markdown(img, 1000)
+          val allApplicable = (readers.filter(_.urn ~~ cn.urn))
+          if (allApplicable.isEmpty) {
+            "**No reader configured for " +  cn.urn + "**" + "  " + md
+          }  else {
+            val applicable = allApplicable.head.readers.head
+            applicable.editedNode(cn).text +  " (*" + cn.urn + "*)" + "  " + md
+            //applicable.editedNode(psgNodes(0)).text +  " (*" + psg + "*)" + "  " + md
+          }
+        }
       }
-
-
-      //println(applicable)
-      //dipl + " (*" + psg.urn + "*)" + "  " + md
-
-
+      psgMd
     }
     rows.mkString("\n\n\n")
   }

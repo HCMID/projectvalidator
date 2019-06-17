@@ -63,6 +63,9 @@ class DseReporterSpec extends FlatSpec {
       val lines = reporter.passageView.split("\n").filter(_.nonEmpty)
       val expectedEntries = 4
       assert(lines.size == expectedEntries)
+
+      println("HERE'S A PASSAGE VIEW of4 SORTED PSGS:\n")
+      println(lines.mkString("\n\n"))
   }
 
   it should "report on completeness of coverage in DSE" in {

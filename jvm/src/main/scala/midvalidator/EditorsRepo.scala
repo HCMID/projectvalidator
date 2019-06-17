@@ -29,11 +29,11 @@ case class EditorsRepo(baseDir: String)  {
     require(d.exists, "Repository not correctly laid out: missing directory " + d)
   }
 
-  
+
   /** Catalog of edited texts.*/
-  val ctsCatalog = editionsDir/"catalog.cex"
+  val ctsCatalog = nameBetterFile(editionsDir,"catalog.cex")
   /** Configuration of citation for local files (in any supported format).*/
-  val ctsCitation = editionsDir/"citation.cex"
+  val ctsCitation = nameBetterFile(editionsDir,"citation.cex")
 
   for (conf <- Seq(ctsCatalog, ctsCitation)) {
     require(conf.exists,"Missing required configuration file: " + conf)

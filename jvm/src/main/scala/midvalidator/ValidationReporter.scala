@@ -28,8 +28,6 @@ case class ValidationReporter(midValidator: Validator) {
   /** Select a corpus by page reference.
   *
   * @param pg Page to select texts for.
-  * @param dse DseVector to consult for records of
-  * texts on page.
   */
   def corpusForPage(pg: Cite2Urn) = {
     val textUrns = dse.textsForTbs(pg).toVector

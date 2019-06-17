@@ -1,5 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**6.2.3**: sort passages by document order in `passageView` reporting
+
+
 **6.2.2**:  better handling of cases where no texts in the corpus match for a surface with indexed texts.
 
 **6.2.1**: correct passage view display to work by requested surface only.  Better reporting in markdown output.
