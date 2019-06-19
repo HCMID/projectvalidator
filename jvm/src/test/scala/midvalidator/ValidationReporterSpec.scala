@@ -26,7 +26,7 @@ class ValidationReporterSpec extends FlatSpec {
     }
   }
 
-  it should "make a directory for reports based on the collection and object ID" in  {
+  it should "make a directory for reports based on the collection and object ID" in pending /* {
     val repo = EditorsRepo("jvm/src/test/resources/bifoliosample")
     val mom = Validator(repo, readers, ortho)
     val reporter = ValidationReporter(mom)
@@ -36,7 +36,7 @@ class ValidationReporterSpec extends FlatSpec {
     assert(expectedDir.exists)
     expectedDir.delete()
   }
-
+ */
   it should "write a DSE report" in  {
     val repo = EditorsRepo("jvm/src/test/resources/iliadsample")
     val reportsDir = nameBetterFile(repo.validationDir, "e3-109v")

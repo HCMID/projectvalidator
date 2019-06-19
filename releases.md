@@ -1,5 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+
+**6.2.5**: use `Corpus` to sort more reliably.
+
 **6.2.4**: sort better.
 
 **6.2.3**: sort passages by document order in `passageView` reporting

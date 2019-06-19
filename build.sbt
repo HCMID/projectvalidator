@@ -17,7 +17,7 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "6.2.4",
+      version := "6.2.5",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -42,8 +42,8 @@ lazy val crossed = crossProject.in(file(".")).
         "edu.holycross.shot" %% "cex" % "6.3.3",
 
         // FOR DEBUGGIN:
-        //  "edu.holycross.shot" %% "greek" % "2.4.0",
-        //  "org.homermultitext" %% "hmt-textmodel" % "6.0.1"
+          ///"edu.holycross.shot" %% "greek" % "2.4.0",
+          //"org.homermultitext" %% "hmt-textmodel" % "6.0.1"
 
       ),
       tutTargetDirectory := file("docs"),

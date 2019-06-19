@@ -30,8 +30,12 @@ case class ValidationReporter(midValidator: Validator) {
   * @param pg Page to select texts for.
   */
   def corpusForPage(pg: Cite2Urn) = {
+    //These are unsorted!
     val textUrns = dse.textsForTbs(pg).toVector
-    val miniCorpora = for (u <- textUrns) yield {
+    val sorted = midValidator.raw.sortPassages(textUrns)
+
+
+    val miniCorpora = for (u <- sorted) yield {
       val merged = corpus ~~ u
       //println("checked " + u + " against " + corpus.nodes.map(_.urn))
       merged
@@ -41,7 +45,52 @@ case class ValidationReporter(midValidator: Validator) {
     //println(miniCorpora(0))
     val singleCorpus = Validator.mergeCorpusVector(miniCorpora, Corpus(Vector.empty[CitableNode]))
     //println("SINGLE CORPUS: " + singleCorpus)
+
+
     singleCorpus
+  }
+
+  def psgView(pageUrn: String) = {
+      try {
+        val u = Cite2Urn(pageUrn)
+        println("\n\n===>Validating page " + u + "...")
+
+        val dirName = u.collection + "-" + u.objectComponent
+        val pageDir = outputDir/dirName
+        if (pageDir.exists) {
+          pageDir.delete()
+        }
+        mkdirs(pageDir)
+
+        val pageCorpus = corpusForPage(u)
+        //        println("Corpus for " + u + " = " + pageCorpus.size + "citable nodes.")
+
+        val psgView = nameBetterFile(pageDir, "transcription.md")
+        val psgViewHdr = s"# Diplomatic transcription of ${u.collection}, page ${u.objectComponent}\n\n"
+
+        val dseReporter =  DseReporter(u, dse, pageCorpus, midValidator.readers)
+
+        val xcription = dseReporter.passageView
+        psgView.overwrite(psgViewHdr + xcription)
+
+        } catch {
+          case t: Throwable => {
+            println("Could not validate " + pageUrn)
+            println("Full error message:\n\t")
+            println(t.toString + "\n\n")
+          }
+        }
+  }
+
+
+  def directoryForSurface(surf: Cite2Urn) : File = {
+    val dirName = surf.collection + "-" + surf.objectComponent
+    val surfaceDirectory = outputDir/dirName
+    if (surfaceDirectory.exists) {
+      surfaceDirectory.delete()
+    }
+    mkdirs(surfaceDirectory)
+    surfaceDirectory
   }
 
   /** Write suite of markdown reports to validate and
@@ -53,32 +102,34 @@ case class ValidationReporter(midValidator: Validator) {
     try {
       val u = Cite2Urn(pageUrn)
       println("\n\n===>Validating page " + u + "...")
-
-      val dirName = u.collection + "-" + u.objectComponent
-      val pageDir = outputDir/dirName
-      if (pageDir.exists) {
-        pageDir.delete()
-      }
-      mkdirs(pageDir)
-
       val pageCorpus = corpusForPage(u)
-      println("Corpus for " + u + " = " + pageCorpus.size + "citable nodes.")
+      val dseReporter =  DseReporter(u, dse, pageCorpus, midValidator.readers)
+      val dseValidMd = dseReporter.dseValidation
+      val xcription = dseReporter.passageView
+
+      val pageDir = directoryForSurface(u)
+      //  DSE validation reporting:
+      val dseReport = nameBetterFile(pageDir,"dse-validation.md")
+      dseReport.overwrite(dseValidMd)
+      //  1.  DSE indexing
+      val dseCompleteMd = dseReporter.dseCompleteness
+      val dseCorrectMd = dseReporter.dseCorrectness
+      val dseVerify = nameBetterFile(pageDir, "dse-verification.md")
+      val dsePassageMd =
+      dseVerify.overwrite(dseCompleteMd + dseCorrectMd)
+
+      // Passage verification
+      val psgView = nameBetterFile(pageDir, "transcription.md")
+      val psgViewHdr = s"# Diplomatic transcription of ${u.collection}, page ${u.objectComponent}\n\n"
+      psgView.overwrite(psgViewHdr + xcription)
+
+
+
+      // BUILD UP HOME PAGE:
       val home = StringBuilder.newBuilder
       home.append(s"# Review of ${u.collection}, page ${u.objectComponent}\n\n")
       home.append("## Summary of automated validation\n\n")
-
-
-
-      //  DSE validation reporting:
-      println("Validating  DSE records...")
-      val dseReporter =  DseReporter(u, dse, pageCorpus, midValidator.readers)
-
-      val dseValidMd = dseReporter.dseValidation
       val dseHasErrors: Boolean = dseValidMd.contains("## Errors")
-      val dseReport = nameBetterFile(pageDir,"dse-validation.md")
-
-
-
       if (dseHasErrors) {
         println("\nThere were errors in DSE records.\n")
         home.append(s"-  ![errors](${sadImg}) DSE validation: there were errors.  ")
@@ -87,36 +138,14 @@ case class ValidationReporter(midValidator: Validator) {
         home.append(s"-  ![errors](${okImg}) DSE validation: there were no errors. \n")
       }
       home.append("See [details in dse-validation.md](./dse-validation.md)\n")
-
-      println("Writing DSE validation report in "  + dseReport)
-      dseReport.overwrite(dseValidMd)
-
-      // Text validation reporting
-      //val errHeader = "Token#Reading#Error\n"
-
-
       home.append("\n\n## Visualizations to review for verification\n\n")
-
-
       home.append("- verify DSE completeness: [dse-verification.md](./dse-verification.md)\n")
-
       home.append("- verify correctness of [diplomatic transcription](./transcription.md)\n")
 
-      val psgView = nameBetterFile(pageDir, "transcription.md")
-      val psgViewHdr = s"# Diplomatic transcription of ${u.collection}, page ${u.objectComponent}\n\n"
-
-      val xcription = dseReporter.passageView
-      println("HERE'S TRANSCRIPTOIN: \n" + xcription)
-      psgView.overwrite(psgViewHdr + xcription)
 
 
-      //  1.  DSE indexing
-      val dseCompleteMd = dseReporter.dseCompleteness
-      val dseCorrectMd = dseReporter.dseCorrectness
-      val dseVerify = nameBetterFile(pageDir, "dse-verification.md")
-      println("Writing DSE verification report in "  + dseVerify)
-      val dsePassageMd =
-      dseVerify.overwrite(dseCompleteMd + dseCorrectMd)
+
+
 
 
 
@@ -133,7 +162,7 @@ case class ValidationReporter(midValidator: Validator) {
       home.append("\n## Overview of page's text contents\n\n")
 
       home.append("TBA\n\n")
-      /*
+
       home.append("\nWord data:\n\n")
 
       home.append("-  frequencies:  see [wordFrequencies.cex](./wordFrequencies.cex)\n")
@@ -143,7 +172,7 @@ case class ValidationReporter(midValidator: Validator) {
 
       home.append("\nCharacter data:\n\n")
       home.append("-  frequencies:  see [characterFrequencies.cex](./characterFrequencies.cex)\n")
-      */
+
       val index = nameBetterFile(pageDir,"summary.md")
       println("Writing summary in " + index + "\n\n")
       index.overwrite(home.toString)
