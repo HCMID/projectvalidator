@@ -88,7 +88,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
 
   /** Given an unsorted Vector of CtsUrns, sort them against the corpus,
   * and create a sorted Vector mapping CtsUrns to IndexedNodes.
-  */
+
   def sortTextNodes(unsorted: Vector[CtsUrn]) :  Vector[(CtsUrn, Option[IndexedNode])] = {
     val allIndexed = indexedNodes
     val selectionIndexed = for (ref <- unsorted) yield {
@@ -104,6 +104,31 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
     //println("\nSORTED: " + sorted.mkString(", "))
     sorted
   }
+  */
+
+
+  def passageMarkdown(urn: CtsUrn) : String = {
+    val imgmgr = ImageManager()
+    val matches = txts ~~ urn
+    matches.size match {
+      case 0 =>  "**No transcription for " +  urn + "**"
+
+      case 1 => {
+        val cn = matches.nodes(0)
+        val img = dse.imageWRoiForText(cn.urn)
+        val md = imgmgr.markdown(img, 1000)
+        val allApplicable = (readers.filter(_.urn ~~ cn.urn))
+        if (allApplicable.isEmpty) {
+          "**No reader configured for " +  cn.urn + "**" + "  " + md
+        }  else {
+          val applicable = allApplicable.head.readers.head
+          applicable.editedNode(cn).text +  " (*" + cn.urn + "*)" + "  " + md
+        }
+      }
+
+      case _ => "**Multiple text nodes found for " + urn + "**"
+    }
+  }
 
   /**  Compose markdown content juxtaposing indexed image with
   * transcribed text content for a specific page.
@@ -112,20 +137,22 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
 
     val urns = dse.textsForTbs(pg)
     //println("TEXTS FOR " + pg + ": " + urns.mkString(", "))
-    val psgs = sortTextNodes(urns)
+    val psgs = txts.sortPassages(urns)
     //println("SORTED URNs: " + psgs.mkString(", "))
     //println("\n\n\nPassageView:")
 
 
-    val imgmgr = ImageManager()
+
     val rows = for (psg <- psgs) yield {
+      passageMarkdown(psg)
     //val rows = for (psg <- urns) yield {
 
-      val psgUrn = psg._1
-      val psgOpt = psg._2
+      //val psgOpt = psg._2
       //println("pasageView:  psg urn " + psgUrn)
       //println("\topt: " + psgOpt)
 
+
+/*
       val psgMd = psgOpt match {
 
         case None => {
@@ -151,8 +178,8 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
 
           //"CN " + cn
         }
-      }
-      psgMd
+      }*/
+      //psgMd
     }
     rows.mkString("\n\n\n")
   }

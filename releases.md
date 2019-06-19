@@ -1,5 +1,6 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**6.3.0**:  add `DseReporter` function to format Markdown view of a passage identified by `CtsUrn`.
 
 **6.2.5**: use `Corpus` to sort more reliably.
 
