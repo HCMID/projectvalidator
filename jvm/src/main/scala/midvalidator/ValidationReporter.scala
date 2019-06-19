@@ -52,7 +52,7 @@ case class ValidationReporter(midValidator: Validator) {
   def validate(pageUrn: String) = {
     try {
       val u = Cite2Urn(pageUrn)
-      println("Validating page " + u + "...")
+      println("\n\n===>Validating page " + u + "...")
 
       val dirName = u.collection + "-" + u.objectComponent
       val pageDir = outputDir/dirName
@@ -62,7 +62,7 @@ case class ValidationReporter(midValidator: Validator) {
       mkdirs(pageDir)
 
       val pageCorpus = corpusForPage(u)
-      println("Corpus for " + u + " = " + pageCorpus)
+      println("Corpus for " + u + " = " + pageCorpus.size + "citable nodes.")
       val home = StringBuilder.newBuilder
       home.append(s"# Review of ${u.collection}, page ${u.objectComponent}\n\n")
       home.append("## Summary of automated validation\n\n")
@@ -104,7 +104,10 @@ case class ValidationReporter(midValidator: Validator) {
 
       val psgView = nameBetterFile(pageDir, "transcription.md")
       val psgViewHdr = s"# Diplomatic transcription of ${u.collection}, page ${u.objectComponent}\n\n"
-      psgView.overwrite(psgViewHdr + dseReporter.passageView)
+
+      val xcription = dseReporter.passageView
+      println("HERE'S TRANSCRIPTOIN: \n" + xcription)
+      psgView.overwrite(psgViewHdr + xcription)
 
 
       //  1.  DSE indexing

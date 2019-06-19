@@ -86,6 +86,9 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
     }
   }
 
+  /** Given an unsorted Vector of CtsUrns, sort them against the corpus,
+  * and create a sorted Vector mapping CtsUrns to IndexedNodes.
+  */
   def sortTextNodes(unsorted: Vector[CtsUrn]) :  Vector[(CtsUrn, Option[IndexedNode])] = {
     val allIndexed = indexedNodes
     val selectionIndexed = for (ref <- unsorted) yield {
@@ -96,10 +99,10 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
       }
 
     }
-
+    //println("\nIndexed selection: " + selectionIndexed.mkString(", "))
     val sorted = selectionIndexed.sortBy(_._2.get.index)
+    //println("\nSORTED: " + sorted.mkString(", "))
     sorted
-
   }
 
   /**  Compose markdown content juxtaposing indexed image with
@@ -108,8 +111,10 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
   def passageView : String = {
 
     val urns = dse.textsForTbs(pg)
+    //println("TEXTS FOR " + pg + ": " + urns.mkString(", "))
     val psgs = sortTextNodes(urns)
-    println("\n\n\nPassageView:")
+    //println("SORTED URNs: " + psgs.mkString(", "))
+    //println("\n\n\nPassageView:")
 
 
     val imgmgr = ImageManager()
@@ -131,6 +136,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
 
         case _ => {
           val cn = psgOpt.get.citableNode
+
           // md = "MAKE MD FOR " + cn
           val img = dse.imageWRoiForText(cn.urn)
           val md = imgmgr.markdown(img, 1000)
@@ -142,6 +148,8 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
             applicable.editedNode(cn).text +  " (*" + cn.urn + "*)" + "  " + md
             //applicable.editedNode(psgNodes(0)).text +  " (*" + psg + "*)" + "  " + md
           }
+
+          //"CN " + cn
         }
       }
       psgMd
