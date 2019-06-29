@@ -43,19 +43,28 @@ case class Validator(repo: EditorsRepo, readers: Vector[ReadersPairing], orthos:
 
   /** Construct DseVector for this repository's records. */
   def dse:  DseVector = {
+    println("MAKE DSEVECTOR but filter out header lines ")
     val records = dseCex.split("\n").filter(_.nonEmpty).filterNot(_.contains("passage#")).toVector
-
+    println("Filtered.")
     // This value must agree with header data in header/1.dse-prolog.cex.
     val baseUrn = "urn:cite2:validate:tempDse.temp:"
+    println("Form DSE Records")
     val dseRecords = for ((record, count) <- records.zipWithIndex) yield {
       s"${baseUrn}validate_${count}#Temporary DSE record ${count}#${record}"
     }
-
+    println("Done")
     if (records.isEmpty) {
       DseVector(Vector.empty[DsePassage])
     } else {
+      println("Make cex")
       val srcAll = libHeader + dseRecords.mkString("\n")
-      DseVector(srcAll)
+      println("Done")
+      println("Make DSEVector from this source")
+      println(srcAll)
+      val dsv = DseVector(srcAll)
+      println("done")
+      dsv
+
     }
   }
 

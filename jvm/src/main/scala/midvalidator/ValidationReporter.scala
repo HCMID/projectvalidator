@@ -20,9 +20,9 @@ case class ValidationReporter(midValidator: Validator) {
   val outputDir = midValidator.repo.validationDir
 
   // compute these once:
-  val dse = midValidator.dse
-  val corpus = midValidator.raw
-  val paleoResults = PaleographyResults(midValidator.paleoCex)
+  def dse = midValidator.dse
+  def corpus = midValidator.raw
+  def paleoResults = PaleographyResults(midValidator.paleoCex)
 
 
   /** Select a corpus by page reference.
