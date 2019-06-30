@@ -22,12 +22,33 @@ import better.files.Dsl._
 * @param orthos Mapping of URN strings to class implementing MidOrthography trait.
 *
 */
-case class Validator(repo: EditorsRepo, readers: Vector[ReadersPairing], orthos: Vector[OrthoPairing]) {
+case class Validator(
+  repo: EditorsRepo,
+  readers: Vector[ReadersPairing],
+  orthos: Vector[OrthoPairing],
+  catalogOption : Option[String] = None,
+  citationOption: Option[String] = None,
+  editionsDirOption: Option[String] = None ) {
+
+
 
   /** Create a corpus of XML archival editions.
   */
-  def raw:  Corpus = {
-    TextRepositorySource.fromFiles(repo.ctsCatalog.toString, repo.ctsCitation.toString, repo.editionsDir.toString).corpus
+  def raw :Corpus = {
+    val catalog = catalogOption match {
+      case None => repo.ctsCatalog.toString
+      case s: Some[String] => s.get
+    }
+    val citation = citationOption match {
+      case None => repo.ctsCitation.toString
+      case s: Some[String] => s.get
+    }
+
+    val dirName = editionsDirOption match {
+      case None => repo.editionsDir.toString
+      case s: Some[String] => s.get
+    }
+    TextRepositorySource.fromFiles(catalog, citation, dirName).corpus
   }
 
   /** CEX records for paleographic observations.
@@ -43,44 +64,39 @@ case class Validator(repo: EditorsRepo, readers: Vector[ReadersPairing], orthos:
 
   /** Construct DseVector for this repository's records. */
   def dse:  DseVector = {
-    println("MAKE DSEVECTOR but filter out header lines ")
     val records = dseCex.split("\n").filter(_.nonEmpty).filterNot(_.contains("passage#")).toVector
-    println("Filtered.")
     // This value must agree with header data in header/1.dse-prolog.cex.
     val baseUrn = "urn:cite2:validate:tempDse.temp:"
-    println("Form DSE Records")
     val dseRecords = for ((record, count) <- records.zipWithIndex) yield {
       s"${baseUrn}validate_${count}#Temporary DSE record ${count}#${record}"
     }
-    println("Done")
+
     if (records.isEmpty) {
       DseVector(Vector.empty[DsePassage])
     } else {
-      println("Make cex")
       val srcAll = libHeader + dseRecords.mkString("\n")
-      println("Done")
-      println("Make DSEVector from this source")
-      println(srcAll)
       val dsv = DseVector(srcAll)
-      println("done")
       dsv
-
     }
   }
 
   def publishTexts = {
+
+
+
     val editionsDir = nameBetterFile(repo.validationDir,"editions")
     if (editionsDir.exists) {
       editionsDir.delete()
     }
     mkdirs(editionsDir)
 
+    val rawCorpus = raw
 
     for (txtRdrs <- readers) {
       for (rdr <- txtRdrs.readers) {
-        println("Using reader " + rdr )
 
-        val texts = raw ~~ txtRdrs.urn
+
+        val texts = rawCorpus ~~ txtRdrs.urn
         val edition = rdr.editionCex(texts.cex("#"))
 
         val fName = txtRdrs.urn.workComponent + "-" + rdr.editionType.versionId + ".cex"
