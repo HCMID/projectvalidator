@@ -34,8 +34,12 @@ case class EditorsRepo(baseDir: String)  {
   val ctsCatalog = nameBetterFile(editionsDir,"catalog.cex")
   /** Configuration of citation for local files (in any supported format).*/
   val ctsCitation = nameBetterFile(editionsDir,"citation.cex")
+  /** Mapping of CtsUrns to MID markup readers.*/
+  val readersConfig = editionsDir/"readers.csv"
+  /** Mapping of CtsUrns to MID orthography system.*/
+  val orthoConfig = editionsDir/"orthographies.csv"
 
-  for (conf <- Seq(ctsCatalog, ctsCitation)) {
+  for (conf <- Seq(ctsCatalog, ctsCitation,readersConfig,orthoConfig)) {
     require(conf.exists,"Missing required configuration file: " + conf)
   }
 
