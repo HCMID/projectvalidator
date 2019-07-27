@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**6.7.0**: require readers and orthographies configurations in editorial repositories
+
 **6.6.0**:  allow optional configure of non-standard names for text repository components.
 
 **6.5.0**: substantial performance improvements with updated `dse` library.
