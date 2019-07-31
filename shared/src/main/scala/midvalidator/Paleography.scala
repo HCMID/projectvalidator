@@ -1,39 +1,129 @@
 package edu.holycross.shot.mid.validator
-
+import scala.scalajs.js.annotation._
 
 import edu.holycross.shot.cite._
 
 /** A paleographic observation of a single glyph.
 *
-* @param reading Reading of text of a single glyph.
+* @param reading Reading of text of a single glyph (including subreference with text of reading)
 * @param img: Visual evidence for the reading (image including region of interest).
 */
-case class PaleographicObservation(reading: String, img: Cite2Urn) {
-
+@JSExportAll case class PaleographicObservation(reading: CtsUrn, img: Cite2Urn) {
   /** Format pair for CEX. */
   def cex :  String = {
     reading + "#" + img
   }
 }
 
-object PaleographyResults {
 
+/** Implementation of [[TestResults]] for [[PaleographicObservation]].
+*
+* @param cex CEX String for PaleographicObservations.
+*/
+@JSExportAll case class PaleographyResults[PaleographicObservation](cex: String) extends TestResults[PaleographicObservation] {
+
+
+  /** Recursively extract syntactically valid paleographic observations
+  * from a Vector of CEX strings.
+  *
+  * @param lines Strings representing a paleographic observation as
+  * `#`-delimited text.
+  * @param observations Previously seen paleographic observations.
+  */
+  def extractGood(
+      lines: Vector[String],
+      observations: Vector[PaleographicObservation]) :
+      Vector[PaleographicObservation]= {
+
+
+    if (lines.isEmpty) {
+      observations
+
+    } else {
+
+
+      val cols = lines.head.split("#").toVector
+      try {
+        val reading = CtsUrn(cols(1))
+        val img = Cite2Urn(cols(2))
+        val observed = observations :+ PaleographicObservation(reading,img)
+        observed match {
+          case v: Vector[PaleographicObservation] => {
+            extractGood(lines.tail, v)
+          }
+          case _ => {
+            println("Paleography, extractGood:  something is wrong.  Vector is NOT a Vector of observations?")
+            extractGood(lines.tail,observations)
+          }
+        }
+
+
+      } catch {
+        case t: Throwable => extractGood(lines.tail, observations)
+      }
+    }
+  }
+
+  /** Implementation of required [[TestResults]] function as a Vector
+  * of [[PaleographicObservation]]s.
+  */
+  def good: Vector[PaleographicObservation] = {
+    extractGood(cex.split("\n").toVector, Vector.empty[PaleographicObservation])
+  }
+
+  def extractBad(
+    lines: Vector[String],
+    errors: Vector[String]): Vector[String] = {
+
+    if (lines.isEmpty) {
+      errors
+
+    } else {
+      val cols = lines.head.split("#").toVector
+      try {
+        val reading = CtsUrn(cols(1))
+        val img = Cite2Urn(cols(2))
+        extractBad(lines.tail,errors)
+
+      } catch {
+        case t: Throwable => {
+          val msg = "Error on paleographic observation:\n\t" + lines.head + "\n" + t.toString
+          val msgs = errors :+ msg
+          msgs match {
+            case v: Vector[String] => {
+              extractBad(lines.tail,v)
+            }
+            case _ => {
+              println("Error processing error message!  This is not a Vector of Strings:\n" + msgs)
+              extractBad(lines.tail,errors)
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  /** Implementation of required [[TestResults]] function.*/
+  def bad:  Vector[String] = {
+    extractBad(cex.split("\n").toVector, Vector.empty[String])
+  }
   /** Compute test results for a paleographic data set in CEX format.
   *
   * @param cex CEX text, including a header line, with paleographic
   * observations.
-  */
+
   def apply (cex: String): TestResults[PaleographicObservation] = {
     def lines = cex.split("\n").toVector
     testCexLines(lines, Vector.empty[PaleographicObservation], Vector.empty[String])
   }
-
+  */
 
   /**  Create test report for a list of CEX Strings
   * recording paleographic observations.
   *
   * @param lines Lines to examine.
-  */
+
   def testCexLines(lines: Vector[String], good: Vector[PaleographicObservation], bad:  Vector[String] ): TestResults[PaleographicObservation] = {
     if (lines.isEmpty) {
       TestResults(good, bad)
@@ -58,14 +148,14 @@ object PaleographyResults {
     }
   }
 
-
+  */
   /** Compose markdown report for verifying paleographic
   * observations for a single page.
   *
   * @param pg Page to examine.
   * @param observations Paelographic observations to display.
   * @param baseUrl ICT2 location.
-  */
+
   def pageVerification(pg: Cite2Urn, observations: Vector[PaleographicObservation], baseUrl: String): String = {
     val bldr = StringBuilder.newBuilder
     bldr.append(s"\n\n## Human verification of paelographic observations for ${pg.collection}, page ${pg.objectComponent}\n\n###  Completeness\n\n")
@@ -93,13 +183,13 @@ object PaleographyResults {
     bldr.append(rows.mkString("\n") + "\n")
     bldr.toString
   }
-
+  */
   /** Write a markdown file summarizing validation for a page.
   *
   * @param img Reference image for the page.
   * @param pg Page to report on individually.
   * @param rslts Results of paleographic observations.
-  */
+
   def pageReport(img: Cite2Urn, pg: Cite2Urn, rslts:  TestResults[PaleographicObservation]): String = {
     val md = StringBuilder.newBuilder
     md.append(s"# Validation of paleographic observations for "+ pg.collection + ", page " + pg.objectComponent + "\n\n")
@@ -123,5 +213,5 @@ object PaleographyResults {
 
     md.toString
   }
-
+  */
 }
