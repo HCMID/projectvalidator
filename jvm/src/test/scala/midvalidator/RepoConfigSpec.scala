@@ -9,7 +9,7 @@ import edu.holycross.shot.cite._
 */
 class RepoConfigSpec extends FlatSpec {
 
-  "An EditorsRepo" should "fail if missing dse dir" in {
+  "An EditorsRepo" should "fail if missing dse dir" in pending /*{
     val badSrc = "jvm/src/test/resources/nodse"
     try {
       val repo = EditorsRepo(badSrc)
@@ -17,8 +17,8 @@ class RepoConfigSpec extends FlatSpec {
     } catch {
       case err: Throwable => assert(true)
     }
-  }
-  it  should "fail if missing editing dir" in {
+  }*/
+  it  should "fail if missing editing dir" in pending /*{
     val badSrc = "jvm/src/test/resources/noeditions"
     try {
       val repo = EditorsRepo(badSrc)
@@ -26,8 +26,8 @@ class RepoConfigSpec extends FlatSpec {
     } catch {
       case err: Throwable => assert(true)
     }
-  }
-  it  should "fail if missing validation dir" in {
+  }*/
+  it  should "fail if missing validation dir" in pending /*{
     val badSrc = "jvm/src/test/resources/novalidation"
     try {
       val repo = EditorsRepo(badSrc)
@@ -35,8 +35,8 @@ class RepoConfigSpec extends FlatSpec {
     } catch {
       case err: Throwable => assert(true)
     }
-  }
-  it  should "fail if missing paleography dir" in {
+  }*/
+  it  should "fail if missing paleography dir" in pending /* {
     val badSrc = "jvm/src/test/resources/nopaleography"
     try {
       val repo = EditorsRepo(badSrc)
@@ -45,8 +45,8 @@ class RepoConfigSpec extends FlatSpec {
       case err: Throwable => assert(true)
     }
   }
-
-  it  should "fail if missing CTS catalog" in {
+*/
+  it  should "fail if missing CTS catalog" in pending /*{
     val badSrc = "jvm/src/test/resources/noctscatalog"
     try {
       val repo = EditorsRepo(badSrc)
@@ -54,9 +54,9 @@ class RepoConfigSpec extends FlatSpec {
     } catch {
       case err: Throwable => assert(true)
     }
-  }
+  }*/
 
-  it  should "fail if missing CTS citation configuration" in {
+  it  should "fail if missing CTS citation configuration" in pending /*{
     val badSrc = "jvm/src/test/resources/noctscitation"
     try {
       val repo = EditorsRepo(badSrc)
@@ -65,6 +65,6 @@ class RepoConfigSpec extends FlatSpec {
       case err: Throwable => assert(true)
     }
   }
-
+*/
 
 }

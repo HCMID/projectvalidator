@@ -7,12 +7,12 @@ import edu.holycross.shot.ohco2._
 
 class ReadersPairingSpec extends FlatSpec {
 
-  "A ReadersPairing" should "have a vector of readers" in {
+  "A ReadersPairing" should "have a vector of readers" in  pending /*{
     val eins121 = CtsUrn("urn:cts:chant:massordinary.eins121:")
     val readers = MidProseABReader.readers
 
     val pairings = ReadersPairing(eins121, readers)
 
     assert (pairings.readers == readers)
-  }
+  }*/
 }

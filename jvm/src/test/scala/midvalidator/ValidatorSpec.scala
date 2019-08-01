@@ -15,15 +15,15 @@ class ValidatorSpec extends FlatSpec {
 
 
   //val repo = EditorsRepo("jvm/src/test/resources/chantsample")
-  val readers = Vector (
+  /*val readers = Vector (
     ReadersPairing(CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:"),
     MidProseABReader.readers),
     ReadersPairing(CtsUrn("urn:cts:chant:massordinary.sg359.neumes_xml:"),
         MidNeumeReader.readers)
-  )
+  )*/
   val ortho = Vector.empty[OrthoPairing]
 
-  "A Validator" should "create a CTS corpus of raw XML source" in pending/* {
+  "A Validator" should "create a CTS corpus of raw XML source" in pending /* {
     val mom = Validator(repo, readers, ortho)
     assert(mom.raw.isInstanceOf[Corpus])
   }*/

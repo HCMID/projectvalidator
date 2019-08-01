@@ -3,12 +3,19 @@ import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
 import scala.xml._
 
+
+object MidProseABDiplomatic extends MidMarkupReader {
+  def editedNode(cn: CitableNode) = MidProseABReader(MidDiplomaticEdition).editedNode(cn)
+  def editionType = MidDiplomaticEdition
+  def recognizedTypes = Vector(MidDiplomaticEdition)
+}
+
 /** Reads MID prose texts in TEI markup using `ab`
 * element as terminal citation unit.
 *
 * @param editionType Type of edition to read.
 */
-case class MidProseABReader(applicableType: MidEditionType) extends MidMarkupReader {
+case class MidProseABReader(applicableType: MidEditionType)  {
   require(recognizedTypes.contains(applicableType), "Unrecognized edition type: " + applicableType)
 
 

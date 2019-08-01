@@ -117,11 +117,11 @@ object Validator {
   * editorial repository.
   *
   * @param repoPath Path to repository.
-  */
-  def apply(repoPath: String, readers: Vector[ReadersPairing], orthos: Vector[OrthoPairing])  : Validator = {
-    Validator(EditorsRepo(repoPath), readers, orthos)
-  }
 
+  def apply(repoPath: String, readers: Vector[ReadersPairing])  : Validator = {
+    Validator(EditorsRepo(repoPath, readers))
+  }
+  */
 
 /*
   def readers(repoPath: String) : Vector[ReadersPairing] = {
