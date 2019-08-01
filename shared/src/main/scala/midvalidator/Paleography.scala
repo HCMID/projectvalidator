@@ -15,13 +15,11 @@ import edu.holycross.shot.cite._
   }
 }
 
-
 /** Implementation of [[TestResults]] for [[PaleographicObservation]].
 *
 * @param cex CEX String for PaleographicObservations.
 */
 @JSExportAll case class PaleographyResults[PaleographicObservation](cex: String) extends TestResults[PaleographicObservation] {
-
 
   /** Recursively extract syntactically valid paleographic observations
   * from a Vector of CEX strings.
@@ -71,6 +69,13 @@ import edu.holycross.shot.cite._
     extractGood(cex.split("\n").toVector, Vector.empty[PaleographicObservation])
   }
 
+  /** Recursively identify syntactically invalid paleographic observations
+  * from a Vector of CEX strings and compose error messages.
+  *
+  * @param lines Strings representing a paleographic observation as
+  * `#`-delimited text.
+  * @param observations Previously seen paleographic observations.
+  */
   def extractBad(
     lines: Vector[String],
     errors: Vector[String]): Vector[String] = {
@@ -108,47 +113,7 @@ import edu.holycross.shot.cite._
   def bad:  Vector[String] = {
     extractBad(cex.split("\n").toVector, Vector.empty[String])
   }
-  /** Compute test results for a paleographic data set in CEX format.
-  *
-  * @param cex CEX text, including a header line, with paleographic
-  * observations.
 
-  def apply (cex: String): TestResults[PaleographicObservation] = {
-    def lines = cex.split("\n").toVector
-    testCexLines(lines, Vector.empty[PaleographicObservation], Vector.empty[String])
-  }
-  */
-
-  /**  Create test report for a list of CEX Strings
-  * recording paleographic observations.
-  *
-  * @param lines Lines to examine.
-
-  def testCexLines(lines: Vector[String], good: Vector[PaleographicObservation], bad:  Vector[String] ): TestResults[PaleographicObservation] = {
-    if (lines.isEmpty) {
-      TestResults(good, bad)
-
-    } else {
-
-      try {
-        val cols = lines.head.split("#")
-        require(cols.size > 2, "Too few columns in input line: "+ lines.head)
-        //Observation URN#Text Reading#Image#Comments
-        val reading = CtsUrn(cols(1))
-        val img = Cite2Urn(cols(2))
-        val observation = PaleographicObservation(reading.passageNodeSubref, img)
-        testCexLines(lines.tail, good :+ observation, bad)
-
-      } catch {
-        case t : Throwable => {
-          val msg = "Failed to parse line " + lines.head + ".  Error message: " + t
-          testCexLines(lines.tail, good, bad :+ msg)
-        }
-      }
-    }
-  }
-
-  */
   /** Compose markdown report for verifying paleographic
   * observations for a single page.
   *
