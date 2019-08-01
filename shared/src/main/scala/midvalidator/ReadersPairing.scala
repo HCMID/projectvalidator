@@ -1,4 +1,5 @@
 package edu.holycross.shot.mid.validator
+import scala.scalajs.js.annotation._
 
 import edu.holycross.shot.cite._
 
@@ -8,4 +9,4 @@ import edu.holycross.shot.cite._
 * @param urn Text or texts these markup readers can be applied to.
 * @param readers Readersa applicable to texts identified by [[urn]].
 */
-case class ReadersPairing(urn: CtsUrn, readers: Vector[MidMarkupReader])
+@JSExportAll  case class ReadersPairing(urn: CtsUrn, readers: Vector[MidMarkupReader])

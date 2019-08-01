@@ -21,6 +21,11 @@ import edu.holycross.shot.cite._
 */
 @JSExportAll case class PaleographyResults[PaleographicObservation](cex: String) extends TestResults[PaleographicObservation] {
 
+  /** Compose report on results.*/
+  def mdReport : String = {
+    "TBD"
+  }
+  
   /** Recursively extract syntactically valid paleographic observations
   * from a Vector of CEX strings.
   *

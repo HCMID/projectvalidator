@@ -16,7 +16,7 @@ class ValidatorDseSpec extends FlatSpec {
     assert(dseV.passages.size > 0)
   }*/
 
-  it should "build a DseVector when multiple surfaces are indexed to one image" in {
+  it should "build a DseVector when multiple surfaces are indexed to one image" in pending/* {
     val repo = EditorsRepo("jvm/src/test/resources/bifoliosample")
     val readers = Vector.empty[ReadersPairing]
     val ortho = Vector.empty[OrthoPairing]
@@ -25,6 +25,6 @@ class ValidatorDseSpec extends FlatSpec {
 
     val expectedSize = 7
     assert(dseV.passages.size == expectedSize)
-  }
+  }*/
 
 }

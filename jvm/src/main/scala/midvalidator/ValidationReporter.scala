@@ -22,7 +22,7 @@ case class ValidationReporter(midValidator: Validator) {
   // compute these once:
   def dse = midValidator.dse
   def corpus = midValidator.raw
-  def paleoResults = PaleographyResults(midValidator.paleoCex)
+  //def paleoResults = PaleographyResults(midValidator.paleoCex)
 
 
   /** Select a corpus by page reference.
@@ -32,8 +32,10 @@ case class ValidationReporter(midValidator: Validator) {
   def corpusForPage(pg: Cite2Urn) = {
     //These are unsorted!
     val textUrns = dse.textsForTbs(pg).toVector
+    println(s"Got ${textUrns.size} text passages, now sorting...")
+    println(textUrns.zipWithIndex.mkString("\n"))
     val sorted = midValidator.raw.sortPassages(textUrns)
-
+    println("Sorted, now merge sorted nodes...")
 
     val miniCorpora = for (u <- sorted) yield {
       val merged = corpus ~~ u
@@ -45,7 +47,7 @@ case class ValidationReporter(midValidator: Validator) {
     //println(miniCorpora(0))
     val singleCorpus = Validator.mergeCorpusVector(miniCorpora, Corpus(Vector.empty[CitableNode]))
     //println("SINGLE CORPUS: " + singleCorpus)
-
+    println("Made corpus of " + singleCorpus.size + " nodes.")
 
     singleCorpus
   }
@@ -102,9 +104,14 @@ case class ValidationReporter(midValidator: Validator) {
     try {
       val u = Cite2Urn(pageUrn)
       println("\n\n===>Validating page " + u + "...")
+      println("Selecting corpus...")
+      // THIS IS FAILING:
       val pageCorpus = corpusForPage(u)
+      println("Getting DSE reporter...")
       val dseReporter =  DseReporter(u, dse, pageCorpus, midValidator.readers)
+      println("Checking valid DSE...")
       val dseValidMd = dseReporter.dseValidation
+      println("Composing passage view")
       val xcription = dseReporter.passageView
 
       val pageDir = directoryForSurface(u)

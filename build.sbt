@@ -17,7 +17,7 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "6.7.0",
+      version := "7.0.0",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -28,17 +28,21 @@ lazy val crossed = crossProject.in(file(".")).
         "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
 
         "edu.holycross.shot.cite" %%% "xcite" % "4.1.0",
-        "edu.holycross.shot" %%% "ohco2" % "10.13.0",
-        "edu.holycross.shot" %%% "citeobj" % "7.3.3",
-        "edu.holycross.shot" %%% "citerelations" % "2.5.0",
-        "edu.holycross.shot" %%% "dse" % "5.1.1"
+        "edu.holycross.shot" %%% "ohco2" % "10.13.2",
+        "edu.holycross.shot" %%% "citeobj" % "7.3.4",
+        "edu.holycross.shot" %%% "citerelations" % "2.5.2",
+        "edu.holycross.shot" %%% "dse" % "5.1.2"//,
+
+        // Later version would bring all dependent libs in sync:
+        //"edu.furman.classics" %% "citewriter" % "1.0.2"
+
       )
     ).
     jvmSettings(
       libraryDependencies ++= Seq(
         "com.github.pathikrit" %% "better-files" % "3.5.0",
 
-        "edu.holycross.shot" %% "scm" % "7.0.0",
+        "edu.holycross.shot" %% "scm" % "7.0.1",
         "edu.holycross.shot" %% "cex" % "6.3.3",
 
         // FOR DEBUGGIN:

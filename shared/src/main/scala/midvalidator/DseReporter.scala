@@ -8,10 +8,6 @@ import edu.holycross.shot.dse._
 import edu.holycross.shot.cex._
 
 
-import better.files._
-import File._
-import java.io.{File => JFile}
-import better.files.Dsl._
 
 
 /** An object for analyzing and writing reports about the DSE

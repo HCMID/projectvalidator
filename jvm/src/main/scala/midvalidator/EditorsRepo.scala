@@ -19,7 +19,10 @@ import better.files.Dsl._
 *
 * @param baseDir Root directory of repository.
 */
-case class EditorsRepo(baseDir: String)  {
+case class EditorsRepo(baseDir: String,
+  readerMap:  Map[String, Vector[MidMarkupReader]],
+  orthoMap: Map[String, MidOrthography])  {
+
   /** Directory for DSE records (in CEX format).*/
   val dseDir = File(baseDir + "/dse")
   /** Writable directory for validation reports. */
@@ -37,12 +40,16 @@ case class EditorsRepo(baseDir: String)  {
     require(d.exists, "Repository not correctly laid out: missing directory " + d)
   }
 
-
   /** Build a CITE library from the files in this repository. */
   def library: CiteLibrary = {
     // required components:
     // text repo, dse,
     CiteLibrary(libHeader + dseCex + textsCex )
+  }
+
+  /** Build [[OrthoPairing]]s from configuration in this repository.*/
+  def orthographies: Vector[OrthoPairing] = {
+    Vector.empty[OrthoPairing]
   }
 
   /** Construct DseVector for this repository's records. */

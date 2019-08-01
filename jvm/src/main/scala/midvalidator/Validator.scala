@@ -34,7 +34,7 @@ case class Validator(
 
   /** Create a corpus of XML archival editions.
   */
-  def raw :Corpus = {
+  def raw : Corpus = {
     val catalog = catalogOption match {
       case None => repo.ctsCatalog.toString
       case s: Some[String] => s.get
@@ -48,6 +48,7 @@ case class Validator(
       case None => repo.editionsDir.toString
       case s: Some[String] => s.get
     }
+    println("Creating repo in " + dirName + "using cat. " + catalog + " and citeconfig " + citation)
     TextRepositorySource.fromFiles(catalog, citation, dirName).corpus
   }
 
@@ -80,6 +81,7 @@ case class Validator(
     }
   }
 
+/*
   def publishTexts = {
 
 
@@ -105,7 +107,7 @@ case class Validator(
       }
     }
   }
-
+*/
 }
 
 

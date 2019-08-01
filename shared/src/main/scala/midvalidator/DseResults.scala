@@ -5,11 +5,11 @@ import edu.holycross.shot.ohco2._
 import edu.holycross.shot.citerelation._
 import edu.holycross.shot.citeobj._
 import edu.holycross.shot.dse._
-import edu.holycross.shot.cex._
+import edu.holycross.shot.scm._
 
 import scala.scalajs.js.annotation._
 
-@JSExportAll  case class DseResults[CiteTriple](cex: String) extends TestResults[CiteTriple] {
+@JSExportAll  case class DseResults[CiteTriple](library: CiteLibrary) extends TestResults[CiteTriple] {
 
   def good : Vector[CiteTriple] = {
     Vector.empty[CiteTriple]
@@ -21,6 +21,10 @@ import scala.scalajs.js.annotation._
   }
 
 
+  /** Compose report on results.*/
+  def mdReport : String = {
+    "TBD"
+  }
   //require(txts.size > 0, "Can not create DseReporter:  no texts found for " + pg)
 
   /** Check if passages in a list are actually in corpus
