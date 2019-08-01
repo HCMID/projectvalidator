@@ -1,13 +1,21 @@
 package edu.holycross.shot.mid.validator
 
+import edu.holycross.shot.scm._
+import edu.holycross.shot.ohco2._
+import edu.holycross.shot.dse._
+import edu.holycross.shot.cite._
+import edu.holycross.shot.cex._
+
 import better.files._
 import File._
 import java.io.{File => JFile}
 import better.files.Dsl._
 
 
-/** Local file system of an HCMID editorial repository
-* laid out according to 2018 standards.
+/** Class for working with HCMID editorial work in a
+* local file system laid out according to convetions first
+* defined in 2018.  The class includes a function to create
+* a CiteLibrary from the contents of these files.
 *
 * @param baseDir Root directory of repository.
 */
@@ -30,6 +38,40 @@ case class EditorsRepo(baseDir: String)  {
   }
 
 
+  /** Build a CITE library from the files in this repository. */
+  def library: CiteLibrary = {
+    // required components:
+    // text repo, dse,
+    CiteLibrary(libHeader + dseCex + textsCex )
+  }
+
+  /** Construct DseVector for this repository's records. */
+  def dse:  DseVector = {
+    val triplesCex = DataCollector.compositeFiles(dseDir.toString, "cex", dropLines = 1)
+    val tempCollection = Cite2Urn("urn:cite2:validate:tempDse.temp:")
+    val dseV = DseVector.fromTextTriples(triplesCex, tempCollection)
+    dseV
+  }
+
+  /** Construct TextRepository. */
+  def texts : TextRepository = {
+    TextRepositorySource.fromFiles(ctsCatalog.toString, ctsCitation.toString, editionsDir.toString)
+  }
+
+  /** CEX library header data.*/
+  def libHeader:  String = DataCollector.compositeFiles(libHeadersDir.toString, "cex")
+
+  /** CEX data for DSE relations.*/
+  def dseCex:  String = {
+    val rows = dse.passages.map(_.cex())
+    rows.mkString("\n")
+  }
+
+  /** CEX data for text editions.*/
+  def textsCex: String = {
+    texts.cex()
+  }
+
   /** Catalog of edited texts.*/
   val ctsCatalog = nameBetterFile(editionsDir,"catalog.cex")
   /** Configuration of citation for local files (in any supported format).*/
@@ -42,5 +84,4 @@ case class EditorsRepo(baseDir: String)  {
   for (conf <- Seq(ctsCatalog, ctsCitation,readersConfig,orthoConfig)) {
     require(conf.exists,"Missing required configuration file: " + conf)
   }
-
 }
