@@ -1,8 +1,3 @@
-//name := "MID project validator"
-
-//crossScalaVersions in ThisBuild := Seq("2.11.8", "2.12.4")
-//scalaVersion := (crossScalaVersions in ThisBuild).value.last
-
 lazy val supportedScalaVersions = List("2.11.8", "2.12.4")
 
 lazy val root = project.in(file(".")).
@@ -21,7 +16,7 @@ lazy val crossed = crossProject.in(file(".")).
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
-      resolvers +=  Resolver.bintrayRepo("cibotech", "public"),
+      //resolvers +=  Resolver.bintrayRepo("cibotech", "public"),
 
       libraryDependencies ++= Seq(
         "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
@@ -49,7 +44,7 @@ lazy val crossed = crossProject.in(file(".")).
         "edu.holycross.shot" %% "cex" % "6.3.3",
         "edu.holycross.shot" %% "xmlutils" % "2.0.0"
 
-        // FOR DEBUGGIN:
+        // FOR DEBUGGING WITH HMT CONTENT:
         //"edu.holycross.shot" %% "greek" % "2.4.0",
         //"org.homermultitext" %% "hmt-textmodel" % "6.0.1"
 

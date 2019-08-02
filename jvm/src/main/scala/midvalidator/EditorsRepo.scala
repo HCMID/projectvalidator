@@ -21,7 +21,8 @@ import better.files.Dsl._
 * @param readerMap Mapping of String names to classes of [[MidMarkupReader]].
 * @param orthoMap Mapping of String names to classes of [[MidOrthography]].
 */
-case class EditorsRepo(baseDir: String,
+case class EditorsRepo(
+  baseDir: String,
   readerMap:  Map[String, Vector[MidMarkupReader]],
   orthoMap: Map[String, MidOrthography])  {
 
@@ -67,6 +68,18 @@ case class EditorsRepo(baseDir: String,
       }
     })
     pairings
+  }
+
+
+  /** Use convention that first reader listed for each CTS URN
+  * in markup reader configuration must produce a diplomatic edition.
+  *
+  * @param urn CTS Urn identifying text(s) to find reader for.
+  */
+  def diplomaticReader(urn: CtsUrn) : MidMarkupReader = {
+    val readerMatches = readers.filter(_.urn >= urn)
+    require(readerMatches.size == 1, s"Failed to find diplomatic reader.\nURN matched more than one configuration entry: \n\t${urn}")
+    readerMatches(0).readers(0)
   }
 
   /** Build [[ReadersPairing]]s from configuration in this repository.*/
