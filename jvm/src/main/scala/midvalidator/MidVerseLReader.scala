@@ -1,6 +1,7 @@
 package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
+import edu.holycross.shot.xmlutils._
 import scala.xml._
 
 /** Reads MID prose texts in TEI markup using `ab`
@@ -149,7 +150,7 @@ object MidVerseLReader {
       // Unicode 0x374 :
       case "num" =>  Some(el.text  + "ʹ")
       // Recursively read all text content wrapped in `w`
-      case "w" => Some(collectText(el))
+      case "w" => Some(TextReader.collectText(el))
 
 
       // Continue hierarchically descending reading

@@ -1,7 +1,7 @@
 import edu.holycross.shot.mid.validator._
 
 // Normally, just "." in an mID project
-val repoRoot = "jvm/src/test/resources/twins-alpha"
+val repoRoot = "jvm/src/test/resources/simplelatin"
 
 
 // Standard way to validate:
