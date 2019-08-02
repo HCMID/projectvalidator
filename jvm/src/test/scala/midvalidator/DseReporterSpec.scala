@@ -37,7 +37,7 @@ class DseReporterSpec extends FlatSpec {
       assert(reporter.missingPassages.isEmpty)
   }
 
-  it should "format a markdown string for a passage view of a given CtsUrn" in {
+  it should "format a markdown string for a passage view of a given CtsUrn" in pending /* {
       val txtDir = "jvm/src/test/resources/iliadsample/editions"
       val txtCatalog = s"${txtDir}/catalog.cex"
       val txtConfig = s"${txtDir}/citation.cex"
@@ -53,8 +53,8 @@ class DseReporterSpec extends FlatSpec {
       assert (md == expected)
 
   }
-
-  it should "create markdown for a passage view of the report" in {
+*/
+  it should "create markdown for a passage view of the report" in pending /*{
 
       val txtDir = "jvm/src/test/resources/iliadsample/editions"
       val txtCatalog = s"${txtDir}/catalog.cex"
@@ -81,7 +81,7 @@ class DseReporterSpec extends FlatSpec {
       val expectedEntries = 4
       assert(lines.size == expectedEntries)
   }
-
+*/
   it should "report on completeness of coverage in DSE" in {
     val txtDir = "jvm/src/test/resources/iliadsample/editions"
     val txtCatalog = s"${txtDir}/catalog.cex"

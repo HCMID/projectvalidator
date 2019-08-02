@@ -12,12 +12,14 @@ import java.io.{File => JFile}
 import better.files.Dsl._
 
 
-/** Class for working with HCMID editorial work in a
-* local file system laid out according to convetions first
+/** A class for working with HC-MID editorial work in a
+* local file system laid out according to conventions first
 * defined in 2018.  The class includes a function to create
 * a CiteLibrary from the contents of these files.
 *
 * @param baseDir Root directory of repository.
+* @param readerMap Mapping of String names to classes of [[MidMarkupReader]].
+* @param orthoMap Mapping of String names to classes of [[MidOrthography]].
 */
 case class EditorsRepo(baseDir: String,
   readerMap:  Map[String, Vector[MidMarkupReader]],

@@ -5,12 +5,12 @@ import org.scalatest.FlatSpec
 
 class JsAccessSpec extends FlatSpec {
 
-  "The MID validator library"  should "expose image managers" in {
+  "The MID validator library"  should "expose image managers" in pending /*{
     val mgr = ImageManager()
     val defaultICT = "http://www.homermultitext.org/ict2/"
     assert(mgr.ictBase ==  defaultICT)
   }
-
+*/
   it should "expose edition type" in {
     assert (MidDiplomaticEdition.label == "diplomatic")
     assert (MidScribalEdition.label == "scribal")

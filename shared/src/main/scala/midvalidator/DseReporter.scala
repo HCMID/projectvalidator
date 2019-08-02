@@ -104,6 +104,7 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
 
 
   def passageMarkdown(urn: CtsUrn) : String = {
+    /*
     val imgmgr = ImageManager()
     val matches = txts ~~ urn
     matches.size match {
@@ -124,6 +125,8 @@ case class DseReporter(pg:  Cite2Urn, dse: DseVector, txts: Corpus, readers: Vec
 
       case _ => "**Multiple text nodes found for " + urn + "**"
     }
+    */
+    ""
   }
 
   /**  Compose markdown content juxtaposing indexed image with
