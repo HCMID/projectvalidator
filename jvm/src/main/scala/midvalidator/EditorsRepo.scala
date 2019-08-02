@@ -51,7 +51,25 @@ case class EditorsRepo(baseDir: String,
 
   /** Build [[OrthoPairing]]s from configuration in this repository.*/
   def orthographies: Vector[OrthoPairing] = {
-    Vector.empty[OrthoPairing]
+    val data = orthoConfig.lines.toVector.tail
+    println("ORTHOS: " + data)
+
+    val pairings = data.map( str => {
+      try {
+          val cols = str.split("#")
+          val txt = CtsUrn(cols(0))
+          val ortho = orthoMap(cols(1))
+          OrthoPairing(txt, ortho)
+
+      } catch {
+        case t : Throwable => {
+          println("Catastrophe: " + t)
+          throw t
+        }
+      }
+    })
+    pairings
+    //Vector.empty[OrthoPairing]
   }
 
   /** Build [[ReadersPairing]]s from configuration in this repository.*/

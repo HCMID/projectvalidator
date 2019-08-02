@@ -35,5 +35,11 @@ class ReaderOrthoSpec extends FlatSpec {
 
   it should "be able to configure orthographies by convention" in {
     val repo = EditorsRepo(repoPath, readerMap, orthoMap)
+    val orthos = repo.orthographies
+    assert(orthos.size == 1)
+    val expectedText = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:")
+    assert(orthos(0).urn == expectedText)
+    val expectedOrtho = "edu.holycross.shot.mid.validator.Latin23"
+    assert(orthos(0).orthography.toString.contains(expectedOrtho))
   }
 }
