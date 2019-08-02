@@ -28,7 +28,12 @@ class ReaderOrthoSpec extends FlatSpec {
     val pairing =  repo.readers.filter(_.urn ==  textUrn)
     // Expect only one reader for this text:
     assert(pairing(0).readers.size == 1)
+    assert(pairing(0).readers(0).toString.contains("edu.holycross.shot.mid.validator.MidProseABDiplomatic"))
   }
 
-  it should "be able to configure orthographies by convention" in pending
+
+
+  it should "be able to configure orthographies by convention" in {
+    val repo = EditorsRepo(repoPath, readerMap, orthoMap)
+  }
 }
