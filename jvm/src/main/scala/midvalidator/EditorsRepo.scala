@@ -54,6 +54,26 @@ case class EditorsRepo(baseDir: String,
     Vector.empty[OrthoPairing]
   }
 
+  /** Build [[ReadersPairing]]s from configuration in this repository.*/
+  def readers: Vector[ReadersPairing] = {
+    val data = readersConfig.lines.toVector.tail
+    val pairings = data.map( str => {
+      try {
+        val cols = str.split("#")
+        val readerStrings = cols(1).split(",").toVector
+        val readers = readerStrings.map(s => readerMap(s))
+
+        ReadersPairing(CtsUrn(cols(0)),readers.flatten)
+      } catch {
+        case t: Throwable => {
+          println("Catastrophe: " + t)
+          throw t
+        }
+      }
+    })
+    pairings
+  }
+
   /** Construct DseVector for this repository's records. */
   def dse:  DseVector = {
     val triplesCex = DataCollector.compositeFiles(dseDir.toString, "cex", dropLines = 1)
@@ -86,9 +106,9 @@ case class EditorsRepo(baseDir: String,
   /** Configuration of citation for local files (in any supported format).*/
   val ctsCitation = nameBetterFile(editionsDir,"citation.cex")
   /** Mapping of CtsUrns to MID markup readers.*/
-  val readersConfig = editionsDir/"readers.csv"
+  val readersConfig = editionsDir/"readers.cex"
   /** Mapping of CtsUrns to MID orthography system.*/
-  val orthoConfig = editionsDir/"orthographies.csv"
+  val orthoConfig = editionsDir/"orthographies.cex"
 
   for (conf <- Seq(ctsCatalog, ctsCitation,readersConfig,orthoConfig)) {
     require(conf.exists,"Missing required configuration file: " + conf)

@@ -13,12 +13,22 @@ import better.files.Dsl._
 
 class ReaderOrthoSpec extends FlatSpec {
 
-  val repoPath = "jvm/src/test/resources/bifoliosample"
+  val repoPath = "jvm/src/test/resources/simplelatin"
+  val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
+    "MidProseABDiplomatic" ->   Vector(MidProseABDiplomatic)
+  )
+  val orthoMap : Map[String, MidOrthography] = Map(
+    "Latin23" -> Latin23
+  )
 
-  "The Validator object" should "be able to configure readers by convention" in pending /*(){
-    Validator(repoPath)
 
-  }*/
+  "An EditorsRepo" should "be able to configure readers by convention" in {
+    val repo = EditorsRepo(repoPath, readerMap, orthoMap)
+    val textUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:")
+    val pairing =  repo.readers.filter(_.urn ==  textUrn)
+    // Expect only one reader for this text:
+    assert(pairing(0).readers.size == 1)
+  }
 
   it should "be able to configure orthographies by convention" in pending
 }

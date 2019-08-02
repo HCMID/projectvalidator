@@ -17,4 +17,15 @@ val orthoMap : Map[String, MidOrthography] = Map(
 
 // 3. Build a validator. This requires ortho map as well as a CITE library.
 val repo = EditorsRepo(repoRoot, readerMap, orthoMap)
-val validator = MidValidator(repo.library, repo.orthographies)
+
+
+
+def validate : Unit = {
+  val validator = MidValidator(repo.library, repo.orthographies)
+  // then run "validate" function on a surface or surfaces defined by URN
+}
+
+def publish: Unit = {
+  val publisher = MidPublisher(repo.library, repo.readers)
+  // then run "publish"
+}
