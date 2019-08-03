@@ -5,9 +5,10 @@ import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
 
 
-class ValidatorObjectSpec extends FlatSpec {
+class TextProfilingSpec extends FlatSpec {
 
-  "The Validator object" should "profile tokens in a corpus" in pending/* {
+  "The Validator object" should "profile tokens in a corpus" in pending
+  /* {
     val repo = EditorsRepo("src/test/resources/il10")
     val mom = Validator(repo)
     val profile = Validator.profileTokens(mom.tokens)
@@ -17,6 +18,7 @@ class ValidatorObjectSpec extends FlatSpec {
     assert (actualCategories == expectedCategories)
   }
 */
+
   it should "extract a list of unique lexical words from a list of tokens" in pending /*{
     val repo = EditorsRepo("src/test/resources/il10")
     val mom = Validator(repo)

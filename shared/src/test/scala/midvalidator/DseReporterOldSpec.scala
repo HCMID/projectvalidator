@@ -9,6 +9,7 @@ import edu.holycross.shot.dse._
 
 class DseReporterSpec extends FlatSpec {
 
+/*
   val dseFile = "jvm/src/test/resources/bifoliosample/dse/e3_dse.cex"
   val scholiaFile = "jvm/src/test/resources/bifoliosample/dse/scholia_e3.cex"
   val dummyCollection = Cite2Urn("urn:cite2:units:dummy.v1:")
@@ -21,7 +22,7 @@ class DseReporterSpec extends FlatSpec {
 
   val readersDummy = Vector.empty[ReadersPairing]
 
-  val corpus = TextRepositorySource.fromFiles(txtCatalog, txtConfig, txtDir).corpus
+  //val corpus = TextRepositorySource.fromFiles(txtCatalog, txtConfig, txtDir).corpus */
 
   "A DseReporter" should "do things" in  pending /*{
     val pg = Cite2Urn("urn:cite2:hmt:e3.v1:109v")
