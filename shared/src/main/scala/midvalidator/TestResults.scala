@@ -17,4 +17,9 @@ trait TestResults[T] {
 
 import scala.scalajs.js.annotation._
 
+/** Results of testing some artifact.
+*
+* @param success True if tested object passed the test.
+* @param summary Human-readable summary of the test.
+*/
 @JSExportAll case class TestReport(success: Boolean, summary: String)
