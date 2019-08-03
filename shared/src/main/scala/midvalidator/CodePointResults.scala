@@ -21,9 +21,8 @@ import edu.holycross.shot.cite._
             TestReport(true, "maybe true? " + s)
           }
         }
-
       }
-      case false => TestReport(false,"This value is not a String: " + str)
+      case false => TestReport(false,s"This string is not valid in the current orthographic system (tested with ${ortho}): " + str)
     }
   }
 
