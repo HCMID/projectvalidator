@@ -4,7 +4,7 @@ import scala.scalajs.js.annotation._
 import edu.holycross.shot.cite._
 
 /** Implementation of [[TestResults]] for Strings of characters
-* in a given orthographic system.
+* testing whether code points used are valid in a given orthographic system.
 *
 * @param ortho MidOrthography.
 */
@@ -17,8 +17,7 @@ import edu.holycross.shot.cite._
       case true =>    {
         str match {
           case s: String => {
-
-            TestReport(true, "maybe true? " + s)
+            TestReport(true, s"String ${s} uses only valid code points.")
           }
         }
       }
