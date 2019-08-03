@@ -53,6 +53,7 @@ case class ValidationReporter(midValidator: Validator) {
   }
 
   def psgView(pageUrn: String) = {
+    /*
       try {
         val u = Cite2Urn(pageUrn)
         println("\n\n===>Validating page " + u + "...")
@@ -70,7 +71,7 @@ case class ValidationReporter(midValidator: Validator) {
         val psgView = nameBetterFile(pageDir, "transcription.md")
         val psgViewHdr = s"# Diplomatic transcription of ${u.collection}, page ${u.objectComponent}\n\n"
 
-        val dseReporter =  DseReporter(u, dse, pageCorpus, midValidator.readers)
+        val dseReporter =  DseReporterDeprecated(u, dse, pageCorpus, midValidator.readers)
 
         val xcription = dseReporter.passageView
         psgView.overwrite(psgViewHdr + xcription)
@@ -81,7 +82,7 @@ case class ValidationReporter(midValidator: Validator) {
             println("Full error message:\n\t")
             println(t.toString + "\n\n")
           }
-        }
+        }*/
   }
 
 
@@ -101,14 +102,14 @@ case class ValidationReporter(midValidator: Validator) {
   * @param pageUrn
   */
   def validate(pageUrn: String) = {
-    try {
+  /*  try {
       val u = Cite2Urn(pageUrn)
       println("\n\n===>Validating page " + u + "...")
       println("Selecting corpus...")
       // THIS IS FAILING:
       val pageCorpus = corpusForPage(u)
       println("Getting DSE reporter...")
-      val dseReporter =  DseReporter(u, dse, pageCorpus, midValidator.readers)
+      val dseReporter =  DseReporterDeprecated(u, dse, pageCorpus, midValidator.readers)
       println("Checking valid DSE...")
       val dseValidMd = dseReporter.dseValidation
       println("Composing passage view")
@@ -191,7 +192,7 @@ case class ValidationReporter(midValidator: Validator) {
         println("Full error message:\n\t")
         println(t.toString + "\n\n")
       }
-    }
+    }*/
   }
 
 }

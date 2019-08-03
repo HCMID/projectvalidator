@@ -19,13 +19,14 @@ import edu.holycross.shot.cite._
 *
 * @param cex CEX String for PaleographicObservations.
 */
-@JSExportAll case class PaleographyResults[PaleographicObservation](cex: String) extends TestResults[PaleographicObservation] {
+//@JSExportAll case class PaleographyResults[PaleographicObservation](cex: String) extends TestResults[PaleographicObservation] {
 
+@JSExportAll case class PaleographyResults[PaleographicObservation](cex: String) {
   /** Compose report on results.*/
-  def mdReport : String = {
+  def mdReport[PaleographicObservation] : String = {
     "TBD"
   }
-  
+
   /** Recursively extract syntactically valid paleographic observations
   * from a Vector of CEX strings.
   *
@@ -71,7 +72,9 @@ import edu.holycross.shot.cite._
   * of [[PaleographicObservation]]s.
   */
   def good: Vector[PaleographicObservation] = {
-    extractGood(cex.split("\n").toVector, Vector.empty[PaleographicObservation])
+    val res: Vector[PaleographicObservation] = extractGood(cex.split("\n").toVector, Vector.empty[PaleographicObservation])
+
+    res
   }
 
   /** Recursively identify syntactically invalid paleographic observations
@@ -115,7 +118,7 @@ import edu.holycross.shot.cite._
   }
 
   /** Implementation of required [[TestResults]] function.*/
-  def bad:  Vector[String] = {
+  def bad[PaleographicObservation]:  Vector[String] = {
     extractBad(cex.split("\n").toVector, Vector.empty[String])
   }
 

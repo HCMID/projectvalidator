@@ -23,19 +23,19 @@ class DseReporterSpec extends FlatSpec {
 
   val corpus = TextRepositorySource.fromFiles(txtCatalog, txtConfig, txtDir).corpus
 
-  "A DseReporter" should "do things" in {
+  "A DseReporter" should "do things" in  pending /*{
     val pg = Cite2Urn("urn:cite2:hmt:e3.v1:109v")
-    val reporter = DseReporter(pg, iliaddse, corpus,readersDummy )
+    val reporter = DseReporterDeprecated(pg, iliaddse, corpus,readersDummy )
 
     val corpusUrns = (corpus.nodes.map(_.urn))
     assert(reporter.missingPassages.isEmpty)
-  }
+  }*/
 
-  it should "handle a range of pages" in {
+  it should "handle a range of pages" in pending/*{
       val pgs = Cite2Urn("urn:cite2:hmt:e3.v1:109v-110r")
-      val reporter = DseReporter(pgs, iliaddse, corpus,readersDummy )
+      val reporter = DseReporterDeprecated(pgs, iliaddse, corpus,readersDummy )
       assert(reporter.missingPassages.isEmpty)
-  }
+  }*/
 
   it should "format a markdown string for a passage view of a given CtsUrn" in pending /* {
       val txtDir = "jvm/src/test/resources/iliadsample/editions"
@@ -46,7 +46,7 @@ class DseReporterSpec extends FlatSpec {
       val dse = DseSource.fromTriplesFile(dseCex,dummyCollection)
       val pg = Cite2Urn("urn:cite2:hmt:e3.v1:109v")
       val readers = Vector(ReadersPairing(CtsUrn("urn:cts:greekLit:tlg0012:"), MidVerseLReader.readers))
-      val reporter = DseReporter(pg, dse, iliadCorpus,readers)
+      val reporter = DseReporterDeprecated(pg, dse, iliadCorpus,readers)
       val u = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.e3:9.2")
       val md = reporter.passageMarkdown(u)
       val expected = """θεσπεσίη ἔχε φύζα φόβου κρυόεντος ἑταίρη-  (*urn:cts:greekLit:tlg0012.tlg001.e3:9.2*)  [![image](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/hmt/e3bifolio/v1/E3_109v_110r.tif&RGN=0.2427,0.3426,0.2094,0.02245&WID=1000&CVT=JPEG)](http://www.homermultitext.org/ict2/?urn=urn:cite2:hmt:e3bifolio.v1:E3_109v_110r@0.2427,0.3426,0.2094,0.02245)"""
@@ -74,7 +74,7 @@ class DseReporterSpec extends FlatSpec {
 
       val readers = Vector(ReadersPairing(CtsUrn("urn:cts:greekLit:tlg0012:"), MidVerseLReader.readers))
 
-      val reporter = DseReporter(pg, dse, iliadCorpus,readers )
+      val reporter = DseReporterDeprecated(pg, dse, iliadCorpus,readers )
       //println("Indexed in DSE:")
       //println(dse.passages.map(_.passage).mkString("\n"))
       val lines = reporter.passageView.split("\n").filter(_.nonEmpty)
@@ -82,7 +82,7 @@ class DseReporterSpec extends FlatSpec {
       assert(lines.size == expectedEntries)
   }
 */
-  it should "report on completeness of coverage in DSE" in {
+  it should "report on completeness of coverage in DSE" in pending /*{
     val txtDir = "jvm/src/test/resources/iliadsample/editions"
     val txtCatalog = s"${txtDir}/catalog.cex"
     val txtConfig = s"${txtDir}/citation.cex"
@@ -101,7 +101,7 @@ class DseReporterSpec extends FlatSpec {
 
     val readers = Vector(ReadersPairing(CtsUrn("urn:cts:greekLit:tlg0012:"), MidVerseLReader.readers))
 
-    val reporter = DseReporter(pg, dse, iliadCorpus,readers )
+    val reporter = DseReporterDeprecated(pg, dse, iliadCorpus,readers )
     println("COMPLETENESS:  \n" + reporter.dseCompleteness)
-  }
+  }*/
 }

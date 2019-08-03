@@ -14,6 +14,12 @@ import scala.scalajs.js.annotation._
   orthoPairings: Vector[OrthoPairing])
  {
 
+   /** Short-hand access to library's text corpus.*/
+   lazy val corpus = library.textRepository.get.corpus
+
+
+   /** Library must implement the DSE model in at least one collection.*/
+   lazy val dsev = DseVector.fromCiteLibrary(library)
 
 
   /** Lookup list of MidMarkupReader's by identifying String.
@@ -42,7 +48,7 @@ import scala.scalajs.js.annotation._
 */
 
 
-
+  /** Validate a series of surfaces.*/
   def validate(surfaceRange: Vector[Cite2Urn]): Unit = {
     for (surface <- surfaceRange)  {
       validate(surface)
@@ -55,9 +61,20 @@ import scala.scalajs.js.annotation._
   */
   def validate(surface: Cite2Urn) : Unit = {
     // 1.  determine if urn is a leaf node, container, or range.
+    require(surface.objectParts.nonEmpty,"Current version of DseResults does not operate on entire collections, only single surfaces. Unable to process URN " + surface)
+
+    require(surface.isRange == false, "Current version of DseResults does not operate on ranges, only single surfaces. Unable to process URN " + surface)
+
+
     // 2. For each leaf node:
     //
     // a. DSE validation
+    //
+    val dsePassageList = dsev.passages.filter(_.surface == surface)
+    val dseResults : DseResults[DsePassage] = DseResults(corpus)
+    for (dsePsg <- dsePassageList) {
+      println(dseResults.good(dsePsg))
+    }
     // b. orthography validation
   }
 }
