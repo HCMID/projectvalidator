@@ -22,13 +22,37 @@ import scala.scalajs.js.annotation._
   * a given DsePassage against the current Corpus.
   */
   def good(dsePassage: T): Boolean = {
-    // if long is goodj...
-    println(dsePassage)
-    true
+    dsePassage match {
+      case dse: DsePassage => {
+        val matches = corpus ~~ dse.passage
+        if (matches.isEmpty) {
+          false
+        } else {
+          true
+        }
+      }
+      case _ => false
+    }
   }
 
   /** Implementation of required [[TestResults]] function.*/
   def report(dsePassage: T):  TestReport = {
+    dsePassage match {
+      case dse: DsePassage => {
+        good(dsePassage) match {
+          case true => {
+            TestReport(true, "We're happy")
+          }
+          case false => {
+            TestReport(false, "We're sad")
+          }
+        }
+      }
+      case _ => TestReport(false, s"Failed: object not a DsePassage:  " + dsePassage)
+    }
+
+
+
     //dseObservations.filter(_.valid == false).map(_.note)
     TestReport(good(dsePassage), "Report on " + dsePassage)
   }
