@@ -22,7 +22,19 @@ import edu.holycross.shot.ohco2._
           }
         }
       }
-      case false => TestReport(false,s"This passage could not be tokenized using the specified orthographic system (tested with ${ortho}): " + citableNode)
+      case false => {
+        citableNode match {
+          case cn: CitableNode => {
+            if (ortho.validString(cn.text)) {
+              TestReport(false,s"This passage could not be tokenized using the specified orthography: " + cn.text)
+            } else {
+                TestReport(false,s"This passage could not be tokenized because there were invalid characters in " + cn.text)
+            }
+
+          }
+        }
+      }
+
     }
   }
 
@@ -33,7 +45,9 @@ import edu.holycross.shot.ohco2._
       case cn: CitableNode =>  {
         val tokens = ortho.tokenizeNode(cn)
         val badTokens = tokens.filter(_.tokenCategory == None)
-        badTokens.isEmpty
+        println(s"All text OK in ${cn.text}? " + ortho.validString(cn.text))
+        println("Tokens OK? " + badTokens.isEmpty)
+        badTokens.isEmpty && ortho.validString(cn.text)
         //ortho.validString(s)
       }
 
