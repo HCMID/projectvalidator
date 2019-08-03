@@ -37,8 +37,10 @@ object Latin23 extends MidOrthography {
   val interrogation = 0x3f
   /** Semicolon. */
   val semicolon = 0x3b
+  /** Comma. */
+  val comma = 0x2c
   /** Collection of punctuation characters.*/
-  val punctuation:  Vector[Int] = Vector(period, hyphen, interrogation, semicolon)
+  val punctuation:  Vector[Int] = Vector(period, hyphen, interrogation, semicolon, comma)
 
 
   val consonants = "sxnytfmqbglpchrkzd"
