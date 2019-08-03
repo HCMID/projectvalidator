@@ -40,7 +40,7 @@ object Latin23 extends MidOrthography {
   val vowelCPs =   for (v <- vowels) yield { v.toInt}
   val vcs = "ui"
   val vcCPs = for (ltr <- vcs) yield { ltr.toInt}
-  val alphabetic = vowelCPs.toVector ++ vcCPs.toVector
+  val alphabetic = consonantCPs.toVector ++ vowelCPs.toVector ++ vcCPs.toVector
 
   /** All valid code points. */
   val cpList:  Vector[Int] =  whiteSpace ++ punctuation ++ alphabetic

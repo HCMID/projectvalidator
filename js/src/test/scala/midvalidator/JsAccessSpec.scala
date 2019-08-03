@@ -19,6 +19,7 @@ class JsAccessSpec extends FlatSpec {
     val expectedTypes = Vector(PraenomenToken, PunctuationToken, LexicalToken, NumericToken)
     assert(expectedTypes == Latin23.tokenCategories)
   }
+
   it should "expose orthography pairings" in  {
     val expectedTypes = Vector(PraenomenToken, PunctuationToken, LexicalToken, NumericToken)
     val pairing = OrthoPairing(CtsUrn("urn:cts:omar:stoa0179.stoa001:"), Latin23)
@@ -33,6 +34,8 @@ class JsAccessSpec extends FlatSpec {
     val cps = Latin23.strToCps("abc")
     val expected = Vector(97, 98, 99)
     assert(cps == expected)
+
+    assert(Latin23.validString("ius belli")) 
   }
 
   it should "expose MidToken" in {

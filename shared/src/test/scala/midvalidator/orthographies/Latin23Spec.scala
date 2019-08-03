@@ -19,6 +19,9 @@ class Latin23Spec extends FlatSpec {
     val tokenCorpus = Latin23.tokenizedCorpus(sourceCorpus)
     val expectedTokens = 32
     assert(tokenCorpus.size == expectedTokens)
-
   }
+  it should "evaluate valid strings" in {
+    assert(Latin23.validString("ius belli"))  
+  }
+
 }

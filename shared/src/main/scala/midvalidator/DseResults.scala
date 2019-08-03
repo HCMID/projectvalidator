@@ -20,8 +20,8 @@ import scala.scalajs.js.annotation._
 
 
 
-  /** Implementation of required [[TestResults]] function as a Vector
-  * of [[DseObservation]]s.
+  /** Implementation of required [[TestResults]] function to evaluate
+  * a given DsePassage against the current Corpus.
   */
   def good(dsePassage: T): Boolean = {
     // if long is goodj...

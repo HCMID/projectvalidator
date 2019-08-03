@@ -11,6 +11,11 @@ import edu.holycross.shot.cite._
 */
 @JSExportAll case class PaleographyResults[T](cex: String) extends TestResults[T] {
 
+  /** Implementation of required [[TestResults]] function to evaluate
+  * a given String as a valid PaleographicObservation.
+  *
+  * @param paleoCex "#"-delimited String with paleographic observation.
+  */
   def report(paleoCex: T):  TestReport = {
     good(paleoCex) match {
       case true =>    {
@@ -54,12 +59,16 @@ import edu.holycross.shot.cite._
     }
   }
 
+
 /*
   def reportAll:  Vector[TestReport] = {
-    val reports = for (ln <- cex.split("\n")) yield {
-      report(ln)
+    val lines : Vector[String] = cex.split("\n").toVector
+    val reports = for (ln <- lines) yield {
+      val rept = report(T)
+      println(rept)
+      rept
     }
-    reports.toVector
+    reports
   }*/
 
 /*

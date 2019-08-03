@@ -2,7 +2,7 @@ package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
 import scala.collection.immutable.ListMap
-//import scala.scalajs.js.annotation._
+import scala.scalajs.js.annotation._
 
 /** An orthographic system
 */
@@ -19,13 +19,13 @@ trait MidOrthography {
   *
   * @param s String to test.
   */
-  def validString(s: String): Boolean = {
+  @JSExport def validString(s: String): Boolean = {
     val tf = strToCps(s).map(validCP(_)).distinct
     ((tf.size == 1) && (tf(0) == true))
   }
 
   /** Turn a string into a Vector of code points. */
-	def strToCps(s: String, cpVector: Vector[Int] = Vector.empty[Int], idx : Int = 0) : Vector[Int] = {
+	@JSExport  def strToCps(s: String, cpVector: Vector[Int] = Vector.empty[Int], idx : Int = 0) : Vector[Int] = {
 		if (idx >= s.length) {
 			cpVector
 		} else {
@@ -50,7 +50,7 @@ trait MidOrthography {
   *
   * @param c Corpus to tokenize.
   */
-  def tokenizeCorpus(c: Corpus): Vector[MidToken] = {
+  @JSExport  def tokenizeCorpus(c: Corpus): Vector[MidToken] = {
     val tokens = for (n <- c.nodes) yield {
       tokenizeNode(n)
     }
@@ -61,7 +61,7 @@ trait MidOrthography {
   *
   * @param c Source corpus to analyze.
   */
-  def tokenizedCorpus(c: Corpus): Corpus = {
+  @JSExport def tokenizedCorpus(c: Corpus): Corpus = {
     def tokens = tokenizeCorpus(c)
     Corpus(tokens.map(_.citableNode))
   }
@@ -69,7 +69,7 @@ trait MidOrthography {
 }
 
 /** Singleton object for operating on vectors of [MidToken]s. */
-object MidOrthography {
+@JSExportAll object MidOrthography {
 
 
   /** Generate sorted, unique list of  vocabulary items.
