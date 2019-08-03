@@ -35,7 +35,7 @@ class JsAccessSpec extends FlatSpec {
     val expected = Vector(97, 98, 99)
     assert(cps == expected)
 
-    assert(Latin23.validString("ius belli")) 
+    assert(Latin23.validString("ius belli"))
   }
 
   it should "expose MidToken" in {
@@ -49,5 +49,7 @@ class JsAccessSpec extends FlatSpec {
     val hist = TokenHistogram(tokenVector)
     assert(hist.tokens.size == 1)
   }*/
+
+  it should "expose concrete methods of the markup reader trait" in pending
 
 }

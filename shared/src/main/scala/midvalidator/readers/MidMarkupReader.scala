@@ -2,7 +2,7 @@ package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
 
-//import scala.scalajs.js.annotation._
+import scala.scalajs.js.annotation._
 
 /** A class capable of reading marked up archival
 * editions, and creating editions of specified types.
@@ -23,7 +23,7 @@ trait MidMarkupReader {
   * @param cexNode CEX String for a single node in
   * archival format.
   */
-  def editedNodeCex(cn: CitableNode, separator: String = "#"):  String = {
+    @JSExport def editedNodeCex(cn: CitableNode, separator: String = "#"):  String = {
     val editionNode = editedNode(cn)
     editionNode.urn.toString + separator + editionNode.text
   }
@@ -45,7 +45,7 @@ trait MidMarkupReader {
   * in archival representation.
   * @param srcUrn `CtsUrn` for the citable node.
   */
-  def editedNodeCex(srcUrn: CtsUrn, archival: String): String = {
+  @JSExport def editedNodeCex(srcUrn: CtsUrn, archival: String): String = {
     editedNodeCex(CitableNode(srcUrn, archival))
   }
 
@@ -57,7 +57,7 @@ trait MidMarkupReader {
   * in archival representation.
   * @param srcUrn `CtsUrn` for the citable node.
   */
-  def editedNode(srcUrn: CtsUrn, archival: String): CitableNode = {
+  @JSExport def editedNode(srcUrn: CtsUrn, archival: String): CitableNode = {
     editedNode(CitableNode(srcUrn, archival))
   }
 
@@ -68,7 +68,7 @@ trait MidMarkupReader {
   * @param cexNode CEX String for a single node in
   * archival format.
   */
-  def editedNodeCex(cexNode: String):  String = {
+  @JSExport def editedNodeCex(cexNode: String):  String = {
     val cols = cexNode.split("#")
     val urn = CtsUrn(cols(0))
     editedNodeCex(urn, cols(1))
@@ -81,7 +81,7 @@ trait MidMarkupReader {
   * @param cexNode CEX String for a single node in
   * archival format.
   */
-  def editedNode(cexNode: String): CitableNode = {
+  @JSExport def editedNode(cexNode: String): CitableNode = {
     val cols = cexNode.split("#")
     val urn = CtsUrn(cols(0))
     editedNode(urn, cols(1))
@@ -97,7 +97,7 @@ trait MidMarkupReader {
   * @param cex CEX String of text(s) in archival
   * format.
   */
-  def editionCex(cex: String): String = {
+  @JSExport def editionCex(cex: String): String = {
     val cexNodes = for (ln <- cex.split("\n")) yield {
       editedNodeCex(ln)
     }
@@ -110,7 +110,7 @@ trait MidMarkupReader {
   *
   * @param corpus A Corpus in archival format.
   */
-  def edition(corpus: Corpus) : Corpus = {
+  @JSExport def edition(corpus: Corpus) : Corpus = {
     val nodes = for (n <- corpus.nodes) yield {
       editedNode(n)
     }
