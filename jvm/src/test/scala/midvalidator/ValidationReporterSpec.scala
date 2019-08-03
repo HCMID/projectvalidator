@@ -37,7 +37,7 @@ class ValidationReporterSpec extends FlatSpec {
     expectedDir.delete()
   }
  */
-  it should "write a DSE report" in pending/* {
+  it should "write a DSE report" in pending /* {
     val repo = EditorsRepo("jvm/src/test/resources/iliadsample")
     val reportsDir = nameBetterFile(repo.validationDir, "e3-109v")
     if (reportsDir.exists) { reportsDir.delete() }

@@ -33,7 +33,7 @@ case class Validator(
 
 
   /** Create a corpus of XML archival editions.
-  */
+
   def raw : Corpus = {
     val catalog = catalogOption match {
       case None => repo.ctsCatalog.toString
@@ -51,19 +51,19 @@ case class Validator(
     println("Creating repo in " + dirName + "using cat. " + catalog + " and citeconfig " + citation)
     TextRepositorySource.fromFiles(catalog, citation, dirName).corpus
   }
-
+  */
   /** CEX records for paleographic observations.
   *  We want data lines only, so drop 1 header line.
   */
   def paleoCex = DataCollector.compositeFiles(repo.paleographyDir.toString, "cex", 1)
 
-  /** CEX library header data.*/
+  /** CEX library header data.
   val libHeader = DataCollector.compositeFiles(repo.libHeadersDir.toString, "cex")
-
-  /** CEX data for DSE relations.*/
+*/
+  /** CEX data for DSE relations.
   val dseCex = DataCollector.compositeFiles(repo.dseDir.toString, "cex")
-
-  /** Construct DseVector for this repository's records. */
+*/
+  /** Construct DseVector for this repository's records.
   def dse:  DseVector = {
     val records = dseCex.split("\n").filter(_.nonEmpty).filterNot(_.contains("passage#")).toVector
     // This value must agree with header data in header/1.dse-prolog.cex.
@@ -80,7 +80,7 @@ case class Validator(
       dsv
     }
   }
-
+ */
 /*
   def publishTexts = {
 

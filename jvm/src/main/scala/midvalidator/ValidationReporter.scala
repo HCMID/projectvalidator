@@ -15,20 +15,20 @@ import better.files.Dsl._
 
 /**
 */
-case class ValidationReporter(midValidator: Validator) {
+case class ValidationReporter(midValidator: MidValidator) {
 
-  val outputDir = midValidator.repo.validationDir
+  //val outputDir = midValidator.repo.validationDir
 
   // compute these once:
-  def dse = midValidator.dse
-  def corpus = midValidator.raw
+  //def dse = midValidator.dse
+  //def corpus = midValidator.raw
   //def paleoResults = PaleographyResults(midValidator.paleoCex)
 
 
   /** Select a corpus by page reference.
   *
   * @param pg Page to select texts for.
-  */
+
   def corpusForPage(pg: Cite2Urn) = {
     //These are unsorted!
     val textUrns = dse.textsForTbs(pg).toVector
@@ -51,7 +51,7 @@ case class ValidationReporter(midValidator: Validator) {
 
     singleCorpus
   }
-
+*/
   def psgView(pageUrn: String) = {
     /*
       try {
@@ -85,7 +85,7 @@ case class ValidationReporter(midValidator: Validator) {
         }*/
   }
 
-
+/*
   def directoryForSurface(surf: Cite2Urn) : File = {
     val dirName = surf.collection + "-" + surf.objectComponent
     val surfaceDirectory = outputDir/dirName
@@ -94,7 +94,7 @@ case class ValidationReporter(midValidator: Validator) {
     }
     mkdirs(surfaceDirectory)
     surfaceDirectory
-  }
+  }*/
 
   /** Write suite of markdown reports to validate and
   * verify editorial work on a single page.

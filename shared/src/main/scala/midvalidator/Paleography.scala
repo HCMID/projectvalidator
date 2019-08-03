@@ -9,22 +9,22 @@ import edu.holycross.shot.cite._
 * @param img: Visual evidence for the reading (image including region of interest).
 */
 @JSExportAll case class PaleographicObservation(reading: CtsUrn, img: Cite2Urn) {
-  /** Format pair for CEX. */
+  /** Format pair for CEX.
   def cex :  String = {
     reading + "#" + img
-  }
+  }*/
 }
 
-/** Implementation of [[TestResults]] for [[PaleographicObservation]].
+/** Implementation of [[TestResults]] for PaleographicObservation.
+* Validate PaleographicObservation records against a CEX source.
 *
 * @param cex CEX String for PaleographicObservations.
 */
-//@JSExportAll case class PaleographyResults[PaleographicObservation](cex: String) extends TestResults[PaleographicObservation] {
+@JSExportAll case class PaleographyResults[T](cex: String) {//extends TestResults[T] {
 
-@JSExportAll case class PaleographyResults[PaleographicObservation](cex: String) {
   /** Compose report on results.*/
-  def mdReport[PaleographicObservation] : String = {
-    "TBD"
+  def report[PaleographicObservation] : String = {
+    ""
   }
 
   /** Recursively extract syntactically valid paleographic observations
@@ -71,10 +71,19 @@ import edu.holycross.shot.cite._
   /** Implementation of required [[TestResults]] function as a Vector
   * of [[PaleographicObservation]]s.
   */
-  def good: Vector[PaleographicObservation] = {
+  def goodX: Vector[PaleographicObservation] = {
     val res: Vector[PaleographicObservation] = extractGood(cex.split("\n").toVector, Vector.empty[PaleographicObservation])
 
     res
+  }
+  def report(paleoObservation: T):  TestReport = {
+    TestReport(true, "Obs: " + paleoObservation)
+  }
+
+  def good(paleoObservation: T): Boolean = {
+    // if long is goodj...
+    println(paleoObservation)
+    true
   }
 
   /** Recursively identify syntactically invalid paleographic observations
