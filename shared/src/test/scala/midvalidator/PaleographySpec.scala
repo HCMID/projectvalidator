@@ -22,22 +22,27 @@ urn:cite2:op:208v:8#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ο[3]#ur
 urn:cite2:op:208v:9#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@γ#urn:cite2:hmt:vaimg.2017a:VA208VN_0710@0.5892,0.2433,0.01013,0.01494#
 urn:cite2:op:208v:10#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ε[2]#urn:cite2:hmt:vaimg.2017a:VA208VN_0710@0.5980,0.2407,0.01013,0.01494#
 """
-  "The PaleographyResults object" should "implement the TestResults trait's good function" in {
-    val testOutput = PaleographyResults(tenGoodCex)
-    //assert(testOutput.good.size == 10)
-    //assert(testOutput.bad.size == 0)
-    println("SPEC'ING OUT " + testOutput)
+  "A PaleographyResults" should "use the report function to report on a single line of CEX source" in {
+    val palResults :  PaleographyResults[String] = PaleographyResults(tenGoodCex)
+    val oneLine = "urn:cite2:op:208v:1#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ο#urn:cite2:hmt:vaimg.2017a:VA208VN_0710@0.4959,0.2445,0.01474,0.01355#"
+    val rept = palResults.report(oneLine)
+    assert(rept.success)
+
   }
-  it should "generate error messages for bad entries" in {
+
+  it should "implement the TestResults trait's good function" in {
+    val palResults :  PaleographyResults[String] = PaleographyResults(tenGoodCex)
+    val oneLine = "urn:cite2:op:208v:1#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ο#urn:cite2:hmt:vaimg.2017a:VA208VN_0710@0.4959,0.2445,0.01474,0.01355#"
+    assert(palResults.good(oneLine))
+  }
+
+  it should "identify bad entries" in {
     val badCex = "Not a URN#Bad value"
+    val palResults :  PaleographyResults[String] = PaleographyResults(badCex)
 
+    assert(palResults.good(badCex) == false)
+    val expectedMsg = "Unable to form valid paleographic observation from String Not a URN#Bad value"
+    assert(palResults.report(badCex).summary == expectedMsg)
 
-    val testOutput : PaleographyResults[PaleographicObservation] = PaleographyResults(badCex)
-    println("SPEC'ING OUT " + testOutput)
-    /*
-    val errList = testOutput.bad
-    assert(errList.size == 1)
-    println(errList(0))
-    */
   }
 }

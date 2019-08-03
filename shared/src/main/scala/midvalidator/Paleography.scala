@@ -3,197 +3,85 @@ import scala.scalajs.js.annotation._
 
 import edu.holycross.shot.cite._
 
-/** A paleographic observation of a single glyph.
-*
-* @param reading Reading of text of a single glyph (including subreference with text of reading)
-* @param img: Visual evidence for the reading (image including region of interest).
-*/
-@JSExportAll case class PaleographicObservation(reading: CtsUrn, img: Cite2Urn) {
-  /** Format pair for CEX.
-  def cex :  String = {
-    reading + "#" + img
-  }*/
-}
+@JSExportAll case class PaleographicObservation(reading: CtsUrn, image: Cite2Urn)
 
-/** Implementation of [[TestResults]] for PaleographicObservation.
-* Validate PaleographicObservation records against a CEX source.
+/** Implementation of [[TestResults]] for Strings with paleographic observations.
 *
 * @param cex CEX String for PaleographicObservations.
 */
-@JSExportAll case class PaleographyResults[T](cex: String) {//extends TestResults[T] {
+@JSExportAll case class PaleographyResults[T](cex: String) extends TestResults[T] {
 
-  /** Compose report on results.*/
-  def report[PaleographicObservation] : String = {
-    ""
+  def report(paleoCex: T):  TestReport = {
+    good(paleoCex) match {
+      case true =>    {
+        paleoCex match {
+          case s: String => {
+            val cols = s.split("#")
+            val observation = PaleographicObservation(CtsUrn(cols(1)), Cite2Urn(cols(2)))
+            TestReport(true, "Valid paleographic observation " + observation)
+          }
+        }
+
+      }
+      case false => TestReport(false,"Unable to form valid paleographic observation from String " + paleoCex)
+    }
   }
 
-  /** Recursively extract syntactically valid paleographic observations
-  * from a Vector of CEX strings.
+  /** Implement required good function of TestResults trait for
+  * String parameter.
   *
-  * @param lines Strings representing a paleographic observation as
-  * `#`-delimited text.
-  * @param observations Previously seen paleographic observations.
+  * @param paleoCex "#"-delimited String with paleographic observation.
   */
-  def extractGood(
-      lines: Vector[String],
-      observations: Vector[PaleographicObservation]) :
-      Vector[PaleographicObservation]= {
+  def good(paleoCex: T): Boolean = {
+    paleoCex match {
+      case s: String =>  {
+        val cols = s.split("#")
+        try {
+          val reading = CtsUrn(cols(1))
+          val img = Cite2Urn(cols(2))
+          // check img for RoI?
+          // check text for extended reference?
+          true
+        } catch {
+          case _ : Throwable => false
+        }
+      }
 
+      case _ => {
+        println(s"${paleoCex}  was NOT a string")
+        false
+      }
+    }
+  }
 
+/*
+  def reportAll:  Vector[TestReport] = {
+    val reports = for (ln <- cex.split("\n")) yield {
+      report(ln)
+    }
+    reports.toVector
+  }*/
+
+/*
+  def observationResults(
+    lines: Vector[String],
+    observations: Vector[ObservationResult]) : Vector[ObservationResult] = {
     if (lines.isEmpty) {
       observations
 
     } else {
-
-
       val cols = lines.head.split("#").toVector
       try {
         val reading = CtsUrn(cols(1))
         val img = Cite2Urn(cols(2))
-        val observed = observations :+ PaleographicObservation(reading,img)
-        observed match {
-          case v: Vector[PaleographicObservation] => {
-            extractGood(lines.tail, v)
-          }
-          case _ => {
-            println("Paleography, extractGood:  something is wrong.  Vector is NOT a Vector of observations?")
-            extractGood(lines.tail,observations)
-          }
-        }
-
+        val observed = observations :+ ObservationResult(Some(PaleographicObservation(reading,img)), "")
+        observationResults(lines.tail, observed)
 
       } catch {
-        case t: Throwable => extractGood(lines.tail, observations)
+        case t: Throwable =>
+        val observed = observations :+ ObservationResult(None, "Unable to validate observation: " + lines.head)
+        observationResults(lines.tail, observed)
       }
     }
-  }
-
-  /** Implementation of required [[TestResults]] function as a Vector
-  * of [[PaleographicObservation]]s.
-  */
-  def goodX: Vector[PaleographicObservation] = {
-    val res: Vector[PaleographicObservation] = extractGood(cex.split("\n").toVector, Vector.empty[PaleographicObservation])
-
-    res
-  }
-  def report(paleoObservation: T):  TestReport = {
-    TestReport(true, "Obs: " + paleoObservation)
-  }
-
-  def good(paleoObservation: T): Boolean = {
-    // if long is goodj...
-    println(paleoObservation)
-    true
-  }
-
-  /** Recursively identify syntactically invalid paleographic observations
-  * from a Vector of CEX strings and compose error messages.
-  *
-  * @param lines Strings representing a paleographic observation as
-  * `#`-delimited text.
-  * @param observations Previously seen paleographic observations.
-  */
-  def extractBad(
-    lines: Vector[String],
-    errors: Vector[String]): Vector[String] = {
-
-    if (lines.isEmpty) {
-      errors
-
-    } else {
-      val cols = lines.head.split("#").toVector
-      try {
-        val reading = CtsUrn(cols(1))
-        val img = Cite2Urn(cols(2))
-        extractBad(lines.tail,errors)
-
-      } catch {
-        case t: Throwable => {
-          val msg = "Error on paleographic observation:\n\t" + lines.head + "\n" + t.toString
-          val msgs = errors :+ msg
-          msgs match {
-            case v: Vector[String] => {
-              extractBad(lines.tail,v)
-            }
-            case _ => {
-              println("Error processing error message!  This is not a Vector of Strings:\n" + msgs)
-              extractBad(lines.tail,errors)
-            }
-          }
-
-        }
-      }
-    }
-  }
-
-  /** Implementation of required [[TestResults]] function.*/
-  def bad[PaleographicObservation]:  Vector[String] = {
-    extractBad(cex.split("\n").toVector, Vector.empty[String])
-  }
-
-  /** Compose markdown report for verifying paleographic
-  * observations for a single page.
-  *
-  * @param pg Page to examine.
-  * @param observations Paelographic observations to display.
-  * @param baseUrl ICT2 location.
-
-  def pageVerification(pg: Cite2Urn, observations: Vector[PaleographicObservation], baseUrl: String): String = {
-    val bldr = StringBuilder.newBuilder
-    bldr.append(s"\n\n## Human verification of paelographic observations for ${pg.collection}, page ${pg.objectComponent}\n\n###  Completeness\n\n")
-
-    bldr.append(s"To check for **completeness** of coverage, please review these visualizations of paleographic observations in ICT2:\n\n")
-
-
-    val rois = observations.map(_.img)
-    val link = if (rois.size > 0) {
-      baseUrl + "?urn=" + rois.mkString("&urn=")
-    } else {
-      baseUrl
-    }
-    bldr.append(s"-  [${pg.objectComponent}](${link})\n\n")
-
-
-    bldr.append("## Correctness\n\n")
-    bldr.append("To check for **correctness** of indexing, please verify that text transcriptions and images agree:\n\n")
-    val imgmgr = ImageManager()
-
-    bldr.append("| Image     | Reading     |\n| :------------- | :------------- |\n")
-    val rows = for (obs <- observations) yield {
-      "| " + imgmgr.markdown(obs.img) + " | " + obs.reading + " |"
-    }
-    bldr.append(rows.mkString("\n") + "\n")
-    bldr.toString
-  }
-  */
-  /** Write a markdown file summarizing validation for a page.
-  *
-  * @param img Reference image for the page.
-  * @param pg Page to report on individually.
-  * @param rslts Results of paleographic observations.
-
-  def pageReport(img: Cite2Urn, pg: Cite2Urn, rslts:  TestResults[PaleographicObservation]): String = {
-    val md = StringBuilder.newBuilder
-    md.append(s"# Validation of paleographic observations for "+ pg.collection + ", page " + pg.objectComponent + "\n\n")
-
-    val observations =rslts.good.filter(_.img ~~ img)
-    md.append("Total observations on this page: " + observations.size +  "\n")
-
-
-    md.append("\n## Profile of entire repository\n")
-    md.append("Synatically valid observations:  " + rslts.good.size + "\n")
-    md.append("Observations with syntax errors:  " + rslts.bad.size + "\n")
-
-
-    if (rslts.bad.nonEmpty) {
-      md.append("\n##Errors\n\n")
-      val errList = for (err <- rslts.bad) yield {
-        "-  " + err + "\n"
-      }
-      md.append(errList.mkString)
-    }
-
-    md.toString
-  }
-  */
+  } */
 }
