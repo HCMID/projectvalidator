@@ -4,7 +4,6 @@ import org.scalatest.FlatSpec
 import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
 
-import scala.io.Source
 
 
 class PaleographySpec extends FlatSpec {
@@ -23,7 +22,7 @@ urn:cite2:op:208v:9#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@γ#urn:c
 urn:cite2:op:208v:10#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ε[2]#urn:cite2:hmt:vaimg.2017a:VA208VN_0710@0.5980,0.2407,0.01013,0.01494#
 """
   "A PaleographyResults" should "use the report function to report on a single line of CEX source" in {
-    val palResults :  PaleographyResults[String] = PaleographyResults(tenGoodCex)
+    val palResults :  PaleographyResults[String] = new PaleographyResults
     val oneLine = "urn:cite2:op:208v:1#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ο#urn:cite2:hmt:vaimg.2017a:VA208VN_0710@0.4959,0.2445,0.01474,0.01355#"
     val rept = palResults.report(oneLine)
     assert(rept.success)
@@ -31,18 +30,33 @@ urn:cite2:op:208v:10#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ε[2]#u
   }
 
   it should "implement the TestResults trait's good function" in {
-    val palResults :  PaleographyResults[String] = PaleographyResults(tenGoodCex)
+    val palResults :  PaleographyResults[String] = new PaleographyResults
     val oneLine = "urn:cite2:op:208v:1#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ο#urn:cite2:hmt:vaimg.2017a:VA208VN_0710@0.4959,0.2445,0.01474,0.01355#"
     assert(palResults.good(oneLine))
   }
 
   it should "identify bad entries" in {
     val badCex = "Not a URN#Bad value"
-    val palResults :  PaleographyResults[String] = PaleographyResults(badCex)
+    val palResults :  PaleographyResults[String] = new PaleographyResults
 
     assert(palResults.good(badCex) == false)
     val expectedMsg = "Unable to form valid paleographic observation from String Not a URN#Bad value"
     assert(palResults.report(badCex).summary == expectedMsg)
+  }
+
+  it should "report on a Vector of Strings" in {
+    val lines = tenGoodCex.split("\n").toVector
+    val palResults :  PaleographyResults[String] = new PaleographyResults
+    val rept = palResults.reports(lines)
+
+    val expectedTotal = 10
+    assert(rept.size == expectedTotal)
+
+    val expectedSuccess = 10
+    assert(rept.filter(_.success).size == expectedSuccess)
+
+    val expectedFails = 0
+    assert(rept.filterNot(_.success).size == expectedFails)
 
   }
 }

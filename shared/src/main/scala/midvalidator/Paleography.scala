@@ -9,7 +9,7 @@ import edu.holycross.shot.cite._
 *
 * @param cex CEX String for PaleographicObservations.
 */
-@JSExportAll case class PaleographyResults[T](cex: String) extends TestResults[T] {
+@JSExportAll class PaleographyResults[T] extends TestResults[T] {
 
   /** Implementation of required [[TestResults]] function to evaluate
   * a given String as a valid PaleographicObservation.

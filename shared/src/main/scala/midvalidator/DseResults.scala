@@ -18,8 +18,6 @@ import scala.scalajs.js.annotation._
 */
 @JSExportAll case class DseResults[T](corpus: Corpus) extends TestResults[T] {
 
-
-
   /** Implementation of required [[TestResults]] function to evaluate
   * a given DsePassage against the current Corpus.
   */
