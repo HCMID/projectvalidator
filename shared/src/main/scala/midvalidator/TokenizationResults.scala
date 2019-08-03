@@ -45,10 +45,10 @@ import edu.holycross.shot.ohco2._
       case cn: CitableNode =>  {
         val tokens = ortho.tokenizeNode(cn)
         val badTokens = tokens.filter(_.tokenCategory == None)
-        println(s"All text OK in ${cn.text}? " + ortho.validString(cn.text))
-        println("Tokens OK? " + badTokens.isEmpty)
+        //println(s"All text OK in ${cn.text}? " + ortho.validString(cn.text))
+        //println("Tokens OK? " + badTokens.isEmpty)
         badTokens.isEmpty && ortho.validString(cn.text)
-        //ortho.validString(s)
+
       }
 
       case _ => {
@@ -56,5 +56,9 @@ import edu.holycross.shot.ohco2._
         false
       }
     }
+  }
+
+  def corpusReport = {
+
   }
 }
