@@ -4,6 +4,12 @@ import edu.holycross.shot.ohco2._
 import scala.scalajs.js.annotation._
 
 //@JSExportAll
+
+/** This is a simplistic toyt orthography system that can be used
+* in this project without invoking circular dependencies.  For a
+* real implementation of a Latin orthography comprisng 23 alphabetic
+* characters, see the `latphone` library.
+*/
 @JSExportTopLevel("Latin23")
 object Latin23 extends MidOrthography {
 
@@ -33,7 +39,6 @@ object Latin23 extends MidOrthography {
   val punctuation:  Vector[Int] = Vector(period, hyphen, interrogation)
 
 
-
   val consonants = "sxnytfmqbglpchrkzd"
   val consonantCPs = for (c <- consonants) yield { c.toInt }
   val vowels = "aeo"
@@ -44,7 +49,6 @@ object Latin23 extends MidOrthography {
 
   /** All valid code points. */
   val cpList:  Vector[Int] =  whiteSpace ++ punctuation ++ alphabetic
-
 
 
 
@@ -66,10 +70,21 @@ object Latin23 extends MidOrthography {
   * @param exemplarId Value to use for exemplar identifier in exemplar-level URN.
   */
   def tokenizeNode(n: CitableNode, exemplarId: String = "tkn"): Vector[MidToken] = {
-    val rawList =  n.text.split("\\s+").filter(_.nonEmpty)
+
+    val simplePunct = "([\\.;?,])".r
+    val punctList = "\\.;?,"
+    val rawList =  simplePunct.replaceAllIn(n.text," $1 ").split("\\s+").filter(_.nonEmpty)
     val raw = for ((t,count) <- rawList.zipWithIndex) yield {
       val psg = n.urn.passageComponent + "." + count
-      MidToken(n.urn.addExemplar(exemplarId).addPassage(psg),t, None)
+
+      // This is enormously simplistic, and solely for purposes of
+      // having an implementation of the MidOrthography trait for testing.
+      if (punctList.contains(t.trim)) {
+        MidToken(n.urn.addExemplar(exemplarId).addPassage(psg),t, Some(PunctuationToken))
+      } else {
+        MidToken(n.urn.addExemplar(exemplarId).addPassage(psg),t, Some(LexicalToken))
+      }
+
     }
     raw.toVector
   }
