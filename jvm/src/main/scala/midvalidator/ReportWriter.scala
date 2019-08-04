@@ -11,8 +11,8 @@ import better.files.Dsl._
 * @param validationDir Writable directory for validation reports.
 */
 case class ReportWriter(validationDir: File)  {
+  //if (! validationDir.exists) {mkdirs(validationDir)}
   require(validationDir.exists, "Valdiation directory not found: " + validationDir)
-
 
   /** Write markdown content of a single [[ReportPage]] to
   * file using suggested name.
@@ -20,14 +20,16 @@ case class ReportWriter(validationDir: File)  {
   * @param reportPage [[ReportPage]] to write to file.
   */
   def writeReport(reportPage: ReportPage) : Unit = {
-    //println("TItle is " + reportPage.title)
+    //println("Title is " + reportPage.title)
     //println("File name " + reportPage.suggestedFileName)
     //println("Write this markdown content:\n" + reportPage.markdown)
 
     val outFile = validationDir/reportPage.suggestedFileName
+    val parentDir = outFile / ".."
+    if (!parentDir.exists) {mkdirs(parentDir)}
+
     outFile.overwrite(reportPage.markdown)
     println(s"\nReport '${reportPage.title.trim}' written to file:\n==>" + outFile + "\n")
-
   }
 
   /** Write markdown content of a series of [[ReportPage]]s to

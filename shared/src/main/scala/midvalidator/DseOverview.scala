@@ -9,7 +9,16 @@ import edu.holycross.shot.scm._
 
 import scala.scalajs.js.annotation._
 
-/**
+
+// In summary page, report on validation details +
+// verification of completeness of coverage.
+//
+// In seeparate page, report on verification of
+// correctness of transcription mapping
+
+/** Class for compiling reporting on DSE validation and verification.
+*
+* @param lib CiteLibrary to use in DSE validation.
 */
 @JSExportAll case class DseOverview(lib: CiteLibrary) extends ReportOverview {
   lazy val dse = DseVector.fromCiteLibrary(lib)
@@ -31,7 +40,7 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def failures(surface: Cite2Urn): Int = {
-    pageReports(surface).filter(_.success == false).size
+    pageTestReports(surface).filter(_.success == false).size
   }
 
   /** Number of successful tests for a specified surface.
@@ -39,15 +48,15 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def successes(surface: Cite2Urn): Int = {
-    pageReports(surface).filter(_.success).size
+    pageTestReports(surface).filter(_.success).size
   }
 
   /** Collection of pages this ReportOverview can compose
-  * for a specified surface..
+  * for a specified surface.
   *
   * @param surface Text-bearing surface.
   */
-  def reportPages(surface: Cite2Urn) =  {
+  def reportPages(surface: Cite2Urn):  Vector[ReportPage] =  {
     Vector(overviewPage(surface), transcriptionPage(surface))
   }
 
@@ -59,11 +68,11 @@ import scala.scalajs.js.annotation._
     dse.passages.filter(_.surface == surface)
   }
 
-  /** Vector of PageReports for all DsePassages occurring on a surface.
+  /** Vector of TestReports for all DsePassages occurring on a surface.
   *
   * @param surface Text-bearing surface.
   */
-  def pageReports(surface: Cite2Urn) = {
+  def pageTestReports(surface: Cite2Urn):  Vector[TestReport] = {
     dseResults.reports(pageDse(surface))
   }
 
@@ -73,11 +82,25 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def overviewPage(surface: Cite2Urn): ReportPage = {
-    def markdown: String = s"Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n"
-    def suggestedFileName: String = "dse-summary.md"
+    def markdown: String = pageSummary(surface)
+    def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-summary.md"
     def title: String = s"Dse relations, ${surface}: summary\n\n"
     ReportPage(title, markdown, suggestedFileName)
   }
+
+
+  def pageSummary(surface: Cite2Urn) : String = {
+    val md = StringBuilder.newBuilder
+    md.append("Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n")
+
+    // summary counts for page (cf. whole corpus)
+    // add links to zoomable view completeness verification
+
+    // link to separate page with index correctness verification
+
+    md.toString
+  }
+
 
   /** Verification page for comparing transcribed text
   * and indexed image segment from DSE record.
@@ -85,10 +108,15 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def transcriptionPage(surface: Cite2Urn): ReportPage = {
-    def markdown: String = s"Beautiful transcription viz goes here\n"
-    def suggestedFileName: String = "transcription.md"
-    def title: String = "## Verify transcription\n\n"
+    def markdown: String = transcriptionView(surface)
+    def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/transcription.md"
+    def title: String = s"Verify transcription: ${surface}\n\n"
     ReportPage(title, markdown, suggestedFileName)
+  }
+
+
+  def transcriptionView(surface: Cite2Urn) : String = {
+    ""
   }
 
 
