@@ -40,7 +40,7 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def failures(surface: Cite2Urn): Int = {
-    pageTestReports(surface).filter(_.success == false).size
+    pageTestResults(surface).filter(_.success == false).size
   }
 
   /** Number of successful tests for a specified surface.
@@ -48,7 +48,7 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def successes(surface: Cite2Urn): Int = {
-    pageTestReports(surface).filter(_.success).size
+    pageTestResults(surface).filter(_.success).size
   }
 
   /** Collection of pages this ReportOverview can compose
@@ -68,11 +68,11 @@ import scala.scalajs.js.annotation._
     dse.passages.filter(_.surface == surface)
   }
 
-  /** Vector of TestReports for all DsePassages occurring on a surface.
+  /** Vector of TestResults for all DsePassages occurring on a surface.
   *
   * @param surface Text-bearing surface.
   */
-  def pageTestReports(surface: Cite2Urn):  Vector[TestReport] = {
+  def pageTestResults(surface: Cite2Urn):  Vector[TestResult] = {
     dseResults.reports(pageDse(surface))
   }
 

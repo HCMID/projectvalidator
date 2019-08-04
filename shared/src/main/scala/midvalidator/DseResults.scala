@@ -36,25 +36,25 @@ import scala.scalajs.js.annotation._
   }
 
   /** Implementation of required [[TestResults]] function.*/
-  def report(dsePassage: T):  TestReport = {
+  def report(dsePassage: T):  TestResult = {
     dsePassage match {
       case dse: DsePassage => {
         good(dsePassage) match {
           case true => {
-            TestReport(true, "We're happy")
+            TestResult(true, "We're happy")
           }
           case false => {
-            TestReport(false, "We're sad")
+            TestResult(false, "We're sad")
           }
         }
       }
-      case _ => TestReport(false, s"Failed: object not a DsePassage:  " + dsePassage)
+      case _ => TestResult(false, s"Failed: object not a DsePassage:  " + dsePassage)
     }
 
 
 
     //dseObservations.filter(_.valid == false).map(_.note)
-    TestReport(good(dsePassage), "Report on " + dsePassage)
+    TestResult(good(dsePassage), "Report on " + dsePassage)
   }
 
 }

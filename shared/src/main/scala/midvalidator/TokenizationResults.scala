@@ -13,12 +13,12 @@ import edu.holycross.shot.ohco2._
 
   /**
   */
-  def report(citableNode: T):  TestReport = {
+  def report(citableNode: T):  TestResult = {
     good(citableNode) match {
       case true =>    {
         citableNode match {
           case cn: CitableNode => {
-            TestReport(true, s"Successfully tokenized node ${cn}")
+            TestResult(true, s"Successfully tokenized node ${cn}")
           }
         }
       }
@@ -26,9 +26,9 @@ import edu.holycross.shot.ohco2._
         citableNode match {
           case cn: CitableNode => {
             if (ortho.validString(cn.text)) {
-              TestReport(false,s"This passage could not be tokenized using the specified orthography: " + cn.text)
+              TestResult(false,s"This passage could not be tokenized using the specified orthography: " + cn.text)
             } else {
-                TestReport(false,s"This passage could not be tokenized because there were invalid characters in " + cn.text)
+              TestResult(false,s"This passage could not be tokenized because there were invalid characters in " + cn.text)
             }
 
           }

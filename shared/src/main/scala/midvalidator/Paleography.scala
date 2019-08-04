@@ -16,19 +16,19 @@ import edu.holycross.shot.cite._
   *
   * @param paleoCex "#"-delimited String with paleographic observation.
   */
-  def report(paleoCex: T):  TestReport = {
+  def report(paleoCex: T):  TestResult = {
     good(paleoCex) match {
       case true =>    {
         paleoCex match {
           case s: String => {
             val cols = s.split("#")
             val observation = PaleographicObservation(CtsUrn(cols(1)), Cite2Urn(cols(2)))
-            TestReport(true, "Valid paleographic observation " + observation)
+            TestResult(true, "Valid paleographic observation " + observation)
           }
         }
 
       }
-      case false => TestReport(false,"Unable to form valid paleographic observation from String " + paleoCex)
+      case false => TestResult(false,"Unable to form valid paleographic observation from String " + paleoCex)
     }
   }
 

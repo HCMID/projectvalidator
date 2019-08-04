@@ -12,16 +12,16 @@ import edu.holycross.shot.cite._
 
   /**
   */
-  def report(str: T):  TestReport = {
+  def report(str: T):  TestResult = {
     good(str) match {
       case true =>    {
         str match {
           case s: String => {
-            TestReport(true, s"String ${s} uses only valid code points.")
+            TestResult(true, s"String ${s} uses only valid code points.")
           }
         }
       }
-      case false => TestReport(false,s"This string is not valid in the current orthographic system (tested with ${ortho}): " + str)
+      case false => TestResult(false,s"This string is not valid in the current orthographic system (tested with ${ortho}): " + str)
     }
   }
 

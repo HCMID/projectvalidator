@@ -12,10 +12,10 @@ trait TestResults[T] {
   def good(observation: T):  Boolean
 
   /** A Markdown String reporting on the testing results.*/
-  def report(observation: T): TestReport
+  def report(observation: T): TestResult
 
-  /** Get a Vector of parameterized TestReports.*/
-  @JSExport def reports(observations: Vector[T]): Vector[TestReport] = {
+  /** Get a Vector of parameterized TestResults.*/
+  @JSExport def reports(observations: Vector[T]): Vector[TestResult] = {
      observations.map(report(_))
   }
 
@@ -31,9 +31,9 @@ trait TestResults[T] {
   }
 }
 
-/** Results of testing some artifact.
+/** Results of testing a single artifact.
 *
 * @param success True if tested object passed the test.
 * @param summary Human-readable summary of the test.
 */
-@JSExportAll case class TestReport(success: Boolean, summary: String)
+@JSExportAll case class TestResult(success: Boolean, summary: String)
