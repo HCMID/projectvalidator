@@ -7,7 +7,7 @@ import edu.holycross.shot.ohco2._
 
 class ValidatorDseSpec extends FlatSpec {
 
-  "A validator" should "build a DseVector for the repository when a single text reference spns multiple pages" in pending/* {
+  "Multi-page valiation" should "build a DseVector for the repository when a single text reference spns multiple pages" in pending/* {
     val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val readers = Vector.empty[ReadersPairing]
     val ortho = Vector.empty[OrthoPairing]

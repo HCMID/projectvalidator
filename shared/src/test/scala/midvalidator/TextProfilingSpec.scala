@@ -7,7 +7,7 @@ import edu.holycross.shot.ohco2._
 
 class TextProfilingSpec extends FlatSpec {
 
-  "The Validator object" should "profile tokens in a corpus" in pending
+  "Text profiling" should "profile tokens in a corpus" in pending
   /* {
     val repo = EditorsRepo("src/test/resources/il10")
     val mom = Validator(repo)
