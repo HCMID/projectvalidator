@@ -15,14 +15,31 @@ trait TestResults[T] {
   def report(observation: T): TestReport
 
   /** Get a Vector of parameterized TestReports.*/
-   @JSExport def reports(observations: Vector[T]): Vector[TestReport] = {
+  @JSExport def reports(observations: Vector[T]): Vector[TestReport] = {
      observations.map(report(_))
   }
+
+
+  @JSExport def successes(observations: Vector[T]): Int = {
+     val tf = observations.map(good(_))
+     (tf.filter(_ ==  true)).size
+  }
+
+  @JSExport def failures(observations: Vector[T]): Int = {
+     val tf = observations.map(good(_))
+     (tf.filter(_ ==  false)).size
+  }
+  //def overview(observations: Vector[T]): ReportOverview
 }
 
 
-
-
+trait ReportOverview {
+  def success: Int
+  def failure: Int
+  def title: String
+  def markdown: String
+  def suggestedFileName: String
+}
 
 /** Results of testing some artifact.
 *

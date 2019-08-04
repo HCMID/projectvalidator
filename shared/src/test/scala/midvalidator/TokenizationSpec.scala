@@ -17,7 +17,6 @@ class TokenizationSpec extends FlatSpec {
 
   "A TokenzationResults" should "use the report function to report on a single CitableNode" in{
     val rept = tknResults.report(cn)
-    println(rept.summary)
     assert(rept.success)
   }
 
