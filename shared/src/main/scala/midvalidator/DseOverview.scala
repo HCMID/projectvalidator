@@ -18,41 +18,63 @@ import scala.scalajs.js.annotation._
   lazy val corpus = lib.textRepository.get.corpus
   lazy val dseResults :  DseResults[DsePassage] = DseResults(corpus)
 
+  /** Number of failed tests for entire library.*/
   def failures: Int = {
     dseResults.failures(dse.passages)
   }
+
+  /** Number of successful tests for entire library.*/
   def successes: Int = {
     dseResults.successes(dse.passages)
   }
 
+  /** Number of failed tests for a specified surface.
+  *
+  * @param surface Text-bearing surface.
+  */
   def failures(surface: Cite2Urn): Int = {
-    //dseResults.failures(dse.passages)
     pageReports(surface).filter(_.success == false).size
   }
+
+  /** Number of successful tests for a specified surface.
+  *
+  * @param surface Text-bearing surface.
+  */
   def successes(surface: Cite2Urn): Int = {
     //dseResults.successes(dse.passages)
     pageReports(surface).filter(_.success).size
   }
 
+  /** Collection of pages this ReportOverview can compose
+  * for a specified surface..
+  *
+  * @param surface Text-bearing surface.
+  */
   def reportPages(surface: Cite2Urn) =  {
     Vector(overviewPage(surface), transcriptionPage(surface))
   }
 
+  /** Vector of all DsePassages occurring on a surface.
+  *
+  * @param surface Text-bearing surface.
+  */
   def pageDse(surface: Cite2Urn): Vector[DsePassage] = {
     dse.passages.filter(_.surface == surface)
   }
 
+  /** Vector of PageReports for all DsePassages occurring on a surface.
+  *
+  * @param surface Text-bearing surface.
+  */
   def pageReports(surface: Cite2Urn) = {
     dseResults.reports(pageDse(surface))
   }
-/*
-  def pageSuccesses(surface: Cite2Urn) : Int = {
-    pageReports(surface).filter(_.success).size
-  }
-  def pageFailures(surface: Cite2Urn) : Int = {
-    pageReports(surface).filter(_.success == false).size
-  }*/
 
+
+  /** Summary or overview page for a given surface.
+  *
+  * @param surface Text-bearing surface.
+  */
   def overviewPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = s"Successful tests: ${successes}\n\nFailed tests: ${failures}\n"
     def suggestedFileName: String = "dse-summary.md"
@@ -60,6 +82,11 @@ import scala.scalajs.js.annotation._
     ReportPage(title, markdown, suggestedFileName)
   }
 
+  /** Verification page for comparing transcribed text
+  * and indexed image segment from DSE record.
+  *
+  * @param surface Text-bearing surface.
+  */
   def transcriptionPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = s"Beautiful transcription viz goes here\n"
     def suggestedFileName: String = "transcription.md"
