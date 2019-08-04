@@ -13,8 +13,28 @@ import scala.scalajs.js.annotation._
 
 /**
 */
-@JSExportAll case class DseOverview(lib: CiteLibrary) {// extends ReportOverview {
+@JSExportAll case class DseOverview(lib: CiteLibrary) extends ReportOverview {
   lazy val dse = DseVector.fromCiteLibrary(lib)
-  //lazy val repts =
+  lazy val corpus = lib.textRepository.get.corpus
+  lazy val dseResults :  DseResults[DsePassage] = DseResults(corpus)
+
+  def failures: Int = {
+    dseResults.failures(dse.passages)
+  }
+  def successes: Int = {
+    dseResults.successes(dse.passages)
+  }
+  def reportPages =  {
+    Vector(overviewPage)
+  }
+
+  def overviewPage: ReportPage = {
+    def markdown: String = s"Successful tests: ${successes}\n\nFailed tests: ${failures}\n"
+    def suggestedFileName: String = "dse-summary.md"
+    def title: String = "## Dse relations: summary\n\n"
+    ReportPage(title, markdown, suggestedFileName)
+  }
+
+
 
 }

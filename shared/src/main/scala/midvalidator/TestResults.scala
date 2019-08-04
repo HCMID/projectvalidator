@@ -32,13 +32,17 @@ trait TestResults[T] {
   //def overview(observations: Vector[T]): ReportOverview
 }
 
+@JSExportAll case class ReportPage(
+  title: String,
+  markdown: String,
+  suggestedFileName: String
+)
 
 trait ReportOverview {
-  def success: Int
-  def failure: Int
-  def title: String
-  def markdown: String
-  def suggestedFileName: String
+  def successes: Int
+  def failures: Int
+  def reportPages: Vector[ReportPage]
+
 }
 
 /** Results of testing some artifact.

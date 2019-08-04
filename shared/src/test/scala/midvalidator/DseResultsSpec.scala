@@ -9,7 +9,7 @@ import org.scalatest.FlatSpec
 class DseResultsSpec extends FlatSpec {
 
 
- val dseStr = "urn:cts:chant:massordinary.sg359.text_xml:h007_2.h10.1#urn:cite2:ecod:codsang359imgs.v1:csg359_0_43_36_0@0.6863,0.2851,0.1977,0.02985#urn:cite2:ecod:sg359pages.v1:36"
+  //val dseStr = "urn:cts:chant:massordinary.sg359.text_xml:h007_2.h10.1#urn:cite2:ecod:codsang359imgs.v1:csg359_0_43_36_0@0.6863,0.2851,0.1977,0.02985#urn:cite2:ecod:sg359pages.v1:36"
 
 
 
