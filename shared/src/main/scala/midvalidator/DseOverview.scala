@@ -105,7 +105,10 @@ import scala.scalajs.js.annotation._
 
   def pageSummary(surface: Cite2Urn) : String = {
     val md = StringBuilder.newBuilder
-    md.append(s"Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n")
+    md.append(s"Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n\n")
+
+    md.append("If we have auto-ict2, that will be awesome!  [Verify completeness](" + dse.ictForSurface(surface) + ").\n\n")
+
 
     // summary counts for page (cf. whole corpus)
     // add links to zoomable view completeness verification
@@ -129,11 +132,23 @@ import scala.scalajs.js.annotation._
   }
 
 
+  /** Configure an IIIFApi BinaryImageService for the
+  * image used as reference image in DSE records for a
+  * specified surface.
+  *
+  * @param surface Text-bearing surface.
+  */
   def iiifApiForSurface(surface: Cite2Urn):  IIIFApi = {
     val image = dse.imageForTbs(surface)
     IIIFApi(imageServiceUrlBase, imageServicePathBase + PathUtility.expandedPath(image))
   }
 
+
+  /** Compose markdown page juxtaposing diplomatic text
+  * with indexed image region for human verification.
+  *
+  * @param surface Text-bearing surface.
+  */
   def transcriptionView(surface: Cite2Urn) : String = {
     val iiif = iiifApiForSurface(surface)
     //val requestString  = iiif.serviceRequest(UNAGE=====)

@@ -6,7 +6,7 @@ import scala.xml._
 
 
 object MidProseABDiplomatic extends MidMarkupReader {
-  def editedNode(cn: CitableNode) = MidProseABReader(MidDiplomaticEdition).editedNode(cn)
+  def editedNode(cn: CitableNode) : CitableNode = MidProseABReader(MidDiplomaticEdition).editedNode(cn)
   def editionType = MidDiplomaticEdition
   def recognizedTypes = Vector(MidDiplomaticEdition)
 }
