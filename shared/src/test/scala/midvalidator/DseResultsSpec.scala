@@ -44,11 +44,11 @@ class DseResultsSpec extends FlatSpec {
     val rept = dseResults.report(dsePsg)
     assert(rept.success == false)
   }
-  it should "return a TestReport" in {
+  it should "return a TestResult" in {
     val rept = dseResults.report(dsePsg)
     rept match {
-      case tr: TestReport => assert(true)
-      case _ => fail("Not a TestReport: " + rept)
+      case tr: TestResult => assert(true)
+      case _ => fail("Not a TestResult: " + rept)
     }
   }
 

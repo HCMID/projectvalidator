@@ -23,16 +23,18 @@ import scala.scalajs.js.annotation._
 @JSExportAll case class DseOverview(lib: CiteLibrary) extends ReportOverview {
   lazy val dse = DseVector.fromCiteLibrary(lib)
   lazy val corpus = lib.textRepository.get.corpus
-  lazy val dseResults :  DseResults[DsePassage] = DseResults(corpus)
+
+  // consider making this part of ReportOverview trait .. ?
+  lazy val testResults :  DseResults[DsePassage] = DseResults(corpus)
 
   /** Number of failed tests for entire library.*/
   def failuresAll: Int = {
-    dseResults.failures(dse.passages)
+    testResults.failures(dse.passages)
   }
 
   /** Number of successful tests for entire library.*/
   def successesAll: Int = {
-    dseResults.successes(dse.passages)
+    testResults.successes(dse.passages)
   }
 
   /** Number of failed tests for a specified surface.
@@ -73,7 +75,7 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def pageTestResults(surface: Cite2Urn):  Vector[TestResult] = {
-    dseResults.reports(pageDse(surface))
+    testResults.reports(pageDse(surface))
   }
 
 

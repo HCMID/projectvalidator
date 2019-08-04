@@ -40,7 +40,7 @@ class DseOverviewSpec extends FlatSpec {
     val expectedPageSuccess = 17
     val expectedPageFailure = 0
 
-    val pgRepts = dseOv.dseResults.reports(pgDse)
+    val pgRepts = dseOv.testResults.reports(pgDse)
     assert(pgRepts.size == expectedReports)
     assert(dseOv.successes(pg) == expectedPageSuccess)
     assert(dseOv.failures(pg) == expectedPageFailure)
