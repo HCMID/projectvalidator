@@ -29,7 +29,6 @@ trait TestResults[T] {
      val tf = observations.map(good(_))
      (tf.filter(_ ==  false)).size
   }
-  //def overview(observations: Vector[T]): ReportOverview
 }
 
 @JSExportAll case class ReportPage(
@@ -42,7 +41,6 @@ trait ReportOverview {
   def successes: Int
   def failures: Int
   def reportPages: Vector[ReportPage]
-
 }
 
 /** Results of testing some artifact.
