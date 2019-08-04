@@ -99,7 +99,7 @@ import scala.scalajs.js.annotation._
     def markdown: String = pageSummary(surface)
     def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-summary.md"
     def title: String = s"Dse relations, ${surface}: summary"
-    ReportPage(title, markdown, suggestedFileName, successes(surface), failures(surface))
+    ReportPage(title, markdown, suggestedFileName, Some(successes(surface)), Some(failures(surface)))
   }
 
 
@@ -129,7 +129,7 @@ import scala.scalajs.js.annotation._
     def markdown: String = transcriptionView(surface)
     def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/transcription.md"
     def title: String = s"Verify transcription for page (surface): ${surface.collection}, ${surface.objectComponent}"
-    ReportPage(title, markdown, suggestedFileName, successes(surface), failures(surface))
+    ReportPage(title, markdown, suggestedFileName, None, None)
   }
 
 

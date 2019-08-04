@@ -16,7 +16,9 @@ import scala.scalajs.js.annotation._
   /** Intelligible file name.*/
   suggestedFileName: String,
 
-  successes: Int,
-
-  failures:  Int,
+  /** Should be None for verification tests.*/
+  successes: Option[Int],
+  
+  /** Should be None for verification tests.*/
+  failures:  Option[Int],
 )

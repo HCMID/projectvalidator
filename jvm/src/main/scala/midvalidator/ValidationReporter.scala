@@ -23,17 +23,52 @@ case class ValidationReporter(
   lazy val dseOV = DseOverview(editorsRepo.library, editorsRepo.readers)
 
   def validate(surface: Cite2Urn) : Unit = {
+    val targetDir = editorsRepo.validationDir / s"${surface.collection}-${surface.objectComponent}"
+
     // DSE is required in version 7.0.0.  Other reports may be added.
     val allReportPages = dseOV.reportPages(surface) ++ otherPages
     reptWriter.writeReports(allReportPages)
 
+    val index = composeIndex(allReportPages, surface)
+    val indexPage = targetDir / "index.md"
+    indexPage.overwrite(index)
 
-    val targetDir = editorsRepo.validationDir / s"${surface.collection}-${surface.objectComponent}"
-    println(s"Wrote a total of ${allReportPages.size} files to:\n" + targetDir)
+    println(s"Wrote a total of ${allReportPages.size + 1} files to:\n" + targetDir)
   }
 
-  def composeIndex(pages: Vector[ReportPage]) : String =  {
-    ""
+  def composeIndex(pages: Vector[ReportPage], surface: Cite2Urn) : String =  {
+    val txt = StringBuilder.newBuilder
+    txt.append(s"# Reports for ${surface.collection}, ${surface.objectComponent}\n\n")
+    val successes = pages.map(_.successes).flatten.sum
+    val failures = pages.map(_.failures).flatten.sum
+
+    txt.append("## Summary of automated validation\n\n")
+
+    if (failures == 0){
+      txt.append("- ![errors](" + okImg + ") There were no errors.")
+    } else {
+      txt.append("- ![errors]("+ sadImg + ") There errors.  See details below.")
+    }
+    txt.append("Tests passed **" + successes + "** / tests failed **" + failures + "**")
+
+
+    txt.append("\n\n## Detailed reports")
+    txt.append("\n\nTotal report files: " + pages.size + "\n\n")
+    for (pg <- pages) {
+      txt.append("- *" + pg.title + "*.")
+
+      pg.successes match {
+        case None => {
+          txt.append( s" (see [${pg.suggestedFileName}](${pg.suggestedFileName}))\n")
+        }
+        case _ => {
+          txt.append(" Tests passed/failed: ")
+          txt.append(pg.successes.get + "/" + pg.failures.get + "\n")
+        }
+      }
+
+    }
+    txt.toString
   }
 
 /*
