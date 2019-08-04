@@ -99,12 +99,13 @@ import scala.scalajs.js.annotation._
     def markdown: String = pageSummary(surface)
     def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-summary.md"
     def title: String = s"Dse relations, ${surface}: summary"
-    ReportPage(title, markdown, suggestedFileName)
+    ReportPage(title, markdown, suggestedFileName, successes(surface), failures(surface))
   }
 
 
   def pageSummary(surface: Cite2Urn) : String = {
     val md = StringBuilder.newBuilder
+
     md.append(s"Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n\n")
 
     md.append("If we have auto-ict2, that will be awesome!  [Verify completeness](" + dse.ictForSurface(surface) + ").\n\n")
@@ -128,7 +129,7 @@ import scala.scalajs.js.annotation._
     def markdown: String = transcriptionView(surface)
     def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/transcription.md"
     def title: String = s"Verify transcription for page (surface): ${surface.collection}, ${surface.objectComponent}"
-    ReportPage(title, markdown, suggestedFileName)
+    ReportPage(title, markdown, suggestedFileName, successes(surface), failures(surface))
   }
 
 

@@ -14,5 +14,9 @@ import scala.scalajs.js.annotation._
   markdown: String,
 
   /** Intelligible file name.*/
-  suggestedFileName: String
+  suggestedFileName: String,
+
+  successes: Int,
+
+  failures:  Int,
 )

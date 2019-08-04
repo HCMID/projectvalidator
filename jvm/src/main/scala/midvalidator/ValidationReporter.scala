@@ -13,10 +13,34 @@ import java.io.{File => JFile}
 import better.files.Dsl._
 
 
-/**
+/**  Manage writing of markdown reports.
 */
-case class ValidationReporter(midValidator: MidValidator) {
+case class ValidationReporter(
+  editorsRepo: EditorsRepo,
+  otherPages: Vector[ReportPage] = Vector.empty[ReportPage]) {
 
+  lazy val reptWriter = ReportWriter(editorsRepo.validationDir)
+  lazy val dseOV = DseOverview(editorsRepo.library, editorsRepo.readers)
+
+  def validate(surface: Cite2Urn) : Unit = {
+    // DSE is required in version 7.0.0.  Other reports may be added.
+    val allReportPages = dseOV.reportPages(surface) ++ otherPages
+    reptWriter.writeReports(allReportPages)
+
+
+    val targetDir = editorsRepo.validationDir / s"${surface.collection}-${surface.objectComponent}"
+    println(s"Wrote a total of ${allReportPages.size} files to:\n" + targetDir)
+  }
+
+  def composeIndex(pages: Vector[ReportPage]) : String =  {
+    ""
+  }
+
+/*
+reptWriter.writeReports(reptPages)
+val targetDir = repo.validationDir / s"${urn.collection}-${urn.objectComponent}"
+println(s"Wrote total of ${reptPages.size} reports to:\n" + targetDir)
+*/
   //val outputDir = midValidator.repo.validationDir
 
   // compute these once:

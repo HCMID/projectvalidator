@@ -19,21 +19,25 @@ val orthoMap : Map[String, MidOrthography] = Map(
 // 3. Build a validator. This requires ortho map as well as a CITE library.
 val repo = EditorsRepo(repoRoot, readerMap, orthoMap)
 
-// 4. To write reports to a File, create a ReportWriter (JVM only)
-val reptWriter = ReportWriter(repo.validationDir)
+
+
+// 4. To write reports to a File, a ValidatorReporter uses a ReportWriter (JVM only)
+val reporter = ValidationReporter(repo)
 
 
 def validate(urnStr: String) : Unit = {
   try {
     val urn = Cite2Urn(urnStr)
+    reporter.validate(urn)
+
 
     /// Add all your reports here:
-    val dseOV = DseOverview(repo.library)
-    val reptPages = dseOV.reportPages(urn)  // ++ any others...
+    //val dseOV = DseOverview(repo.library, repo.readers)
+    //val reptPages = dseOV.reportPages(urn)  ++  otherPages
 
-    reptWriter.writeReports(reptPages)
-    val targetDir = repo.validationDir / s"${urn.collection}-${urn.objectComponent}"
-    println(s"Wrote total of ${reptPages.size} reports to:\n" + targetDir)
+    //reptWriter.writeReports(reptPages)
+
+
   } catch {
     case t: Throwable => {
       println("Well, that didn't work.  Error was:  " + t)
