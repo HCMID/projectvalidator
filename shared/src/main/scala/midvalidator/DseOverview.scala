@@ -9,8 +9,6 @@ import edu.holycross.shot.scm._
 
 import scala.scalajs.js.annotation._
 
-
-
 /**
 */
 @JSExportAll case class DseOverview(lib: CiteLibrary) extends ReportOverview {
@@ -19,12 +17,12 @@ import scala.scalajs.js.annotation._
   lazy val dseResults :  DseResults[DsePassage] = DseResults(corpus)
 
   /** Number of failed tests for entire library.*/
-  def failures: Int = {
+  def failuresAll: Int = {
     dseResults.failures(dse.passages)
   }
 
   /** Number of successful tests for entire library.*/
-  def successes: Int = {
+  def successesAll: Int = {
     dseResults.successes(dse.passages)
   }
 
@@ -41,7 +39,6 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def successes(surface: Cite2Urn): Int = {
-    //dseResults.successes(dse.passages)
     pageReports(surface).filter(_.success).size
   }
 
@@ -76,7 +73,7 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def overviewPage(surface: Cite2Urn): ReportPage = {
-    def markdown: String = s"Successful tests: ${successes}\n\nFailed tests: ${failures}\n"
+    def markdown: String = s"Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n"
     def suggestedFileName: String = "dse-summary.md"
     def title: String = s"Dse relations, ${surface}: summary\n\n"
     ReportPage(title, markdown, suggestedFileName)

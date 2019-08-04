@@ -30,8 +30,8 @@ class DseOverviewSpec extends FlatSpec {
     val expectedCorpusSuccess = 84
     val expectedCorpusFailure = 0
 
-    assert(dseOv.successes == expectedCorpusSuccess)
-    assert(dseOv.failures == expectedCorpusFailure)
+    assert(dseOv.successesAll == expectedCorpusSuccess)
+    assert(dseOv.failuresAll == expectedCorpusFailure)
 
     val pg = Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
     val pgDse = dseOv.dse.passages.filter(_.surface == pg)
