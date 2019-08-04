@@ -31,18 +31,6 @@ trait TestResults[T] {
   }
 }
 
-@JSExportAll case class ReportPage(
-  title: String,
-  markdown: String,
-  suggestedFileName: String
-)
-
-trait ReportOverview {
-  def successes: Int
-  def failures: Int
-  def reportPages: Vector[ReportPage]
-}
-
 /** Results of testing some artifact.
 *
 * @param success True if tested object passed the test.

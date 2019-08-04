@@ -28,6 +28,22 @@ import scala.scalajs.js.annotation._
     Vector(overviewPage, transcriptionPage)
   }
 
+
+  def pageDse(surface: Cite2Urn): Vector[DsePassage] = {
+    dse.passages.filter(_.surface == surface)
+  }
+
+  def pageReports(surface: Cite2Urn) = {
+    dseResults.reports(pageDse(surface))
+  }
+
+  def pageSuccesses(surface: Cite2Urn) : Int = {
+    pageReports(surface).filter(_.success).size
+  }
+  def pageFailures(surface: Cite2Urn) : Int = {
+    pageReports(surface).filter(_.success == false).size
+  }
+
   def overviewPage: ReportPage = {
     def markdown: String = s"Successful tests: ${successes}\n\nFailed tests: ${failures}\n"
     def suggestedFileName: String = "dse-summary.md"
