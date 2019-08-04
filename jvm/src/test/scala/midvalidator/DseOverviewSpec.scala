@@ -42,8 +42,8 @@ class DseOverviewSpec extends FlatSpec {
 
     val pgRepts = dseOv.dseResults.reports(pgDse)
     assert(pgRepts.size == expectedReports)
-    assert(dseOv.pageSuccesses(pg) == expectedPageSuccess)
-    assert(dseOv.pageFailures(pg) == expectedPageFailure)
+    assert(dseOv.successes(pg) == expectedPageSuccess)
+    assert(dseOv.failures(pg) == expectedPageFailure)
   }
 
 

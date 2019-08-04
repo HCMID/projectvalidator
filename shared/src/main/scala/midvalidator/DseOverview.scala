@@ -24,10 +24,19 @@ import scala.scalajs.js.annotation._
   def successes: Int = {
     dseResults.successes(dse.passages)
   }
-  def reportPages =  {
-    Vector(overviewPage, transcriptionPage)
+
+  def failures(surface: Cite2Urn): Int = {
+    //dseResults.failures(dse.passages)
+    pageReports(surface).filter(_.success == false).size
+  }
+  def successes(surface: Cite2Urn): Int = {
+    //dseResults.successes(dse.passages)
+    pageReports(surface).filter(_.success).size
   }
 
+  def reportPages(surface: Cite2Urn) =  {
+    Vector(overviewPage(surface), transcriptionPage(surface))
+  }
 
   def pageDse(surface: Cite2Urn): Vector[DsePassage] = {
     dse.passages.filter(_.surface == surface)
@@ -36,22 +45,22 @@ import scala.scalajs.js.annotation._
   def pageReports(surface: Cite2Urn) = {
     dseResults.reports(pageDse(surface))
   }
-
+/*
   def pageSuccesses(surface: Cite2Urn) : Int = {
     pageReports(surface).filter(_.success).size
   }
   def pageFailures(surface: Cite2Urn) : Int = {
     pageReports(surface).filter(_.success == false).size
-  }
+  }*/
 
-  def overviewPage: ReportPage = {
+  def overviewPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = s"Successful tests: ${successes}\n\nFailed tests: ${failures}\n"
     def suggestedFileName: String = "dse-summary.md"
-    def title: String = "## Dse relations: summary\n\n"
+    def title: String = s"Dse relations, ${surface}: summary\n\n"
     ReportPage(title, markdown, suggestedFileName)
   }
 
-  def transcriptionPage: ReportPage = {
+  def transcriptionPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = s"Beautiful transcription viz goes here\n"
     def suggestedFileName: String = "transcription.md"
     def title: String = "## Verify transcription\n\n"
@@ -59,5 +68,27 @@ import scala.scalajs.js.annotation._
   }
 
 
+
+
+/*
+
+    md.append(s"# Automated validation of DSE records for ${pg.collection}, page " + pg.objectComponent + "\n\n")
+    if (dse.size == 0) {
+      md.append("## Errors\n\nNo DSE records found!\n\n")
+    } else {
+
+      val dseImgMessage = dse.imageForTbs(pg)
+      md.append("\n\n## Reference image\n\n" +  dseImgMessage  + "\n\n")
+
+      val dseTextMessage =  if (missingPassages.isEmpty) {
+        "**All** passages indexed in DSE records appear in text corpus."
+
+      } else {
+        "### Errors\n\nThere were errors indexing texts. \n\n" +
+        "The following passages in DSE records do not appear in the text corpus:\n\n" + missingPassages.map("-  " + _ ).mkString("\n") + "\n\n"
+
+      }
+      md.append("\n\n## Relation of DSE records to text corpus\n\n" +  dseTextMessage  + "\n\n" + errors.toString + "\n\n")
+*/
 
 }
