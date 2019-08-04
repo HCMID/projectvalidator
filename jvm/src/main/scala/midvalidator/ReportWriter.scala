@@ -28,7 +28,7 @@ case class ReportWriter(validationDir: File)  {
     val parentDir = outFile / ".."
     if (!parentDir.exists) {mkdirs(parentDir)}
 
-    outFile.overwrite(reportPage.markdown)
+    outFile.overwrite("## " + reportPage.title + "\n\n" + reportPage.markdown)
     println(s"\nReport '${reportPage.title.trim}' written to file:\n==>" + outFile + "\n")
   }
 

@@ -32,6 +32,13 @@ import scala.scalajs.js.annotation._
   // consider making this part of ReportOverview trait .. ?
   lazy val testResults :  DseResults[DsePassage] = DseResults(corpus)
 
+
+  def diplomaticReader(urn: CtsUrn) : MidMarkupReader = {
+    val readerMatches = readers.filter(_.urn >= urn)
+    require(readerMatches.size == 1, s"Failed to find diplomatic reader.\nURN matched more than one configuration entry: \n\t${urn}")
+    readerMatches(0).readers(0)
+  }
+
   /** Number of failed tests for entire library.*/
   def failuresAll: Int = {
     testResults.failures(dse.passages)
@@ -91,7 +98,7 @@ import scala.scalajs.js.annotation._
   def overviewPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = pageSummary(surface)
     def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-summary.md"
-    def title: String = s"Dse relations, ${surface}: summary\n\n"
+    def title: String = s"Dse relations, ${surface}: summary"
     ReportPage(title, markdown, suggestedFileName)
   }
 
@@ -117,7 +124,7 @@ import scala.scalajs.js.annotation._
   def transcriptionPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = transcriptionView(surface)
     def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/transcription.md"
-    def title: String = s"Verify transcription: ${surface}\n\n"
+    def title: String = s"Verify transcription for page (surface): ${surface.collection}, ${surface.objectComponent}"
     ReportPage(title, markdown, suggestedFileName)
   }
 
@@ -134,11 +141,16 @@ import scala.scalajs.js.annotation._
 
     val relevant = pageDse(surface)
     val md = StringBuilder.newBuilder
-    md.append("Evaluating " + relevant.size + " Dse records.")
+    md.append("Please verify that the diplomatic transcription of the following " + relevant.size + " DSE records corresponds to the associated image.\n\n")
 
-    for (dsePsg <- relevant) {
+    for ((dsePsg,idx) <- relevant.zipWithIndex) {
       if (testResults.good(dsePsg)) {
-        println("Good to go on " + dsePsg)
+        //println("Good to go on " + dsePsg.passage)
+        val indexedText = corpus ~~ dsePsg.passage
+        val rdr = diplomaticReader(indexedText.nodes(0).urn)
+        //diplomaticReader
+        val diplomatic = indexedText.nodes.map(n => s"**${idx + 1}**. " + s" (*${n.urn.passageComponent}*) " + rdr.editedNode(n).text )
+        md.append("\n\n---\n\n" +  diplomatic.mkString(" ") + " \n")
         md.append("\n\n" + iiif.linkedMarkdownImage(dsePsg.imageroi))
 
       } else {
@@ -147,7 +159,7 @@ import scala.scalajs.js.annotation._
       }
 
     }
-    println(md)
+    //println(md)
     md.toString
 
   }
