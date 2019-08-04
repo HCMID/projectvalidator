@@ -6,9 +6,9 @@ import edu.holycross.shot.citerelation._
 import edu.holycross.shot.citeobj._
 import edu.holycross.shot.dse._
 import edu.holycross.shot.scm._
+import edu.holycross.shot.citebinaryimage._
 
 import scala.scalajs.js.annotation._
-
 
 // In summary page, report on validation details +
 // verification of completeness of coverage.
@@ -20,7 +20,12 @@ import scala.scalajs.js.annotation._
 *
 * @param lib CiteLibrary to use in DSE validation.
 */
-@JSExportAll case class DseOverview(lib: CiteLibrary) extends ReportOverview {
+@JSExportAll case class DseOverview(
+  lib: CiteLibrary,
+  readers: Vector[ReadersPairing],
+  imageServiceUrlBase: String = "http://www.homermultitext.org/iipsrv?",
+  imageServicePathBase: String = "/project/homer/pyramidal/deepzoom/"
+) extends ReportOverview {
   lazy val dse = DseVector.fromCiteLibrary(lib)
   lazy val corpus = lib.textRepository.get.corpus
 
@@ -93,7 +98,7 @@ import scala.scalajs.js.annotation._
 
   def pageSummary(surface: Cite2Urn) : String = {
     val md = StringBuilder.newBuilder
-    md.append("Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n")
+    md.append(s"Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n")
 
     // summary counts for page (cf. whole corpus)
     // add links to zoomable view completeness verification
@@ -117,8 +122,34 @@ import scala.scalajs.js.annotation._
   }
 
 
+  def iiifApiForSurface(surface: Cite2Urn):  IIIFApi = {
+    val image = dse.imageForTbs(surface)
+    IIIFApi(imageServiceUrlBase, imageServicePathBase + PathUtility.expandedPath(image))
+  }
+
   def transcriptionView(surface: Cite2Urn) : String = {
-    ""
+    val iiif = iiifApiForSurface(surface)
+    //val requestString  = iiif.serviceRequest(UNAGE=====)
+
+
+    val relevant = pageDse(surface)
+    val md = StringBuilder.newBuilder
+    md.append("Evaluating " + relevant.size + " Dse records.")
+
+    for (dsePsg <- relevant) {
+      if (testResults.good(dsePsg)) {
+        println("Good to go on " + dsePsg)
+        md.append("\n\n" + iiif.linkedMarkdownImage(dsePsg.imageroi))
+
+      } else {
+        println("\n\nBroken on " + dsePsg)
+        md.append("CAN'T WORK ON " + dsePsg)
+      }
+
+    }
+    println(md)
+    md.toString
+
   }
 
 

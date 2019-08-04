@@ -20,12 +20,16 @@ class DseOverviewSpec extends FlatSpec {
   )
   val repoRoot = "jvm/src/test/resources/simplelatin"
 
-  val lib = EditorsRepo(repoRoot, readerMap, orthoMap).library
+  val repo = EditorsRepo(repoRoot, readerMap, orthoMap)
+  val lib = repo.library
 
+  val badRepoRoot = "jvm/src/test/resources/simplelatin-bad"
+  val badRepo = EditorsRepo(badRepoRoot, readerMap, orthoMap)
+  val badLib = badRepo.library
 
 
   "A DseOverview" should "get basic summary scores by corpus and by surface" in {
-    val dseOv = DseOverview(lib)
+    val dseOv = DseOverview(lib, repo.readers)
 
     val expectedCorpusSuccess = 84
     val expectedCorpusFailure = 0
@@ -44,6 +48,28 @@ class DseOverviewSpec extends FlatSpec {
     assert(pgRepts.size == expectedReports)
     assert(dseOv.successes(pg) == expectedPageSuccess)
     assert(dseOv.failures(pg) == expectedPageFailure)
+  }
+
+  it should "cope with errors" in {
+
+    val pg = Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
+    val dseOv = DseOverview(badLib, badRepo.readers)
+    println("CORPUS SUCCESS/FAIL:\n" + dseOv.successesAll + "/" + dseOv.failuresAll)
+
+    //val pgRepts = dseOv.testResults.reports(pgDse)
+
+
+    println("PAGE SUCCESS/FAIL:\n" + dseOv.successes(pg) + "/" + dseOv.failures(pg))
+
+
+  }
+
+  it should "cope with image service configs" in {
+    //BinaryImageService
+
+    val baseUrl  = "http://www.homermultitext.org/iipsrv?"
+    val imagePath = "/project/homer/pyramidal/deepzoom/ecod/codsang359imgs/v1/"
+    val img = Cite2Urn("urn:cite2:ecod:codsang359imgs.v1:csg359_0_43_36_0@0.3888,0.2488,0.04748,0.03466")
   }
 
 
