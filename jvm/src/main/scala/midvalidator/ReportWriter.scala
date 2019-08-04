@@ -14,6 +14,11 @@ case class ReportWriter(validationDir: File)  {
   require(validationDir.exists, "Valdiation directory not found: " + validationDir)
 
 
+  /** Write markdown content of a single [[ReportPage]] to
+  * file using suggested name.
+  *
+  * @param reportPage [[ReportPage]] to write to file.
+  */
   def writeReport(reportPage: ReportPage) : Unit = {
     //println("TItle is " + reportPage.title)
     //println("File name " + reportPage.suggestedFileName)
@@ -25,19 +30,15 @@ case class ReportWriter(validationDir: File)  {
 
   }
 
-
+  /** Write markdown content of a series of [[ReportPage]]s to
+  * files using suggested names.
+  *
+  * @param reportPages [[ReportPage]]s to write to file.
+  */
   def writeReports(reportPages: Vector[ReportPage]): Unit = {
     for (reptPage <- reportPages) {
       writeReport(reptPage)
     }
   }
-
-/*
-val baseDir = File(s"validation/${pg.collection}-${pg.objectComponent}")
-  //val fName = e3urn.collection + "-" + e3urn.objectComponent + "-" + msBurn.collection+ "-" + msBurn.objectComponent + ".md"
-  val reptName = "place-names.md"
-  val outFile = baseDir/reptName
-  outFile.overwrite(rept.toString)
-  */
 
 }
