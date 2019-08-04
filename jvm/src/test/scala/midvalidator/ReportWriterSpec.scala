@@ -39,23 +39,20 @@ class ReportWriterSpec extends FlatSpec {
   // Tests:
   "A ReportWriter" should "write 'em'" in {
     val pg = Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
-    //val pgDse = dseOv.dse.passages.filter(_.surface == pg)
     val reports = dseOv.reportPages(pg)
     val fileList = reports.map(rept => repo.validationDir/rept.suggestedFileName)
-    // rm if files already there:
+    // rm files if already there:
     tidy(fileList)
 
 
     val reptWriter = ReportWriter(repo.validationDir)
     reptWriter.writeReports(reports)
-    // test that files exist...
-
-
+    // test that resulting report files exist
     for (f <- fileList) {
       assert(f.exists)
     }
+    // rm files before further testing
     tidy(fileList)
-
   }
   it should "object if a writable directory is not found" in {
     val bogus = File("Not_a_directory")
@@ -70,27 +67,4 @@ class ReportWriterSpec extends FlatSpec {
       case t: Throwable => println("QUIT ON " + t)
     }
   }
-  /*
-    val dseOv = DseOverview(lib)
-
-    val expectedCorpusSuccess = 84
-    val expectedCorpusFailure = 0
-
-    assert(dseOv.successes == expectedCorpusSuccess)
-    assert(dseOv.failures == expectedCorpusFailure)
-
-
-    val pgDse = dseOv.dse.passages.filter(_.surface == pg)
-
-    val expectedReports = 17
-    val expectedPageSuccess = 17
-    val expectedPageFailure = 0
-
-    val pgRepts = dseOv.dseResults.reports(pgDse)
-    assert(pgRepts.size == expectedReports)
-    assert(dseOv.successes(pg) == expectedPageSuccess)
-    assert(dseOv.failures(pg) == expectedPageFailure)
-  */
-
-
 }
