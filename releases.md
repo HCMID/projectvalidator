@@ -1,5 +1,6 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**7.1.0**:  Adds the `MidVerseLReaderDiplomatic` class.
 
 **7.0.0**:  API-breaking, ground-up rewrite.  Will require more extensive documentation than release notes to document how it makes use of the `MidOrthography` and `MidMarkupReader` abstractions, and now cleanly separates such distinct issues as organization of files in an editorial repository, assessment of the validity of a CITE Library, and how to summarize and report on automated testing.
 

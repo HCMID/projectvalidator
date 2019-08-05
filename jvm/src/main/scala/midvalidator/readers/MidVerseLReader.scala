@@ -4,6 +4,13 @@ import edu.holycross.shot.ohco2._
 import edu.holycross.shot.xmlutils._
 import scala.xml._
 
+
+object MidVerseLReaderDiplomatic extends MidMarkupReader {
+  def editedNode(cn: CitableNode) : CitableNode = MidVerseLReader(MidDiplomaticEdition).editedNode(cn)
+  def editionType = MidDiplomaticEdition
+  def recognizedTypes = Vector(MidDiplomaticEdition)
+}
+
 /** Reads MID prose texts in TEI markup using `ab`
 * element as terminal citation unit.
 *

@@ -3,11 +3,11 @@
 A code library to validate HC-MID editorial projects.
 
 
-## Current version: 7.0.0
+## Current version: 7.1.0
 
 Status:  **active development**. [Release notes](releases.md)
 
-The `master` branch includes work on a forthcoming API-breaking 7.0.0 release, and its current state at any moment is not guaranteed to be coherent. It should be used for building from source only for bleeding-edge purposes.  The source package published on bintray with the 6.7.0 release will compile and function as tested against the 6.7.0 API.
+Versions beginning with 7.0.0 represent an API-breaking, ground-up rewrite.
 
 ## License
 
@@ -15,4 +15,4 @@ The `master` branch includes work on a forthcoming API-breaking 7.0.0 release, a
 
 ## Documentation
 
-See  <https://hcmid.github.io/projectvalidator/>.
+The documentation at  <https://hcmid.github.io/projectvalidator/> is out of date for the 7.x.x series of releaes.

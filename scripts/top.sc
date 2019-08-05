@@ -28,14 +28,8 @@ val reporter = ValidationReporter(repo)
 def validate(urnStr: String) : Unit = {
   try {
     val urn = Cite2Urn(urnStr)
+    /// Add all your reports here in optional otherReports parameter
     reporter.validate(urn)
-
-
-    /// Add all your reports here:
-    //val dseOV = DseOverview(repo.library, repo.readers)
-    //val reptPages = dseOV.reportPages(urn)  ++  otherPages
-
-    //reptWriter.writeReports(reptPages)
 
 
   } catch {
@@ -53,9 +47,6 @@ println("(e.g., try validate(pg))")
 
 
 /* TBA ...
-
-//val validator = MidValidator(repo.library, repo.orthographies)
-// then run "validate" function on a surface or surfaces defined by URN
 
 
 def publish: Unit = {
