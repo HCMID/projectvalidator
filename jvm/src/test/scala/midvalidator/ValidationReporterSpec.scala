@@ -12,6 +12,7 @@ import java.io.{File => JFile}
 class ValidationReporterSpec extends FlatSpec {
 
   val repoRoot = "jvm/src/test/resources/simplelatin"
+  val badRepoRoot = "jvm/src/test/resources/simplelatin-bad"
   val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
     "MidProseABDiplomatic" ->   Vector(MidProseABDiplomatic)
   )
@@ -19,6 +20,7 @@ class ValidationReporterSpec extends FlatSpec {
     "Latin23" -> Latin23
   )
   val repo = EditorsRepo(repoRoot, readerMap, orthoMap)
+  val badRepo = EditorsRepo(badRepoRoot, readerMap, orthoMap)
 
 
 
@@ -26,13 +28,15 @@ class ValidationReporterSpec extends FlatSpec {
 
   it should "make a directory for reports based on the collection and object ID" in pending
 
-  it should "write a DSE report" in pending
-
-  it should "do all the magic" in {
+  it should "do all the magic" in  pending /*{
     val reporter = ValidationReporter(repo)
     val urn = Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
     reporter.validate(urn)
+  }*/
+  it should "cope with errors just fine"in {
+    val reporter = ValidationReporter(badRepo)
+    val urn = Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
+    reporter.validate(urn)
   }
-
 
 }

@@ -33,6 +33,11 @@ import scala.scalajs.js.annotation._
   lazy val testResults :  DseResults[DsePassage] = DseResults(corpus)
 
 
+  /** Determine MidMarkupReader to use for diplomatic edition
+  * of a specified text.
+  *
+  * @param urn Text to find markup reader for.
+  */
   def diplomaticReader(urn: CtsUrn) : MidMarkupReader = {
     val readerMatches = readers.filter(_.urn >= urn)
     require(readerMatches.size == 1, s"Failed to find diplomatic reader.\nURN matched more than one configuration entry: \n\t${urn}")
@@ -71,7 +76,7 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def reportPages(surface: Cite2Urn):  Vector[ReportPage] =  {
-    Vector(overviewPage(surface), transcriptionPage(surface))
+    Vector(overviewPage(surface), verificationPage(surface))
   }
 
   /** Vector of all DsePassages occurring on a surface.
@@ -97,25 +102,33 @@ import scala.scalajs.js.annotation._
   */
   def overviewPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = pageSummary(surface)
-    def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-summary.md"
-    def title: String = s"Dse relations, ${surface}: summary"
+    def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-validation.md"
+    def title: String = s"DSE relations for ${surface.collection}, ${surface.objectComponent}: summary"
     ReportPage(title, markdown, suggestedFileName, Some(successes(surface)), Some(failures(surface)))
   }
 
 
+  /** Compose markdown page summarizing DSE evaluation
+  * for a specified page.
+  *
+  * @param surface Page to analyze.
+  */
   def pageSummary(surface: Cite2Urn) : String = {
     val md = StringBuilder.newBuilder
 
-    md.append(s"Successful tests: ${successesAll}\n\nFailed tests: ${failuresAll}\n\n")
+    val pageFailures = failures(surface)
+    md.append ("## Automated validation\n\n")
+    md.append(s"Successful tests: ${successes(surface)}\n\nFailed tests: ${pageFailures}\n\n")
 
-    md.append("If we have auto-ict2, that will be awesome!  [Verify completeness](" + dse.ictForSurface(surface) + ").\n\n")
+    md.append(s">(Compare results for whole corpus:\nSuccessful tests: ${successesAll} / failed tests: ${failuresAll})\n\n")
 
-
-    // summary counts for page (cf. whole corpus)
-    // add links to zoomable view completeness verification
-
-    // link to separate page with index correctness verification
-
+    if (pageFailures > 0) {
+      val testOutput = pageTestResults(surface)
+      md.append("\n\n## Errors\n\n")
+      for (badResult <- testOutput.filter(_.success == false)) {
+        md.append("1. " + badResult.summary + "\n")
+      }
+    }
     md.toString
   }
 
@@ -125,12 +138,13 @@ import scala.scalajs.js.annotation._
   *
   * @param surface Text-bearing surface.
   */
-  def transcriptionPage(surface: Cite2Urn): ReportPage = {
-    def markdown: String = transcriptionView(surface)
-    def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/transcription.md"
-    def title: String = s"Verify transcription for page (surface): ${surface.collection}, ${surface.objectComponent}"
+  def verificationPage(surface: Cite2Urn): ReportPage = {
+    def markdown: String = verificationView(surface)
+    def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-verification.md"
+    def title: String = s"Verify completeness and correctness for page (surface): ${surface.collection}, ${surface.objectComponent}"
     ReportPage(title, markdown, suggestedFileName, None, None)
   }
+
 
 
   /** Configure an IIIFApi BinaryImageService for the
@@ -150,13 +164,17 @@ import scala.scalajs.js.annotation._
   *
   * @param surface Text-bearing surface.
   */
-  def transcriptionView(surface: Cite2Urn) : String = {
+  def verificationView(surface: Cite2Urn) : String = {
     val iiif = iiifApiForSurface(surface)
-    //val requestString  = iiif.serviceRequest(UNAGE=====)
 
-
-    val relevant = pageDse(surface)
     val md = StringBuilder.newBuilder
+    md.append("### Verify completeness\n\n")
+
+    md.append( s"Please verify that all [passages of text on this image](${dse.ictForSurface(surface)}) are indexed.\n\n")
+
+    md.append("### Verify correctness\n\n")
+    val relevant = pageDse(surface)
+
     md.append("Please verify that the diplomatic transcription of the following " + relevant.size + " DSE records corresponds to the associated image.\n\n")
 
     for ((dsePsg,idx) <- relevant.zipWithIndex) {
@@ -170,14 +188,13 @@ import scala.scalajs.js.annotation._
         md.append("\n\n" + iiif.linkedMarkdownImage(dsePsg.imageroi))
 
       } else {
-        println("\n\nBroken on " + dsePsg)
-        md.append("CAN'T WORK ON " + dsePsg)
+        val error = "\n\nError on DSE passage" + dsePsg
+        println(error)
+        md.append(error)
       }
 
     }
-    //println(md)
     md.toString
-
   }
 
 

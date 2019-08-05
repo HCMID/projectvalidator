@@ -53,7 +53,7 @@ case class ValidationReporter(
 
 
     txt.append("\n\n## Detailed reports")
-    txt.append("\n\nTotal report files: " + pages.size + "\n\n")
+    txt.append("\n\nTotal report files: **" + pages.size + "**\n\n")
     for (pg <- pages) {
       txt.append("- *" + pg.title + "*.")
 
@@ -63,7 +63,8 @@ case class ValidationReporter(
         }
         case _ => {
           txt.append(" Tests passed/failed: ")
-          txt.append(pg.successes.get + "/" + pg.failures.get + "\n")
+          txt.append(pg.successes.get + "/" + pg.failures.get)
+          txt.append( s" (see more information in [${pg.suggestedFileName}](${pg.suggestedFileName}))\n")
         }
       }
 

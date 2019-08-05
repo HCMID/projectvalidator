@@ -37,24 +37,22 @@ import scala.scalajs.js.annotation._
 
   /** Implementation of required [[TestResults]] function.*/
   def report(dsePassage: T):  TestResult = {
-    dsePassage match {
+    val res = dsePassage match {
       case dse: DsePassage => {
         good(dsePassage) match {
           case true => {
-            TestResult(true, "We're happy")
+            TestResult(true, "Valid indexing in " + dse)
           }
           case false => {
-            TestResult(false, "We're sad")
+            TestResult(false, s"Text passage **${dse.passage}** not in corpus (indexed to page ${dse.surface} on image ${dse.imageroi})")
           }
         }
       }
       case _ => TestResult(false, s"Failed: object not a DsePassage:  " + dsePassage)
     }
 
-
-
-    //dseObservations.filter(_.valid == false).map(_.note)
-    TestResult(good(dsePassage), "Report on " + dsePassage)
+    //TestResult(good(dsePassage), "Report on " + dsePassage)
+    res
   }
 
 }
