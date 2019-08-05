@@ -18,7 +18,7 @@ import scala.scalajs.js.annotation._
 
   /** Should be None for verification tests.*/
   successes: Option[Int],
-  
+
   /** Should be None for verification tests.*/
-  failures:  Option[Int],
+  failures:  Option[Int]
 )
