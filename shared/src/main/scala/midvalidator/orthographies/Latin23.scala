@@ -77,7 +77,7 @@ object Latin23 extends MidOrthography {
 
     val simplePunct = "([\\.;?,])".r
     val punctList = "\\.;?,"
-    val rawList =  simplePunct.replaceAllIn(n.text," $1 ").split("\\s+").filter(_.nonEmpty)
+    val rawList =  simplePunct.replaceAllIn(n.text," $1 ").split("[\\s+\\+]+").filter(_.nonEmpty)
     val raw = for ((t,count) <- rawList.zipWithIndex) yield {
       val psg = n.urn.passageComponent + "." + count
 

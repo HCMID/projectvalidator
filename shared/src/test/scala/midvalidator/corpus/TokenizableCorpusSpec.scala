@@ -48,8 +48,20 @@ class TokenizableCorpusSpec extends FlatSpec {
   }
 
   it should "compile a concordance of lexical tokens" in {
-
+    val tc = TokenizableCorpus(o2corpus, Latin23)
+    val conc = tc.concordance
+    println(conc)
   }
 
-  it should "compute a histogram of lexical tokens"
+  it should "compute a histogram of lexical tokens" in {
+    val tc = TokenizableCorpus(o2corpus, Latin23)
+    val histogram = tc.lexHistogram
+    println(histogram)
+  }
+
+  it should "compute a histogram of token categories" in {
+    val tc = TokenizableCorpus(o2corpus, Latin23)
+    val histogram = tc.categoryHistogram
+    println(histogram)
+  }
 }
