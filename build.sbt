@@ -28,7 +28,7 @@ lazy val crossed = crossProject.in(file(".")).
         "edu.holycross.shot" %%% "citerelations" % "2.5.2",
         "edu.holycross.shot" %%% "dse" % "5.2.1",
 
-
+        "edu.holycross.shot" %%% "histoutils" % "1.0.0",
         "edu.holycross.shot" %%% "citebinaryimage" % "3.1.0"
 
         // Later version would bring all dependent libs in sync:
