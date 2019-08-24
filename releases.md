@@ -1,5 +1,6 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**7.2.1**:  Tokenization now lower cases tokens before counting.
 
 **7.2.0**:  Adds the `TokenizableCorpus` class.
 

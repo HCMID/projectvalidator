@@ -45,6 +45,7 @@ class TokenizableCorpusSpec extends FlatSpec {
     assert(tc.wordList.size == distinctWords)
     val expectedTopFive = Vector("auctor", "compressa", "culpae", "cum", "debebatur")
     assert(tc.wordList.take(5) == expectedTopFive)
+    println(tc.wordList)
   }
 
   it should "compile a concordance of lexical tokens" in {
@@ -63,5 +64,11 @@ class TokenizableCorpusSpec extends FlatSpec {
     val tc = TokenizableCorpus(o2corpus, Latin23)
     val histogram = tc.categoryHistogram
     println(histogram)
+  }
+
+  it should "lower case tokens before computing histogram" in {
+      val tc = TokenizableCorpus(o2corpus, Latin23)
+      val histogram = tc.lexHistogram.frequencies.filter(_.item == "vestalis")
+      assert(histogram.size == 1)
   }
 }

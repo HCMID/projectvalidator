@@ -35,7 +35,7 @@ import scala.scalajs.js.annotation._
 
   /** Create a histogram of lexical forms.*/
   lazy val lexHistogram: Histogram[String] = {
-    val rawCounts = lexicalTokens.map(_.string).groupBy(w => w).map{ case(k,v) => (k, v.size) }
+    val rawCounts = lexicalTokens.map(_.string.toLowerCase).groupBy(w => w).map{ case(k,v) => (k, v.size) }
     val freqs : Vector[Frequency[String ]]= rawCounts.toVector.map{ case (s,i) => Frequency(s,i)}
     val histogram : Histogram[String] = Histogram(freqs.sortWith(_.count > _.count))
     histogram
