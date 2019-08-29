@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**8.0.0**: `concordance` function of `TokenizableCorpus`  now creates a `Map`, not a Vector.
+
 **7.2.1**:  Tokenization now lower cases tokens before counting.
 
 **7.2.0**:  Adds the `TokenizableCorpus` class.

@@ -53,8 +53,9 @@ import scala.scalajs.js.annotation._
   /** Create a traditional concordance of lower-case strings to
   * canonical (containing) passages.
   */
-  lazy val concordance: Vector[(String, Vector[CtsUrn])]  = {
-    lexicalTokens.groupBy(_.string.toLowerCase).map{case(k,v) => (k, v.map(_.urn.collapsePassageBy(1))) }.toVector.sortBy(_._1)
+  lazy val concordance : Map[String, Vector[CtsUrn]]  = {
+    val formMap = lexicalTokens.groupBy(_.string.toLowerCase)
+    formMap.map{case(k,v) => (k, v.map(_.urn.collapsePassageBy(1))) }
   }
 
 }
