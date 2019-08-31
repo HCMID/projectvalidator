@@ -1,5 +1,6 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**9.0.1**: Removes erroneously included circular dependency.
 
 **9.0.0**:  Implementations of the `MidMarkupReader` trait are broken out into their own package.  See https://github.com/hcmid/markupreaders.
 
