@@ -18,4 +18,5 @@ import edu.holycross.shot.ohco2._
   /**  Create a `CitableNode` from this token.
   */
   def citableNode: CitableNode = CitableNode(urn, string)
+  def text = string
 }

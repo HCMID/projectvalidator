@@ -1,6 +1,9 @@
 package edu.holycross.shot.mid.validator
 import scala.collection.immutable.ListMap
 import edu.holycross.shot.cite._
+
+import edu.holycross.shot.histoutils._
+
 import org.scalatest.FlatSpec
 
 
@@ -54,11 +57,18 @@ class MidOrthographyObjectSpec extends FlatSpec {
   }
 
   it should "generate a histogram of tokens from lists of tokens" in {
-    val expected = ListMap("," -> 2, "Πηληϊάδεω" -> 1, "θεά" -> 1, "μῆνιν" -> 1, "οὐλομένην" -> 1, "ἄειδε" -> 1, "Ἀχιλῆος" -> 1)
+    val expected  : Histogram[String] = Histogram(Vector(
+      Frequency(",", 2),
+      Frequency("Πηληϊάδεω" , 1),
+      Frequency("θεά", 1),
+      Frequency("μῆνιν", 1),
+      Frequency("οὐλομένην" ,1),
+      Frequency("ἄειδε", 1),
+      Frequency("Ἀχιλῆος", 1)))
     assert(MidOrthography.tokenHistogram(tokens) == expected)
   }
 
-  
+
 
 
 }

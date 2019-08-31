@@ -1,5 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+
+**9.0.0**:  Implementations of the `MidMarkupReader` trait are broken out into their own package.  See https://github.com/hcmid/markupreaders.
+
 **8.0.0**: `concordance` function of `TokenizableCorpus`  now creates a `Map`, not a Vector.
 
 **7.2.1**:  Tokenization now lower cases tokens before counting.

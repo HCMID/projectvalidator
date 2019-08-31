@@ -1,6 +1,9 @@
 package edu.holycross.shot.mid.validator
 import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
+
+import edu.holycross.shot.histoutils._
+
 import scala.collection.immutable.ListMap
 import scala.scalajs.js.annotation._
 
@@ -95,18 +98,21 @@ trait MidOrthography {
   *
   * @param tokens Vector of [[MidToken]]s to create histogram for.
   */
-  def tokenHistogram(tokens: Vector[MidToken]): ListMap[String, Int] = {
-    val counts = concordance(tokens).map{ case (k,v) => (k, v.size)}
-    ListMap(counts.toSeq.sortWith(_._2 > _._2):_*)
+  def tokenHistogram(tokens: Vector[MidToken]) : Histogram[String ]= { //: ListMap[String, Int] = {
+    val freqs = concordance(tokens).map{ case (k,v) => Frequency(k, v.size)}
+    //ListMap(counts.toSeq.sortWith(_._2 > _._2):_*)
+    Histogram(freqs.toVector)
+
   }
 
   /** Generate a histogram of occurrences of each token category.
   *
   * @param tokens Vector of [[MidToken]]s to create histogram for.
   */
-  def categoryHistogram(tokens: Vector[MidToken]): ListMap[Option[MidTokenCategory], Int] = {
-    val grouped = tokens.groupBy(_.tokenCategory).map{ case (k,v) => (k, v.size)}
-    ListMap(grouped.toSeq.sortWith(_._2 > _._2):_*)
+  def categoryHistogram(tokens: Vector[MidToken]): Histogram[Option[MidTokenCategory]] = {//ListMap[Option[MidTokenCategory], Int] = {
+    val freqs = tokens.groupBy(_.tokenCategory).map{ case (k,v) => Frequency(k, v.size)}
+    //ListMap(grouped.toSeq.sortWith(_._2 > _._2):_*)
+    Histogram(freqs.toVector)
   }
 
 
