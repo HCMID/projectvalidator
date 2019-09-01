@@ -45,30 +45,37 @@ class TokenizableCorpusSpec extends FlatSpec {
     assert(tc.wordList.size == distinctWords)
     val expectedTopFive = Vector("auctor", "compressa", "culpae", "cum", "debebatur")
     assert(tc.wordList.take(5) == expectedTopFive)
-    println(tc.wordList)
   }
 
   it should "compile a concordance of lexical tokens" in {
     val tc = TokenizableCorpus(o2corpus, Latin23)
     val conc = tc.concordance
-    println(conc)
+    val expectedList = Vector(CtsUrn("urn:cts:omar:stoa0179.stoa001.omar.tkn:1.4.1"))
+    assert(conc("opinor") == expectedList)
   }
 
   it should "compute a histogram of lexical tokens" in {
     val tc = TokenizableCorpus(o2corpus, Latin23)
     val histogram = tc.lexHistogram
-    println(histogram)
+    assert(histogram.countForItem("opinor") == 1)
   }
 
   it should "compute a histogram of token categories" in {
     val tc = TokenizableCorpus(o2corpus, Latin23)
     val histogram = tc.categoryHistogram
-    println(histogram)
+    val expectedPunct = 7
+    assert(histogram.countForItem(PunctuationToken) == expectedPunct)
   }
 
   it should "lower case tokens before computing histogram" in {
       val tc = TokenizableCorpus(o2corpus, Latin23)
       val histogram = tc.lexHistogram.frequencies.filter(_.item == "vestalis")
       assert(histogram.size == 1)
+  }
+
+  it should "report the size of the corpus in tokens" in {
+    val tc = TokenizableCorpus(o2corpus, Latin23)
+    val expectedSize = 44
+    assert(tc.size == expectedSize)
   }
 }

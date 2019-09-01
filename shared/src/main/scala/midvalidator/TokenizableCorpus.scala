@@ -13,6 +13,9 @@ import scala.scalajs.js.annotation._
 */
 @JSExportAll case class TokenizableCorpus(corpus: Corpus, orthography: MidOrthography) {
 
+
+  def size = tokens.size
+  
   /** A new Corpus at token level.*/
   lazy val tokenizedCorpus :  Corpus = {
     orthography.tokenizedCorpus(corpus)

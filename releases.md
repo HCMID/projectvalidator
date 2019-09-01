@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**9.1.0**:  Adds `size` function on `TokenizableCorpus`.
+
 **9.0.1**: Removes erroneously included circular dependency.
 
 **9.0.0**:  Implementations of the `MidMarkupReader` trait are broken out into their own package.  See https://github.com/hcmid/markupreaders.
