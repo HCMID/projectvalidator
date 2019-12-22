@@ -1,6 +1,9 @@
 Data/configuration we need for MID project validation:
 
-1.  create `TextRepository` from
+
+MID project conventions for building content required to validate:
+
+1.  create a `TextRepository`  from
     -   val catCex = "editions/ctscatalog.cex"
     -   val baseDir = "editions"
     -   val citeConf = "editions/citationconfig.cex"

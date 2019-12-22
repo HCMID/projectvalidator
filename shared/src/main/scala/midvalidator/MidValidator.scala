@@ -7,14 +7,19 @@ import edu.holycross.shot.citeobj._
 import edu.holycross.shot.dse._
 import edu.holycross.shot.scm._
 
+
+import wvlet.log._
+import wvlet.log.LogFormatter.SourceCodeLogFormatter
+
 import scala.scalajs.js.annotation._
 
 @JSExportAll case class MidValidator(
   library: CiteLibrary,
-  orthoPairings: Vector[OrthoPairing])
+  orthoPairings: Vector[OrthoPairing]) extends LogSupport
  {
    /** Short-hand access to library's text corpus.*/
    lazy val corpus = library.textRepository.get.corpus
+
    /** Library must implement the DSE model in at least one collection.*/
    lazy val dsev = DseVector.fromCiteLibrary(library)
 
@@ -58,9 +63,14 @@ import scala.scalajs.js.annotation._
   */
   def validate(surface: Cite2Urn) : Unit = {
     // 1.  determine if urn is a leaf node, container, or range.
-    require(surface.objectParts.nonEmpty,"Current version of MidValidator does not operate on entire collections, only single surfaces. Unable to process URN " + surface)
+    val sad = "Current version of MidValidator does not operate on entire collections, only single surfaces. Unable to process URN " + surface
+    info(sad)
+    require(surface.objectParts.nonEmpty,sad)
 
-    require(surface.isRange == false, "Current version of MidValidator does not operate on ranges, only single surfaces. Unable to process URN " + surface)
+
+    val sadRange = "Current version of MidValidator does not operate on ranges, only single surfaces. Unable to process URN " + surface
+    info(sadRange)
+    require(surface.isRange == false, sadRange)
 
 
     // 2. For each leaf node:
@@ -70,7 +80,7 @@ import scala.scalajs.js.annotation._
     val dsePassageList = dsev.passages.filter(_.surface == surface)
     val dseResults : DseResults[DsePassage] = DseResults(corpus)
     for (dsePsg <- dsePassageList) {
-      println(dseResults.good(dsePsg))
+      debug(dseResults.good(dsePsg))
     }
     // b. orthography validation
   }
