@@ -1,4 +1,4 @@
-lazy val supportedScalaVersions = List("2.11.8", "2.12.4")
+lazy val supportedScalaVersions =  List("2.12.4") // List("2.11.8", "2.12.4")
 
 lazy val root = project.in(file(".")).
     aggregate(crossedJVM, crossedJS).
@@ -12,7 +12,7 @@ lazy val crossed = crossProject.in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "9.1.0",
+      version := "9.2.0",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -22,14 +22,16 @@ lazy val crossed = crossProject.in(file(".")).
         "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
         "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
 
-        "edu.holycross.shot.cite" %%% "xcite" % "4.1.0",
-        "edu.holycross.shot" %%% "ohco2" % "10.14.0",
-        "edu.holycross.shot" %%% "citeobj" % "7.3.4",
-        "edu.holycross.shot" %%% "citerelations" % "2.5.2",
-        "edu.holycross.shot" %%% "dse" % "5.2.1",
+        "org.wvlet.airframe" %%% "airframe-log" % "19.8.10",
 
-        "edu.holycross.shot" %%% "histoutils" % "2.1.0",
-        "edu.holycross.shot" %%% "citebinaryimage" % "3.1.0"
+        "edu.holycross.shot.cite" %%% "xcite" % "4.2.0",
+        "edu.holycross.shot" %%% "ohco2" % "10.18.0",
+        "edu.holycross.shot" %%% "citeobj" % "7.4.0",
+        "edu.holycross.shot" %%% "citerelations" % "2.6.0",
+        "edu.holycross.shot" %%% "dse" % "5.3.0",
+
+        "edu.holycross.shot" %%% "histoutils" % "2.2.0",
+        "edu.holycross.shot" %%% "citebinaryimage" % "3.1.1"
 
 
         // Later version would bring all dependent libs in sync:

@@ -1,5 +1,9 @@
 ## Release notes: MID   `projectvalidator` code library
 
+
+**9.2.0**:  Adds logging support and updates library dependencies.
+
+
 **9.1.0**:  Adds `size` function on `TokenizableCorpus`.
 
 **9.0.1**: Removes erroneously included circular dependency.

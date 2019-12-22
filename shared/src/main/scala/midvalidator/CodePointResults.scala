@@ -3,12 +3,17 @@ import scala.scalajs.js.annotation._
 
 import edu.holycross.shot.cite._
 
+
+import wvlet.log._
+import wvlet.log.LogFormatter.SourceCodeLogFormatter
+
+
 /** Implementation of [[TestResults]] for Strings of characters
 * testing whether code points used are valid in a given orthographic system.
 *
 * @param ortho MidOrthography.
 */
-@JSExportAll case class CodePointResults[T](ortho: MidOrthography) extends TestResults[T] {
+@JSExportAll case class CodePointResults[T](ortho: MidOrthography) extends TestResults[T] with LogSupport {
 
   /**
   */
@@ -34,7 +39,7 @@ import edu.holycross.shot.cite._
       }
 
       case _ => {
-        println(s"${str}  was NOT a string")
+        warn(s"${str}  was NOT a string")
         false
       }
     }
