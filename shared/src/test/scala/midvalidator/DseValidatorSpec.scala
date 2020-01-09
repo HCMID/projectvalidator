@@ -5,9 +5,13 @@ import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
 
 
-class ValidatorDseSpec extends FlatSpec {
+class DseValidatorSpec extends FlatSpec {
 
-  "Multi-page valiation" should "build a DseVector for the repository when a single text reference spns multiple pages" in pending/* {
+  "A DseValidator" should "implement the MidValidator trait's validate function" in {
+
+  }
+
+  it should "build a DseVector for the repository when a single text reference spans multiple pages" in pending/* {
     val repo = EditorsRepo("jvm/src/test/resources/chantsample")
     val readers = Vector.empty[ReadersPairing]
     val ortho = Vector.empty[OrthoPairing]
