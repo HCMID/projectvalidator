@@ -9,9 +9,9 @@ import edu.holycross.shot.ohco2._
 class CodePointsSpec extends FlatSpec {
 
 
-  val cpResults :  CodePointResults[String] = new CodePointResults(Latin23)
+  //val cpResults :  CodePointResults[String] = new CodePointResults(Latin23)
 
-  "A CodePointResults" should "use the report function to report on a string" in {
+  "A CodePointResults" should "use the report function to report on a string" in pending /*{
     val rept = cpResults.report("casus belli")
     assert(rept.success)
   }
@@ -29,7 +29,7 @@ class CodePointsSpec extends FlatSpec {
     assert(cpResults.report(badString).summary.contains(expectedMsg))
   }
 
-  it should "report on a Vector of Strings" in pending /*{
+  it should "report on a Vector of Strings" in pending {
     val lines = tenGoodCex.split("\n").toVector
     val palResults :  PaleographyResults[String] = new PaleographyResults
     val rept = palResults.reports(lines)

@@ -12,10 +12,11 @@ class TokenizationSpec extends FlatSpec {
   val txt = "iam primum omnium satis constat Troia capta in ceteros saeuitum esse Troianos, duobus, Aeneae Antenorique, et uetusti iure hospitii et quia pacis reddendaeque Helenae semper auctores fuerant, omne ius belli Achiuos abstinuisse;".toLowerCase
   val cn = CitableNode(urn,txt)
   val corpus = Corpus(Vector(cn))
-  val tknResults :  TokenizationResults[CitableNode] = TokenizationResults(Latin23)
+  //val tknResults :  TokenizationResults[CitableNode] = TokenizationResults(Latin23)
 
 
-  "A TokenzationResults" should "use the report function to report on a single CitableNode" in{
+  "A TokenzationResults" should "use the report function to report on a single CitableNode" in pending
+  /*{
     val rept = tknResults.report(cn)
     assert(rept.success)
   }
@@ -35,7 +36,7 @@ class TokenizationSpec extends FlatSpec {
 
   }
 
-  it should "support reporting on a corpus using the reports function" in pending /*{
+  it should "support reporting on a corpus using the reports function" in pending {
     val repts = tknResults.reports(corpus.nodes)
     val expectedSize = 1
     assert(repts.size == expectedSize)

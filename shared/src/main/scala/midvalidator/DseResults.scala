@@ -16,29 +16,38 @@ import scala.scalajs.js.annotation._
 *
 * @param corpus Corpus to check DsePassages against.
 */
-@JSExportAll case class DseResults[T](corpus: Corpus) extends TestResults[T] {
+@JSExportAll case class DseResults[DsePassage](corpus: Corpus) extends TestResults[DsePassage] {
 
   /** Implementation of required [[TestResults]] function to evaluate
   * a given DsePassage against the current Corpus.
   */
-  def good(dsePassage: T): Boolean = {
-    dsePassage match {
-      case dse: DsePassage => {
-        val matches = corpus ~~ dse.passage
+  def good(surface: Cite2Urn): Boolean = {
+    false
+  }
+  def report(surface: Cite2Urn): TestResult =
+          TestResult(false,"Nothing implemented yet")
+}
+    /*
+    //dsePassage match {
+      //case dse: DsePassage => {
+        val matches = corpus ~~ dsePassage.passage
         if (matches.isEmpty) {
           false
         } else {
           true
         }
       }
-      case _ => false
-    }
-  }
+      //case _ => false
+    //}
+  //}
+*/
 
-  /** Implementation of required [[TestResults]] function.*/
-  def report(dsePassage: T):  TestResult = {
-    val res = dsePassage match {
-      case dse: DsePassage => {
+
+
+  /** Implementation of required [[TestResults]] function.
+  def report(surface: Cite2Urn):  TestResult = {
+    //  val res = dsePassage match {
+    //  case dse: DsePassage => {
         good(dsePassage) match {
           case true => {
             TestResult(true, "Valid indexing in " + dse)
@@ -47,12 +56,12 @@ import scala.scalajs.js.annotation._
             TestResult(false, s"Text passage **${dse.passage}** not in corpus (indexed to page ${dse.surface} on image ${dse.imageroi})")
           }
         }
-      }
-      case _ => TestResult(false, s"Failed: object not a DsePassage:  " + dsePassage)
-    }
+      //}
+      //case _ => TestResult(false, s"Failed: object not a DsePassage:  " + dsePassage)
+    //}
 
     //TestResult(good(dsePassage), "Report on " + dsePassage)
-    res
-  }
+    //res
 
-}
+  }
+  */

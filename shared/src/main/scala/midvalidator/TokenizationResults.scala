@@ -9,7 +9,8 @@ import edu.holycross.shot.ohco2._
 *
 * @param ortho MidOrthography.
 */
-@JSExportAll case class TokenizationResults[T](ortho: MidOrthography) extends TestResults[T] {
+//@JSExportAll
+abstract case class TokenizationResults[T](ortho: MidOrthography) extends TestResults[T] {
 
   /**
   */

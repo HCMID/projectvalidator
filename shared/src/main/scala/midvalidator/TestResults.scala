@@ -1,6 +1,7 @@
 package edu.holycross.shot.mid.validator
 
 import scala.scalajs.js.annotation._
+import edu.holycross.shot.cite._
 
 /**  Type-paramaterized trait for results of validation testing.
 * Classes implementing this trait can be cross-built with the usual
@@ -9,16 +10,16 @@ import scala.scalajs.js.annotation._
 trait TestResults[T] {
 
   /** True if test was successful */
-  def good(observation: T):  Boolean
+  def good(surface: Cite2Urn):  Boolean
 
   /** A Markdown String reporting on the testing results.*/
-  def report(observation: T): TestResult
+  def report(surface: Cite2Urn): TestResult
 
   /** Get a Vector of parameterized TestResults.
   @JSExport def reports(observations: Vector[T]): Vector[TestResult] = {
      observations.map(report(_))
   }
-*/
+
   @JSExport def successes(observations: Vector[T]): Int = {
      val tf = observations.map(good(_))
      (tf.filter(_ ==  true)).size
@@ -27,7 +28,7 @@ trait TestResults[T] {
   @JSExport def failures(observations: Vector[T]): Int = {
      val tf = observations.map(good(_))
      (tf.filter(_ ==  false)).size
-  }
+  }*/
 }
 
 /** Results of testing a single artifact.

@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**10.0.0**:  API redesign making `MidValidator` a trait.
+
 
 **9.2.0**:  Adds logging support and updates library dependencies.
 

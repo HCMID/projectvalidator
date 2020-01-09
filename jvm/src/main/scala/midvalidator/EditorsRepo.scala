@@ -12,6 +12,10 @@ import java.io.{File => JFile}
 import better.files.Dsl._
 
 
+import wvlet.log._
+import wvlet.log.LogFormatter.SourceCodeLogFormatter
+
+
 /** A class for working with HC-MID editorial work in a
 * local file system laid out according to conventions first
 * defined in 2018.  The class includes a function to create
@@ -24,7 +28,7 @@ import better.files.Dsl._
 case class EditorsRepo(
   baseDir: String,
   readerMap:  Map[String, Vector[MidMarkupReader]],
-  orthoMap: Map[String, MidOrthography])  {
+  orthoMap: Map[String, MidOrthography]) extends LogSupport {
 
   /** Directory for DSE records (in CEX format).*/
   val dseDir = File(baseDir + "/dse")
@@ -40,7 +44,11 @@ case class EditorsRepo(
   val dirs = Vector(dseDir, editionsDir, validationDir, paleographyDir, libHeadersDir)
 
   for (d <- dirs) {
-    require(d.exists, "Repository not correctly laid out: missing directory " + d)
+    if (! d.exists) {
+      val msg = "Repository not correctly laid out: missing directory  " + d
+      warn(msg)
+      throw new Exception(msg)
+    }
   }
 
   /** Build a CITE library from the files in this repository. */
@@ -62,7 +70,7 @@ case class EditorsRepo(
 
       } catch {
         case t : Throwable => {
-          println("Catastrophe: " + t)
+          warn("Catastrophe: " + t)
           throw t
         }
       }

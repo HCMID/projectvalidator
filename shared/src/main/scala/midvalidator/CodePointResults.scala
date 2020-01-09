@@ -13,7 +13,9 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 *
 * @param ortho MidOrthography.
 */
-@JSExportAll case class CodePointResults[T](ortho: MidOrthography) extends TestResults[T] with LogSupport {
+//@JSExportAll 
+
+abstract case class CodePointResults[T](ortho: MidOrthography) extends TestResults[T] with LogSupport {
 
   /**
   */

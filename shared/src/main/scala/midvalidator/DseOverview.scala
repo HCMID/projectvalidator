@@ -46,12 +46,14 @@ import scala.scalajs.js.annotation._
 
   /** Number of failed tests for entire library.*/
   def failuresAll: Int = {
-    testResults.failures(dse.passages)
+    //testResults.failures(dse.passages)
+    0
   }
 
   /** Number of successful tests for entire library.*/
   def successesAll: Int = {
-    testResults.successes(dse.passages)
+    //testResults.successes(dse.passages)
+    0
   }
 
   /** Number of failed tests for a specified surface.
@@ -179,6 +181,7 @@ import scala.scalajs.js.annotation._
 
     md.append("Please verify that the diplomatic transcription of the following " + relevant.size + " DSE records corresponds to the associated image.\n\n")
 
+    /*
     for ((dsePsg,idx) <- relevant.zipWithIndex) {
       if (testResults.good(dsePsg)) {
         //println("Good to go on " + dsePsg.passage)
@@ -196,6 +199,7 @@ import scala.scalajs.js.annotation._
       }
 
     }
+    */
     md.toString
   }
 

@@ -10,19 +10,24 @@ The `LibraryValidator` class should do this by:
 2. each `MidValidator` to a surface identified by `Cite2Urn`
 
 
-
-
 ### Type parameterization
 
-The `MidValidator` trait defines a type-paramertized `validate` method that operates on a surface identified by `Cite2Urn`.  It returns a  `TestResults` object operating type-parameterized to the same type as the `validate` function is invoked with.
+
+The `MidValidator` trait defines a type-parameterized `validate` method that operates on a surface identified by `Cite2Urn`.  It returns a  `TestResults` object operating type-parameterized to the same type as the `validate` function is invoked with.
 
 Bottom-up example of track of validation:
 
 
 1.  `DseValidator` extends `MidValidator`.  Its `validate` function is specified as working on type `DsePassage` and returns a `TestResults` object of `DsePassage` type.
-2.
 
 
+
+
+Tests:
+
+
+- construct a `DseValidator` implementing `MidValidator[DsePassage]`and get its `validate` results.  This should be a `DseResults[DsePassage]`.
+- pass a `DseValidator` in to a `LibraryValidator`
 
 
 ### Building a CITE library from an MID project
