@@ -14,10 +14,12 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 import scala.scalajs.js.annotation._
 
 @JSExportAll case class LibraryValidator(library : CiteLibrary)  extends LogSupport {
+  // Set logging to DEBUG while developing:
+  Logger.setDefaultLogLevel(LogLevel.DEBUG)
 
   def validate(surface: Cite2Urn, validators: Vector[MidValidator]) : Unit = {
 
-    println("Applying " + validators.size + " MID Validators to surface " + surface)
+    debug("Applying " + validators.size + " MID Validators to surface " + surface)
     for (validator <- validators) {
       val ress = validator.validate(surface)
     }
