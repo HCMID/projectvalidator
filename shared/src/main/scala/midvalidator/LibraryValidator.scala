@@ -17,12 +17,21 @@ import scala.scalajs.js.annotation._
   // Set logging to DEBUG while developing:
   Logger.setDefaultLogLevel(LogLevel.DEBUG)
 
-  def validate(surface: Cite2Urn, validators: Vector[MidValidator[Any]]) : Unit = {
+
+  /** Collect all validation results for a text-bearing using
+  * by apply all [[MidValidator]]s in a given list.
+  *
+  * @param surface Text-bearing surface to test.
+  * @param validators [[MidValidator]]s to apply.
+  */
+  def validate(surface: Cite2Urn, validators: Vector[MidValidator[Any]]) : Vector[TestResult[Any]] = {
 
     debug("Applying " + validators.size + " MID Validators to surface " + surface)
-    for (validator <- validators) {
-      val ress = validator.validate(surface)
-      println(ress)
+    val testGroups = for (validator <- validators) yield {
+      validator.validate(surface)
     }
+    val allTests = testGroups.flatten
+    debug("Total tests: " + allTests.size)
+    allTests
   }
 }

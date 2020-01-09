@@ -1,24 +1,22 @@
-
-
 ## Top-level overview
 
-The projectvalidator's main purpose is to validate a **CITE library**.
+The `projectvalidator` library's main purpose is to validate a **CITE library**. It can be applied to a CITE library constructed in any fashion.
 
 The `LibraryValidator` class should do this by:
 
-1. taking a Vector of  `MidValidator` implementations;  these have in common a `validate` function that returns a type-parameterized `TestResults` for a given surface identified by `Cite2Urn`.
-2. each `MidValidator` to a surface identified by `Cite2Urn`
+1. taking a Vector of  `MidValidator` implementations;  these have in common a `validate` function that returns a Vector of type-parameterized `TestResult` for a given surface identified by `Cite2Urn`.
+
 
 
 ### Type parameterization
 
 
-The `MidValidator` trait defines a type-parameterized `validate` method that operates on a surface identified by `Cite2Urn`.  It returns a  `TestResults` object operating type-parameterized to the same type as the `validate` function is invoked with.
+The `MidValidator` trait defines a type-parameterized `validate` method that operates on a surface identified by `Cite2Urn`.  It returns a type-parameterized `TestResult` of the same type as the `validate` function.
 
 Bottom-up example of track of validation:
 
 
-1.  `DseValidator` extends `MidValidator`.  Its `validate` function is specified as working on type `DsePassage` and returns a `TestResults` object of `DsePassage` type.
+1.  `DseValidator` extends `MidValidator`.  Its `validate` function is specified as working on type `DsePassage` and returns a `TestResult` object of `DsePassage` type.
 
 
 
@@ -26,8 +24,8 @@ Bottom-up example of track of validation:
 Tests:
 
 
-- construct a `DseValidator` implementing `MidValidator[DsePassage]`and get its `validate` results.  This should be a `DseResults[DsePassage]`.
-- pass a `DseValidator` in to a `LibraryValidator`
+- construct a `DseValidator` implementing `MidValidator[DsePassage]`and get its `validate` results.  This should be a Vector of `TestResult[DsePassage]`.
+- pass a `DseValidator` in to a `LibraryValidator` and do the same thing.
 
 
 ### Building a CITE library from an MID project

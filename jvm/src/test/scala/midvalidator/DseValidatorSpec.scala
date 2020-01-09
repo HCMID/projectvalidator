@@ -8,58 +8,28 @@ import org.scalatest.FlatSpec
 
 class DseValidatorSpec extends FlatSpec {
 
+  // Build a CiteLibrary from an EditorsRepo for test data
+  val readerMap = Map.empty[String, Vector[MidMarkupReader]]
+  val orthoMap = Map.empty[String, MidOrthography]
+  val repo = EditorsRepo("jvm/src/test/resources/chantsample",
+  readerMap, orthoMap)
+  val lib = repo.library
 
-  //val dseStr = "urn:cts:chant:massordinary.sg359.text_xml:h007_2.h10.1#urn:cite2:ecod:codsang359imgs.v1:csg359_0_43_36_0@0.6863,0.2851,0.1977,0.02985#urn:cite2:ecod:sg359pages.v1:36"
-
-
-
- ///urn: Cite2Urn, label: String, passage: CtsUrn, imageroi: Cite2Urn, surface: Cite2Urn)
-  val dsePsg = DsePassage(
-    Cite2Urn("urn:cite2:hcmid:units.v1:dsesg1"),
-    "Demo text",
-    CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:h007_2.h10.1"), Cite2Urn("urn:cite2:ecod:codsang359imgs.v1:csg359_0_43_36_0@0.6863,0.2851,0.1977,0.02985"),
-    Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
-  )
-  val urn = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:h007_2.h10.1")
-  val txt = "Caeli enarrant."
-  val cn = CitableNode(urn,txt)
-  val corpus = Corpus(Vector(cn))
-  //val dseResults :  DseResults[DsePassage] = DseResults(corpus)
-
-  "A DseResults" should "determine if a DsePassage reports a node in the given corpus" in {
-    val readerMap = Map.empty[String, Vector[MidMarkupReader]]
-    val orthoMap = Map.empty[String, MidOrthography]
-    val repo = EditorsRepo("jvm/src/test/resources/chantsample",
-    readerMap, orthoMap)
-    val lib = repo.library
+  "A DseValidator" should "test DsePassages to see if nodes appear in the library's text corpus" in {
     val dsev = DseValidator(lib)
-
-  } /*{
-    //val rept = dseResults.report(dsePsg)
-    //println("IN DSE: " + dsePsg.passage)
-    //println("IN CORPUS: " + corpus.nodes.map(_.urn).mkString(", "))
-    //assert(rept.success)
+    val pg =   Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
+    val rslts = dsev.validate(pg)
+    println("Tests: " + rslts.size)
+    println("Pass/fail: " + dsev.successes(pg).size + "/" + dsev.failures(pg).size)
   }
-*/
-  it should "identify entries missing from the text corpus" in pending /* {
-    val absent = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:NOT_HERE")
-    val dsePsg = DsePassage(
-      Cite2Urn("urn:cite2:hcmid:units.v1:dsesg1"),
-      "Demo text",
-      absent, Cite2Urn("urn:cite2:ecod:codsang359imgs.v1:csg359_0_43_36_0@0.6863,0.2851,0.1977,0.02985"),
-      Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
-    )
-    //val rept = dseResults.report(dsePsg)
-    //assert(rept.success == false)
-  }*/
 
-  it should "return a TestResult" in pending /*{
-    val rept = dseResults.report(dsePsg)
-    rept match {
-      case tr: TestResult => assert(true)
-      case _ => fail("Not a TestResult: " + rept)
-    }
-  }*/
+
+  it should "identify entries missing from the text corpus" in {
+    val dsev = DseValidator(lib)
+    val pg =   Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
+    val missing = dsev.failures(pg)
+    println(missing.map(_.unit.passage))
+  }
 
 
 }
