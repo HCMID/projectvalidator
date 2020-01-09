@@ -1,10 +1,18 @@
-The projectvalidator's main function is to valid a CITE library.
 
 
-What should it do? Take a Vector of initialized etensions of an MidValidator trait;  these have in common a `validate` function that returns a type-parameterized `TestResults`
+## Top-level overview
+
+The projectvalidator's main purpose is to validate a **CITE library**.
+
+The `LibraryValidator` class should do this by:
+
+1. taking a Vector of  `MidValidator` implementations;  these have in common a `validate` function that returns a type-parameterized `TestResults` for a given surface identified by `Cite2Urn`.
+2. eacsh `MidValidator` to a surface identified by `Cite2Urn`
+
+
+## Building a CITE library from an MID project
 
 Data/configuration we need for MID project validation:
-
 
 MID project conventions for building content required to validate:
 
