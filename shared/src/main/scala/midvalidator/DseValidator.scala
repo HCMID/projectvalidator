@@ -7,21 +7,23 @@ import edu.holycross.shot.citeobj._
 import edu.holycross.shot.dse._
 import edu.holycross.shot.scm._
 
+import scala.reflect.runtime.universe._
 
 import wvlet.log._
 import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
 import scala.scalajs.js.annotation._
 
-@JSExportAll  case class DseValidator(library: CiteLibrary)  extends MidValidator with LogSupport {
+@JSExportAll  case class DseValidator(citeLibrary: CiteLibrary)  extends MidValidator[DsePassage] with LogSupport {
   /** All [[MidValidator]]s work on a CiteLibrary */
-  //def library : CiteLibrary
+  def library : CiteLibrary = citeLibrary
 
 
-  def validate[DsePassage](surface: Cite2Urn) : TestResults[DsePassage] =
-    {
-      DseResults[DsePassage](library.textRepository.get.corpus)
-    }
+  def validate(surface: Cite2Urn) : Vector[TestResult] = {
+    Vector.empty[TestResult]
+  }
+
+}
 
 
   /** Lookup list of MidMarkupReader's by identifying String.
@@ -52,13 +54,13 @@ import scala.scalajs.js.annotation._
 
 
 
-  /** Validate a series of surfaces.*/
+  /** Validate a series of surfaces.
   def validateOld(surfaceRange: Vector[Cite2Urn]): Unit = {
     for (surface <- surfaceRange)  {
       validate(surface)
     }
   }
-
+*/
   /** Validate a text-bearing surface or surfaces.
   *
   * @param surface Surface to validate.
@@ -86,4 +88,3 @@ import scala.scalajs.js.annotation._
     }
     // b. orthography validation
   }  */
-}

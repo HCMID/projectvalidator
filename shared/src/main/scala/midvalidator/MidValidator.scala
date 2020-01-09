@@ -13,7 +13,7 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
 import scala.scalajs.js.annotation._
 
-trait MidValidator  extends LogSupport {
+trait MidValidator[T]  extends LogSupport {
   /** All [[MidValidator]]s work on a CiteLibrary */
   def library : CiteLibrary
 
@@ -23,8 +23,8 @@ trait MidValidator  extends LogSupport {
   /** Library must implement the DSE model in at least one collection.*/
   lazy val dsev = DseVector.fromCiteLibrary(library)
 
-  def validate[T](surface: Cite2Urn) : TestResults[T]
-
+  //def validate[T](surface: Cite2Urn) : TestResults[T]
+  def validate(surface: Cite2Urn) : Vector[TestResult]
 
   /** Lookup list of MidMarkupReader's by identifying String.
   *
