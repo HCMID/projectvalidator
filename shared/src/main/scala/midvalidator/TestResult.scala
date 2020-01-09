@@ -8,4 +8,4 @@ import edu.holycross.shot.cite._
 * @param success True if tested object passed the test.
 * @param summary Human-readable summary of the test.
 */
-@JSExportAll case class TestResult[T](success: Boolean, summary: String, unit: T)
+@JSExportAll case class TestResult[+T](success: Boolean, summary: String, unit: T)

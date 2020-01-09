@@ -40,8 +40,6 @@ import scala.scalajs.js.annotation._
       testRes
     }
   }
-
-  
 }
 
 

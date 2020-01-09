@@ -13,7 +13,7 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
 import scala.scalajs.js.annotation._
 
-trait MidValidator[T]  extends LogSupport {
+trait MidValidator[+T]  extends LogSupport {
   /** All [[MidValidator]]s work on a CiteLibrary */
   def library : CiteLibrary
 
