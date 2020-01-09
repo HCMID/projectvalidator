@@ -28,7 +28,7 @@ class DseOverviewSpec extends FlatSpec {
   val badLib = badRepo.library
 
 
-  "A DseOverview" should "get basic summary scores by corpus and by surface" in {
+  "A DseOverview" should "get basic summary scores by corpus and by surface" in  pending /*{
     val dseOv = DseOverview(lib, repo.readers)
 
     val expectedCorpusSuccess = 84
@@ -48,7 +48,7 @@ class DseOverviewSpec extends FlatSpec {
     assert(pgRepts.size == expectedReports)
     assert(dseOv.successes(pg) == expectedPageSuccess)
     assert(dseOv.failures(pg) == expectedPageFailure)
-  }
+  }*/
 
   it should "cope with errors" in {
 

@@ -14,12 +14,11 @@ trait TestResults[T] {
   /** A Markdown String reporting on the testing results.*/
   def report(observation: T): TestResult
 
-  /** Get a Vector of parameterized TestResults.*/
+  /** Get a Vector of parameterized TestResults.
   @JSExport def reports(observations: Vector[T]): Vector[TestResult] = {
      observations.map(report(_))
   }
-
-
+*/
   @JSExport def successes(observations: Vector[T]): Int = {
      val tf = observations.map(good(_))
      (tf.filter(_ ==  true)).size

@@ -46,7 +46,7 @@ class ReportWriterSpec extends FlatSpec {
   }
 
   // Tests:
-  "A ReportWriter" should "write 'em'" in {
+  "A ReportWriter" should "write 'em'" in  pending /*{
     val pg = Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
     val reports = dseOv.reportPages(pg)
     val fileList = reports.map(rept => repo.validationDir/rept.suggestedFileName)
@@ -55,14 +55,15 @@ class ReportWriterSpec extends FlatSpec {
 
 
     val reptWriter = ReportWriter(repo.validationDir)
-    reptWriter.writeReports(reports)/*
+    reptWriter.writeReports(reports)
     // test that resulting report files exist
     for (f <- fileList) {
       assert(f.exists)
     }
     // rm files before further testing
-    tidy(fileList) */
-  }
+    tidy(fileList)
+  }*/
+
   it should "object if a writable directory is not found" in pending /*{
     val bogus = File("Not_a_directory")
     try {

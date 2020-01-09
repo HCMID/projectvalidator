@@ -59,7 +59,8 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def failures(surface: Cite2Urn): Int = {
-    pageTestResults(surface).filter(_.success == false).size
+    //pageTestResults(surface).filter(_.success == false).size
+    0
   }
 
   /** Number of successful tests for a specified surface.
@@ -67,18 +68,19 @@ import scala.scalajs.js.annotation._
   * @param surface Text-bearing surface.
   */
   def successes(surface: Cite2Urn): Int = {
-    pageTestResults(surface).filter(_.success).size
+    //pageTestResults(surface).filter(_.success).size
+    0
   }
 
   /** Collection of pages this ReportOverview can compose
   * for a specified surface.
   *
   * @param surface Text-bearing surface.
-  */
+
   def reportPages(surface: Cite2Urn):  Vector[ReportPage] =  {
     Vector(overviewPage(surface), verificationPage(surface))
   }
-
+  */
   /** Vector of all DsePassages occurring on a surface.
   *
   * @param surface Text-bearing surface.
@@ -90,29 +92,29 @@ import scala.scalajs.js.annotation._
   /** Vector of TestResults for all DsePassages occurring on a surface.
   *
   * @param surface Text-bearing surface.
-  */
+
   def pageTestResults(surface: Cite2Urn):  Vector[TestResult] = {
     testResults.reports(pageDse(surface))
   }
-
+  */
 
   /** Summary or overview page for a given surface.
   *
   * @param surface Text-bearing surface.
-  */
+
   def overviewPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = pageSummary(surface)
     def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-validation.md"
     def title: String = s"DSE relations for ${surface.collection}, ${surface.objectComponent}: summary"
     ReportPage(title, markdown, suggestedFileName, Some(successes(surface)), Some(failures(surface)))
   }
-
+  */
 
   /** Compose markdown page summarizing DSE evaluation
   * for a specified page.
   *
   * @param surface Page to analyze.
-  */
+
   def pageSummary(surface: Cite2Urn) : String = {
     val md = StringBuilder.newBuilder
 
@@ -131,20 +133,20 @@ import scala.scalajs.js.annotation._
     }
     md.toString
   }
-
+  */
 
   /** Verification page for comparing transcribed text
   * and indexed image segment from DSE record.
   *
   * @param surface Text-bearing surface.
-  */
+
   def verificationPage(surface: Cite2Urn): ReportPage = {
     def markdown: String = verificationView(surface)
     def suggestedFileName: String = s"${surface.collection}-${surface.objectComponent}/dse-verification.md"
     def title: String = s"Verify completeness and correctness for page (surface): ${surface.collection}, ${surface.objectComponent}"
     ReportPage(title, markdown, suggestedFileName, None, None)
   }
-
+  */
 
 
   /** Configure an IIIFApi BinaryImageService for the

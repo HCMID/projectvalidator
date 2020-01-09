@@ -23,6 +23,6 @@ trait ReportOverview {
   /** Report pages in markdown format.
   *
   * @param surface Text-bearing surface.
-  */
-  def reportPages(surface: Cite2Urn): Vector[ReportPage]
+
+  def reportPages(surface: Cite2Urn): Vector[ReportPage]  */
 }

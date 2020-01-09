@@ -13,17 +13,15 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
 import scala.scalajs.js.annotation._
 
-trait MidValidator  extends LogSupport {
+@JSExportAll  case class DseValidator(library: CiteLibrary)  extends MidValidator with LogSupport {
   /** All [[MidValidator]]s work on a CiteLibrary */
-  def library : CiteLibrary
+  //def library : CiteLibrary
 
-  /** Short-hand access to library's text corpus.*/
-  lazy val corpus = library.textRepository.get.corpus
 
-  /** Library must implement the DSE model in at least one collection.*/
-  lazy val dsev = DseVector.fromCiteLibrary(library)
-
-  def validate[T](surface: Cite2Urn) : TestResults[T]
+  def validate[DsePassage](surface: Cite2Urn) : TestResults[DsePassage] =
+    {
+      DseResults[DsePassage](library.textRepository.get.corpus)
+    }
 
 
   /** Lookup list of MidMarkupReader's by identifying String.
@@ -54,12 +52,12 @@ trait MidValidator  extends LogSupport {
 
 
 
-  /** Validate a series of surfaces.
+  /** Validate a series of surfaces.*/
   def validateOld(surfaceRange: Vector[Cite2Urn]): Unit = {
     for (surface <- surfaceRange)  {
       validate(surface)
     }
-  }*/
+  }
 
   /** Validate a text-bearing surface or surfaces.
   *
@@ -87,6 +85,5 @@ trait MidValidator  extends LogSupport {
       debug(dseResults.good(dsePsg))
     }
     // b. orthography validation
-  }
-    */
+  }  */
 }

@@ -23,6 +23,7 @@ case class ValidationReporter(
   lazy val dseOV = DseOverview(editorsRepo.library, editorsRepo.readers)
 
   def validate(surface: Cite2Urn) : Unit = {
+    /*
     val targetDir = editorsRepo.validationDir / s"${surface.collection}-${surface.objectComponent}"
 
     // DSE is required in version 7.0.0.  Other reports may be added.
@@ -34,7 +35,9 @@ case class ValidationReporter(
     indexPage.overwrite(index)
 
     println(s"Wrote a total of ${allReportPages.size + 1} files to:\n" + targetDir)
+    */
   }
+
 
   def composeIndex(pages: Vector[ReportPage], surface: Cite2Urn) : String =  {
     val txt = StringBuilder.newBuilder

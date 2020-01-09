@@ -44,7 +44,7 @@ urn:cite2:op:208v:10#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ε[2]#u
     assert(palResults.report(badCex).summary == expectedMsg)
   }
 
-  it should "report on a Vector of Strings" in {
+  it should "report on a Vector of Strings" in pending /* {
     val lines = tenGoodCex.split("\n").toVector
     val palResults :  PaleographyResults[String] = new PaleographyResults
     val rept = palResults.reports(lines)
@@ -58,5 +58,5 @@ urn:cite2:op:208v:10#urn:cts:greekLit:tlg0012.tlg001.msA.hmt2017a:16.126@ε[2]#u
     val expectedFails = 0
     assert(rept.filterNot(_.success).size == expectedFails)
 
-  }
+  }*/
 }
