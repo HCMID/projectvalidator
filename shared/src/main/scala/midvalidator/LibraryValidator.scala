@@ -28,6 +28,7 @@ import scala.scalajs.js.annotation._
 
     debug("Applying " + validators.size + " MID Validators to surface " + surface)
     val testGroups = for (validator <- validators) yield {
+      debug("validating with " + validator)
       validator.validate(surface)
     }
     val allTests = testGroups.flatten
