@@ -1,5 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+
+**11.0.0**  Change to `LibraryValidator` API: now a static object rather than case class.
+
 **10.0.0**:  API redesign making `MidValidator` a trait.
 
 
