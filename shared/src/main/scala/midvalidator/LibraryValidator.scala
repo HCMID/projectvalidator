@@ -18,24 +18,26 @@ import scala.scalajs.js.annotation._
   Logger.setDefaultLogLevel(LogLevel.DEBUG)
 
 
+/*
   def validate(surfaces: Vector[Cite2Urn],  validators: Vector[MidValidator[Any]]) : Vector[TestResult[Any]] = {
     val testGroupsByPage = for (surface <- surfaces) yield {
       validate(surface, validators)
     }
     testGroupsByPage.flatten
   }
+  */
   /** Collect all validation results for a text-bearing using
   * by apply all [[MidValidator]]s in a given list.
   *
   * @param surface Text-bearing surface to test.
   * @param validators [[MidValidator]]s to apply.
   */
-  def validate(surface: Cite2Urn, validators: Vector[MidValidator[Any]]) : Vector[TestResult[Any]] = {
+  def validate(lib: CiteLibrary, validators: Vector[MidValidator[Any]]) : Vector[TestResult[Any]] = {
 
-    info("Applying " + validators.size + " MID Validators to surface " + surface)
+    info("Applying " + validators.size + " MID Validators to library " + lib.name)
     val testGroups = for (validator <- validators) yield {
       debug("Use " + validator.label)
-      validator.validate(surface)
+      validator.validate(lib)
     }
     val allTests = testGroups.flatten
     //debug("Total tests: " + allTests.size)

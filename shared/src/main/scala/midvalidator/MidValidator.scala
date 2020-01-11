@@ -18,23 +18,25 @@ trait MidValidator[+T]  extends LogSupport {
   def label: String
 
   /** All [[MidValidator]]s work on a CiteLibrary */
-  def library : CiteLibrary
+  //def library : CiteLibrary
 
   /** Short-hand access to library's text corpus.*/
-  lazy val corpus = library.textRepository.get.corpus
+  //lazy val corpus = library.textRepository.get.corpus
 
   /** Library must implement the DSE model in at least one collection.*/
-  lazy val dsev = DseVector.fromCiteLibrary(library)
+  //lazy val dsev = DseVector.fromCiteLibrary(library)
 
   //def validate[T](surface: Cite2Urn) : TestResults[T]
-  def validate(surface: Cite2Urn) : Vector[TestResult[T]]
+  //def validate(surface: Cite2Urn) : Vector[TestResult[T]]
 
-  def successes(surface: Cite2Urn): Vector[TestResult[T]] = {
-    validate(surface).filter(_.success)
+  def validate(library: CiteLibrary) : Vector[TestResult[T]]
+
+  def successes(library: CiteLibrary): Vector[TestResult[T]] = {
+    validate(library).filter(_.success)
   }
 
-  def failures(surface: Cite2Urn):  Vector[TestResult[T]]   = {
-    validate(surface).filterNot(_.success)
+  def failures(library: CiteLibrary):  Vector[TestResult[T]]   = {
+    validate(library).filterNot(_.success)
   }
 
   /** Lookup list of MidMarkupReader's by identifying String.

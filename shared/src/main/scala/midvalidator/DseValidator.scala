@@ -18,22 +18,44 @@ import scala.scalajs.js.annotation._
   Logger.setDefaultLogLevel(LogLevel.DEBUG)
 
   def label : String = "Validate DsePassage relations"
-  /** Library's DseVector.*/
-  lazy val dse = DseVector.fromCiteLibrary(citeLibrary)
 
-  /** All [[MidValidator]]s work on a CiteLibrary */
-  def library = citeLibrary
+  lazy val corpus = citeLibrary.textRepository.get.corpus
+  lazy val collections = citeLibrary.collectionRepository.get
+
+  /** Library must implement the DSE model in at least one collection.*/
+  lazy val dsev = DseVector.fromCiteLibrary(citeLibrary)
+
+  def tbs: Vector[Cite2Urn] = {
+    val tbsUrn = Cite2Urn("urn:cite2:cite:datamodels.v1:tbsmodel")
+
+    val tbsCollections: Vector[Cite2Urn] = citeLibrary.collectionsForModel(tbsUrn)
+
+    println("TBS: " + tbsCollections)
+    tbsCollections.flatMap (c =>
+      (collections ~~ c).map(_.urn)
+    )
+  }
+
+  def validate(surfaces: Vector[Cite2Urn]) : Vector[TestResult[DsePassage]]  = {
+    surfaces.flatMap(validate(_))
+  }
+
+
+  def validate(citeLibrary: CiteLibrary) : Vector[TestResult[DsePassage]]  = {
+    val surfaceResults = tbs.map(validate(_))
+    surfaceResults.flatten
+  }
 
   /** Required method for implementation of MidValidaor trait.
   *
   * @param surface Validate DSE content on this text-bearing surface.
   */
   def validate(surface: Cite2Urn) : Vector[TestResult[DsePassage]] = {
-    println("DSE VALIDATE " + surface + " : start computing DSE...")
-    val surfaceDse = dse.passages.filter(_.surface == surface)
-    println("Done. DSE VALIDATING " + surfaceDse.size + " DSE passages.")
+    println("DSE validate for " + surface + " : start computing DSE...")
+    val surfaceDse = dsev.passages.filter(_.surface == surface)
+    println("Done. DSE validating " + surfaceDse.size + " DSE passages.")
     for (dsePsg <- surfaceDse) yield {
-      println("Work on passage " + dsePsg)
+      println("Validating DSE passage " + dsePsg)
       val matches = corpus ~~ dsePsg.passage
       println(s"Text ${dsePsg.passage} on " + surface + ": " + matches.size + " in corpus")
 
