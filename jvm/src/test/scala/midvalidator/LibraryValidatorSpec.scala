@@ -15,13 +15,13 @@ class LibraryValidatorSpec extends FlatSpec {
   readerMap, orthoMap)
   val lib = repo.library
 
-  "A LibraryValidator" should "apply a list of validators of any type" in pending /*{
+  "A LibraryValidator" should "apply a list of validators of any type" in {
     val dsev = DseValidator(lib)
     val validatorList = Vector(dsev)
-    val pg =   Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
-    val rslts = LibraryValidator.validate(pg, validatorList)
+    println("DSE Vector for lib: " + DseVector.fromCiteLibrary(lib).size)
+    val rslts = LibraryValidator.validate(lib, validatorList)
     println("Library validator: " + rslts.size + " tests run.")
-  }*/
+  }
 
 
 }
