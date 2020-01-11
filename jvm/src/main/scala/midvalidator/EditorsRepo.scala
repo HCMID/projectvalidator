@@ -40,8 +40,12 @@ case class EditorsRepo(
   val paleographyDir = File(baseDir + "/paleography")
   /** Directory with library headers for building composite CEX file.*/
   val libHeadersDir = File(baseDir + "/header")
+  /** Directory with TBS data of codices you're editing.*/
+  val codicesDir = File(baseDir + "/codices-data")
+  /** Directory with CITE Collection cataloging of codices you're editing.*/
+  val codicesCatalogs = File(baseDir + "/codices-catalog")
   /** Vector of all required directories for an HCMID editorial project.*/
-  val dirs = Vector(dseDir, editionsDir, validationDir, paleographyDir, libHeadersDir)
+  val dirs = Vector(dseDir, editionsDir, validationDir, paleographyDir, libHeadersDir, codicesDir, codicesCatalogs)
 
   for (d <- dirs) {
     if (! d.exists) {
@@ -54,8 +58,8 @@ case class EditorsRepo(
   /** Build a CITE library from the files in this repository. */
   def library: CiteLibrary = {
     // required components:
-    // text repo, dse,
-    CiteLibrary(libHeader + dseCex + textsCex )
+    // text repo, dse, collections of codices
+    CiteLibrary(libHeader + dseCex + textsCex  + codicesCex)
   }
 
   /** Build [[OrthoPairing]]s from configuration in this repository.*/
@@ -130,6 +134,12 @@ case class EditorsRepo(
   def dseCex:  String = {
     val rows = dse.passages.map(_.cex())
     rows.mkString("\n")
+  }
+
+  def codicesCex : String = {
+    val codexData = DataCollector.compositeFiles(codicesDir.toString, "cex")
+    val codexCatalog = DataCollector.compositeFiles(codicesCatalogs.toString, "cex")
+    codexCatalog + codexData
   }
 
   /** CEX data for text editions.*/

@@ -42,8 +42,9 @@ import scala.scalajs.js.annotation._
 
 
   def validate(citeLibrary: CiteLibrary) : Vector[TestResult[DsePassage]]  = {
-    val surfaceResults = tbs.map(validate(_))
-    surfaceResults.flatten
+    //val surfaceResults =
+    //surfaceResults.flatten
+    tbs.flatMap(validate(_))
   }
 
   /** Required method for implementation of MidValidaor trait.
