@@ -14,26 +14,29 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
 import scala.scalajs.js.annotation._
 
-@JSExportAll  case class DseValidator(citeLibrary: CiteLibrary)  extends MidValidator[DsePassage] with LogSupport {
-
+@JSExportAll  case class DseValidator(citeLibrary: CiteLibrary) extends MidValidator[DsePassage] with LogSupport {
+  Logger.setDefaultLogLevel(LogLevel.DEBUG)
   /** Library's DseVector.*/
   lazy val dse = DseVector.fromCiteLibrary(citeLibrary)
 
   /** All [[MidValidator]]s work on a CiteLibrary */
-  def library : CiteLibrary = citeLibrary
+  def library = citeLibrary
 
   /** Required method for implementation of MidValidaor trait.
   *
   * @param surface Validate DSE content on this text-bearing surface.
   */
   def validate(surface: Cite2Urn) : Vector[TestResult[DsePassage]] = {
-    for (dsePsg <- dse.passages) yield {
-
+    debug("DSE VALIDATE " + surface + " in DSE with " + dse.size + " records.")
+    val surfaceDse = dse.passages.filter(_.surface == surface)
+    debug("DSE VALIDATING " +surfaceDse.size + " DSE passages.")
+    for (dsePsg <- surfaceDse) yield {
+      debug("Work on passage " + dsePsg)
       val matches = corpus ~~ dsePsg.passage
       //println(s"Text ${dsePsg.passage} on " + surface + ": " + matches.size)
       val testRes = matches.size match {
         case 0 => TestResult(false, "Indexed passage " + dsePsg.passage + " not found in text corpus.", dsePsg)
-        case 1 => {
+        case  _ => {
           TestResult(true, "Text passage " + dsePsg.passage + " found in corpus.", dsePsg)
         }
       }
