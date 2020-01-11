@@ -1,0 +1,21 @@
+// This is the declaration of a CITE collection of text-bearing surfaces.
+// We concatenate data from codices with this.
+
+#!citecollections
+URN#Description#Labelling property#Ordering property#License
+urn:cite2:validate:tempDse.temp:#Temporary collection for in-progress work on DSE model of Venetus A manuscript#urn:cite2:validate:tempDse.temp.label:##CC-attribution-share-alike
+
+
+#!citeproperties
+Property#Label#Type#Authority list
+urn:cite2:hmt:msA.v1.sequence:#Page sequence#Number#
+urn:cite2:hmt:msA.v1.urn:#URN#Cite2Urn#
+urn:cite2:hmt:msA.v1.rv:#Recto or Verso#String#recto,verso
+urn:cite2:hmt:msA.v1.label:#Label#String#
+urn:cite2:hmt:msA.v1.image:#TBS image#Cite2Urn#
+
+#!datamodels
+Collection#Model#Label#Description
+urn:cite2:ecod:eins121pages.v1:#urn:cite2:cite:datamodels.v1:tbsmodel#Model of codex Einsiedeln 121#Codex Einsiedeln 121 in the CITE model of a sequence of text-bearing surfaces
+
+#!citedata

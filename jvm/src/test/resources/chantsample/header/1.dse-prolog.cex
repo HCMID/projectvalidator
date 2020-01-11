@@ -3,7 +3,7 @@
 
 #!citecollections
 URN#Description#Labelling property#Ordering property#License
-urn:cite2:validate:tempDse.temp:#Temporary collection for in-progress work on DSE model of Venetus A manuscript#urn:cite2:validate:tempDse.temp.label:##CC-attribution-share-alike
+urn:cite2:validate:tempDse.temp:#Temporary collection for in-progress work on DSE records#urn:cite2:validate:tempDse.temp.label:##CC-attribution-share-alike
 
 #!citeproperties
 Property#Label#Type#Authority list
@@ -15,7 +15,7 @@ urn:cite2:validate:tempDse.temp.surface:#Artifact surface#Cite2Urn#
 
 #!datamodels
 Collection#Model#Label#Description
-urn:cite2:validate:tempDse.temp:#urn:cite2:cite:datamodels.v1:dsemodel#DSE model of the Venetus A manuscript#Diplomatic Scholarly Edition (DSE) model.  See documentation at <https://github.com/cite-architecture/dse>.
+urn:cite2:validate:tempDse.temp:#urn:cite2:cite:datamodels.v1:dsemodel#DSE model editorial work#Diplomatic Scholarly Edition (DSE) model.  See documentation at <https://github.com/cite-architecture/dse>.
 
 
 #!citedata

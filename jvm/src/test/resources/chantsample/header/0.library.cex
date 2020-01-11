@@ -5,8 +5,8 @@
 3.0.1
 
 #!citelibrary
-name#Documents of the U.S. National Archives
-urn#urn:cite2:hcmid:natarch.cex.2018workshop:all
+name#Chants project
+urn#urn:cite2:hcmid:chants.cex.testdata:all
 license#Creative Commons Attribution, Non-Commercial 4.0 License <https://creativecommons.org/licenses/by-nc/4.0/>.
 
 // We apply the DSE data model in our work in progress,
@@ -26,3 +26,4 @@ urn:cite2:cite:datamodels.v1.description:#Description#String#
 #!citedata
 urn#label#description
 urn:cite2:cite:datamodels.v1:dsemodel#Diplomatic Scholarly Edition#Diplomatic Scholarly Edition.  See https://cite-architecture.github.io/dse/.
+urn:cite2:cite:datamodels.v1:tbsmodel#Text Bearing Surface Model#Model of TextBearing Surfaces.  See http://cite-architecture.github.io/tbsmodel/.
