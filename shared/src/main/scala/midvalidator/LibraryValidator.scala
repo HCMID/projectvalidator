@@ -13,7 +13,7 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
 import scala.scalajs.js.annotation._
 
-@JSExportAll case class LibraryValidator(library : CiteLibrary)  extends LogSupport {
+@JSExportAll object LibraryValidator  extends LogSupport {
   // Set logging to DEBUG while developing:
   Logger.setDefaultLogLevel(LogLevel.DEBUG)
 
@@ -26,13 +26,13 @@ import scala.scalajs.js.annotation._
   */
   def validate(surface: Cite2Urn, validators: Vector[MidValidator[Any]]) : Vector[TestResult[Any]] = {
 
-    debug("Applying " + validators.size + " MID Validators to surface " + surface)
+    info("Applying " + validators.size + " MID Validators to surface " + surface)
     val testGroups = for (validator <- validators) yield {
-      debug("validating with " + validator)
+      debug("Use " + validator.label)
       validator.validate(surface)
     }
     val allTests = testGroups.flatten
-    debug("Total tests: " + allTests.size)
+    //debug("Total tests: " + allTests.size)
     allTests
   }
 }

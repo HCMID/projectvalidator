@@ -18,9 +18,8 @@ class LibraryValidatorSpec extends FlatSpec {
   "A LibraryValidator" should "apply a list of validators of any type" in {
     val dsev = DseValidator(lib)
     val validatorList = Vector(dsev)
-    val libval = LibraryValidator(lib)
     val pg =   Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")
-    val rslts = libval.validate(pg, validatorList)
+    val rslts = LibraryValidator.validate(pg, validatorList)
     println("Library validator: " + rslts.size + " tests run.")
   }
 
