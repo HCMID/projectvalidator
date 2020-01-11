@@ -10,9 +10,8 @@ class LibraryValidatorSpec extends FlatSpec {
 
   // Build a CiteLibrary from an EditorsRepo for test data
   val readerMap = Map.empty[String, Vector[MidMarkupReader]]
-  val orthoMap = Map.empty[String, MidOrthography]
   val repo = EditorsRepo("jvm/src/test/resources/chantsample",
-  readerMap, orthoMap)
+  readerMap)
   val lib = repo.library
 
   "A LibraryValidator" should "apply a list of validators of any type" in {

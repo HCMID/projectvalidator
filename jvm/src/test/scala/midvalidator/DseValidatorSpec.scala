@@ -11,9 +11,9 @@ class DseValidatorSpec extends FlatSpec {
 
   // Build a CiteLibrary from an EditorsRepo for test data
   val readerMap = Map.empty[String, Vector[MidMarkupReader]]
-  val orthoMap = Map.empty[String, MidOrthography]
+
   val repo = EditorsRepo("jvm/src/test/resources/chantsample",
-  readerMap, orthoMap)
+  readerMap)
   val lib1 = repo.library
   val hmtLib = CiteLibrarySource.fromFile("hmt_w_commentary.cex")
 

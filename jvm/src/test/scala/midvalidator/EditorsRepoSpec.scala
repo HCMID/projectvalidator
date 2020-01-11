@@ -14,12 +14,10 @@ class EditorsRepoSpec extends FlatSpec {
   val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
     "MidProseABDiplomatic" ->   Vector(MidProseABDiplomatic)
   )
-  val orthoMap : Map[String, MidOrthography] = Map(
-    "Latin23" -> Latin23
-  )
+
   val repoRoot = "jvm/src/test/resources/simplelatin"
 
-  val repo = EditorsRepo(repoRoot, readerMap, orthoMap)
+  val repo = EditorsRepo(repoRoot, readerMap)
 
 
 
@@ -29,7 +27,7 @@ class EditorsRepoSpec extends FlatSpec {
       case _ => fail("Did not create a CiteLibrary")
     }
   }
-  
+
   it should "construct a DseVector for the records in this repository" in {
     repo.dse match {
       case dses: DseVector => assert(true)
@@ -43,7 +41,7 @@ class EditorsRepoSpec extends FlatSpec {
     }
   }
 
-  it should "build a Vector of OrthoPairings from souce files" in {
+  it should "build a Vector of OrthoPairings from source files" in  pending /*{
     val orthos = repo.orthographies
 
     val expectedSize = 1
@@ -54,7 +52,7 @@ class EditorsRepoSpec extends FlatSpec {
 
     val expectedOrtho = "edu.holycross.shot.mid.validator.Latin23"
     assert(orthos(0).orthography.toString.contains(expectedOrtho))
-  }
+  }*/
 
   it should "build a Vector of ReaderPairings from source files" in {
     val readers = repo.readers

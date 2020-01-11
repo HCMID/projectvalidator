@@ -15,6 +15,7 @@ import better.files.Dsl._
 import wvlet.log._
 import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
+//* @param orthoMap Mapping of String names to classes of [[MidOrthography]].
 
 /** A class for working with HC-MID editorial work in a
 * local file system laid out according to conventions first
@@ -23,12 +24,10 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 *
 * @param baseDir Root directory of repository.
 * @param readerMap Mapping of String names to classes of [[MidMarkupReader]].
-* @param orthoMap Mapping of String names to classes of [[MidOrthography]].
 */
 case class EditorsRepo(
   baseDir: String,
-  readerMap:  Map[String, Vector[MidMarkupReader]],
-  orthoMap: Map[String, MidOrthography]) extends LogSupport {
+  readerMap:  Map[String, Vector[MidMarkupReader]]) extends LogSupport {
 
   /** Directory for DSE records (in CEX format).*/
   val dseDir = File(baseDir + "/dse")
@@ -62,7 +61,7 @@ case class EditorsRepo(
     CiteLibrary(libHeader + dseCex + textsCex  + codicesCex)
   }
 
-  /** Build [[OrthoPairing]]s from configuration in this repository.*/
+  /** Build [[OrthoPairing]]s from configuration in this repository.
   def orthographies: Vector[OrthoPairing] = {
     val data = orthoConfig.lines.toVector.tail
     val pairings = data.map( str => {
@@ -82,6 +81,7 @@ case class EditorsRepo(
     pairings
   }
 
+*/
 
   /** Use convention that first reader listed for each CTS URN
   * in markup reader configuration must produce a diplomatic edition.
@@ -101,12 +101,14 @@ case class EditorsRepo(
       try {
         val cols = str.split("#")
         val readerStrings = cols(1).split(",").toVector
+        println("FIX UP PAIRING FOR " + readerStrings)
+        println("Heres' reader map: " + readerMap)
         val readers = readerStrings.map(s => readerMap(s))
 
         ReadersPairing(CtsUrn(cols(0)),readers.flatten)
       } catch {
         case t: Throwable => {
-          println("Catastrophe: " + t)
+          println("Catastrophe: could not find " + t + " in reader pairings from :\n" + data.mkString("\n") )
           throw t
         }
       }
@@ -152,9 +154,9 @@ case class EditorsRepo(
   /** Configuration of citation for local files (in any supported format).*/
   val ctsCitation = nameBetterFile(editionsDir,"citation.cex")
   /** Mapping of CtsUrns to MID markup readers.*/
-  val readersConfig = editionsDir/"readers.cex"
+  val readersConfig = editionsDir / "readers.cex"
   /** Mapping of CtsUrns to MID orthography system.*/
-  val orthoConfig = editionsDir/"orthographies.cex"
+  val orthoConfig = editionsDir / "orthographies.cex"
 
   for (conf <- Seq(ctsCatalog, ctsCitation,readersConfig,orthoConfig)) {
     require(conf.exists,"Missing required configuration file: " + conf)
