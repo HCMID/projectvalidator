@@ -15,7 +15,7 @@ class HmtValidatorSpec extends FlatSpec {
   "A LibraryValidator" should "validate an HMT release" in {
     val dsev = DseValidator(lib)
     val validatorList = Vector(dsev)
-    val pg =   Cite2Urn("urn:cite2:hmt:msA.v1:12r")
+    val pg =   Cite2Urn("urn:cite2:hmt:msA.v1:28r")
     val rslts = LibraryValidator.validate(pg, validatorList)
     println("Library validator: " + rslts.size + " tests run.")
   }
