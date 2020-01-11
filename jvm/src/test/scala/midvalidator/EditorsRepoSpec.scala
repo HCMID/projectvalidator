@@ -29,6 +29,7 @@ class EditorsRepoSpec extends FlatSpec {
       case _ => fail("Did not create a CiteLibrary")
     }
   }
+  
   it should "construct a DseVector for the records in this repository" in {
     repo.dse match {
       case dses: DseVector => assert(true)
