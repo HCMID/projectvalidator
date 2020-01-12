@@ -53,8 +53,8 @@ import scala.scalajs.js.annotation._
     println("DSE validate for " + surface + " : start computing DSE...")
     val surfaceDse = dsev.passages.filter(_.surface == surface)
     println("Done. DSE validating " + surfaceDse.size + " DSE passages.")
-    for (dsePsg <- surfaceDse) yield {
-      print(".")
+    for ((dsePsg, count) <- surfaceDse.zipWithIndex) yield {
+      println(s"\t${count + 1}/${surfaceDse.size} ${dsePsg.passage}")
       //println("Validating DSE passage " + dsePsg)
       val matches = corpus ~~ dsePsg.passage
       //println(s"Text ${dsePsg.passage} on " + surface + ": " + matches.size + " in corpus")
@@ -65,7 +65,6 @@ import scala.scalajs.js.annotation._
           TestResult(true, "Text passage " + dsePsg.passage + " found in corpus.", dsePsg)
         }
       }
-      println("")
       testRes
     }
   }

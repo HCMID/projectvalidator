@@ -1,7 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**12.1.1**: Correct formatting of message
 
-**12.0.1**:  Add `OrthographyValidator` and `TestResultGroup` classes.
+**12.1.0**:  Add `OrthographyValidator` and `TestResultGroup` classes.
 
 **12.0.0**:  Change to `MidValidator` trait:  required `validate` function operates on a library, not a surface.
 
