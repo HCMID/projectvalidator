@@ -11,7 +11,34 @@ import scala.scalajs.js.annotation._
 */
 trait MidOrthography {
 
+  /** Unicode code point for asterisk character.*/
+  val asteriskCp = 0x002A
+  val spaceCp = 0x0020
 
+  /** Format a markdown string hilighting bad
+  * code points, if any, in a given string.
+  *
+  * @param s String to check.
+  */
+  def hiliteBadCps(s: String) : String = {
+    val cps =  strToCps(s)
+    hiliteBadCps(cps)
+  }
+
+  def hiliteBadCps(cps:  Vector[Int]) : String = {
+    val hiliteList = for (cp <- cps) yield {
+      if (validCP(cp)) {
+        Vector(cp)
+      } else {
+        Vector(spaceCp, asteriskCp, asteriskCp, cp, asteriskCp, asteriskCp, spaceCp)
+      }
+    }
+    val cpArray = hiliteList.flatten.toArray
+    new String(cpArray, 0, cpArray.length)
+  // val points = Array(0x1F1F2, 0x1F1E6)
+  //points: Array[Int] = Array(127474, 127462)
+  //cala> val string = new String(points, 0, points.length)
+  }
   /** Label for this orthographic system.*/
   def orthography: String
 
@@ -102,7 +129,6 @@ trait MidOrthography {
     val freqs = concordance(tokens).map{ case (k,v) => Frequency(k, v.size)}
     //ListMap(counts.toSeq.sortWith(_._2 > _._2):_*)
     Histogram(freqs.toVector)
-
   }
 
   /** Generate a histogram of occurrences of each token category.

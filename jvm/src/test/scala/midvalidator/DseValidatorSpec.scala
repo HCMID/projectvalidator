@@ -15,16 +15,16 @@ class DseValidatorSpec extends FlatSpec {
   val repo = EditorsRepo("jvm/src/test/resources/chantsample",
   readerMap)
   val lib1 = repo.library
-  val hmtLib = CiteLibrarySource.fromFile("hmt_w_commentary.cex")
+  //val hmtLib = CiteLibrarySource.fromFile("hmt_w_commentary.cex")
 
-  "A DseValidator" should "find a list of text-bearing surfaces in a library" in {
+  "A DseValidator" should "find a list of text-bearing surfaces in a library" in pending /*{
     val dseValidator = DseValidator(hmtLib)
     val surfaces = dseValidator.tbs
     println("FOUND " + surfaces.size)
-  }
+  }*/
 
 
-  it should "validate a range of surfaces" in {
+  it should "validate a range of surfaces" in pending /*{
     val pageList = Vector(
       Cite2Urn("urn:cite2:hmt:msA.v1:77v"),
       Cite2Urn("urn:cite2:hmt:msA.v1:78r")
@@ -32,7 +32,8 @@ class DseValidatorSpec extends FlatSpec {
     val dseValidator = DseValidator(hmtLib)
     val rslts = dseValidator.validate(pageList)
     println("Validated " + pageList.size + " surfaces, and got " + rslts.size + " results.")
-  }
+  }*/
+
     /* "do things" in pending
 
  {

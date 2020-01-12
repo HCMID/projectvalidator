@@ -35,4 +35,9 @@ class Latin23Spec extends FlatSpec {
     assert(Latin23.validString("ius belli"))
   }
 
+  it should "fancy format bad code points in a string" in {
+    val hilited = Latin23.hiliteBadCps("latin ανδ greek")
+    println(hilited)
+  }
+
 }

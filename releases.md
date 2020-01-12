@@ -1,6 +1,9 @@
 ## Release notes: MID   `projectvalidator` code library
 
-**11.0.0**:  Change to `MidValidator` trait:  required `validate` function operates on a library, not a surface.
+
+**12.0.1**:  Add `OrthographyValidator` and `TestResultGroup` classes.
+
+**12.0.0**:  Change to `MidValidator` trait:  required `validate` function operates on a library, not a surface.
 
 **11.0.0**:  Change to `LibraryValidator` API: now a static object rather than case class.
 
