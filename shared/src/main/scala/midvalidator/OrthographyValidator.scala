@@ -31,11 +31,9 @@ import scala.scalajs.js.annotation._
     }
   }
 
-/*
-  def validate(surfaces: Vector[Cite2Urn]) : Vector[TestResult[DsePassage]]  = {
-    surfaces.flatMap(validate(_))
-  }
-*/
+
+
+
 
   def validate(citeLibrary: CiteLibrary) : Vector[TestResult[CtsUrn]]  = {
     val corpus = citeLibrary.textRepository.get.corpus
@@ -52,10 +50,11 @@ import scala.scalajs.js.annotation._
   /** Required method for implementation of MidValidaor trait.
   *
   * @param surface Validate DSE content on this text-bearing surface.
-  def validate(surface: Cite2Urn) : Vector[TestResult[DsePassage]] = {
-    }
+  */
+  def validate(surface: Cite2Urn) : Vector[TestResult[CtsUrn]] = {
+    Vector.empty[TestResult[CtsUrn]]
   }
-    */
+
 }
 
 

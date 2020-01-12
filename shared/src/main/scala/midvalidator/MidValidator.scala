@@ -4,7 +4,7 @@ import edu.holycross.shot.cite._
 import edu.holycross.shot.ohco2._
 import edu.holycross.shot.citerelation._
 import edu.holycross.shot.citeobj._
-import edu.holycross.shot.dse._
+//import edu.holycross.shot.dse._
 import edu.holycross.shot.scm._
 
 
@@ -31,13 +31,12 @@ trait MidValidator[+T]  extends LogSupport {
 
   def validate(library: CiteLibrary) : Vector[TestResult[T]]
 
-  def successes(library: CiteLibrary): Vector[TestResult[T]] = {
-    validate(library).filter(_.success)
+  def validate(surface: Cite2Urn) : Vector[TestResult[T]]
+
+  def validate(surfaces: Vector[Cite2Urn]) : Vector[TestResult[T]]  = {
+    surfaces.flatMap(validate(_))
   }
 
-  def failures(library: CiteLibrary):  Vector[TestResult[T]]   = {
-    validate(library).filterNot(_.success)
-  }
 
   /** Lookup list of MidMarkupReader's by identifying String.
   *
@@ -64,15 +63,6 @@ trait MidValidator[+T]  extends LogSupport {
   }
 */
 
-
-
-
-  /** Validate a series of surfaces.
-  def validateOld(surfaceRange: Vector[Cite2Urn]): Unit = {
-    for (surface <- surfaceRange)  {
-      validate(surface)
-    }
-  }*/
 
   /** Validate a text-bearing surface or surfaces.
   *

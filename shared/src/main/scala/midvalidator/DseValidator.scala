@@ -25,29 +25,27 @@ import scala.scalajs.js.annotation._
   /** Library must implement the DSE model in at least one collection.*/
   lazy val dsev = DseVector.fromCiteLibrary(citeLibrary)
 
+  /** Get ordered list of all text-bearing surfaces in the library.
+  */
   def tbs: Vector[Cite2Urn] = {
     val tbsUrn = Cite2Urn("urn:cite2:cite:datamodels.v1:tbsmodel")
 
     val tbsCollections: Vector[Cite2Urn] = citeLibrary.collectionsForModel(tbsUrn)
-
-    println("TBS: " + tbsCollections)
     tbsCollections.flatMap (c =>
       (collections ~~ c).map(_.urn)
     )
   }
 
-  def validate(surfaces: Vector[Cite2Urn]) : Vector[TestResult[DsePassage]]  = {
-    surfaces.flatMap(validate(_))
-  }
-
-
+  /** Validate DSE relations page-by-page for an entire library.
+  *
+  * @param citeLibrary Library to validate.
+  */
   def validate(citeLibrary: CiteLibrary) : Vector[TestResult[DsePassage]]  = {
-    //val surfaceResults =
-    //surfaceResults.flatten
     tbs.flatMap(validate(_))
   }
 
-  /** Required method for implementation of MidValidaor trait.
+  /** Validate DSE content on a single text-bearing surface.
+  * Required method for implementation of MidValidator trait.
   *
   * @param surface Validate DSE content on this text-bearing surface.
   */
@@ -56,9 +54,10 @@ import scala.scalajs.js.annotation._
     val surfaceDse = dsev.passages.filter(_.surface == surface)
     println("Done. DSE validating " + surfaceDse.size + " DSE passages.")
     for (dsePsg <- surfaceDse) yield {
-      println("Validating DSE passage " + dsePsg)
+      print(".")
+      //println("Validating DSE passage " + dsePsg)
       val matches = corpus ~~ dsePsg.passage
-      println(s"Text ${dsePsg.passage} on " + surface + ": " + matches.size + " in corpus")
+      //println(s"Text ${dsePsg.passage} on " + surface + ": " + matches.size + " in corpus")
 
       val testRes = matches.size match {
         case 0 => TestResult(false, "Indexed passage " + dsePsg.passage + " not found in text corpus.", dsePsg)
@@ -66,6 +65,7 @@ import scala.scalajs.js.annotation._
           TestResult(true, "Text passage " + dsePsg.passage + " found in corpus.", dsePsg)
         }
       }
+      println("")
       testRes
     }
   }
@@ -97,16 +97,6 @@ import scala.scalajs.js.annotation._
   }
 */
 
-
-
-
-  /** Validate a series of surfaces.
-  def validateOld(surfaceRange: Vector[Cite2Urn]): Unit = {
-    for (surface <- surfaceRange)  {
-      validate(surface)
-    }
-  }
-*/
   /** Validate a text-bearing surface or surfaces.
   *
   * @param surface Surface to validate.
