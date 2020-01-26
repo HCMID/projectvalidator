@@ -17,22 +17,33 @@ class DseValidatorSpec extends FlatSpec {
   val lib1 = repo.library
   //val hmtLib = CiteLibrarySource.fromFile("hmt_w_commentary.cex")
 
-  "A DseValidator" should "find a list of text-bearing surfaces in a library" in pending /*{
-    val dseValidator = DseValidator(hmtLib)
+  "A DseValidator" should "find a list of text-bearing surfaces in a library" in {
+    val dseValidator = DseValidator(lib1)
     val surfaces = dseValidator.tbs
     println("FOUND " + surfaces.size)
-  }*/
+    println(surfaces.mkString("\n"))
+  }
 
+  it should "validate surfaces supplied in a Vector" in {
+    val pg = Cite2Urn("urn:cite2:ecod:eins121pages.v1:21")
+    val pageList = Vector(pg)
+    val dseValidator = DseValidator(lib1)
+    val rslts = dseValidator.validate(pageList)
+    println("Validated " + pageList.size + " surfaces, and got " + rslts.size + " results.")
+    println(rslts)
+  }
 
   it should "validate a range of surfaces" in pending /*{
     val pageList = Vector(
-      Cite2Urn("urn:cite2:hmt:msA.v1:77v"),
+      Cite2Urn("urn:cite2:ecod:eins121pages.v1:21"),
       Cite2Urn("urn:cite2:hmt:msA.v1:78r")
     )
-    val dseValidator = DseValidator(hmtLib)
+    val dseValidator = DseValidator(lib1)
     val rslts = dseValidator.validate(pageList)
     println("Validated " + pageList.size + " surfaces, and got " + rslts.size + " results.")
   }*/
+
+
 
     /* "do things" in pending
 

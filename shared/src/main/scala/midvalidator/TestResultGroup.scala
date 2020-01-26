@@ -30,7 +30,7 @@ import java.io.PrintWriter
 
   /** Format markdown string to report on test results.*/
   def markdown : String = {
-    s"#${title}\n\n## Summary" + summary + "\n\n## Details for failed tests\n\n" + failures.map(rslt => "- " + rslt.summary).mkString("\n") + "\n\n"
+    s"#${title}\n\n" + summary + "\n\n## Details for failed tests\n\n" + failures.map(rslt => "- " + rslt.summary).mkString("\n") + "\n\n"
   }
 
   /** Write report to a local file.

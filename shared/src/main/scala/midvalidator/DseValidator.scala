@@ -19,7 +19,11 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
 import scala.scalajs.js.annotation._
 
-@JSExportAll  case class DseValidator(citeLibrary: CiteLibrary) extends MidValidator[DsePassage] with LogSupport {
+@JSExportAll  case class DseValidator(citeLibrary: CiteLibrary,
+    baseUrl : String  = "http://www.homermultitext.org/iipsrv?",
+    basePath: String = "/project/homer/pyramidal/deepzoom/",
+    ictUrl: String = "http://www.homermultitext.org/ict2?"
+  ) extends MidValidator[DsePassage] with LogSupport {
   Logger.setDefaultLogLevel(LogLevel.DEBUG)
 
   def label : String = "Validate DsePassage relations"
@@ -67,19 +71,22 @@ import scala.scalajs.js.annotation._
       val testRes = matches.size match {
         case 0 => TestResult(false, "Indexed passage " + dsePsg.passage + " not found in text corpus.", dsePsg)
         case  _ => {
-          TestResult(true, "Text passage " + dsePsg.passage + " found in corpus.", dsePsg)
+          TestResult(true, "Text passage " + dsePsg.passage + " found in corpus. " + dsePsg.markdown(baseUrl, basePath), dsePsg)
         }
       }
       testRes
     }
   }
 
-
-  def markdownSpecifyingImageService(
-    baseUrl: String  = "http://www.homermultitext.org/iipsrv?",
-    imagePath: String = "/project/homer/pyramidal/VenA/"
-  ) = {""}
-
+  /** Composes markdown string for visual verification of a surface.
+  *
+  * @param surface Surface to verify.
+  */
+  def verify(surface: Cite2Urn) : String = {
+    val surfaceDse = dsev.passages.filter(_.surface == surface)
+    val images = surfaceDse.map(dse => "urn=" + dse.imageroi)
+    ictUrl + images.mkString("&")
+  }
 
 
 }
