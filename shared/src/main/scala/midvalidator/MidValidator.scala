@@ -17,18 +17,6 @@ trait MidValidator[+T]  extends LogSupport {
   /** Label or title for this validator.*/
   def label: String
 
-  /** All [[MidValidator]]s work on a CiteLibrary */
-  //def library : CiteLibrary
-
-  /** Short-hand access to library's text corpus.*/
-  //lazy val corpus = library.textRepository.get.corpus
-
-  /** Library must implement the DSE model in at least one collection.*/
-  //lazy val dsev = DseVector.fromCiteLibrary(library)
-
-  //def validate[T](surface: Cite2Urn) : TestResults[T]
-  //def validate(surface: Cite2Urn) : Vector[TestResult[T]]
-
   def validate(library: CiteLibrary) : Vector[TestResult[T]]
 
   def validate(surface: Cite2Urn) : Vector[TestResult[T]]
@@ -37,6 +25,8 @@ trait MidValidator[+T]  extends LogSupport {
     surfaces.flatMap(validate(_))
   }
 
+  //def markdownResults(results: Vector[TestResult[T]]): String
+  def markdownResults[T](results: Vector[TestResult[T]]) : String
 
   /** Lookup list of MidMarkupReader's by identifying String.
   *
@@ -62,34 +52,4 @@ trait MidValidator[+T]  extends LogSupport {
     }
   }
 */
-
-
-  /** Validate a text-bearing surface or surfaces.
-  *
-  * @param surface Surface to validate.
-
-  def validateOld(surface: Cite2Urn) : Unit = {
-    // 1.  determine if urn is a leaf node, container, or range.
-    val sad = "Current version of MidValidator does not operate on entire collections, only single surfaces. Unable to process URN " + surface
-    info(sad)
-    require(surface.objectParts.nonEmpty,sad)
-
-
-    val sadRange = "Current version of MidValidator does not operate on ranges, only single surfaces. Unable to process URN " + surface
-    info(sadRange)
-    require(surface.isRange == false, sadRange)
-
-
-    // 2. For each leaf node:
-    //
-    // a. DSE validation
-    //
-    val dsePassageList = dsev.passages.filter(_.surface == surface)
-    val dseResults : DseResults[DsePassage] = DseResults(corpus)
-    for (dsePsg <- dsePassageList) {
-      debug(dseResults.good(dsePsg))
-    }
-    // b. orthography validation
-  }
-    */
 }
