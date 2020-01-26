@@ -24,7 +24,7 @@ import scala.scalajs.js.annotation._
     basePath: String = "/project/homer/pyramidal/deepzoom/",
     ictUrl: String = "http://www.homermultitext.org/ict2?"
   ) extends MidValidator[DsePassage] with LogSupport {
-  Logger.setDefaultLogLevel(LogLevel.DEBUG)
+  Logger.setDefaultLogLevel(LogLevel.INFO)
 
   def label : String = "Validate DsePassage relations"
 

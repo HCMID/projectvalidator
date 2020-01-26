@@ -15,7 +15,7 @@ import scala.scalajs.js.annotation._
 
 @JSExportAll object LibraryValidator  extends LogSupport {
   // Set logging to DEBUG while developing:
-  Logger.setDefaultLogLevel(LogLevel.DEBUG)
+  Logger.setDefaultLogLevel(LogLevel.INFO)
 
 
 /*

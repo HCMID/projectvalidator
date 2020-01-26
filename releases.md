@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**12.2.1**: Republish 12.2.0 with sane logging level.
+
 **12.2.0**: `DseValidator` now includes `verify` method.
 
 **12.1.1**: Correct formatting of message
