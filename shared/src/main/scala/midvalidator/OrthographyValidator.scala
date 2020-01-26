@@ -66,8 +66,6 @@ import scala.scalajs.js.annotation._
     Vector.empty[TestResult[CtsUrn]]
   }
 
-  def markdownResults[CtsUrn](results: Vector[TestResult[CtsUrn]]): String = {
-    ""
-  }
+
 
 }

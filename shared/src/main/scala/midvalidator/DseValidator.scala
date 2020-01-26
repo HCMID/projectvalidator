@@ -82,9 +82,4 @@ import scala.scalajs.js.annotation._
 
 
 
-
-
-  def markdownResults[DsePassage](results: Vector[TestResult[DsePassage]]): String = {
-    ""
-  }
 }

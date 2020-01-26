@@ -25,8 +25,10 @@ trait MidValidator[+T]  extends LogSupport {
     surfaces.flatMap(validate(_))
   }
 
-  //def markdownResults(results: Vector[TestResult[T]]): String
-  def markdownResults[T](results: Vector[TestResult[T]]) : String
+  def markdownResults[T](results: Vector[TestResult[T]]) : String = {
+    val markdownList = results.map(r => "- " + r.summary)
+    markdownList.mkString("\n")
+  }
 
   /** Lookup list of MidMarkupReader's by identifying String.
   *
