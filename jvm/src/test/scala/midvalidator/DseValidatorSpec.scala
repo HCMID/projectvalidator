@@ -31,7 +31,11 @@ class DseValidatorSpec extends FlatSpec {
     val rslts = dseValidator.validate(pageList)
     println("Validated " + pageList.size + " surfaces, and got " + rslts.size + " results.")
     println(rslts)
+    // and summary should link to an ICT
+    println("WITH SUMMARIES:\n" + rslts.map(_.summary).mkString("\n"))
   }
+
+
 
   it should "validate a range of surfaces" in pending /*{
     val pageList = Vector(
@@ -59,10 +63,8 @@ class DseValidatorSpec extends FlatSpec {
   } */
 
 
-
-  /*
   it should "identify entries missing from the text corpus" in pending
-
+  /*
 {
     val dsev = DseValidator(hmtLib)
     val pg =   Cite2Urn("urn:cite2:ecod:sg359pages.v1:36")

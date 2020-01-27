@@ -69,9 +69,9 @@ import scala.scalajs.js.annotation._
       debug(s"Text ${dsePsg.passage} on " + surface + ": " + matches.size + " in corpus")
 
       val testRes = matches.size match {
-        case 0 => TestResult(false, "Indexed passage " + dsePsg.passage + " not found in text corpus.", dsePsg)
+        case 0 => TestResult(false, dsePsg.markdown(baseUrl, basePath) + "Indexed passage " + dsePsg.passage + " **NOT FOUND** in text corpus."  , dsePsg)
         case  _ => {
-          TestResult(true, "Text passage " + dsePsg.passage + " found in corpus. " + dsePsg.markdown(baseUrl, basePath), dsePsg)
+          TestResult(true,  dsePsg.markdown(baseUrl, basePath) + "Text passage " + dsePsg.passage + " found in corpus. " , dsePsg)
         }
       }
       testRes
