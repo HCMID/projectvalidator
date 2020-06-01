@@ -7,10 +7,7 @@ import edu.holycross.shot.citeobj._
 import edu.holycross.shot.dse._
 import edu.holycross.shot.scm._
 
-import scala.reflect.runtime.universe._
-
-import wvlet.log._
-import wvlet.log.LogFormatter.SourceCodeLogFormatter
+//import scala.reflect.runtime.universe._
 
 
 import wvlet.log._
