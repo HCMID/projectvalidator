@@ -1,6 +1,7 @@
 lazy val scala212 = "2.12.10"
 lazy val supportedScalaVersions = List(scala212)
-
+ThisBuild / scalaVersion := scala212
+ThisBuild / turbo := true
 
 lazy val root = project.in(file(".")).
     aggregate(crossed.js, crossed.jvm).
@@ -46,11 +47,11 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
 
         "edu.holycross.shot" %% "scm" % "7.0.1",
         "edu.holycross.shot" %% "cex" % "6.3.3",
-        "edu.holycross.shot" %% "xmlutils" % "2.0.0"
+        "edu.holycross.shot" %% "xmlutils" % "2.0.0",
 
         // FOR DEBUGGING WITH HMT CONTENT:
-        //"edu.holycross.shot" %% "greek" % "2.4.0",
-        //"org.homermultitext" %% "hmt-textmodel" % "6.0.1"
+        "edu.holycross.shot" %% "greek" % "2.4.0",
+        "org.homermultitext" %% "hmt-textmodel" % "6.0.1"
 
       )
 
@@ -68,5 +69,9 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       .enablePlugins(MdocPlugin)
       .settings(
         mdocIn := file("guide"),
-        mdocOut := file("mdocs")
+        mdocOut := file("docs"),
+        mdocExtraArguments := Seq("--no-link-hygiene"),
+        mdocVariables := Map(
+          "VERSION" -> "12.2.2"
+        )
       )
