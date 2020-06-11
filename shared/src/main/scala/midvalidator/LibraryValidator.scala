@@ -26,6 +26,22 @@ import scala.scalajs.js.annotation._
     testGroupsByPage.flatten
   }
   */
+
+  def validate(lib: CiteLibrary, validators: Vector[MidValidator[Any]], pg: Cite2Urn) : Vector[TestResult[Any]] = {
+
+    info("Applying " + validators.size + s" MID Validators to page ${pg} in library " + lib.name)
+    val testGroups = for (validator <- validators) yield {
+      debug("Use " + validator.label)
+      validator.validate(pg)
+    }
+    val allTests = testGroups.flatten
+    //debug("Total tests: " + allTests.size)
+    allTests
+  }
+
+
+
+
   /** Collect all validation results for a text-bearing using
   * by apply all [[MidValidator]]s in a given list.
   *
