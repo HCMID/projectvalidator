@@ -1,5 +1,5 @@
 ---
-title: Walk through an exmaple
+title: Walk through an example
 layout: page
 ---
 

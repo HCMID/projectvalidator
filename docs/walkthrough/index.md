@@ -1,5 +1,5 @@
 ---
-title: Walk through an exmaple
+title: Walk through an example
 layout: page
 ---
 
@@ -27,7 +27,7 @@ val readerMap =   Map(
   "DiplomaticReader" ->   Vector(DiplomaticReader)
 )
 // readerMap: Map[String, Vector[DiplomaticReader.type]] = Map(
-//   "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@183253b2)
+//   "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@56a100b2)
 // )
 
 val repo = EditorsRepo("hmtexample",
@@ -35,7 +35,7 @@ readerMap)
 // repo: EditorsRepo = EditorsRepo(
 //   "hmtexample",
 //   Map(
-//     "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@183253b2)
+//     "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@56a100b2)
 //   )
 // )
 ```
