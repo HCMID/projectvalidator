@@ -13,4 +13,4 @@ Status:  **active development**. [Release notes](releases.md)
 
 ## Documentation
 
-The documentation at  <https://hcmid.github.io/projectvalidator/> is out of date.
+The documentation at  <https://hcmid.github.io/projectvalidator/> is being revised from scratch for the current version of `projectvalidator`.
