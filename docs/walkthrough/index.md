@@ -3,7 +3,7 @@ title: Walk through an example
 layout: page
 ---
 
-**Version 12.2.2**
+**Library version 12.2.2**
 
 
 Import all libraries we'll use:
@@ -27,7 +27,7 @@ val readerMap =   Map(
   "DiplomaticReader" ->   Vector(DiplomaticReader)
 )
 // readerMap: Map[String, Vector[DiplomaticReader.type]] = Map(
-//   "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@56a100b2)
+//   "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@16b1fd0f)
 // )
 
 val repo = EditorsRepo("hmtexample",
@@ -35,7 +35,7 @@ readerMap)
 // repo: EditorsRepo = EditorsRepo(
 //   "hmtexample",
 //   Map(
-//     "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@56a100b2)
+//     "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@16b1fd0f)
 //   )
 // )
 ```

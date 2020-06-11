@@ -3,4 +3,4 @@ layout: page
 title: Orthographies
 ---
 
-**Version @VERSION@**
+**Library version @VERSION@**

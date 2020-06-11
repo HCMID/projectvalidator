@@ -3,7 +3,7 @@ title: Validators
 layout: page
 ---
 
-**Version @VERSION@**
+**Library version @VERSION@**
 
 
 - work on a CITE library

@@ -3,7 +3,7 @@ title: HCMID validator library
 layout: page
 ---
 
-**Version 12.2.2**
+**Library version 12.2.2**
 
 ## Generalized concepts for editorial project validation
 

@@ -3,7 +3,7 @@ title: Walk through an example
 layout: page
 ---
 
-**Version @VERSION@**
+**Library version @VERSION@**
 
 
 Import all libraries we'll use:
