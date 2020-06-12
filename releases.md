@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**12.3.0**: Adds validation by text-bearing surface to `LibraryValidator` object.
+
 **12.2.2**: Correct summary text for display of `DsePassage` errors.
 
 **12.2.1**: Republish 12.2.0 with sane logging level.

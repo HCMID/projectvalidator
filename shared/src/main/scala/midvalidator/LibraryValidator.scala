@@ -27,9 +27,8 @@ import scala.scalajs.js.annotation._
   }
   */
 
-  def validate(lib: CiteLibrary, validators: Vector[MidValidator[Any]], pg: Cite2Urn) : Vector[TestResult[Any]] = {
-
-    info("Applying " + validators.size + s" MID Validators to page ${pg} in library " + lib.name)
+  def validate(pg: Cite2Urn, validators: Vector[MidValidator[Any]] ) : Vector[TestResult[Any]] = {
+    info("Applying " + validators.size + s" MID Validators to page ${pg} ")
     val testGroups = for (validator <- validators) yield {
       debug("Use " + validator.label)
       validator.validate(pg)

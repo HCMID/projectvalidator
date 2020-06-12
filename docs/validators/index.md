@@ -3,7 +3,7 @@ title: Validators
 layout: page
 ---
 
-**Library version 12.2.2**
+**Library version 12.3.0**
 
 
 - work on a CITE library

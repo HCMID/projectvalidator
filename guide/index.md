@@ -10,7 +10,7 @@ layout: page
 The  `midvalidator` library defines abstract interfaces that can be implemented to validate editing for any of the HC MID Club's projects.  These include:
 
 - [orthographies](./orthographies/).  Implementations of the `MidOrthography` trait define what characters are acceptable in a given orthographic system, and how the semantics of the characters' usage determine a classified tokenization of a text.
-- [validators](./validators/).  Type-parameterized mplementations of the `MidValidator` trait apply some specific type of validation to elements of a CITE Library.  They include methods for validating an entire library, or for validating contents related to a specific text-bearing surface in the DSE model.  The results of their validation are also type parameterized.  Results of different types can be gathered in a `TestResultGroup`.
+- [validators](./validators/).  Type-parameterized implementations of the `MidValidator` trait apply some specific type of validation to elements of a CITE Library.  They include methods for validating an entire library, or for validating contents related to a specific text-bearing surface in the DSE model.  The results of their validation are also type parameterized.  Results of different types can be gathered in a `TestResultGroup`.
 
 These abstractions are united in the `LibraryValidator` object.  Given a CITE library and a Vector of `MidValidator`s, the `LibraryValidator` can apply each validator successively, either to the entire library, or to material related to a single text-bearing surface.  
 
@@ -28,4 +28,4 @@ In addition, it requires that HC MID projects follow a set of conventions for or
 
 ## Summary example
 
-- overview of [building a CITE library from files organized in MID conventions, and validating work on one page of a manuscript](./walkthrough/).
+- overview of building a CITE library from files organized in MID conventions, and validating work on one page of a manuscript [using the `LibraryValidator` object](./walkthrough/).

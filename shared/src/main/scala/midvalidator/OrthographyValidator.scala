@@ -19,7 +19,7 @@ import scala.scalajs.js.annotation._
 
   /** Lookup MidMarkupReader class by identifying String.
   *
-  * @orthoName Name of class implementing MidOrthography trait.
+  * @param orthoName Name of class implementing MidOrthography trait.
   */
   def orthoForUrn(urn: CtsUrn): MidOrthography = {
     if (orthoMap.keySet.contains(urn)){

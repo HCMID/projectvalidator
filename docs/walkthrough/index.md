@@ -3,19 +3,17 @@ title: Walk through an example
 layout: page
 ---
 
-**Library version 12.2.2**
+**Library version 12.3.0**
 
 
-Import all libraries we'll use:
+Import all the libraries we'll use:
 
 ```scala
-// Generic libraries we always use:
+// Import the generic validator library:
 import edu.holycross.shot.mid.validator._
-import edu.holycross.shot.ohco2._
 import edu.holycross.shot.cite._
-import edu.holycross.shot.dse._
 
-// For project-specific markup reader:
+// Import markup readers for this project:
 import org.homermultitext.edmodel._
 ```
 
@@ -24,18 +22,16 @@ from the directory `hmtexample`:
 
 ```scala
 val readerMap =   Map(
-  "DiplomaticReader" ->   Vector(DiplomaticReader)
+  "DiplomaticReader" -> Vector(DiplomaticReader)
 )
 // readerMap: Map[String, Vector[DiplomaticReader.type]] = Map(
-//   "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@16b1fd0f)
+//   "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@25a1c6ba)
 // )
-
-val repo = EditorsRepo("hmtexample",
-readerMap)
+val repo = EditorsRepo("examplerepo", readerMap)
 // repo: EditorsRepo = EditorsRepo(
-//   "hmtexample",
+//   "examplerepo",
 //   Map(
-//     "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@16b1fd0f)
+//     "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@25a1c6ba)
 //   )
 // )
 ```
@@ -77,7 +73,7 @@ val lib = repo.library
 // ...
 ```
 
-For this example, we'll create a Vector with a single validator:
+For this example, we'll apply a single validator:
 
 ```scala
 val dseValidator = DseValidator(lib)
@@ -146,12 +142,12 @@ val validators = Vector(dseValidator)
 // ...
 ```
 
-Now we can use the `LibraryValidator` to validate a page in the library using the given list of validators:
+Now we can use the `LibraryValidator` object to validate a page in the library using the given list of validators:
 
 ```scala
 val pg = Cite2Urn("urn:cite2:hmt:msA.v1:292v")
 // pg: Cite2Urn = Cite2Urn("urn:cite2:hmt:msA.v1:292v")
-val rslts = LibraryValidator.validate(lib,validators,pg)
+val rslts = LibraryValidator.validate(pg,validators)
 // rslts: Vector[TestResult[Any]] = Vector(
 //   TestResult(
 //     true,
@@ -188,4 +184,4 @@ val rslts = LibraryValidator.validate(lib,validators,pg)
 // ...
 ```
 
-The resulting Vetor of `TestResult`s has lots of interesing information you could use to write reports or study the quality of your editorial work.
+The resulting Vector of `TestResult`s has lots of interesing information you could use to write reports or study the quality of your editorial work.
