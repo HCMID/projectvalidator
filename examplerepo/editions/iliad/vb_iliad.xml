@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Iliad</title>
+        <editor>Luke Giuntoli</editor>
+        <editor>Augusta Holyfield</editor>
+        <editor>go</editor>
+        <editor>here</editor>
+
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished edition of the Escorial manuscript Upsilon 1.1 for the Homer Multitext project</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Edited directly from photography of the manuscript</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+
+      <div n="23"><l n="title"> ἀρχὴ τῆς <title>Ψῖ</title>  <persName n="urn:cite2:hmt:pers.v1:pers17">Ὁμήρου</persName>ῥαψωδίας⁑</l>
+        <l n="1">ὣς οἱ μὲν στενάχοντο κατὰ πτόλιν~ ἀυτὰρ <rs type="ethnic" n= "urn:cite2:hmt:place.v1:place96">Ἀχαιοὶ</rs> </l>
+        <l n="2">ἐπειδὴ νῆας, τε καὶ <placeName n= "urn:cite2:hmt:place.v1:place22"> Ἑλλήσποντον </placeName> ἵκοντο, </l>
+        <l n="3">οἱ μὲν ἂρ ἐσκίδναντο ἑὴν ἐπὶ νῆα ἕκαστος~ </l>
+        <l n="4">μυρμιδόνας δ᾽ oὐκ εἴα ἀποσκίδνασθαι <persName n="urn:cite2:hmt:pers.v1:pers1">Ἀχιλλεύς</persName>~</l>
+        <l n="5">ἀλλ᾽ ὅ γε οἷς ἑτάροισι φιλοπτολέμοισι μετηύδα~</l>
+        <l n="6">Μυρμιδόνες ταχύπωλοι~ ἐμοὶ ἐρίηρες ἑταῖροι, </l>
+        <l n="7">μὴ δή πω ὑπ᾽ ὄχεσφι λυώμεθα μώνυχας ἵππους~ </l>
+        <l n="8">ἀλλ᾽ αὐτοῖς ἵπποισι καὶ ἅρμασιν ἆσσον ἰόντες, </l>
+        <l n="9"><persName n="urn:cite2:hmt:pers.v1:pers158">Πάτροκλον</persName> κλαίωμεν~ ὃ γὰρ γέρας ἐστὶ θανόντων~ </l>
+        <l n="10">ἀυτὰρ ἐπεί κ᾽ ὀλοοῖο τεταρπώμεσθα γόοιο, </l>
+        <l n="11">ἵππους λυσάμενοι δορπήσομεν ἐνθάδε πάντες~ </l>
+        <l n="12">ὣς ἔφαθ'~ οἳ δ᾽ ᾤμωξαν ἀολλέες~ ἦρχε δ᾽<persName n="urn:cite2:hmt:pers.v1:pers1"> Ἀχιλλεύς </persName>~</l>
+      </div>
+    </body>
+  </text>
+</TEI>

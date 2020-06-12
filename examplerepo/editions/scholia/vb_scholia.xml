@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Scholia to Venetus B</title>
+        <editor>Luke Giuntoli</editor>
+        <editor>Augusta Holyfield</editor>
+        <editor>HERE</editor>
+      </titleStmt>
+      <publicationStmt>
+        <p>Unpublished</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Transcribed from Venetus B MS</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+
+<group n="23">
+  <text n="e3">
+    <body>
+      <div n="SCHOLION_ID" type="scholion">
+        <div n="lemma">
+          <p>
+            <num value="1">TEXT_OF_NUMBER</num>
+          </p>
+        </div>
+        <div n="ref">
+          <p>URN FOR ILIAD</p>
+        </div>
+        <div n="comment">
+          <p>
+            <p>CONTENT</p>
+          </p>
+        </div>
+      </div>
+      <div n="e3_294r_4" type="scholion">
+        <div n="lemma">
+          <p>
+            <num value="17">ιζ</num>
+          </p>
+        </div>
+        <div n="ref">
+          <p>urn:cts:greekLit:tlg0012.tlg001.e3:23.2</p>
+        </div>
+        <div n="comment">
+          <p>
+            <p>Νῆας. τὸν τόπον τῶν νηῶν~<placeName n="urn:cite2:hmt:place.v1:place22"> Ἑλλήσποντον</placeName> δὲ τὴν μέχρι <placeName n="urn:cite2:hmt:place.v1:place424">Σιγείου</placeName> θάλασσαν⁑</p>
+          </p>
+        </div>
+      </div>
+      <div n="e3_294r_5" type="scholion">
+        <div n="lemma">
+          <p>
+            <num value="18">ιη</num>
+          </p>
+        </div>
+        <div n="ref">
+          <p>urn:cts:greekLit:tlg0012.tlg001.e3:23.3</p>
+        </div>
+        <div n="comment">
+          <p>
+            <p>ἀπ' ἀλλήλων ἐχωρίζοντο⁑</p>
+          </p>
+        </div>
+      </div>
+      <div n="e3_294r_6" type="scholion">
+        <div n="lemma">
+          <p>
+            <num value="19">ιθ</num>
+          </p>
+        </div>
+        <div n="ref">
+          <p>urn:cts:greekLit:tlg0012.tlg001.e3:23.4</p>
+        </div>
+        <div n="comment">
+          <p>
+            <p>ἀπ' αὐτοῦ χωρίζεσθαι~ ἢ παρέλκει ἡ ἀπό ὡς τὸ ἀχητίμησεν⁑</p>
+          </p>
+          </div>
+        </div>
+        <div n="e3_294r_7" type="scholion">
+          <div n="lemma">
+            <p>
+              <num value="20">κ</num>
+            </p>
+          </div>
+          <div n="ref">
+            <p>urn:cts:greekLit:tlg0012.tlg001.e3:23.7</p>
+          </div>
+          <div n="comment">
+            <p>
+              <p>τοὺς ὑπὸ τοῖς ὀχήμασι μονώνυχας ἵππους⁑</p>
+            </p>
+            </div>
+          </div>
+          <div n="e3_294r_8" type="scholion">
+            <div n="lemma">
+              <p>
+                <num value=""></num>
+              </p>
+            </div>
+            <div n="ref">
+              <p>urn:cts:greekLit:tlg0012.tlg001.e3:23.8</p>
+            </div>
+            <div n="comment">
+              <p>
+                <p>λείπει ἡ συν ⁑</p>
+              </p>
+              </div>
+            </div>
+            <div n="e3_294r_9" type="scholion">
+              <div n="lemma">
+                <p>
+                  <num value="21">κα</num>
+                </p>
+              </div>
+              <div n="ref">
+                <p>urn:cts:greekLit:tlg0012.tlg001.e3:23.10</p>
+              </div>
+              <div n="comment">
+                <p>
+                  <p><persName n="urn:cite2:hmt:pers.v1:pers225">Αἰσχύλος</persName> φησὶν. ὅτι στεναγμὶ τῶν πόνων ἰάματα οὐ μέτρια τυγχάνουσιν⁑</p>
+                </p>
+                </div>
+              </div>
+    </body>
+  </text>
+</group>
+
+</text>
+</TEI>
