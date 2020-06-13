@@ -28,4 +28,4 @@ In addition, it requires that HC MID projects follow a set of conventions for or
 
 ## Summary example
 
-- overview of building a CITE library from files organized in MID conventions, and validating work on one page of a manuscript [using the `LibraryValidator` object](./walkthrough/).
+- [complete example](./walkthrough/): build a CITE library from files organized in MID conventions, and validate work on one page of a manuscript.
