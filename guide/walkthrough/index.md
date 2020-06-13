@@ -20,7 +20,7 @@ import org.homermultitext.edmodel._
 In this example, we'll use a single markup reader, and create an `EditorsRepo`
 from the directory `hmtexample`:
 
-```scala mdoc
+```scala mdoc:silent
 val readerMap =   Map(
   "DiplomaticReader" -> Vector(DiplomaticReader)
 )
@@ -35,7 +35,7 @@ val lib = repo.library
 
 For this example, we'll apply a single validator:
 
-```scala mdoc
+```scala mdoc:silent
 val dseValidator = DseValidator(lib)
 val validators = Vector(dseValidator)
 ```

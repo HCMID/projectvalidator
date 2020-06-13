@@ -24,16 +24,7 @@ from the directory `hmtexample`:
 val readerMap =   Map(
   "DiplomaticReader" -> Vector(DiplomaticReader)
 )
-// readerMap: Map[String, Vector[DiplomaticReader.type]] = Map(
-//   "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@25a1c6ba)
-// )
 val repo = EditorsRepo("examplerepo", readerMap)
-// repo: EditorsRepo = EditorsRepo(
-//   "examplerepo",
-//   Map(
-//     "DiplomaticReader" -> Vector(org.homermultitext.edmodel.DiplomaticReader$@25a1c6ba)
-//   )
-// )
 ```
 
 The `EditorsRepo` assembles the CITE library we need:
@@ -77,69 +68,7 @@ For this example, we'll apply a single validator:
 
 ```scala
 val dseValidator = DseValidator(lib)
-// dseValidator: DseValidator = DseValidator(
-//   CiteLibrary(
-//     "MID manuscriptshackathon 2019",
-//     Cite2Urn("urn:cite2:hcmid:mshackathon.cex.2019workshop:all"),
-//     "Creative Commons Attribution, Non-Commercial 4.0 License <https://creativecommons.org/licenses/by-nc/4.0/>.",
-//     Vector(),
-//     Some(
-//       TextRepository(
-//         Corpus(
-//           Vector(
-//             CitableNode(
-//               CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.1"),
-//               "<l n=\"1\" xmlns=\"http://www.tei-c.org/ns/1.0\">\u1f61\u03c2 \u03bf\u1f31 \u03bc\u1f72\u03bd \u03c3\u03c4\u03b5\u03bd\u03ac\u03c7\u03bf\u03bd\u03c4\u03bf \u03ba\u03b1\u03c4\u03b1 \u03c0\u03c4\u03cc\u03bb\u03b9\u03bd~ \u03b1\u1f50\u03c4\u1f70\u03c1 <rs n=\"urn:cite2:hmt:place.v1:place96\" type=\"ethnic\">\u1f08\u03c7\u03b1\u03b9\u03bf\u1f76</rs>.</l>"
-//             ),
-//             CitableNode(
-//               CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.2"),
-//               "<l n=\"2\" xmlns=\"http://www.tei-c.org/ns/1.0\"> \u1f10\u03c0\u03b5\u03b9\u03b4\u1f74 \u03bd\u1fc6\u03ac\u03c2 \u03c4\u03b5 \u03ba\u03b1\u1f76 <placeName n=\"urn:cite2:hmt:place.v1:place22\">\u1f19\u03bb\u03bb\u03ae\u03c3\u03c0\u03bf\u03bd\u03c4\u03bf\u03bd</placeName> \u1ffe\u0390\u03ba\u03bf\u03bd\u03c4\u03bf.</l>"
-//             ),
-//             CitableNode(
-//               CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.3"),
-//               "<l n=\"3\" xmlns=\"http://www.tei-c.org/ns/1.0\"> \u03bf\u1f31 \u03bc\u1f72\u03bd \u1f70\u03c1 \u1f10\u03c3\u03ba\u03af\u03b4\u03bd\u03b1\u03bd\u03c4\u03bf \u1f11\u1f74\u03bd \u1f10\u03c0\u03b9 \u03bd\u1fc6\u03b1 \u1f15\u03ba\u03b1\u03c3\u03c4\u03bf\u03c2~</l>"
-//             ),
-//             CitableNode(
-//               CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.4"),
-//               "<l n=\"4\" xmlns=\"http://www.tei-c.org/ns/1.0\">\u039c\u03c5\u03c1\u03bc\u03b9\u03b4\u03cc\u03bd\u03b1\u03c2 \u03b4\u2019 \u03bf\u1f50\u03ba \u03b5\u1f34\u03b1 \u1f00\u03c0\u03bf\u03c3\u03ba\u03af\u03b4\u03bd\u03b1\u03c3\u03b8\u03b1\u03b9 <persName n=\"urn:cite2:hmt:pers.v1:pers1\">\u1f08\u03c7\u03b9\u03bb\u03bb\u03b5\u03cd\u03c2</persName>\u0387</l>"
-//             ),
-//             CitableNode(
-//               CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.5"),
-//               "<l n=\"5\" xmlns=\"http://www.tei-c.org/ns/1.0\">\u1f00\u03bb\u03bb' \u1f45 \u03b3\u03b5, \u03bf\u1f37\u03c2, \u1f11\u03c4\u03ac\u03c1\u03bf\u03b9\u03c3\u03b9 \u03c6\u03b9\u03bb\u03bf\u03c0\u03c4\u03bf\u03bb\u03ad\u03bc\u03bf\u03b9\u03c3\u03b9 \u03bc\u03b5\u03c4\u03b7\u03cd\u03b4\u03b1~</l>"
-//             ),
-// ...
 val validators = Vector(dseValidator)
-// validators: Vector[DseValidator] = Vector(
-//   DseValidator(
-//     CiteLibrary(
-//       "MID manuscriptshackathon 2019",
-//       Cite2Urn("urn:cite2:hcmid:mshackathon.cex.2019workshop:all"),
-//       "Creative Commons Attribution, Non-Commercial 4.0 License <https://creativecommons.org/licenses/by-nc/4.0/>.",
-//       Vector(),
-//       Some(
-//         TextRepository(
-//           Corpus(
-//             Vector(
-//               CitableNode(
-//                 CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.1"),
-//                 "<l n=\"1\" xmlns=\"http://www.tei-c.org/ns/1.0\">\u1f61\u03c2 \u03bf\u1f31 \u03bc\u1f72\u03bd \u03c3\u03c4\u03b5\u03bd\u03ac\u03c7\u03bf\u03bd\u03c4\u03bf \u03ba\u03b1\u03c4\u03b1 \u03c0\u03c4\u03cc\u03bb\u03b9\u03bd~ \u03b1\u1f50\u03c4\u1f70\u03c1 <rs n=\"urn:cite2:hmt:place.v1:place96\" type=\"ethnic\">\u1f08\u03c7\u03b1\u03b9\u03bf\u1f76</rs>.</l>"
-//               ),
-//               CitableNode(
-//                 CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.2"),
-//                 "<l n=\"2\" xmlns=\"http://www.tei-c.org/ns/1.0\"> \u1f10\u03c0\u03b5\u03b9\u03b4\u1f74 \u03bd\u1fc6\u03ac\u03c2 \u03c4\u03b5 \u03ba\u03b1\u1f76 <placeName n=\"urn:cite2:hmt:place.v1:place22\">\u1f19\u03bb\u03bb\u03ae\u03c3\u03c0\u03bf\u03bd\u03c4\u03bf\u03bd</placeName> \u1ffe\u0390\u03ba\u03bf\u03bd\u03c4\u03bf.</l>"
-//               ),
-//               CitableNode(
-//                 CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.3"),
-//                 "<l n=\"3\" xmlns=\"http://www.tei-c.org/ns/1.0\"> \u03bf\u1f31 \u03bc\u1f72\u03bd \u1f70\u03c1 \u1f10\u03c3\u03ba\u03af\u03b4\u03bd\u03b1\u03bd\u03c4\u03bf \u1f11\u1f74\u03bd \u1f10\u03c0\u03b9 \u03bd\u1fc6\u03b1 \u1f15\u03ba\u03b1\u03c3\u03c4\u03bf\u03c2~</l>"
-//               ),
-//               CitableNode(
-//                 CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.4"),
-//                 "<l n=\"4\" xmlns=\"http://www.tei-c.org/ns/1.0\">\u039c\u03c5\u03c1\u03bc\u03b9\u03b4\u03cc\u03bd\u03b1\u03c2 \u03b4\u2019 \u03bf\u1f50\u03ba \u03b5\u1f34\u03b1 \u1f00\u03c0\u03bf\u03c3\u03ba\u03af\u03b4\u03bd\u03b1\u03c3\u03b8\u03b1\u03b9 <persName n=\"urn:cite2:hmt:pers.v1:pers1\">\u1f08\u03c7\u03b9\u03bb\u03bb\u03b5\u03cd\u03c2</persName>\u0387</l>"
-//               ),
-//               CitableNode(
-//                 CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:23.5"),
-//                 "<l n=\"5\" xmlns=\"http://www.tei-c.org/ns/1.0\">\u1f00\u03bb\u03bb' \u1f45 \u03b3\u03b5, \u03bf\u1f37\u03c2, \u1f11\u03c4\u03ac\u03c1\u03bf\u03b9\u03c3\u03b9 \u03c6\u03b9\u03bb\u03bf\u03c0\u03c4\u03bf\u03bb\u03ad\u03bc\u03bf\u03b9\u03c3\u03b9 \u03bc\u03b5\u03c4\u03b7\u03cd\u03b4\u03b1~</l>"
-// ...
 ```
 
 Now we can use the `LibraryValidator` object to validate a page in the library using the given list of validators:
