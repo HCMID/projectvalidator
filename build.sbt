@@ -35,6 +35,10 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
 
         "edu.holycross.shot" %%% "histoutils" % "2.3.0",
 
+        "edu.holycross.shot.mid" %% "orthography" % "1.0.0",
+        "edu.holycross.shot.mid" %% "markupreader" % "0.0.1",
+        "edu.holycross.shot" %% "citevalidator" % "0.0.1",
+
 
 
         // Later version would bring all dependent libs in sync:
@@ -46,6 +50,9 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       libraryDependencies ++= Seq(
         "org.scala-js" %% "scalajs-stubs" % "1.0.0" % "provided",
         "com.github.pathikrit" %% "better-files" % "3.5.0",
+
+
+
 
         "edu.holycross.shot" %% "scm" % "7.3.0",
         "edu.holycross.shot" %% "cex" % "6.5.0",

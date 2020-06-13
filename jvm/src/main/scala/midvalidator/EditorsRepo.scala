@@ -5,6 +5,10 @@ import edu.holycross.shot.ohco2._
 import edu.holycross.shot.dse._
 import edu.holycross.shot.cite._
 import edu.holycross.shot.cex._
+import edu.holycross.shot.citevalidator._
+
+import edu.holycross.shot.mid.markupreader._
+import edu.holycross.shot.mid.orthography._
 
 import better.files._
 import File._

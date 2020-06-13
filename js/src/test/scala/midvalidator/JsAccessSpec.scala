@@ -3,6 +3,11 @@ import edu.holycross.shot.cite._
 import org.scalatest.FlatSpec
 
 
+import edu.holycross.shot.citevalidator._
+import edu.holycross.shot.mid.markupreader._
+import edu.holycross.shot.mid.orthography._
+
+
 class JsAccessSpec extends FlatSpec {
 
   "The MID validator library"  should "expose image managers" in pending /*{
@@ -10,7 +15,7 @@ class JsAccessSpec extends FlatSpec {
     val defaultICT = "http://www.homermultitext.org/ict2/"
     assert(mgr.ictBase ==  defaultICT)
   }
-*/
+
   it should "expose edition type" in {
     assert (MidDiplomaticEdition.label == "diplomatic")
     assert (MidScribalEdition.label == "scribal")
@@ -43,7 +48,7 @@ class JsAccessSpec extends FlatSpec {
     assert(tkn.string == "bogus")
   }
 
-  it should "expose TokenHistogram" in  pending /*{
+  it should "expose TokenHistogram" in  pending {
     val tkn = MidToken(CtsUrn("urn:cts:test:none.demoval:1"),"bogus", None)
     val tokenVector = Vector(tkn)
     val hist = TokenHistogram(tokenVector)

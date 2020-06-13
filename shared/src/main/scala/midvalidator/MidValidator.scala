@@ -7,6 +7,10 @@ import edu.holycross.shot.citeobj._
 //import edu.holycross.shot.dse._
 import edu.holycross.shot.scm._
 
+import edu.holycross.shot.citevalidator._
+
+import edu.holycross.shot.mid.markupreader._
+import edu.holycross.shot.mid.orthography._
 
 import wvlet.log._
 import wvlet.log.LogFormatter.SourceCodeLogFormatter
