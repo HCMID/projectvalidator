@@ -3,4 +3,4 @@ layout: page
 title: Orthographies
 ---
 
-**Library version 12.3.0**
+**Library version 13.0.0**

@@ -3,7 +3,7 @@ title: Directory layout
 layout: page
 ---
 
-**Library version 12.3.0**
+**Library version 13.0.0**
 
 The following directories are required to create an `EditorsRepo`.
 
@@ -14,3 +14,8 @@ The following directories are required to create an `EditorsRepo`.
 - editions
 - header
 - validation
+
+
+```scala
+
+```

@@ -14,3 +14,8 @@ The following directories are required to create an `EditorsRepo`.
 - editions
 - header
 - validation
+
+
+```scala mdoc
+
+```

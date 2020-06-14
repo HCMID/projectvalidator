@@ -12,37 +12,48 @@ Import all the libraries we'll use:
 // Import the generic validator library:
 import edu.holycross.shot.mid.validator._
 import edu.holycross.shot.cite._
+import edu.holycross.shot.ohco2._
+import edu.holycross.shot.scm._
+import edu.holycross.shot.dse._
 
-// Import markup readers for this project:
-import org.homermultitext.edmodel._
+import edu.holycross.shot.citevalidator._
+import edu.holycross.shot.mid.markupreader._
+import edu.holycross.shot.mid.orthography._
 ```
 
 In this example, we'll use a single markup reader, and create an `EditorsRepo`
-from the directory `hmtexample`:
+from the directory `chantsample`:
 
-```scala mdoc:silent
+
+
+
+```scala mdoc
 val readerMap =   Map(
-  "DiplomaticReader" -> Vector(DiplomaticReader)
+  "DiplomaticReader" -> Vector(MidProseABDiplomatic)
 )
-val repo = EditorsRepo("examplerepo", readerMap)
+val repo = EditorsRepo("jvm/src/test/resources/chantsample", readerMap)
 ```
 
 The `EditorsRepo` assembles the CITE library we need:
 
-```scala mdoc
+scala mdoc
+```
 val lib = repo.library
 ```
 
 For this example, we'll apply a single validator:
 
-```scala mdoc:silent
+scala mdoc:silent
+```
 val dseValidator = DseValidator(lib)
 val validators = Vector(dseValidator)
 ```
 
 Now we can use the `LibraryValidator` object to validate a page in the library using the given list of validators:
 
-```scala mdoc
+
+scala mdoc
+```
 val pg = Cite2Urn("urn:cite2:hmt:msA.v1:292v")
 val rslts = LibraryValidator.validate(pg,validators)
 ```

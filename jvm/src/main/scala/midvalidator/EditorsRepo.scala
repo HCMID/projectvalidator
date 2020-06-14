@@ -27,20 +27,22 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 * a CiteLibrary from the contents of these files.
 *
 * @param baseDir Root directory of repository.
-* @param readerMap Mapping of String names to classes of [[MidMarkupReader]].
+* @param readerMap Mapping of String names to classes of [[MidMarkupReader]], necessary in building CITE library.
 */
 case class EditorsRepo(
   baseDir: String,
-  readerMap:  Map[String, Vector[MidMarkupReader]]) extends LogSupport {
-
+  readerMap:  Map[String, Vector[MidMarkupReader]]
+) extends LogSupport {
+    Logger.setDefaultLogLevel(LogLevel.DEBUG)
   /** Directory for DSE records (in CEX format).*/
   val dseDir = File(baseDir + "/dse")
   /** Writable directory for validation reports. */
   val validationDir = File(baseDir + "/validation")
   /** Directory with cataloged editions of texts. */
   val editionsDir = File(baseDir + "/editions")
-  /** Directory with paleographic observations (in CEX format).*/
+  /** Directory with paleographic observations (in CEX format).
   val paleographyDir = File(baseDir + "/paleography")
+  */
   /** Directory with library headers for building composite CEX file.*/
   val libHeadersDir = File(baseDir + "/header")
   /** Directory with TBS data of codices you're editing.*/
@@ -48,7 +50,9 @@ case class EditorsRepo(
   /** Directory with CITE Collection cataloging of codices you're editing.*/
   val codicesCatalogs = File(baseDir + "/codices-catalog")
   /** Vector of all required directories for an HCMID editorial project.*/
-  val dirs = Vector(dseDir, editionsDir, validationDir, paleographyDir, libHeadersDir, codicesDir, codicesCatalogs)
+  val dirs = Vector(dseDir, editionsDir, validationDir,
+    /*paleographyDir,*/
+    libHeadersDir, codicesDir, codicesCatalogs)
 
   for (d <- dirs) {
     if (! d.exists) {
@@ -100,13 +104,15 @@ case class EditorsRepo(
 
   /** Build [[ReadersPairing]]s from configuration in this repository.*/
   def readers: Vector[ReadersPairing] = {
+    debug("readers: work from config " + readersConfig)
     val data = readersConfig.lines.toVector.tail
+    debug("yeilding data " + data)
     val pairings = data.map( str => {
       try {
         val cols = str.split("#")
         val readerStrings = cols(1).split(",").toVector
-        println("FIX UP PAIRING FOR " + readerStrings)
-        println("Heres' reader map: " + readerMap)
+        //println("FIX UP PAIRING FOR " + readerStrings)
+        //println("Heres' reader map: " + readerMap)
         val readers = readerStrings.map(s => readerMap(s))
 
         ReadersPairing(CtsUrn(cols(0)),readers.flatten)

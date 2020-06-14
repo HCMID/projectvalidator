@@ -33,10 +33,10 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         "edu.holycross.shot" %%% "citebinaryimage" % "3.2.0",
 
 
-        "edu.holycross.shot" %%% "histoutils" % "2.3.0",
+        //"edu.holycross.shot" %%% "histoutils" % "2.3.0",
 
         "edu.holycross.shot.mid" %% "orthography" % "1.0.0",
-        "edu.holycross.shot.mid" %% "markupreader" % "0.0.1",
+        "edu.holycross.shot.mid" %% "markupreader" % "1.0.0",
         "edu.holycross.shot" %% "citevalidator" % "0.0.1",
 
 
@@ -59,8 +59,8 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         "edu.holycross.shot" %% "xmlutils" % "2.0.0",
 
         // FOR DEBUGGING WITH HMT CONTENT:
-        "edu.holycross.shot" %% "greek" % "2.4.0",
-        "org.homermultitext" %% "hmt-textmodel" % "6.0.1"
+        //"edu.holycross.shot" %% "greek" % "2.4.0",
+        //"org.homermultitext" %% "hmt-textmodel" % "6.0.1"
 
       )
 
