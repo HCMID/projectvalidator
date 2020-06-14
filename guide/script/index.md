@@ -5,7 +5,7 @@ title: Markup readers
 
 **Library version @VERSION@**
 
-Need 'em.
+
 
 ```scala mdoc
 import edu.holycross.shot.mid.markupreader._
