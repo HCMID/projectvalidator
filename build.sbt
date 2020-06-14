@@ -51,9 +51,6 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         "org.scala-js" %% "scalajs-stubs" % "1.0.0" % "provided",
         "com.github.pathikrit" %% "better-files" % "3.5.0",
 
-
-
-
         "edu.holycross.shot" %% "scm" % "7.3.0",
         "edu.holycross.shot" %% "cex" % "6.5.0",
         "edu.holycross.shot" %% "xmlutils" % "2.0.0",
