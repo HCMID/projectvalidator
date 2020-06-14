@@ -5,7 +5,7 @@ layout: page
 
 **Library version 13.0.0**
 
-The following directories are required to create an `EditorsRepo`.
+The following directories are required to create an MID `EditorsRepo`.
 
 
 - codices-catalog
@@ -14,8 +14,3 @@ The following directories are required to create an `EditorsRepo`.
 - editions
 - header
 - validation
-
-
-```scala
-
-```

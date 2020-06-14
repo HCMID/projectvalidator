@@ -14,7 +14,7 @@ val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
 )
 // readerMap: Map[String, Vector[MidMarkupReader]] = Map(
 //   "MidProseABDiplomatic" -> Vector(
-//     edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@6df53aeb
+//     edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@eb62165
 //   )
 // )
 ```
