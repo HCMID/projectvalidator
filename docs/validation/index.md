@@ -29,7 +29,7 @@ val readerMap =   Map(
 )
 // readerMap: Map[String, Vector[MidProseABDiplomatic.type]] = Map(
 //   "DiplomaticReader" -> Vector(
-//     edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@40658dd1
+//     edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@67534732
 //   )
 // )
 val repo = EditorsRepo("jvm/src/test/resources/chantsample", readerMap)
@@ -37,7 +37,7 @@ val repo = EditorsRepo("jvm/src/test/resources/chantsample", readerMap)
 //   "jvm/src/test/resources/chantsample",
 //   Map(
 //     "DiplomaticReader" -> Vector(
-//       edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@40658dd1
+//       edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@67534732
 //     )
 //   )
 // )
