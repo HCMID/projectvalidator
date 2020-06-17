@@ -14,4 +14,4 @@ Status:  **active development**. [Release notes](releases.md)
 ## Documentation
 
 - [User documentation](https://hcmid.github.io/projectvalidator/)
-- [API docs](https://hcmid.github.io/projectvalidator/)
+- API docs
