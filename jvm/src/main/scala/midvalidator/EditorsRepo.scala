@@ -40,6 +40,8 @@ case class EditorsRepo(
   val validationDir = File(baseDir + "/validation")
   /** Directory with cataloged editions of texts. */
   val editionsDir = File(baseDir + "/editions")
+  /** Directory with cataloged editions of texts. */
+  val textConfig = File(baseDir + "/textConfig")
   /** Directory with paleographic observations (in CEX format).
   val paleographyDir = File(baseDir + "/paleography")
   */
@@ -52,7 +54,7 @@ case class EditorsRepo(
   /** Vector of all required directories for an HCMID editorial project.*/
   val dirs = Vector(dseDir, editionsDir, validationDir,
     /*paleographyDir,*/
-    libHeadersDir, codicesDir, codicesCatalogs)
+    libHeadersDir, codicesDir, codicesCatalogs, textConfig)
 
   for (d <- dirs) {
     if (! d.exists) {
@@ -66,7 +68,7 @@ case class EditorsRepo(
   def library: CiteLibrary = {
     // required components:
     // text repo, dse, collections of codices
-    CiteLibrary(libHeader + dseCex + textsCex  + codicesCex)
+    CiteLibrary(libHeader + dseCex + rawTextsCex  + codicesCex)
   }
 
   /** Build [[OrthoPairing]]s from configuration in this repository.
@@ -106,7 +108,7 @@ case class EditorsRepo(
   def readers: Vector[ReadersPairing] = {
     debug("readers: work from config " + readersConfig)
     val data = readersConfig.lines.toVector.tail
-    debug("yeilding data " + data)
+    debug("yielding data " + data)
     val pairings = data.map( str => {
       try {
         val cols = str.split("#")
@@ -135,7 +137,7 @@ case class EditorsRepo(
   }
 
   /** Construct TextRepository. */
-  def texts : TextRepository = {
+  def rawTexts : TextRepository = {
     TextRepositorySource.fromFiles(ctsCatalog.toString, ctsCitation.toString, editionsDir.toString)
   }
 
@@ -155,18 +157,18 @@ case class EditorsRepo(
   }
 
   /** CEX data for text editions.*/
-  def textsCex: String = {
-    texts.cex()
+  def rawTextsCex: String = {
+    rawTexts.cex()
   }
 
   /** Catalog of edited texts.*/
-  val ctsCatalog = nameBetterFile(editionsDir,"catalog.cex")
+  val ctsCatalog = nameBetterFile(textConfig,"catalog.cex")
   /** Configuration of citation for local files (in any supported format).*/
-  val ctsCitation = nameBetterFile(editionsDir,"citation.cex")
+  val ctsCitation = nameBetterFile(textConfig,"citation.cex")
   /** Mapping of CtsUrns to MID markup readers.*/
-  val readersConfig = editionsDir / "readers.cex"
+  val readersConfig = textConfig / "readers.cex"
   /** Mapping of CtsUrns to MID orthography system.*/
-  val orthoConfig = editionsDir / "orthographies.cex"
+  val orthoConfig = textConfig / "orthographies.cex"
 
   for (conf <- Seq(ctsCatalog, ctsCitation,readersConfig,orthoConfig)) {
     require(conf.exists,"Missing required configuration file: " + conf)

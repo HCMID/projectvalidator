@@ -17,7 +17,7 @@ import edu.holycross.shot.mid.orthography._
 class EditorsRepoSpec extends FlatSpec {
 
   val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
-    "MidProseABDiplomatic" ->   Vector(MidProseABDiplomatic)
+    "MidProseAB" ->   Vector(MidProseABDiplomatic)
   )
 
   val repoRoot = "jvm/src/test/resources/chantsample"
@@ -40,7 +40,7 @@ class EditorsRepoSpec extends FlatSpec {
     }
   }
   it should "constuct a TextRepository for the records in this repository" in {
-    repo.texts match {
+    repo.rawTexts match {
       case textRepo: TextRepository => assert(true)
       case _ => fail("Did not create a TextRepository")
     }
