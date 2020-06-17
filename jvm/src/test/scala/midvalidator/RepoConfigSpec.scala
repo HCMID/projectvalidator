@@ -32,7 +32,7 @@ class RepoConfigSpec extends FlatSpec {
     val expectedSize = 1
     assert(orthos.size == expectedSize)
 
-    val expectedUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:")
+    val expectedUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text:")
     assert(orthos(0).urn == expectedUrn)
 
     val expectedOrtho = "edu.holycross.shot.mid.validator.Latin23"
@@ -45,7 +45,7 @@ class RepoConfigSpec extends FlatSpec {
     val expectedSize = 2
     assert(readers.size == expectedSize)
 
-    val expectedUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:")
+    val expectedUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text:")
     assert(readers(0).urn == expectedUrn)
 
     val readersVector = readers(0).readers
@@ -58,7 +58,7 @@ class RepoConfigSpec extends FlatSpec {
   }
 
   it should "find a diplomatic MarkupReader for a given CTS URN" in {
-    val testUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:1")
+    val testUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text:1")
     val expectedDiplReader = "edu.holycross.shot.mid.markupreader.MidProseABDiplomatic"
     assert(repo.diplomaticReader(testUrn).toString.contains(expectedDiplReader))
   }

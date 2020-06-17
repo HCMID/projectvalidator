@@ -19,8 +19,6 @@ import better.files.Dsl._
 import wvlet.log._
 import wvlet.log.LogFormatter.SourceCodeLogFormatter
 
-//* @param orthoMap Mapping of String names to classes of [[MidOrthography]].
-
 /** A class for working with HC-MID editorial work in a
 * local file system laid out according to conventions first
 * defined in 2018.  The class includes a function to create
@@ -173,4 +171,5 @@ case class EditorsRepo(
   for (conf <- Seq(ctsCatalog, ctsCitation,readersConfig,orthoConfig)) {
     require(conf.exists,"Missing required configuration file: " + conf)
   }
+
 }
