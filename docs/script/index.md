@@ -66,8 +66,8 @@ def validate(pageUrn: String) = {
 validate("urn:cite2:ecod:eins121pages.v1:21")
 // res0: Vector[TestResult[Any]] = Vector(
 //   TestResult(
-//     true,
-//     "- Compare text urn:cts:chant:massordinary.eins121.text_xml:h007_2.h00.1 to image [![Linked to zoomble image](http://www.homermultitext.org/iipsrv?IIIF=/project/homer/pyramidal/deepzoom/ecod/einsiedeln121imgs/v1/sbe_0121_021.tif/pct:42.24,67.53,29.02,6.05/2000,/0/default.jpg)](http://www.homermultitext.org/ict2/?urn=urn:cite2:ecod:einsiedeln121imgs.v1:sbe_0121_021@0.4224,0.6753,0.2902,0.06050)Text passage urn:cts:chant:massordinary.eins121.text_xml:h007_2.h00.1 found in corpus. ",
+//     false,
+//     "- Compare text urn:cts:chant:massordinary.eins121.text_xml:h007_2.h00.1 to image [![Linked to zoomble image](http://www.homermultitext.org/iipsrv?IIIF=/project/homer/pyramidal/deepzoom/ecod/einsiedeln121imgs/v1/sbe_0121_021.tif/pct:42.24,67.53,29.02,6.05/2000,/0/default.jpg)](http://www.homermultitext.org/ict2/?urn=urn:cite2:ecod:einsiedeln121imgs.v1:sbe_0121_021@0.4224,0.6753,0.2902,0.06050)Indexed passage urn:cts:chant:massordinary.eins121.text_xml:h007_2.h00.1 **NOT FOUND** in text corpus.",
 //     DsePassage(
 //       Cite2Urn("urn:cite2:validate:tempDse.temp:record_0"),
 //       "Passage 0",
