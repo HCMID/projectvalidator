@@ -21,7 +21,6 @@ class EditorsRepoSpec extends FlatSpec {
   )
 
   val repoRoot = "jvm/src/test/resources/chantsample"
-
   val repo = EditorsRepo(repoRoot, readerMap)
 
 
@@ -39,7 +38,7 @@ class EditorsRepoSpec extends FlatSpec {
       case _ => fail("Did not create a DseVector")
     }
   }
-  it should "constuct a TextRepository for the records in this repository" in {
+  it should "construct a repository of raw texts for the documents in this repository" in {
     repo.rawTexts match {
       case textRepo: TextRepository => assert(true)
       case _ => fail("Did not create a TextRepository")

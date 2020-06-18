@@ -62,6 +62,7 @@ case class EditorsRepo(
     }
   }
 
+
   /** Build a CITE library from the files in this repository. */
   def library: CiteLibrary = {
     // required components:
@@ -104,24 +105,30 @@ case class EditorsRepo(
 
   /** Build [[ReadersPairing]]s from configuration in this repository.*/
   def readers: Vector[ReadersPairing] = {
-    debug("readers: work from config " + readersConfig)
     val data = readersConfig.lines.toVector.tail
-    debug("yielding data " + data)
+    val configSplits = data.map(ln => ln.split("#").toVector)
+    val configKeys = configSplits.map(v => v(1))
+    debug(configKeys)
+
+    val missingKeys = configKeys.toSet diff readerMap.keySet
+    if (missingKeys.nonEmpty) {
+      val msg = "Catastrophe: " + missingKeys.mkString(",") + " in textConfig/readers.cex missing from map of MarkupReaders."
+      warn(msg)
+      throw new Exception(msg)
+    }
+
     val pairings = data.map( str => {
-      try {
+      //try {
         val cols = str.split("#")
         val readerStrings = cols(1).split(",").toVector
-        //println("FIX UP PAIRING FOR " + readerStrings)
-        //println("Heres' reader map: " + readerMap)
         val readers = readerStrings.map(s => readerMap(s))
-
         ReadersPairing(CtsUrn(cols(0)),readers.flatten)
-      } catch {
+      /*} catch {
         case t: Throwable => {
-          println("Catastrophe: could not find " + t + " in reader pairings from :\n" + data.mkString("\n") )
+          warn("Catastrophe: could not find " + t + " in reader pairings from :\n" + data.mkString("\n") )
           throw t
         }
-      }
+      }*/
     })
     pairings
   }
@@ -173,4 +180,5 @@ case class EditorsRepo(
     require(conf.exists,"Missing required configuration file: " + conf)
   }
 
+  require(readers.nonEmpty, "No markup readers in textConfig/readers.cex matched key set " + readerMap.keySet)
 }
