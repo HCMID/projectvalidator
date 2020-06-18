@@ -3,7 +3,7 @@ title: Walk through an example
 layout: page
 ---
 
-**Library version 13.0.1**
+**Library version 13.1.0**
 
 
 ## 1. Build a CITE library
@@ -25,19 +25,19 @@ from the directory `chantsample`.
 
 ```scala
 val readerMap =   Map(
-  "DiplomaticReader" -> Vector(MidProseABDiplomatic)
+  "MidProseAB" -> Vector(MidProseABDiplomatic)
 )
 // readerMap: Map[String, Vector[MidProseABDiplomatic.type]] = Map(
-//   "DiplomaticReader" -> Vector(
-//     edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@300be399
+//   "MidProseAB" -> Vector(
+//     edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@eb176be
 //   )
 // )
 val repo = EditorsRepo("jvm/src/test/resources/chantsample", readerMap)
 // repo: EditorsRepo = EditorsRepo(
 //   "jvm/src/test/resources/chantsample",
 //   Map(
-//     "DiplomaticReader" -> Vector(
-//       edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@300be399
+//     "MidProseAB" -> Vector(
+//       edu.holycross.shot.mid.markupreader.MidProseABDiplomatic$@eb176be
 //     )
 //   )
 // )

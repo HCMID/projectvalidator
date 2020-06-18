@@ -3,7 +3,7 @@ title: HCMID validator library
 layout: page
 ---
 
-**Library version 13.0.1**
+**Library version 13.1.0**
 
 ## `EditorsRepo`
 

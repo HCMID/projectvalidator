@@ -3,7 +3,7 @@ layout: page
 title: Markup readers
 ---
 
-**Library version 13.0.1**
+**Library version 13.1.0**
 
 
 > Add a complete MID validation script here!

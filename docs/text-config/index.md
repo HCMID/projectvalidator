@@ -3,7 +3,7 @@ title: Configuring text editions
 layout: page
 ---
 
-**Library version 13.0.1**
+**Library version 13.1.0**
 
 There are four required files in the `textConfig` directory.
 

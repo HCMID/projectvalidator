@@ -25,7 +25,7 @@ from the directory `chantsample`.
 
 ```scala mdoc
 val readerMap =   Map(
-  "DiplomaticReader" -> Vector(MidProseABDiplomatic)
+  "MidProseAB" -> Vector(MidProseABDiplomatic)
 )
 val repo = EditorsRepo("jvm/src/test/resources/chantsample", readerMap)
 ```
