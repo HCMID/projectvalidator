@@ -19,7 +19,7 @@ import edu.holycross.shot.mid.orthography._
 class RepoProcessingSpec extends FlatSpec {
 
   val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
-    "MidProseABReader" ->   Vector(MidProseABDiplomatic)
+    "MidProseAB" ->   Vector(MidProseABDiplomatic)
   )
 
   val repoRoot = "jvm/src/test/resources/chantsample"
