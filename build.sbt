@@ -15,7 +15,7 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "13.0.1",
+      version := "13.1.0",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -63,7 +63,7 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
 
     )
 
-    lazy val docs = project       // new documentation project
+    lazy val docs = project    // new documentation project
       .in(file("docs-build")) // important: it must not be docs/
       .dependsOn(crossed.jvm)
       .enablePlugins(MdocPlugin)
@@ -72,6 +72,6 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         mdocOut := file("docs"),
         mdocExtraArguments := Seq("--no-link-hygiene"),
         mdocVariables := Map(
-          "VERSION" -> "13.0.1"
+          "VERSION" -> "13.1.0"
         )
       )

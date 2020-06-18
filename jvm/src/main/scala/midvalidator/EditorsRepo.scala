@@ -26,7 +26,7 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 * a CiteLibrary from the contents of these files.
 *
 * @param baseDir Root directory of repository.
-* @param readerMap Mapping of String names to classes of [[MidMarkupReader]], necessary in building CITE library.
+* @param readerMap Mapping of String names to classes of MidMarkupReader, necessary in building CITE library.
 */
 case class EditorsRepo(
   baseDir: String,
@@ -68,7 +68,7 @@ case class EditorsRepo(
   def library: CiteLibrary = {
     // required components:
     // text repo, dse, collections of codices
-    CiteLibrary(libHeader + dseCex + rawTextsCex  + codicesCex)
+    CiteLibrary(libHeader + dseCex + editionsRepository.cex()  + codicesCex)
   }
 
   /** Build [[OrthoPairing]]s from configuration in this repository.
@@ -94,8 +94,7 @@ case class EditorsRepo(
 */
 
 
-
-  /** Build [[ReadersPairing]]s from configuration in this repository.*/
+  /** Build ReadersPairings from configuration in this repository.*/
   def readers: Vector[ReadersPairing] = {
     val data = readersConfig.lines.toVector.tail
     val configSplits = data.map(ln => ln.split("#").toVector)
@@ -200,6 +199,12 @@ case class EditorsRepo(
     })
     sumEditions(editedTexts.flatten)
   }
+
+  /** Create a TextRepository for all configured editions.*/
+  def editionsRepository: TextRepository = {
+    TextRepository( editions, editionsCatalog)
+  }
+
 
   /** Construct DseVector for this repository's records. */
   def dse:  DseVector = {

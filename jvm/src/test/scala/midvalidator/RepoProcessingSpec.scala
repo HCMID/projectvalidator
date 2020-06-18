@@ -52,7 +52,13 @@ class RepoProcessingSpec extends FlatSpec {
     assert(catalog.texts.map(_.urn).toSet == expectedWorks)
   }
 
-  it should "create a TextRepository of configured editions" in pending
+  it should "create a TextRepository of configured editions" in {
+    val textRepo = repo.editionsRepository
+    textRepo match {
+      case tr: TextRepository => assert(true)
+      case _ => fail("Created wrong type of object: " + textRepo)
+    }
+  }
 
 
 
