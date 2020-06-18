@@ -25,7 +25,7 @@ import edu.holycross.shot.cite._
 
 ## Define markup readers
 
-Define the markup reader classes to apply for a given key in `editions/readers.cex`:
+Define the markup reader classes to apply for a given key in `textConfig/readers.cex`:
 
 ```scala mdoc
 def readerMap : Map[String, Vector[MidMarkupReader]] = Map(
