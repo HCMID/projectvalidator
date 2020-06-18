@@ -32,7 +32,7 @@ case class EditorsRepo(
   baseDir: String,
   readerMap:  Map[String, Vector[MidMarkupReader]]
 ) extends LogSupport {
-    Logger.setDefaultLogLevel(LogLevel.DEBUG)
+    Logger.setDefaultLogLevel(LogLevel.INFO)
   /** Directory for DSE records (in CEX format).*/
   val dseDir = File(baseDir + "/dse")
   /** Writable directory for validation reports. */
@@ -64,7 +64,6 @@ case class EditorsRepo(
     }
   }
 
-
   /** Build a CITE library from the files in this repository. */
   def library: CiteLibrary = {
     // required components:
@@ -94,16 +93,7 @@ case class EditorsRepo(
 
 */
 
-  /** Use convention that first reader listed for each CTS URN
-  * in markup reader configuration must produce a diplomatic edition.
-  *
-  * @param urn CTS Urn identifying text(s) to find reader for.
-  */
-  def diplomaticReader(urn: CtsUrn) : MidMarkupReader = {
-    val readerMatches = readers.filter(_.urn >= urn)
-    require(readerMatches.size == 1, s"Failed to find diplomatic reader.\nURN matched more than one configuration entry: \n\t${urn}")
-    readerMatches(0).readers(0)
-  }
+
 
   /** Build [[ReadersPairing]]s from configuration in this repository.*/
   def readers: Vector[ReadersPairing] = {
@@ -144,6 +134,8 @@ case class EditorsRepo(
 
   /** Recursively composite a list of edition corpora into a single corpus.
   *
+  * @param editionsList List of individually corpora to aggregate.
+  * @param corpus Material accumulated in a single corpus so far.
   */
   @tailrec private def sumEditions(editionList: Vector[Corpus], corpus: Corpus = Corpus(Vector.empty[CitableNode])): Corpus = {
     if (editionList.isEmpty) {
@@ -154,6 +146,48 @@ case class EditorsRepo(
 
   }
 
+
+
+  /** Compose text Catalog for all editions.*/
+  def editionsCatalog : Catalog = {
+    val rawEntries = rawTexts.catalog.texts
+    val catalogEntries =  for (pairing <- readers) yield {
+      val matched = rawEntries.filter(_.urn ~~ pairing.urn)
+      /*matched.size match {
+        case 0 => {
+          warn("No matches in raw text corpus for URN " + pairing.urn)
+        }
+        case 1 => {
+          info("Single match for " + pairing.urn)
+        }
+        case _ => {
+          warn("Found multiple matches for " + pairing.urn + "\n" + matched.mkString("\n"))
+          warn("Will generate edition for first")
+        }
+      }*/
+
+      val readerPairings = for (rdr <- pairing.readers) yield {
+        val edTypes = for (edType <- rdr.recognizedTypes) yield {
+          debug("Apply " + edType + " with extension " + edType.versionExtension)
+          val entries = for (raw <- matched) yield {
+            val newEditionUrn = raw.urn.addVersion(raw.urn.version + edType.versionExtension)
+            debug("New edition URN " + newEditionUrn)
+            val versionLabel = edType.description + " for " + raw.versionLabel.get
+            debug(println(versionLabel))
+            CatalogEntry(
+              newEditionUrn, raw.citationScheme, raw.lang, raw.groupName, raw.workTitle,
+              Some(versionLabel), raw.exemplarLabel, true  )
+          }
+          entries
+        }
+        edTypes.flatten
+      }
+      readerPairings.flatten
+    }
+    Catalog(catalogEntries.flatten)
+  }
+
+  /** Create a single Corpus containing all configured editions. */
   def editions: Corpus = {
     val editedTexts = readers.map( r => {
       val subcorpus = rawTexts.corpus ~~ r.urn
@@ -213,9 +247,10 @@ case class EditorsRepo(
   /** Mapping of CtsUrns to MID orthography system.*/
   val orthoConfig = textConfig / "orthographies.cex"
 
+
+  // Require configuration files:
   for (conf <- Seq(ctsCatalog, ctsCitation,readersConfig,orthoConfig)) {
     require(conf.exists,"Missing required configuration file: " + conf)
   }
-
   require(readers.nonEmpty, "No markup readers in textConfig/readers.cex matched key set " + readerMap.keySet)
 }

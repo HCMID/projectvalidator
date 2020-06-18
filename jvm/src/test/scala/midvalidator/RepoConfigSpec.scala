@@ -51,12 +51,14 @@ class RepoConfigSpec extends FlatSpec {
 
   }
 
+
+/*
   it should "find a diplomatic MarkupReader for a given CTS URN" in {
     val testUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text:1")
     val expectedDiplReader = "edu.holycross.shot.mid.markupreader.MidProseABDiplomatic"
     assert(repo.diplomaticReader(testUrn).toString.contains(expectedDiplReader))
   }
-
+*/
 
   it should "object is there is no readers.cex configured" in {
     val readerMap : Map[String, Vector[MidMarkupReader]] = Map(

@@ -42,6 +42,17 @@ class RepoProcessingSpec extends FlatSpec {
     assert(editions.citedWorks.toSet == expectedWorks)
   }
 
+  it should "generate at text Catalog for configured editions" in {
+    val catalog = repo.editionsCatalog
+    val expectedSize = 2
+    assert(catalog.size == expectedSize)
+
+    val expectedWorks = Set(CtsUrn("urn:cts:chant:massordinary.sg359.text:"),CtsUrn("urn:cts:chant:massordinary.eins121.text:") )
+
+    assert(catalog.texts.map(_.urn).toSet == expectedWorks)
+  }
+
+  it should "create a TextRepository of configured editions" in pending
 
 
 
