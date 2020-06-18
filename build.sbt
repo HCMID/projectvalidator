@@ -39,10 +39,6 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         "edu.holycross.shot" %% "citevalidator" % "1.2.1",
 
 
-
-        // Later version would bring all dependent libs in sync:
-        //"edu.furman.classics" %% "citewriter" % "1.0.2"
-
       )
     ).
     jvmSettings(
@@ -56,7 +52,7 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
 
         // FOR DEBUGGING WITH HMT CONTENT:
         //"edu.holycross.shot" %% "citevalidator" % "1.2.1",
-        //"org.homermultitext" %% "hmt-textmodel" % "7.0.0",
+        "org.homermultitext" %% "hmt-textmodel" % "7.0.0",
       )
 
 
