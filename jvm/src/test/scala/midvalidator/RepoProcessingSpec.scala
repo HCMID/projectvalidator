@@ -24,8 +24,6 @@ class RepoProcessingSpec extends FlatSpec {
   val repoRoot = "jvm/src/test/resources/chantsample"
   val repo = EditorsRepo(repoRoot, readerMap)
 
-
-
   "An EditorsRepo"  should "find a list of subcorpora for the keys in the reader map" in {
     val subCs = repo.subcorpora
     val expectedSize = 2
@@ -36,31 +34,14 @@ class RepoProcessingSpec extends FlatSpec {
 
     val secondExpectedWorks = Vector(CtsUrn("urn:cts:chant:massordinary.eins121.text:"))
     assert(subCs(1).citedWorks == secondExpectedWorks)
-
   }
 
-  it should "create a diplomatic version of a text" in  pending /*{
-      val textUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:")
-      val subCorpus = repo.library.textRepository.get.corpus ~~ textUrn
-
-      val rdr = repo.diplomaticReader(textUrn)
-      val dipl = rdr.edition(subCorpus)
-
-      assert(subCorpus.size == dipl.size)
-  }*/
-/*
-CiteLibrary(name: String, urn: Cite2Urn, license: String, namespaces: Vector[CiteNamespace], textRepository: Option[TextRepository]
-
-*/
-
-
-
-  it should "find a diplomatic MarkupReader for a given CTS URN" in pending /*{
-    val testUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text_xml:1")
-    val expectedDiplReader = "edu.holycross.shot.mid.validator.MidProseABDiplomatic"
-    assert(repo.diplomaticReader(testUrn).toString.contains(expectedDiplReader))
+  it should "create a single edition combining all configured editions" in {
+    val editions = repo.editions
+    val expectedWorks = Set(CtsUrn("urn:cts:chant:massordinary.sg359.text:"),CtsUrn("urn:cts:chant:massordinary.eins121.text:") )
+    assert(editions.citedWorks.toSet == expectedWorks)
   }
-*/
+
 
 
 

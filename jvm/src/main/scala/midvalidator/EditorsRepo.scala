@@ -15,6 +15,7 @@ import File._
 import java.io.{File => JFile}
 import better.files.Dsl._
 
+import scala.annotation.tailrec
 
 import wvlet.log._
 import wvlet.log.LogFormatter.SourceCodeLogFormatter
@@ -138,6 +139,32 @@ case class EditorsRepo(
   /** Extract subcorpora for texts defined in readers pairings.*/
   def subcorpora: Vector[Corpus] = {
     readers.map(_.urn).map(u => rawTexts.corpus ~~ u)
+  }
+
+
+  /** Recursively composite a list of edition corpora into a single corpus.
+  *
+  */
+  @tailrec private def sumEditions(editionList: Vector[Corpus], corpus: Corpus = Corpus(Vector.empty[CitableNode])): Corpus = {
+    if (editionList.isEmpty) {
+      corpus
+    } else {
+      sumEditions(editionList.tail, corpus ++ editionList.head)
+    }
+
+  }
+
+  def editions: Corpus = {
+    val editedTexts = readers.map( r => {
+      val subcorpus = rawTexts.corpus ~~ r.urn
+      val subordinated = for (reader <- r.readers) yield {
+        val corpusEditions = reader.recognizedTypes.map (t => reader.edition(subcorpus, t))
+        //reader.edition(subcorpus) // NEED TYPE
+        corpusEditions
+      }
+      subordinated.flatten
+    })
+    sumEditions(editedTexts.flatten)
   }
 
   /** Construct DseVector for this repository's records. */
