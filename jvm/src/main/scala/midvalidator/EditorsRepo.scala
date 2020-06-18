@@ -128,8 +128,8 @@ case class EditorsRepo(
 
   /** Construct DseVector for this repository's records. */
   def dse:  DseVector = {
-    //val triplesCex = DataCollector.compositeFiles(dseDir.toString, "cex", dropLines = 1)
-    val triplesCex = DataCollector.compositeFiles(dseDir.toString, "cex")
+    // This collects correct results:
+    val triplesCex = DataCollector.compositeFiles(dseDir.toString, "cex", dropLines = 1)
     val tempCollection = Cite2Urn("urn:cite2:validate:tempDse.temp:")
     val dseV = DseVector.fromTextTriples(triplesCex, tempCollection)
     dseV

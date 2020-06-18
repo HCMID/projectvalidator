@@ -15,7 +15,7 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     settings(
       name := "midvalidator",
       organization := "edu.holycross.shot",
-      version := "13.0.0",
+      version := "13.0.1",
       licenses += ("GPL-3.0",url("https://opensource.org/licenses/gpl-3.0.html")),
       resolvers += Resolver.jcenterRepo,
       resolvers += Resolver.bintrayRepo("neelsmith", "maven"),
@@ -29,15 +29,14 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         "edu.holycross.shot" %%% "citeobj" % "7.5.0",
         "edu.holycross.shot" %%% "ohco2" % "10.19.0",
         "edu.holycross.shot" %%% "citerelations" % "2.7.0",
-        "edu.holycross.shot" %%% "dse" % "7.1.0",
+        "edu.holycross.shot" %%% "dse" % "7.1.2",
         "edu.holycross.shot" %%% "citebinaryimage" % "3.2.0",
 
 
         //"edu.holycross.shot" %%% "histoutils" % "2.3.0",
-
         "edu.holycross.shot.mid" %% "orthography" % "1.0.0",
         "edu.holycross.shot.mid" %% "markupreader" % "1.0.0",
-        "edu.holycross.shot" %% "citevalidator" % "0.0.1",
+        "edu.holycross.shot" %% "citevalidator" % "1.2.1",
 
 
 
@@ -56,9 +55,8 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         "edu.holycross.shot" %% "xmlutils" % "2.0.0",
 
         // FOR DEBUGGING WITH HMT CONTENT:
-        //"edu.holycross.shot" %% "greek" % "2.4.0",
-        //"org.homermultitext" %% "hmt-textmodel" % "6.0.1"
-
+        //"edu.holycross.shot" %% "citevalidator" % "1.2.1",
+        //"org.homermultitext" %% "hmt-textmodel" % "7.0.0",
       )
 
 
@@ -78,6 +76,6 @@ lazy val crossed = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         mdocOut := file("docs"),
         mdocExtraArguments := Seq("--no-link-hygiene"),
         mdocVariables := Map(
-          "VERSION" -> "13.0.0"
+          "VERSION" -> "13.0.1"
         )
       )

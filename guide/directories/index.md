@@ -14,3 +14,4 @@ The following directories are required to create an MID `EditorsRepo`.
 - editions
 - header
 - validation
+- textConfig

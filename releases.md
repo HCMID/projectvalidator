@@ -1,5 +1,7 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**13.0.1**: updated `dse` library corrects off-by-one bug loading data.
+
 **13.0.0**: API-crushing, radical refactoring with parts of 12.3.0 version broken out into `edu.holycross.shot.mid.markupreader`, `edu.holycross.shot.mid.orthography` and `edu.holycross.shot.citevalidator` libraries.
 
 **12.3.0**: Adds validation by text-bearing surface to `LibraryValidator` object.
