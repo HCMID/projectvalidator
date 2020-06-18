@@ -54,6 +54,7 @@ case class EditorsRepo(
     /*paleographyDir,*/
     libHeadersDir, codicesDir, codicesCatalogs, textConfig)
 
+  // Insist on required directory layout:
   for (d <- dirs) {
     if (! d.exists) {
       val msg = "Repository not correctly laid out: missing directory  " + d
@@ -133,6 +134,12 @@ case class EditorsRepo(
     pairings
   }
 
+
+  /** Extract subcorpora for texts defined in readers pairings.*/
+  def subcorpora: Vector[Corpus] = {
+    readers.map(_.urn).map(u => rawTexts.corpus ~~ u)
+  }
+
   /** Construct DseVector for this repository's records. */
   def dse:  DseVector = {
     // This collects correct results:
@@ -143,9 +150,12 @@ case class EditorsRepo(
   }
 
   /** Construct TextRepository. */
-  def rawTexts : TextRepository = {
-    TextRepositorySource.fromFiles(ctsCatalog.toString, ctsCitation.toString, editionsDir.toString)
-  }
+  lazy val rawTexts = TextRepositorySource.fromFiles(
+    ctsCatalog.toString,
+    ctsCitation.toString,
+    editionsDir.toString
+  )
+
 
   /** CEX library header data.*/
   def libHeader:  String = DataCollector.compositeFiles(libHeadersDir.toString, "cex")
