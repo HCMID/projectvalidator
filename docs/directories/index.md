@@ -3,7 +3,7 @@ title: Directory layout
 layout: page
 ---
 
-**Library version 13.0.0**
+**Library version 13.0.1**
 
 The following directories are required to create an MID `EditorsRepo`.
 
@@ -14,3 +14,4 @@ The following directories are required to create an MID `EditorsRepo`.
 - editions
 - header
 - validation
+- textConfig
