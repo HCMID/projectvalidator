@@ -30,7 +30,8 @@ import wvlet.log.LogFormatter.SourceCodeLogFormatter
 */
 case class EditorsRepo(
   baseDir: String,
-  readerMap:  Map[String, Vector[MidMarkupReader]]
+  readerMap:  Map[String, Vector[MidMarkupReader]],
+  orthoMap: Map[String, MidOrthography] = Map.empty[String, MidOrthography],
 ) extends LogSupport {
     Logger.setDefaultLogLevel(LogLevel.INFO)
   /** Directory for DSE records (in CEX format).*/
@@ -72,8 +73,19 @@ case class EditorsRepo(
   }
 
   /** Build [[OrthoPairing]]s from configuration in this repository.
+  */
   def orthographies: Vector[OrthoPairing] = {
     val data = orthoConfig.lines.toVector.tail
+    val configSplits = data.map(ln => ln.split("#").toVector)
+    val configKeys = configSplits.map(v => v(1))
+    val missingKeys = configKeys.toSet diff orthoMap.keySet
+    if (missingKeys.nonEmpty) {
+      val msg = "Catastrophe: " + missingKeys.mkString(",") + " in textConfig/orthographies.cex does not match map of MidOrthography classes."
+      warn(msg)
+      throw new Exception(msg)
+    }
+
+
     val pairings = data.map( str => {
       try {
           val cols = str.split("#")
@@ -91,7 +103,7 @@ case class EditorsRepo(
     pairings
   }
 
-*/
+
 
 
   /** Build ReadersPairings from configuration in this repository.*/
@@ -103,7 +115,7 @@ case class EditorsRepo(
 
     val missingKeys = configKeys.toSet diff readerMap.keySet
     if (missingKeys.nonEmpty) {
-      val msg = "Catastrophe: " + missingKeys.mkString(",") + " in textConfig/readers.cex missing from map of MarkupReaders."
+      val msg = "Catastrophe: " + missingKeys.mkString(",") + " in textConfig/readers.cex does not match map of MarkupReaders."
       warn(msg)
       throw new Exception(msg)
     }
@@ -128,6 +140,10 @@ case class EditorsRepo(
   /** Extract subcorpora for texts defined in readers pairings.*/
   def subcorpora: Vector[Corpus] = {
     readers.map(_.urn).map(u => rawTexts.corpus ~~ u)
+  }
+
+  def tokencorpora: Vector[Corpus] = {
+    orthographies.map(_.urn).map(u => rawTexts.corpus ~~ u)
   }
 
 
@@ -258,4 +274,7 @@ case class EditorsRepo(
     require(conf.exists,"Missing required configuration file: " + conf)
   }
   require(readers.nonEmpty, "No markup readers in textConfig/readers.cex matched key set " + readerMap.keySet)
+  if (orthoMap.nonEmpty) {
+    require(orthographies.nonEmpty,"No orthographies configured in textConfig/orthographies.cex matching key set " + orthographies)
+  }
 }

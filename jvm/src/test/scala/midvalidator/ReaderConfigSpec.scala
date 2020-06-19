@@ -13,7 +13,7 @@ import edu.holycross.shot.mid.orthography._
 
 /**
 */
-class RepoConfigSpec extends FlatSpec {
+class ReaderConfigSpec extends FlatSpec {
 
   val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
     "MidProseAB" ->   Vector(MidProseABDiplomatic)
@@ -21,20 +21,7 @@ class RepoConfigSpec extends FlatSpec {
   val repoRoot = "jvm/src/test/resources/chantsample"
   val repo = EditorsRepo(repoRoot, readerMap)
 
-  "An EditorsRepo" should "build a Vector of OrthoPairings from source files" in  pending /*{
-    val orthos = repo.orthographies
-
-    val expectedSize = 1
-    assert(orthos.size == expectedSize)
-
-    val expectedUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text:")
-    assert(orthos(0).urn == expectedUrn)
-
-    val expectedOrtho = "edu.holycross.shot.mid.validator.Latin23"
-    assert(orthos(0).orthography.toString.contains(expectedOrtho))
-  }*/
-
-  it should "build a Vector of ReaderPairings from source files" in {
+  "An EditorsRepo" should "build a Vector of ReaderPairings from source files" in {
     val readers = repo.readers
     val expectedSize = 2
     assert(readers.size == expectedSize)
@@ -51,16 +38,7 @@ class RepoConfigSpec extends FlatSpec {
 
   }
 
-
-/*
-  it should "find a diplomatic MarkupReader for a given CTS URN" in {
-    val testUrn = CtsUrn("urn:cts:chant:massordinary.sg359.text:1")
-    val expectedDiplReader = "edu.holycross.shot.mid.markupreader.MidProseABDiplomatic"
-    assert(repo.diplomaticReader(testUrn).toString.contains(expectedDiplReader))
-  }
-*/
-
-  it should "object is there is no readers.cex configured" in {
+  it should "object if configured keys do not agree with keys in the readers map" in {
     val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
       "CONFLICTING_KEY" ->   Vector(MidProseABDiplomatic)
     )
@@ -69,7 +47,7 @@ class RepoConfigSpec extends FlatSpec {
       val repo = EditorsRepo(repoRoot, readerMap)
     } catch {
       case exc: Exception => {
-        val expected = "java.lang.Exception: Catastrophe: MidProseAB in textConfig/readers.cex missing from map of MarkupReaders."
+        val expected = "java.lang.Exception: Catastrophe: MidProseAB in textConfig/readers.cex does not match map of MarkupReaders."
         assert(exc.toString == expected)
       }
     }
