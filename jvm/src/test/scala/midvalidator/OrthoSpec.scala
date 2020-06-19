@@ -29,19 +29,15 @@ class OrthoSpec extends FlatSpec {
 
 
   "An EditorsRepo" should "recognize orhography mappings" in {
-    println(repo.orthographies)
-
     val orthos = repo.orthographies
 
     val expectedSize = 2
     assert(orthos.size == expectedSize)
 
-
-
     val expected1 = CtsUrn("urn:cts:chant:massordinary.sg359.text:")
     assert(orthos(0).urn == expected1)
 
-   val expectedOrtho = "edu.holycross.shot.mid.orthography.Latin23"
+    val expectedOrtho = "edu.holycross.shot.mid.orthography.Latin23"
     assert(orthos(0).orthography.toString.contains(expectedOrtho))
 
     val expected2 = CtsUrn("urn:cts:chant:massordinary.eins121.text:")
@@ -74,9 +70,14 @@ class OrthoSpec extends FlatSpec {
     assert(subCs(1).citedWorks == secondExpectedWorks)
   }
 
-  it should "create tokenized editions for each subcorpus" in pending
+  it should "create editions for each subcorpus tokenized at exemplar level" in {
+    val newEdd = repo.tokenized
+    println(newEdd.citedWorks)
+    val expected = Vector(
+      CtsUrn("urn:cts:chant:massordinary.sg359.text.tkn:"), CtsUrn("urn:cts:chant:massordinary.eins121.text.tkn:")
+    )
+  }
 
-  it should "sum all tokenized edtiions and add to library" in pending
-
+  it should "compose a catalog of the tokenized exemaplar editions" in pending
 
 }

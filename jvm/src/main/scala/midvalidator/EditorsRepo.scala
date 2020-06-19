@@ -146,19 +146,26 @@ case class EditorsRepo(
     orthographies.map(_.urn).map(u => rawTexts.corpus ~~ u)
   }
 
+  def tokenized: Corpus = {
+    val tokenizedTexts = orthographies.map( ortho => {
+      val subcorpus = rawTexts.corpus ~~ ortho.urn
+      ortho.orthography.tokenizedCorpus(subcorpus)
+    })
+    sumCorpora(tokenizedTexts)
+  }
+
 
   /** Recursively composite a list of edition corpora into a single corpus.
   *
   * @param editionsList List of individually corpora to aggregate.
   * @param corpus Material accumulated in a single corpus so far.
   */
-  @tailrec private def sumEditions(editionList: Vector[Corpus], corpus: Corpus = Corpus(Vector.empty[CitableNode])): Corpus = {
-    if (editionList.isEmpty) {
+  @tailrec private def sumCorpora(corpusList: Vector[Corpus], corpus: Corpus = Corpus(Vector.empty[CitableNode])): Corpus = {
+    if (corpusList.isEmpty) {
       corpus
     } else {
-      sumEditions(editionList.tail, corpus ++ editionList.head)
+      sumCorpora(corpusList.tail, corpus ++ corpusList.head)
     }
-
   }
 
 
@@ -188,7 +195,7 @@ case class EditorsRepo(
             val newEditionUrn = raw.urn.addVersion(raw.urn.version + edType.versionExtension)
             debug("New edition URN " + newEditionUrn)
             val versionLabel = edType.description + " for " + raw.versionLabel.get
-            debug(println(versionLabel))
+            debug(versionLabel)
             CatalogEntry(
               newEditionUrn, raw.citationScheme, raw.lang, raw.groupName, raw.workTitle,
               Some(versionLabel), raw.exemplarLabel, true  )
@@ -213,7 +220,7 @@ case class EditorsRepo(
       }
       subordinated.flatten
     })
-    sumEditions(editedTexts.flatten)
+    sumCorpora(editedTexts.flatten)
   }
 
   /** Create a TextRepository for all configured editions.*/
