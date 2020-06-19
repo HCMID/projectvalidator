@@ -19,9 +19,11 @@ class EditorsRepoSpec extends FlatSpec {
   val readerMap : Map[String, Vector[MidMarkupReader]] = Map(
     "MidProseAB" ->   Vector(MidProseABDiplomatic)
   )
-
+  val orthoMap : Map[String, MidOrthography] = Map(
+    "Latin23" ->   Latin23
+  )
   val repoRoot = "jvm/src/test/resources/chantsample"
-  val repo = EditorsRepo(repoRoot, readerMap)
+  val repo = EditorsRepo(repoRoot, readerMap, orthoMap)
 
 
 

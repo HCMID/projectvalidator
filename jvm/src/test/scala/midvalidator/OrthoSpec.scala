@@ -72,14 +72,20 @@ class OrthoSpec extends FlatSpec {
 
   it should "create editions for each subcorpus tokenized at exemplar level" in {
     val newEdd = repo.tokenized
-    println(newEdd.citedWorks)
     val expected = Vector(
-      CtsUrn("urn:cts:chant:massordinary.sg359.text.tkn:"), CtsUrn("urn:cts:chant:massordinary.eins121.text.tkn:")
+      CtsUrn("urn:cts:chant:massordinary.sg359.text.lat23tkn:"), CtsUrn("urn:cts:chant:massordinary.eins121.text.lat23tkn:")
     )
+    assert(newEdd.citedWorks == expected)
   }
 
-  it should "compose a catalog of the tokenized exemaplar editions" in {
+  it should "compose a catalog of the tokenized exemplar editions" in {
     val catalog = repo.tokenizedCatalog
+
+    val expected = Vector(
+      CtsUrn("urn:cts:chant:massordinary.sg359.text.lat23tkn:"), CtsUrn("urn:cts:chant:massordinary.eins121.text.lat23tkn:")
+    )
+    assert(catalog.texts.map(_.urn) == expected)
+
   }
 
 }

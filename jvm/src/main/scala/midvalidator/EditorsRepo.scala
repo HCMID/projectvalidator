@@ -69,7 +69,7 @@ case class EditorsRepo(
   def library: CiteLibrary = {
     // required components:
     // text repo, dse, collections of codices
-    CiteLibrary(libHeader + dseCex + editionsRepository.cex()  + codicesCex)
+    CiteLibrary(libHeader + dseCex + allTexts.cex()  + codicesCex)
   }
 
   /** Build [[OrthoPairing]]s from configuration in this repository.
@@ -84,7 +84,6 @@ case class EditorsRepo(
       warn(msg)
       throw new Exception(msg)
     }
-
 
     val pairings = data.map( str => {
       try {
@@ -102,9 +101,6 @@ case class EditorsRepo(
     })
     pairings
   }
-
-
-
 
   /** Build ReadersPairings from configuration in this repository.*/
   def readers: Vector[ReadersPairing] = {
@@ -142,10 +138,12 @@ case class EditorsRepo(
     readers.map(_.urn).map(u => rawTexts.corpus ~~ u)
   }
 
+  /** Extract subcorpora for texts defined in orthography pairings.*/
   def tokencorpora: Vector[Corpus] = {
     orthographies.map(_.urn).map(u => rawTexts.corpus ~~ u)
   }
 
+  /** Compose a tokenized corpus of texts from parent texts defined in orthography pairings.*/
   def tokenized: Corpus = {
     val tokenizedTexts = orthographies.map( ortho => {
       val subcorpus = rawTexts.corpus ~~ ortho.urn
@@ -153,7 +151,6 @@ case class EditorsRepo(
     })
     sumCorpora(tokenizedTexts)
   }
-
 
   /** Recursively composite a list of edition corpora into a single corpus.
   *
@@ -168,14 +165,30 @@ case class EditorsRepo(
     }
   }
 
+  /** Compose a text catalog for tokenized editions.*/
   def tokenizedCatalog : Catalog = {
-    val parentEntries = editionsCatalog
-    Catalog(Vector.empty[CatalogEntry])
+    val catalogEntries =  for (pairing <- orthographies) yield {
+      val matched = editionsCatalog.texts.filter(_.urn ~~ pairing.urn)
+      debug("Number matches for tokenizing: " + matched.size)
+      val entries = for (parentEntry <- matched) yield {
+        val newUrn = parentEntry.urn.addExemplar(pairing.orthography.exemplarId)
+        val exemplarLabel = "Tokenized edition of " + parentEntry.versionLabel.get
+        val newCitationScheme = parentEntry.citationScheme + ",token"
+        CatalogEntry(
+          newUrn, newCitationScheme, parentEntry.lang, parentEntry.groupName, parentEntry.workTitle,
+          parentEntry.versionLabel, Some(exemplarLabel), true  )
+      }
+      entries
+    }
+    val newCatalog = Catalog(catalogEntries.flatten)
+    newCatalog
   }
 
+ def tokenizedRepository = TextRepository(tokenized, tokenizedCatalog)
 
+ def allTexts = editionsRepository ++ tokenizedRepository
 
-  /** Compose text Catalog for all editions.*/
+  /** Compose text Catalog for generated editions.*/
   def editionsCatalog : Catalog = {
     val rawEntries = rawTexts.catalog.texts
     val catalogEntries =  for (pairing <- readers) yield {
@@ -233,7 +246,6 @@ case class EditorsRepo(
     TextRepository( editions, editionsCatalog)
   }
 
-
   /** Construct DseVector for this repository's records. */
   def dse:  DseVector = {
     // This collects correct results:
@@ -243,8 +255,8 @@ case class EditorsRepo(
     dseV
   }
 
-  /** Construct TextRepository. */
-  lazy val rawTexts = TextRepositorySource.fromFiles(
+  /** Construct a TextRepository from files in local repository. */
+  lazy val rawTexts: TextRepository = TextRepositorySource.fromFiles(
     ctsCatalog.toString,
     ctsCitation.toString,
     editionsDir.toString
@@ -270,6 +282,15 @@ case class EditorsRepo(
   def rawTextsCex: String = {
     rawTexts.cex()
   }
+
+
+/*
+  def allTexts: Corpus = {
+    sumCorpora(editions, tokenizedEditions)
+  }
+  def allTextsCex: String = {
+    val allTexts
+  }*/
 
   /** Catalog of edited texts.*/
   val ctsCatalog = nameBetterFile(textConfig,"catalog.cex")
