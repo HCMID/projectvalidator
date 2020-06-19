@@ -168,6 +168,11 @@ case class EditorsRepo(
     }
   }
 
+  def tokenizedCatalog : Catalog = {
+    val parentEntries = editionsCatalog
+    Catalog(Vector.empty[CatalogEntry])
+  }
+
 
 
   /** Compose text Catalog for all editions.*/

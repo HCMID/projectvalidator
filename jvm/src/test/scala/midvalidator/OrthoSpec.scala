@@ -78,6 +78,8 @@ class OrthoSpec extends FlatSpec {
     )
   }
 
-  it should "compose a catalog of the tokenized exemaplar editions" in pending
+  it should "compose a catalog of the tokenized exemaplar editions" in {
+    val catalog = repo.tokenizedCatalog
+  }
 
 }
