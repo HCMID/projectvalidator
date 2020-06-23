@@ -1,5 +1,8 @@
 ## Release notes: MID   `projectvalidator` code library
 
+
+**13.3.0**: update library dependencies.
+
 **13.2.0**: builds library including all configured tokenized editions.
 
 **13.1.0**: builds library including all configured editions automatically generated.
