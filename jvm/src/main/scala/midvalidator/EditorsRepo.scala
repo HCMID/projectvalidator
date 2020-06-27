@@ -186,7 +186,7 @@ case class EditorsRepo(
 
  def tokenizedRepository = TextRepository(tokenized, tokenizedCatalog)
 
- def allTexts = editionsRepository ++ tokenizedRepository
+ def allTexts : TextRepository = editionsRepository ++ tokenizedRepository
 
   /** Compose text Catalog for generated editions.*/
   def editionsCatalog : Catalog = {
@@ -283,14 +283,6 @@ case class EditorsRepo(
     rawTexts.cex()
   }
 
-
-/*
-  def allTexts: Corpus = {
-    sumCorpora(editions, tokenizedEditions)
-  }
-  def allTextsCex: String = {
-    val allTexts
-  }*/
 
   /** Catalog of edited texts.*/
   val ctsCatalog = nameBetterFile(textConfig,"catalog.cex")

@@ -1,5 +1,6 @@
 ## Release notes: MID   `projectvalidator` code library
 
+**13.3.1**: bug fixes in library dependencies.
 
 **13.3.0**: update library dependencies.
 
